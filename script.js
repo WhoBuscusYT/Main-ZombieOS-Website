@@ -57,7 +57,7 @@ ALL SYSTEMS STABLE`
 ];
 
 const shellText =
-    document.getElementById("shellText");
+    document.getElementById("shell-text");
 
 function randomShellMessage(){
 
@@ -75,7 +75,7 @@ function randomShellMessage(){
 
         setTimeout(() => {
 
-            shellText.innerHTML =
+            shellText.textContent =
                 random.replace(/\n/g,"<br>");
 
             shellText.style.opacity = "1";
