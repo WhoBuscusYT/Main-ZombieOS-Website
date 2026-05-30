@@ -540,6 +540,94 @@ pre {
 }
 
 /* =========================================
+   SOCIAL BUTTONS
+========================================= */
+
+.social-grid {
+  margin-top: 35px;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  gap: 14px;
+}
+
+.social-btn {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  min-width: 160px;
+
+  padding: 14px 18px;
+
+  border-radius: 16px;
+
+  text-decoration: none;
+
+  color: #00ff88;
+
+  background:
+    rgba(0,255,136,0.05);
+
+  border:
+    1px solid
+    rgba(0,255,136,0.22);
+
+  transition: 0.25s;
+
+  box-shadow:
+    0 0 18px rgba(0,255,136,0.06);
+}
+
+.social-btn:hover {
+  transform:
+    translateY(-4px);
+
+  box-shadow:
+    0 0 22px rgba(0,255,136,0.28);
+}
+
+.social-btn i {
+  font-size: 1.2rem;
+}
+
+/* BRAND COLORS */
+
+.discord i {
+  color: #5865F2;
+}
+
+.youtube i {
+  color: #FF0000;
+}
+
+.tiktok i {
+  color: #ffffff;
+}
+
+.twitter i {
+  color: #ffffff;
+}
+
+.facebook i {
+  color: #1877F2;
+}
+
+.reddit i {
+  color: #FF4500;
+}
+
+.instagram i {
+  color: #ff66c4;
+}
+
+/* =========================================
    FOOTER
 ========================================= */
 
