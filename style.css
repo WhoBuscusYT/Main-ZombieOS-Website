@@ -452,6 +452,10 @@ pre {
   overflow-x: auto;
 }
 
+#shellText{
+    transition:opacity 0.3s ease;
+}
+
 /* =========================================
    SPLIT SECTION
 ========================================= */
