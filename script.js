@@ -1,5 +1,5 @@
 /* =========================================
-   COPYRIGHT YEAR
+   COPYRIGHT
 ========================================= */
 
 const copyright =
@@ -17,7 +17,7 @@ if (copyright) {
 }
 
 /* =========================================
-   TERMINAL EASTER EGGS
+   TERMINAL ROTATION
 ========================================= */
 
 const terminal =
@@ -29,122 +29,139 @@ if (terminal) {
 
   const terminalSets = [
 
-    [
-      "> boot ZombieOS",
-      "> load ZSharp",
-      "> ecosystem.status()",
-      "",
-      "SYSTEM ONLINE"
-    ],
+`> boot ZombieOS
+> load ZSharp
+> ecosystem.status()
 
-    [
-      "> initialize runtime",
-      "> compiling modules",
-      "> loading assets",
-      "",
-      "RUNTIME READY"
-    ],
+SYSTEM ONLINE`,
 
-    [
-      "> connect services",
-      "> establish protocol",
-      "> validating shell",
-      "",
-      "NETWORK STABLE"
-    ],
+`> initialize runtime
+> compiling modules
+> loading assets
 
-    [
-      "> import ZSharp.Core",
-      "> launch subsystem",
-      "> checking ecosystem",
-      "",
-      "ALL SYSTEMS ACTIVE"
-    ],
+RUNTIME READY`,
 
-    [
-      "> boot experimental mode",
-      "> checking memory",
-      "> loading runtime shell",
-      "",
-      "PROTOTYPE ACTIVE"
-    ],
+`> connect services
+> validating shell
+> syncing modules
 
-    [
-      "> scanning environment",
-      "> loading API bridge",
-      "> validating modules",
-      "",
-      "ALL SERVICES ONLINE"
-    ]
+NETWORK STABLE`,
+
+`> import ZSharp.Core
+> launch subsystem
+> checking ecosystem
+
+ALL SYSTEMS ACTIVE`,
+
+`> loading kernel
+> starting runtime
+> checking memory
+
+PROTOTYPE ACTIVE`
 
   ];
 
-  function loadTerminalSet() {
+  let terminalIndex = 0;
 
-    terminal.innerHTML = "";
+  function updateTerminal() {
 
-    const lines =
+    terminal.textContent =
     terminalSets[
-      Math.floor(
-        Math.random() *
-        terminalSets.length
-      )
+      terminalIndex
     ];
 
-    let currentLine = 0;
-    let currentChar = 0;
+    terminalIndex++;
 
-    function typeTerminal() {
-
-      if (
-        currentLine >=
-        lines.length
-      ) {
-        return;
-      }
-
-      const line =
-      lines[currentLine];
-
-      if (
-        currentChar <
-        line.length
-      ) {
-
-        terminal.innerHTML +=
-        line.charAt(currentChar);
-
-        currentChar++;
-
-        setTimeout(
-          typeTerminal,
-          35
-        );
-
-      } else {
-
-        terminal.innerHTML +=
-        "<br>";
-
-        currentLine++;
-        currentChar = 0;
-
-        setTimeout(
-          typeTerminal,
-          180
-        );
-      }
+    if (
+      terminalIndex >=
+      terminalSets.length
+    ) {
+      terminalIndex = 0;
     }
-
-    typeTerminal();
   }
 
-  loadTerminalSet();
+  updateTerminal();
 
   setInterval(
-    loadTerminalSet,
+    updateTerminal,
     30000
   );
+}
+
+/* =========================================
+   OS DETECTION
+========================================= */
+
+const osText =
+document.getElementById(
+  "detected-os"
+);
+
+const downloadButton =
+document.getElementById(
+  "recommended-download"
+);
+
+if (
+  osText &&
+  downloadButton
+) {
+
+  const userAgent =
+  navigator.userAgent;
+
+  let os = "Unknown OS";
+  let download = "#";
+
+  if (
+    userAgent.includes("Win")
+  ) {
+
+    os = "Windows";
+
+    download =
+    "downloads/ZOS-Windows.zip";
+
+  } else if (
+    userAgent.includes("Mac")
+  ) {
+
+    os = "macOS";
+
+    download =
+    "downloads/ZOS-Mac.zip";
+
+  } else if (
+    userAgent.includes("Linux")
+  ) {
+
+    os = "Linux";
+
+    download =
+    "downloads/ZOS-Linux.zip";
+
+  } else if (
+    /Android/i.test(userAgent)
+  ) {
+
+    os = "Android";
+
+  } else if (
+    /iPhone|iPad|iPod/i.test(userAgent)
+  ) {
+
+    os = "iOS";
+
+  }
+
+  osText.textContent =
+  `Detected Platform: ${os}`;
+
+  downloadButton.textContent =
+  `Download for ${os}`;
+
+  downloadButton.href =
+  download;
 }
 
 /* =========================================
@@ -187,47 +204,3 @@ fills.forEach((fill) => {
   }, 15);
 
 });
-
-/* =========================================
-   FLOATING ORBS
-========================================= */
-
-const orbContainer =
-document.createElement("div");
-
-orbContainer.className =
-"orb-container";
-
-document.body.appendChild(
-  orbContainer
-);
-
-for (let i = 0; i < 12; i++) {
-
-  const orb =
-  document.createElement("div");
-
-  orb.className = "orb";
-
-  orb.style.left =
-  Math.random() * 100 + "%";
-
-  orb.style.top =
-  Math.random() * 100 + "%";
-
-  orb.style.animationDuration =
-  10 + Math.random() * 20 + "s";
-
-  orb.style.animationDelay =
-  Math.random() * 5 + "s";
-
-  orb.style.width =
-  60 + Math.random() * 120 + "px";
-
-  orb.style.height =
-  orb.style.width;
-
-  orbContainer.appendChild(
-    orb
-  );
-}
