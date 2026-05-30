@@ -1,10 +1,10 @@
-const shellText = document.getElementById("shell-text");
+// script.js
 
 const shellMessages = [
 
 `> boot ZombieOS
-> initialize runtime
-> load ecosystem
+> load ZSharp
+> connect ecosystem
 
 SYSTEM ONLINE`,
 
@@ -14,88 +14,58 @@ SYSTEM ONLINE`,
 
 ZSHARP ACTIVE`,
 
-`> mount system_core
-> validate packages
-> start interface
-
-CORE READY`,
-
-`> authenticate runtime
-> sync cloud nodes
-> launch services
-
-NETWORK STABLE`,
-
 `> load future_ui
 > enable plugins
 > prepare apps
 
-UI READY`
+UI READY`,
+
+`> initialize services
+> sync cloud
+> verify modules
+
+SERVICES READY`
+
 ];
 
-function typeMessage(message) {
+function animateShell(id){
 
-    if (!shellText) return;
+const shell = document.getElementById(id);
 
-    shellText.textContent = "";
+if(!shell) return;
 
-    let i = 0;
+function typeMessage(){
 
-    const typing = setInterval(() => {
+const message =
+shellMessages[
+Math.floor(Math.random() * shellMessages.length)
+];
 
-        shellText.textContent += message.charAt(i);
+shell.textContent = "";
 
-        i++;
+let i = 0;
 
-        if (i >= message.length) {
+const interval = setInterval(() => {
 
-            clearInterval(typing);
-        }
+shell.textContent += message.charAt(i);
 
-    }, 22);
+i++;
+
+if(i >= message.length){
+
+clearInterval(interval);
+
+setTimeout(typeMessage,10000);
+
 }
 
-function randomShellMessage() {
+},35);
 
-    const random =
-        shellMessages[
-            Math.floor(Math.random() * shellMessages.length)
-        ];
-
-    typeMessage(random);
 }
 
-randomShellMessage();
+typeMessage();
 
-setInterval(randomShellMessage, 10000);
-
-/* STATUS BAR */
-
-const statusFill =
-    document.querySelector(".status-fill");
-
-const statusText =
-    document.querySelector(".status-text");
-
-if (statusFill && statusText) {
-
-    const target = 98;
-
-    let current = 0;
-
-    const animation = setInterval(() => {
-
-        current++;
-
-        statusFill.style.width = current + "%";
-
-        statusText.textContent =
-            current + "% Uptime";
-
-        if (current >= target) {
-
-            clearInterval(animation);
-        }
-
-    }, 15);
 }
+
+animateShell("shell-text");
+animateShell("shell-text-2");
