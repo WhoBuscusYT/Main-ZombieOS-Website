@@ -1,113 +1,92 @@
+
 const shellMessages = [
 
-`> boot ZombieOS
-> load ZSharp
-> connect ecosystem
+[
+"> boot ZombieOS",
+"> load ZSharp",
+"> initialize runtime",
 
-SYSTEM ONLINE`,
+"ZSHARP ACTIVE"
+],
 
-`> connect Z#
-> compile runtime
-> execute startup
+[
+"> connect Z#",
+"> compile runtime",
+"> execute startup",
 
-ZSHARP ACTIVE`,
+"UI READY"
+],
 
-`> load future_ui
-> enable plugins
-> prepare apps
+[
+"> sync ecosystem",
+"> load future_ui",
+"> enable plugins",
 
-UI READY`,
+"RUNTIME ONLINE"
+],
 
-`> initialize services
-> sync cloud
-> verify modules
+[
+"> verify kernel",
+"> establish environment",
+"> launch services",
 
-SERVICES READY`
+"SYSTEM ONLINE"
+],
+
+[
+"> initialize network",
+"> connect modules",
+"> activate shell",
+
+"ECOSYSTEM ACTIVE"
+]
 
 ];
 
-function animateShell(id){
+const shellText =
+document.getElementById("shell-text");
 
-const shell = document.getElementById(id);
+function typeShellMessage(messageArray){
 
-if(!shell) return;
+if(!shellText) return;
 
-function typeMessage(){
+const finalText =
+messageArray.join("\n\n");
 
-const message =
+shellText.textContent = "";
+
+let index = 0;
+
+function type(){
+
+if(index < finalText.length){
+
+shellText.textContent +=
+finalText.charAt(index);
+
+index++;
+
+setTimeout(type, 35);
+
+}
+
+}
+
+type();
+
+}
+
+function randomShell(){
+
+const randomMessage =
 shellMessages[
 Math.floor(Math.random() * shellMessages.length)
 ];
 
-shell.textContent = "";
-
-let i = 0;
-
-const interval = setInterval(() => {
-
-shell.textContent += message.charAt(i);
-
-i++;
-
-if(i >= message.length){
-
-clearInterval(interval);
-
-setTimeout(typeMessage,10000);
+typeShellMessage(randomMessage);
 
 }
 
-},35);
+randomShell();
 
-}
-
-typeMessage();
-
-}
-
-animateShell("shell-text");
-animateShell("shell-text-2");
-
-/* =========================
-   FIREBASE LOGIN DETECTION
-========================= */
-
-import("https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js")
-.then(async ({ initializeApp }) => {
-
-const { getAuth, onAuthStateChanged } =
-await import("https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js");
-
-const firebaseConfig = {
-apiKey: "AIzaSyDG0hSabeqYdGgSISOgvSnkOwATXDLiV9g",
-authDomain: "zombieos.firebaseapp.com",
-projectId: "zombieos",
-storageBucket: "zombieos.firebasestorage.app",
-messagingSenderId: "577624378484",
-appId: "1:577624378484:web:3e88e693724bde8e89d521",
-measurementId: "G-LV0T97LGWP"
-};
-
-const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
-
-onAuthStateChanged(auth, (user) => {
-
-const loginLinks =
-document.querySelectorAll('a[href="login.html"]');
-
-if(user){
-
-loginLinks.forEach(link => {
-
-link.textContent = "Dashboard";
-link.href = "dashboard/index.html";
-
-});
-
-}
-
-});
-
-});
+setInterval(randomShell, 10000);
