@@ -1,7 +1,8 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,19 +10,16 @@
 
 <link rel="stylesheet" href="style.css">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<div class="bg-orb orb1"></div>
-<div class="bg-orb orb2"></div>
-<div class="bg-orb orb3"></div>
+<div class="bg-grid"></div>
 
-<header class="navbar">
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<nav class="navbar">
 
 <div class="nav-container">
 
@@ -29,7 +27,8 @@
 ZOS
 </a>
 
-<nav class="nav-links">
+<div class="nav-links">
+
 <a href="index.html">Home</a>
 <a href="zsharp.html">Z#</a>
 <a href="downloads.html">Downloads</a>
@@ -38,181 +37,54 @@ ZOS
 <a href="devlog.html">Devlog</a>
 <a href="docs.html">Docs</a>
 <a href="community.html">Community</a>
-<a href="login.html">Login</a>
-</nav>
+
+<a id="account-link" href="login.html">
+Login
+</a>
 
 </div>
 
-</header>
+</div>
 
-<section class="hero">
+</nav>
 
-<div class="hero-left">
+<section class="page">
 
-<p class="section-tag">
+<div class="section-tag">
 INITIALIZING FUTURE RUNTIME
-</p>
+</div>
 
 <h1 class="page-title">
 ZombieOS
 </h1>
 
-<p class="hero-text">
+<p class="page-subtitle">
+
 ZOS is a futuristic operating system,
-runtime platform, and development ecosystem powered by Z#.
+runtime platform, and development
+ecosystem powered by Z#.
+
 </p>
 
 <div class="hero-buttons">
 
-<a href="downloads.html" class="primary-btn">
+<a href="downloads.html" class="btn">
 Launch Prototype
 </a>
 
-<a href="zsharp.html" class="secondary-btn">
+<a href="zsharp.html" class="btn btn-secondary">
 Explore Z#
 </a>
 
 </div>
 
-</div>
+<div class="card shell-card">
 
-<div class="hero-right">
-
-<div class="holo-card">
-
-<div class="window-bar">
-<span></span>
-<span></span>
-<span></span>
-</div>
-
-<h3 class="shell-title">
+<h2>
 ZOS Runtime Shell
-</h3>
-
-<pre id="shell-text">
-LOADING...
-</pre>
-
-</div>
-
-</div>
-
-</section>
-
-<section class="section">
-
-<div class="info-grid">
-
-<div class="info-left">
-
-<div class="holo-card">
-
-<div class="window-bar">
-<span></span>
-<span></span>
-<span></span>
-</div>
-
-<h3 class="shell-title">
-ZOS Runtime Shell
-</h3>
-
-<pre id="shell-text-2">
-LOADING...
-</pre>
-
-</div>
-
-</div>
-
-<div class="info-center">
-
-<p class="section-tag">
-OPERATING ECOSYSTEM
-</p>
-
-<h2 class="section-title">
-What is ZOS?
 </h2>
 
-<div class="feature-card">
-<h3>Operating System Vision</h3>
-
-<p>
-A futuristic runtime and operating ecosystem
-built around modular systems and advanced UI concepts.
-</p>
-</div>
-
-<div class="feature-card">
-<h3>Z# Runtime Language</h3>
-
-<p>
-Z# powers events, runtime systems,
-applications, and future ecosystem integrations.
-</p>
-</div>
-
-<div class="feature-card">
-<h3>Future Ecosystem</h3>
-
-<p>
-Planned support for apps, games, tools,
-runtimes, plugins, and community systems.
-</p>
-</div>
-
-</div>
-
-<div class="info-right">
-
-<p class="section-tag">
-COMMUNITY NETWORK
-</p>
-
-<h2 class="section-title">
-Join the Network
-</h2>
-
-<p class="hero-text">
-Follow development progress, future prototypes,
-Z# updates, and ecosystem expansion.
-</p>
-
-<div class="community-buttons">
-
-<a href="#">
-Discord
-</a>
-
-<a href="#">
-YouTube
-</a>
-
-<a href="#">
-TikTok
-</a>
-
-<a href="#">
-Twitter
-</a>
-
-<a href="#">
-Facebook
-</a>
-
-<a href="#">
-Subreddit
-</a>
-
-<a href="#">
-Instagram
-</a>
-
-</div>
-
-</div>
+<pre id="shell-text"></pre>
 
 </div>
 
@@ -246,14 +118,6 @@ Versions
 Status
 </a>
 
-<a href="devlog.html" class="footer-btn">
-Devlog
-</a>
-
-<a href="docs.html" class="footer-btn">
-Docs
-</a>
-
 <a href="community.html" class="footer-btn">
 Community
 </a>
@@ -261,6 +125,68 @@ Community
 </div>
 
 </footer>
+
+<script type="module">
+
+import {
+initializeApp
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getAuth,
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyDG0hSabeqYdGgSISOgvSnkOwATXDLiV9g",
+
+authDomain: "zombieos.firebaseapp.com",
+
+projectId: "zombieos",
+
+storageBucket: "zombieos.firebasestorage.app",
+
+messagingSenderId: "577624378484",
+
+appId: "1:577624378484:web:3e88e693724bde8e89d521",
+
+measurementId: "G-LV0T97LGWP"
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const auth =
+getAuth(app);
+
+const accountLink =
+document.getElementById("account-link");
+
+onAuthStateChanged(auth, (user) => {
+
+if(user){
+
+accountLink.textContent =
+"Dashboard";
+
+accountLink.href =
+"dashboard/index.html";
+
+}else{
+
+accountLink.textContent =
+"Login";
+
+accountLink.href =
+"login.html";
+
+}
+
+});
+
+</script>
 
 <script src="script.js"></script>
 
