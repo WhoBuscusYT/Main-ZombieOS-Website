@@ -1,6 +1,9 @@
 /* script.js */
 
-const shell = document.getElementById("shell-text");
+/* SHELL */
+
+const shell =
+document.getElementById("shell-text");
 
 if(shell){
 
@@ -106,6 +109,87 @@ typedKeys.slice(-30);
 }
 
 });
+
+/* PLATFORM DETECTION */
+
+const platformText =
+document.getElementById("platform-text");
+
+const autoDownloadButton =
+document.getElementById("auto-download-button");
+
+const downloadContainer =
+document.getElementById("download-container");
+
+if(platformText){
+
+const platform =
+navigator.platform.toLowerCase();
+
+if(platform.includes("win")){
+
+platformText.textContent =
+"Windows detected. Your system supports the latest version of ZOS.";
+
+if(autoDownloadButton){
+
+autoDownloadButton.href =
+"downloads/zombieos-installer.exe";
+
+}
+
+}
+
+else if(
+platform.includes("mac")
+){
+
+platformText.innerHTML =
+`
+<div class="unsupported-warning">
+Your OS doesn't support the latest version of ZOS.
+</div>
+`;
+
+if(downloadContainer){
+downloadContainer.innerHTML = "";
+}
+
+}
+
+else if(
+platform.includes("linux")
+){
+
+platformText.innerHTML =
+`
+<div class="unsupported-warning">
+Your OS doesn't support the latest version of ZOS.
+</div>
+`;
+
+if(downloadContainer){
+downloadContainer.innerHTML = "";
+}
+
+}
+
+else{
+
+platformText.innerHTML =
+`
+<div class="unsupported-warning">
+Unknown operating system detected.
+</div>
+`;
+
+if(downloadContainer){
+downloadContainer.innerHTML = "";
+}
+
+}
+
+}
 
 /* YEAR */
 
