@@ -5,20 +5,20 @@ if(shell){
 const messages = [
 
 `> boot ZombieOS
-> load runtime
-> initialize future_ui
+> load ZSharp
+> initialize runtime
 
 SYSTEM ONLINE`,
 
 `> connect ecosystem
-> verify services
-> load modules
+> prepare future_ui
+> verify modules
 
 RUNTIME READY`,
 
 `> execute zsharp
 > initialize plugins
-> verify runtime
+> connect services
 
 ZSHARP ACTIVE`
 
