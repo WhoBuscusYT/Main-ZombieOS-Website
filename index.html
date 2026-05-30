@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
@@ -8,33 +7,24 @@
 
 <title>ZombieOS</title>
 
-<link rel="stylesheet" href="/css/style.css">
-
-<link rel="icon" type="image/png" href="/images/favicon.png">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="stylesheet" href="css/style.css">
 
 </head>
-
 <body>
 
 <div class="background-grid"></div>
-<div class="background-glow glow-1"></div>
-<div class="background-glow glow-2"></div>
+
+<div class="background-glow glow1"></div>
+<div class="background-glow glow2"></div>
 
 <header class="navbar">
 
-<div class="logo">
+<a href="index.html" class="logo">
 ZombieOS
-</div>
+</a>
 
-<nav class="nav-links">
+<nav>
 
 <a href="index.html">Home</a>
 <a href="zsharp.html">Z#</a>
@@ -42,24 +32,17 @@ ZombieOS
 <a href="versions.html">Versions</a>
 <a href="status.html">Status</a>
 <a href="devlog.html">Devlog</a>
-<a href="docs">Docs</a>
+<a href="docs.html">Docs</a>
 <a href="community.html">Community</a>
-
-<a id="account-link" href="login.html">
-Login
-</a>
+<a href="login.html">Login</a>
 
 </nav>
 
 </header>
 
-<main>
+<section class="hero">
 
-<section class="hero-section">
-
-<div class="hero-content">
-
-<p class="eyebrow">
+<p class="section-eyebrow">
 INITIALIZING FUTURE RUNTIME
 </p>
 
@@ -69,13 +52,13 @@ ZombieOS
 
 <p class="hero-description">
 ZOS is a futuristic operating system,
-runtime platform, and development
-ecosystem powered by Z#.
+runtime platform,
+and development ecosystem powered by Z#.
 </p>
 
 <div class="button-row">
 
-<a href="downloads.html" class="primary-button">
+<a href="#" class="primary-button">
 Launch Prototype
 </a>
 
@@ -85,35 +68,30 @@ Explore Z#
 
 </div>
 
-<div class="terminal-card">
+<div class="runtime-shell">
 
-<div class="terminal-dots">
-
+<div class="shell-dots">
 <span></span>
 <span></span>
 <span></span>
-
 </div>
 
 <h2>
 ZOS Runtime Shell
 </h2>
 
-<pre id="shell-text"></pre>
+<p>> boot ZombieOS</p>
+<p>> load ZSharp</p>
+<p>> initialize runtime</p>
+<p>> execute future_ui()</p>
 
 </div>
 
-</div>
-
-</section>
-
-<section class="info-section">
+<div class="info-grid">
 
 <div class="info-card">
 
-<h3>
-Operating System Vision
-</h3>
+<h3>Operating System Vision</h3>
 
 <p>
 A futuristic runtime and operating ecosystem
@@ -124,12 +102,11 @@ built around modular systems and advanced UI concepts.
 
 <div class="info-card">
 
-<h3>
-Z# Runtime Language
-</h3>
+<h3>Z# Runtime Language</h3>
 
 <p>
-Z# powers events, runtime systems, applications,
+Z# powers events, runtime systems,
+applications,
 and future ecosystem integrations.
 </p>
 
@@ -137,22 +114,26 @@ and future ecosystem integrations.
 
 <div class="info-card">
 
-<h3>
-Future Ecosystem
-</h3>
+<h3>Future Ecosystem</h3>
 
 <p>
-Planned support for apps, games, tools, runtimes,
-plugins, and community systems.
+Planned support for apps,
+games,
+tools,
+runtimes,
+plugins,
+and community systems.
 </p>
+
+</div>
 
 </div>
 
 </section>
 
-<section class="community-section">
+<section class="community">
 
-<p class="eyebrow">
+<p class="section-eyebrow">
 COMMUNITY NETWORK
 </p>
 
@@ -160,61 +141,32 @@ COMMUNITY NETWORK
 Join the Network
 </h2>
 
-<p class="community-text">
-Follow development progress, future prototypes,
-Z# updates, and ecosystem expansion.
+<p>
+Follow development progress,
+future prototypes,
+Z# updates,
+and ecosystem expansion.
 </p>
 
-<div class="community-buttons">
+<div class="social-grid">
 
-<a href="#">
-<i class="fa-brands fa-discord"></i>
-Discord
-</a>
-
-<a href="#">
-<i class="fa-brands fa-youtube"></i>
-YouTube
-</a>
-
-<a href="#">
-<i class="fa-brands fa-tiktok"></i>
-TikTok
-</a>
-
-<a href="#">
-<i class="fa-brands fa-x-twitter"></i>
-Twitter
-</a>
-
-<a href="#">
-<i class="fa-brands fa-facebook"></i>
-Facebook
-</a>
-
-<a href="#">
-<i class="fa-brands fa-reddit"></i>
-Subreddit
-</a>
-
-<a href="#">
-<i class="fa-brands fa-instagram"></i>
-Instagram
-</a>
+<a href="#">Discord</a>
+<a href="#">YouTube</a>
+<a href="#">TikTok</a>
+<a href="#">Twitter</a>
+<a href="#">Facebook</a>
+<a href="#">Subreddit</a>
+<a href="#">Instagram</a>
 
 </div>
 
 </section>
 
-</main>
+<footer>
 
-<footer class="footer">
+<h2>ZombieOS</h2>
 
-<h2>
-ZombieOS
-</h2>
-
-<div class="footer-grid">
+<div class="footer-links">
 
 <a href="index.html">Home</a>
 <a href="zsharp.html">Z#</a>
@@ -233,7 +185,7 @@ ZombieOS / ZOS © 2026
 
 </footer>
 
-<script src="/js/script.js"></script>
+<script src="js/script.js"></script>
 
 </body>
 </html>
