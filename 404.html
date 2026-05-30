@@ -1,84 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta charset="UTF-8">
-
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
->
-
-<title>404 | ZombieOS</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link
-rel="icon"
-type="image/png"
-href="favicon.png"
->
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 | ZombieOS</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
+  <div class="bg-grid"></div>
+  <div class="orb-container">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+  </div>
 
-<div class="bg-grid"></div>
+  <header class="nav">
+    <div class="logo">ZOS</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="status.html">Status</a>
+    </nav>
+  </header>
 
-<div class="orb-container"></div>
+  <main class="page">
+    <section class="section center">
+      <p class="tag">SYSTEM ERROR</p>
+      <h1>404</h1>
+      <h2>Page Not Found</h2>
 
-<main
-class="page center"
-style="
-display:flex;
-align-items:center;
-justify-content:center;
-flex-direction:column;
-padding:120px 8%;
-"
->
+      <div class="info-box">
+        <h3>Runtime Path Missing</h3>
+        <p>The requested ZombieOS page could not be found inside the current web ecosystem.</p>
 
-<p class="tag">
-SYSTEM ERROR
-</p>
+        <div class="buttons">
+          <a class="btn primary" href="index.html">Return Home</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-<h1>
-404
-</h1>
+  <footer>
+    <div class="footer-glow"></div>
+    <h2 class="footer-title">ZombieOS</h2>
 
-<h2>
-Page Not Found
-</h2>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="zsharp.html">Z#</a>
+      <a href="downloads.html">Downloads</a>
+      <a href="versions.html">Versions</a>
+      <a href="status.html">Status</a>
+      <a href="devlog.html">Devlog</a>
+      <a href="docs.html">Docs</a>
+      <a href="community.html">Community</a>
+    </div>
 
-<p
-style="
-max-width:600px;
-margin-top:20px;
-"
->
-The requested ZombieOS page
-could not be located within
-the runtime ecosystem.
-</p>
+    <p id="copyright-text"></p>
+  </footer>
 
-<div class="buttons">
-
-<a
-class="btn primary"
-href="index.html"
->
-Return Home
-</a>
-
-</div>
-
-</main>
-
-<script src="script.js"></script>
-
+  <script src="script.js"></script>
 </body>
 </html>
