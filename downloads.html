@@ -1,189 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
 
-  <title>ZOS Downloads</title>
+    <meta charset="UTF-8">
 
-  <link
-    rel="icon"
-    type="image/png"
-    href="favicon.png"
-  >
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="style.css">
+    <title>ZombieOS Downloads</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="style.css">
 
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<div class="bg-grid"></div>
+    <div class="background-grid"></div>
+    <div class="scanlines"></div>
 
-<div class="orb-container">
-  <div class="orb"></div>
-  <div class="orb"></div>
-  <div class="orb"></div>
-</div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
 
-<header class="nav">
+    <nav class="navbar">
 
-  <div class="logo">
-    ZOS
-  </div>
+        <div class="nav-inner">
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="zsharp.html">Z#</a>
-    <a href="downloads.html">Downloads</a>
-    <a href="versions.html">Versions</a>
-    <a href="status.html">Status</a>
-    <a href="devlog.html">Devlog</a>
-    <a href="docs.html">Docs</a>
-    <a href="community.html">Community</a>
-  </nav>
+            <div class="logo">
+                ZOS
+            </div>
 
-</header>
+            <div class="nav-links">
 
-<main class="page">
+                <a href="index.html">Home</a>
+                <a href="downloads.html">Downloads</a>
+                <a href="status.html">Status</a>
 
-<section class="section center">
+            </div>
 
-  <p class="tag">
-    DOWNLOAD CENTER
-  </p>
+        </div>
 
-  <h1>
-    Downloads
-  </h1>
+    </nav>
 
-  <p id="detected-os">
-    Detecting your operating system...
-  </p>
+    <section class="section">
 
-  <div class="buttons">
+        <p class="section-tag">
+            DOWNLOAD CENTER
+        </p>
 
-    <a
-      id="recommended-download"
-      class="btn primary"
-      href="#"
-    >
-      Preparing Download
-    </a>
+        <h2>
+            Downloads
+        </h2>
 
-  </div>
+        <div class="card-grid">
 
-</section>
+            <div class="card">
 
-<section class="section">
+                <h3>
+                    Windows
+                </h3>
 
-  <h2>
-    Available Platforms
-  </h2>
+                <p>
+                    Current recommended platform
+                    for ZombieOS prototypes.
+                </p>
 
-  <div class="card-grid">
+            </div>
 
-    <div class="card">
+            <div class="card">
 
-      <h3>
-        Windows
-      </h3>
+                <h3>
+                    Linux
+                </h3>
 
-      <p>
-        Current recommended platform for ZombieOS prototypes.
-      </p>
+                <p>
+                    Planned support for future
+                    development builds.
+                </p>
 
-      <div class="buttons">
-        <a
-          class="btn"
-          href="downloads/ZOS-Windows.zip"
-        >
-          Download Windows
-        </a>
-      </div>
+            </div>
 
-    </div>
+            <div class="card">
 
-    <div class="card">
+                <h3>
+                    macOS
+                </h3>
 
-      <h3>
-        macOS
-      </h3>
+                <p>
+                    Experimental support planned
+                    for future releases.
+                </p>
 
-      <p>
-        Planned future support for Apple runtime environments.
-      </p>
+            </div>
 
-      <div class="buttons">
-        <a
-          class="btn"
-          href="downloads/ZOS-Mac.zip"
-        >
-          Download macOS
-        </a>
-      </div>
+        </div>
 
-    </div>
+    </section>
 
-    <div class="card">
-
-      <h3>
-        Linux
-      </h3>
-
-      <p>
-        Future Linux ecosystem runtime support planned.
-      </p>
-
-      <div class="buttons">
-        <a
-          class="btn"
-          href="downloads/ZOS-Linux.zip"
-        >
-          Download Linux
-        </a>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-</main>
-
-<footer>
-
-  <div class="footer-glow"></div>
-
-  <h2 class="footer-title">
-    ZombieOS
-  </h2>
-
-  <div class="footer-links">
-
-    <a href="index.html">Home</a>
-    <a href="zsharp.html">Z#</a>
-    <a href="downloads.html">Downloads</a>
-    <a href="versions.html">Versions</a>
-    <a href="status.html">Status</a>
-    <a href="devlog.html">Devlog</a>
-    <a href="docs.html">Docs</a>
-    <a href="community.html">Community</a>
-
-  </div>
-
-  <p id="copyright-text"></p>
-
-</footer>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
+
 </html>
