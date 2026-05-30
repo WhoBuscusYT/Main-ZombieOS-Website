@@ -1,60 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
   <title>ZOS Downloads</title>
-  <link rel="stylesheet" href="style.css" />
+
+  <link rel="stylesheet" href="style.css"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-  <div class="bg-grid"></div>
 
-  <header class="nav">
-    <div class="logo">ZOS</div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="zsharp.html">Z#</a>
-      <a href="downloads.html">Downloads</a>
-      <a href="versions.html">Previous Versions</a>
-    </nav>
-  </header>
+<div class="bg-grid"></div>
 
-  <main class="page">
-    <section class="section center">
-      <p class="tag">DOWNLOAD CENTER</p>
-      <h1>Download ZombieOS</h1>
-      <p id="detected-os">Detecting your system...</p>
+<header class="nav">
 
-      <a id="recommended-download" class="btn primary" href="#">
-        Preparing Download
-      </a>
+  <div class="logo">ZOS</div>
 
-      <div class="card-grid downloads">
-        <div class="card">
-          <h3>Windows</h3>
-          <p>Recommended for current ZOS prototypes.</p>
-          <a class="btn" href="downloads/ZOS-Windows.zip">Download Windows</a>
-        </div>
+  <nav>
 
-        <div class="card">
-          <h3>macOS</h3>
-          <p>Future prototype support.</p>
-          <a class="btn" href="downloads/ZOS-Mac.zip">Download macOS</a>
-        </div>
+    <a href="index.html">Home</a>
 
-        <div class="card">
-          <h3>Linux</h3>
-          <p>Future prototype support.</p>
-          <a class="btn" href="downloads/ZOS-Linux.zip">Download Linux</a>
-        </div>
+    <a href="zsharp.html">Z#</a>
+
+    <a href="downloads.html">Downloads</a>
+
+    <a href="versions.html">Versions</a>
+
+    <a href="docs.html">Docs</a>
+
+  </nav>
+
+</header>
+
+<main class="page">
+
+<section class="section center">
+
+  <p class="tag">
+    DOWNLOAD CENTER
+  </p>
+
+  <h1>Downloads</h1>
+
+  <p id="detected-os">
+    Detecting your operating system...
+  </p>
+
+  <div
+    class="buttons"
+    style="justify-content: center; margin-top: 30px;"
+  >
+
+    <a
+      id="recommended-download"
+      class="btn primary"
+      href="#"
+    >
+      Preparing Download
+    </a>
+
+  </div>
+
+</section>
+
+<section class="section">
+
+  <h2>Available Platforms</h2>
+
+  <div class="card-grid">
+
+    <div class="card">
+
+      <h3>Windows</h3>
+
+      <p>
+        Current recommended platform for ZombieOS prototypes.
+      </p>
+
+      <div class="buttons">
+
+        <a
+          class="btn"
+          href="downloads/ZOS-Windows.zip"
+        >
+          Download Windows
+        </a>
+
       </div>
 
-      <a class="btn" href="versions.html">View Previous Versions</a>
-    </section>
-  </main>
+    </div>
 
-  <script src="script.js"></script>
+    <div class="card">
+
+      <h3>macOS</h3>
+
+      <p>
+        Future support planned for macOS runtime systems.
+      </p>
+
+      <div class="buttons">
+
+        <a
+          class="btn"
+          href="downloads/ZOS-Mac.zip"
+        >
+          Download macOS
+        </a>
+
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <h3>Linux</h3>
+
+      <p>
+        Planned support for Linux-based runtime environments.
+      </p>
+
+      <div class="buttons">
+
+        <a
+          class="btn"
+          href="downloads/ZOS-Linux.zip"
+        >
+          Download Linux
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="section center">
+
+  <p class="tag">
+    VERSION SYSTEM
+  </p>
+
+  <h2>Archived Releases</h2>
+
+  <p>
+    Older ZombieOS builds and archived prototype versions
+    can be accessed through the versions page.
+  </p>
+
+  <div
+    class="buttons"
+    style="justify-content: center; margin-top: 35px;"
+  >
+
+    <a
+      class="btn"
+      href="versions.html"
+    >
+      View Previous Versions
+    </a>
+
+  </div>
+
+</section>
+
+<section class="section center">
+
+  <p class="tag">
+    RUNTIME STATUS
+  </p>
+
+  <h2>Prototype Status</h2>
+
+  <div class="info-box version-box">
+
+    <h3>
+      ZOS Prototype v0.1 Alpha
+    </h3>
+
+    <p>
+      STATUS: ONLINE<br>
+      DOWNLOADS: ACTIVE<br>
+      RELEASE CHANNEL: ALPHA
+    </p>
+
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+
+  <p>
+    ZombieOS / ZOS © 2026
+  </p>
+
+</footer>
+
+<script src="script.js"></script>
+
 </body>
 </html>
