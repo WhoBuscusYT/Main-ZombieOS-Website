@@ -410,33 +410,173 @@ box-shadow:0 0 22px rgba(0,255,120,0.16);
 }
 
 /* =========================
-   MOBILE
+   MOBILE FIXES
 ========================= */
 
-@media(max-width:768px){
+@media (max-width: 900px){
+
+/* NAVBAR */
+
+.nav-container{
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:20px;
+gap:14px;
+}
+
+.logo{
+font-size:4rem;
+}
+
+.nav-links{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:14px;
+}
+
+.nav-links a{
+font-size:0.9rem;
+}
+
+/* HERO */
+
+.hero{
+grid-template-columns:1fr;
+gap:40px;
+padding:80px 24px;
+}
+
+.hero-left,
+.hero-right{
+width:100%;
+}
+
+/* WHAT IS ZOS SECTION */
+
+.info-grid{
+display:flex;
+flex-direction:column;
+gap:30px;
+}
+
+.info-left,
+.info-center,
+.info-right{
+width:100%;
+}
+
+/* TERMINAL */
+
+.holo-card{
+width:100%;
+max-width:100%;
+}
+
+/* COMMUNITY BUTTONS */
+
+.community-buttons{
+display:flex;
+flex-direction:column;
+gap:16px;
+}
+
+.community-buttons a{
+width:100%;
+}
+
+/* CARDS */
+
+.feature-card,
+.dashboard-card{
+width:100%;
+}
+
+/* AUTH */
+
+.auth-card{
+padding:28px;
+}
+
+.auth-title{
+font-size:4rem;
+}
+
+.zos-input{
+font-size:1rem;
+padding:18px;
+}
+
+.primary-btn,
+.oauth-btn{
+width:100%;
+}
+
+/* FOOTER */
+
+.footer-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+/* =========================
+   SMALL PHONE FIXES
+========================= */
+
+@media (max-width: 600px){
+
+.page-title{
+font-size:3.6rem;
+}
 
 .logo{
 font-size:3rem;
 }
 
-.nav-container{
-flex-direction:column;
+.section-tag{
+font-size:0.8rem;
+letter-spacing:8px;
 }
 
 .nav-links{
-gap:16px;
+gap:10px;
 }
 
-.page-title{
-font-size:4rem;
+.nav-links a{
+font-size:0.78rem;
 }
 
-.dashboard-card{
-padding:28px;
+.auth-title{
+font-size:3.2rem;
 }
 
-.footer-logo{
-font-size:3rem;
+.dashboard-grid{
+grid-template-columns:1fr;
 }
 
+}
+
+/* =========================
+   PREVENT SIDE SCROLL
+========================= */
+
+body{
+overflow-x:hidden;
+}
+
+img{
+max-width:100%;
+}
+
+/* =========================
+   FIX RANDOM WIDTH ISSUES
+========================= */
+
+.hero,
+.page-container,
+.dashboard-grid,
+.info-grid{
+max-width:100%;
 }
