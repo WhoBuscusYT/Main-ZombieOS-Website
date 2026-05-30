@@ -1,4 +1,3 @@
-
 const shellMessages = [
 
 [
@@ -23,22 +22,6 @@ const shellMessages = [
 "> enable plugins",
 
 "RUNTIME ONLINE"
-],
-
-[
-"> verify kernel",
-"> establish environment",
-"> launch services",
-
-"SYSTEM ONLINE"
-],
-
-[
-"> initialize network",
-"> connect modules",
-"> activate shell",
-
-"ECOSYSTEM ACTIVE"
 ]
 
 ];
