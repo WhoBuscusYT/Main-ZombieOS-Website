@@ -579,3 +579,187 @@ font-size:2.5rem;
 }
 
 }
+
+/* =========================
+   ERROR PAGE FIXES
+========================= */
+
+.error-page{
+
+    width:100%;
+    max-width:100%;
+
+    padding:
+
+    180px 24px
+    120px;
+
+    box-sizing:border-box;
+
+    overflow:hidden;
+
+    position:relative;
+
+    z-index:2;
+}
+
+.error-eyebrow{
+
+    font-size:0.9rem;
+
+    letter-spacing:10px;
+
+    color:#00ff99;
+
+    margin-bottom:20px;
+
+    line-height:1.5;
+}
+
+.error-code{
+
+    font-size:6rem;
+
+    line-height:1;
+
+    margin-bottom:10px;
+
+    color:white;
+
+    text-shadow:
+    0 0 20px #00ff99;
+}
+
+.error-title{
+
+    font-size:2.5rem;
+
+    line-height:1.1;
+
+    margin-bottom:20px;
+
+    color:white;
+}
+
+.error-description{
+
+    font-size:1.1rem;
+
+    line-height:1.8;
+
+    color:#cfcfcf;
+
+    max-width:700px;
+
+    margin-bottom:40px;
+}
+
+.error-buttons{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:20px;
+
+    margin-bottom:40px;
+}
+
+.error-terminal{
+
+    width:100%;
+
+    max-width:700px;
+
+    background:
+    rgba(0,0,0,0.7);
+
+    border:
+    1px solid rgba(0,255,150,0.2);
+
+    border-radius:24px;
+
+    padding:30px;
+
+    overflow:auto;
+
+    box-sizing:border-box;
+
+    box-shadow:
+    0 0 30px rgba(0,255,150,0.1);
+}
+
+.error-terminal pre{
+
+    margin:0;
+
+    white-space:pre-wrap;
+
+    color:#00ff99;
+
+    font-size:1rem;
+
+    line-height:2;
+
+    font-family:monospace;
+}
+
+/* =========================
+   MOBILE FIXES
+========================= */
+
+@media(max-width:768px){
+
+    .error-page{
+
+        padding:
+        160px 20px
+        100px;
+    }
+
+    .error-eyebrow{
+
+        font-size:0.75rem;
+
+        letter-spacing:6px;
+    }
+
+    .error-code{
+
+        font-size:4.5rem;
+    }
+
+    .error-title{
+
+        font-size:2rem;
+    }
+
+    .error-description{
+
+        font-size:1rem;
+
+        line-height:1.7;
+    }
+
+    .error-buttons{
+
+        flex-direction:column;
+    }
+
+    .error-buttons a{
+
+        width:100%;
+
+        text-align:center;
+    }
+
+    .error-terminal{
+
+        padding:20px;
+    }
+
+    .error-terminal pre{
+
+        font-size:0.9rem;
+    }
+}
