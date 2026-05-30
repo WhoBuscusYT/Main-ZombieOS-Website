@@ -1,31 +1,27 @@
+<!-- index.html -->
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>ZombieOS</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="style.css">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
+<div class="bg-orb orb1"></div>
+<div class="bg-orb orb2"></div>
+<div class="bg-orb orb3"></div>
 
-<nav class="navbar">
+<header class="navbar">
 
 <div class="nav-container">
 
@@ -33,8 +29,7 @@
 ZOS
 </a>
 
-<div class="nav-links">
-
+<nav class="nav-links">
 <a href="index.html">Home</a>
 <a href="zsharp.html">Z#</a>
 <a href="downloads.html">Downloads</a>
@@ -43,35 +38,28 @@ ZOS
 <a href="devlog.html">Devlog</a>
 <a href="docs.html">Docs</a>
 <a href="community.html">Community</a>
-
-<a href="login.html" class="login-nav-btn">
-Login
-</a>
-
-</div>
-
-</div>
-
+<a href="login.html">Login</a>
 </nav>
+
+</div>
+
+</header>
 
 <section class="hero">
 
 <div class="hero-left">
 
-<div class="hero-top-text">
+<p class="section-tag">
 INITIALIZING FUTURE RUNTIME
-</div>
+</p>
 
-<h1 class="hero-title">
+<h1 class="page-title">
 ZombieOS
 </h1>
 
-<p class="hero-description">
-
+<p class="hero-text">
 ZOS is a futuristic operating system,
-runtime platform, and development
-ecosystem powered by Z#.
-
+runtime platform, and development ecosystem powered by Z#.
 </p>
 
 <div class="hero-buttons">
@@ -88,17 +76,17 @@ Explore Z#
 
 </div>
 
+<div class="hero-right">
+
 <div class="holo-card">
 
 <div class="window-bar">
-
 <span></span>
 <span></span>
 <span></span>
-
 </div>
 
-<h3 id="shell-title">
+<h3 class="shell-title">
 ZOS Runtime Shell
 </h3>
 
@@ -108,144 +96,154 @@ LOADING...
 
 </div>
 
-<!-- WHAT IS ZOS -->
-
-<section class="section">
-
-    <p class="section-tag">
-        OPERATING ECOSYSTEM
-    </p>
-
-    <h2 class="section-title">
-        What is ZOS?
-    </h2>
-
-    <div class="feature-grid">
-
-        <div class="feature-card">
-            <h3>Operating System Vision</h3>
-
-            <p>
-                A futuristic runtime and operating ecosystem
-                built around modular systems and advanced UI concepts.
-            </p>
-        </div>
-
-        <div class="feature-card">
-            <h3>Z# Runtime Language</h3>
-
-            <p>
-                Z# powers events, runtime systems,
-                applications, and future ecosystem integrations.
-            </p>
-        </div>
-
-        <div class="feature-card">
-            <h3>Future Ecosystem</h3>
-
-            <p>
-                Planned support for apps, games,
-                tools, runtimes, plugins,
-                and community systems.
-            </p>
-        </div>
-
-    </div>
+</div>
 
 </section>
 
-<!-- COMMUNITY -->
-
 <section class="section">
 
-    <p class="section-tag">
-        COMMUNITY NETWORK
-    </p>
+<div class="info-grid">
 
-    <h2 class="section-title">
-        Join the Network
-    </h2>
+<div class="info-left">
 
-    <p class="section-subtitle">
-        Follow development progress,
-        future prototypes, Z# updates,
-        and ecosystem expansion.
-    </p>
+<div class="holo-card">
 
-    <div class="social-grid">
+<div class="window-bar">
+<span></span>
+<span></span>
+<span></span>
+</div>
 
-        <a href="#" class="social-button">Discord</a>
-        <a href="#" class="social-button">YouTube</a>
-        <a href="#" class="social-button">TikTok</a>
-        <a href="#" class="social-button">Twitter</a>
-        <a href="#" class="social-button">Facebook</a>
-        <a href="#" class="social-button">Subreddit</a>
-        <a href="#" class="social-button">Instagram</a>
+<h3 class="shell-title">
+ZOS Runtime Shell
+</h3>
 
-    </div>
+<pre id="shell-text-2">
+LOADING...
+</pre>
+
+</div>
+
+</div>
+
+<div class="info-center">
+
+<p class="section-tag">
+OPERATING ECOSYSTEM
+</p>
+
+<h2 class="section-title">
+What is ZOS?
+</h2>
+
+<div class="feature-card">
+<h3>Operating System Vision</h3>
+
+<p>
+A futuristic runtime and operating ecosystem
+built around modular systems and advanced UI concepts.
+</p>
+</div>
+
+<div class="feature-card">
+<h3>Z# Runtime Language</h3>
+
+<p>
+Z# powers events, runtime systems,
+applications, and future ecosystem integrations.
+</p>
+</div>
+
+<div class="feature-card">
+<h3>Future Ecosystem</h3>
+
+<p>
+Planned support for apps, games, tools,
+runtimes, plugins, and community systems.
+</p>
+</div>
+
+</div>
+
+<div class="info-right">
+
+<p class="section-tag">
+COMMUNITY NETWORK
+</p>
+
+<h2 class="section-title">
+Join the Network
+</h2>
+
+<p class="hero-text">
+Follow development progress, future prototypes,
+Z# updates, and ecosystem expansion.
+</p>
+
+<div class="community-buttons">
+
+<a href="#">
+Discord
+</a>
+
+<a href="#">
+YouTube
+</a>
+
+<a href="#">
+TikTok
+</a>
+
+<a href="#">
+Twitter
+</a>
+
+<a href="#">
+Facebook
+</a>
+
+<a href="#">
+Subreddit
+</a>
+
+<a href="#">
+Instagram
+</a>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
 
 <footer class="footer">
 
-    <div class="footer-inner">
+<h2 class="footer-logo">
+ZombieOS
+</h2>
 
-        <h2 class="footer-logo">
-            ZombieOS
-        </h2>
+<div class="footer-grid">
 
-        <div class="footer-links">
+<a href="index.html">Home</a>
+<a href="zsharp.html">Z#</a>
+<a href="downloads.html">Downloads</a>
+<a href="versions.html">Versions</a>
+<a href="status.html">Status</a>
+<a href="devlog.html">Devlog</a>
+<a href="docs.html">Docs</a>
+<a href="community.html">Community</a>
 
-            <a href="index.html">
-                Home
-            </a>
+</div>
 
-            <a href="zsharp.html">
-                Z#
-            </a>
-
-            <a href="downloads.html">
-                Downloads
-            </a>
-
-            <a href="versions.html">
-                Versions
-            </a>
-
-            <a href="status.html">
-                Status
-            </a>
-
-            <a href="devlog.html">
-                Devlog
-            </a>
-
-            <a href="docs.html">
-                Docs
-            </a>
-
-            <a href="community.html">
-                Community
-            </a>
-
-            <a href="login.html">
-                Login
-            </a>
-
-        </div>
-
-        <p class="footer-copy">
-
-            ZombieOS / ZOS © 2026
-
-        </p>
-
-    </div>
+<p class="footer-copy">
+© 2026 ZombieOS
+</p>
 
 </footer>
 
 <script src="script.js"></script>
 
 </body>
-
 </html>
