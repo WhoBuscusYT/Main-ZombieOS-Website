@@ -1,4 +1,3 @@
-
 * {
   margin: 0;
   padding: 0;
@@ -7,10 +6,7 @@
 
 html,
 body {
-  overflow-x: hidden;
   width: 100%;
-  max-width: 100%;
-
   overflow-x: hidden;
 
   scroll-behavior: smooth;
@@ -20,7 +16,7 @@ body {
   background:
     radial-gradient(
       circle at top,
-      rgba(0,255,136,0.12),
+      rgba(0,255,136,0.08),
       transparent 40%
     ),
     #050505;
@@ -57,61 +53,7 @@ body::before {
 }
 
 /* =========================================
-   ORBS
-========================================= */
-
-.orb-container {
-  position: fixed;
-  inset: 0;
-
-  overflow: hidden;
-
-  pointer-events: none;
-
-  z-index: -1;
-}
-
-.orb {
-  position: absolute;
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(0,255,136,0.12),
-      transparent 70%
-    );
-
-  filter: blur(20px);
-
-  animation:
-    orbFloat linear infinite;
-}
-
-@keyframes orbFloat {
-
-  0% {
-    transform:
-      translateY(0px)
-      translateX(0px);
-  }
-
-  50% {
-    transform:
-      translateY(-60px)
-      translateX(30px);
-  }
-
-  100% {
-    transform:
-      translateY(0px)
-      translateX(0px);
-  }
-}
-
-/* =========================================
-   GRID
+   BACKGROUND GRID
 ========================================= */
 
 .bg-grid {
@@ -135,6 +77,72 @@ body::before {
 }
 
 /* =========================================
+   FLOATING ORBS
+========================================= */
+
+.orb-container {
+  position: fixed;
+  inset: 0;
+
+  overflow: hidden;
+
+  pointer-events: none;
+
+  z-index: -1;
+}
+
+.orb {
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(0,255,136,0.12),
+      transparent 70%
+    );
+
+  filter: blur(20px);
+
+  animation:
+    orbFloat 16s ease-in-out infinite;
+}
+
+.orb:nth-child(1) {
+  top: 10%;
+  left: 10%;
+}
+
+.orb:nth-child(2) {
+  top: 50%;
+  left: 70%;
+}
+
+.orb:nth-child(3) {
+  top: 80%;
+  left: 30%;
+}
+
+@keyframes orbFloat {
+
+  0%,100% {
+    transform:
+      translateY(0px)
+      translateX(0px);
+  }
+
+  50% {
+    transform:
+      translateY(-50px)
+      translateX(20px);
+  }
+}
+
+/* =========================================
    NAVBAR
 ========================================= */
 
@@ -146,13 +154,13 @@ body::before {
 
   width: 100%;
 
-  padding: 14px 4%;
+  padding: 18px 5%;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  gap: 14px;
+  gap: 16px;
 
   background:
     rgba(0,0,0,0.82);
@@ -161,13 +169,13 @@ body::before {
 
   border-bottom:
     1px solid
-    rgba(0,255,136,0.2);
+    rgba(0,255,136,0.15);
 }
 
 .logo {
   font-family: 'Orbitron', sans-serif;
 
-  font-size: 2.2rem;
+  font-size: 2.3rem;
 
   color: #00ff88;
 
@@ -178,22 +186,11 @@ body::before {
 
 nav {
   display: flex;
+  flex-wrap: wrap;
 
   justify-content: center;
 
   gap: 18px;
-
-  width: 100%;
-
-  overflow-x: auto;
-
-  white-space: nowrap;
-
-  scrollbar-width: none;
-}
-
-nav::-webkit-scrollbar {
-  display: none;
 }
 
 .nav a {
@@ -203,9 +200,7 @@ nav::-webkit-scrollbar {
 
   transition: 0.25s;
 
-  font-size: 0.95rem;
-
-  flex-shrink: 0;
+  font-size: 1rem;
 }
 
 .nav a:hover {
@@ -213,31 +208,80 @@ nav::-webkit-scrollbar {
 }
 
 /* =========================================
+   TYPOGRAPHY
+========================================= */
+
+.tag {
+  color: #00ff88;
+
+  letter-spacing: 5px;
+
+  margin-bottom: 18px;
+
+  font-size: 0.8rem;
+}
+
+h1 {
+  font-family: 'Orbitron', sans-serif;
+
+  font-size:
+    clamp(3rem, 9vw, 6rem);
+
+  line-height: 1.05;
+
+  margin-bottom: 16px;
+
+  text-shadow:
+    0 0 20px
+    rgba(0,255,136,0.35);
+}
+
+h2 {
+  font-size:
+    clamp(2rem, 5vw, 3rem);
+
+  margin-bottom: 18px;
+}
+
+h3 {
+  color: #00ff88;
+
+  margin-bottom: 14px;
+}
+
+p {
+  color: #b5b5b5;
+
+  line-height: 1.8;
+}
+
+/* =========================================
+   SECTIONS
+========================================= */
+
+.section {
+  padding: 90px 8%;
+}
+
+.center {
+  text-align: center;
+}
+
+.page {
+  min-height: 100vh;
+}
+
+/* =========================================
    HERO
 ========================================= */
 
 .hero {
-  main,
-section,
-.hero,
-.card-grid,
-.split,
-.nav,
-footer {
-  width: 100%;
-  max-width: 100%;
-
-  overflow-x: hidden;
   min-height: 75vh;
-
-  padding:
-    60px 8%
-    80px;
 
   display: grid;
 
   grid-template-columns:
-    1.1fr 0.9fr;
+    1fr 1fr;
 
   gap: 40px;
 
@@ -246,56 +290,6 @@ footer {
 
 .hero-text {
   width: 100%;
-}
-
-.tag {
-  color: #00ff88;
-
-  letter-spacing: 5px;
-
-  margin-bottom: 16px;
-
-  font-size: 0.8rem;
-}
-
-h1 {
-  position: relative;
-
-  font-family: 'Orbitron', sans-serif;
-
-  font-size:
-    clamp(2.5rem, 9vw, 7rem);
-
-  line-height: 1;
-
-  margin-bottom: 10px;
-
-  word-break: break-word;
-
-  overflow-wrap: break-word;
-
-  text-shadow:
-    0 0 20px
-    rgba(0,255,136,0.4);
-}
-
-h2 {
-  font-size:
-    clamp(2rem, 5vw, 3.5rem);
-
-  margin-bottom: 18px;
-}
-
-h3 {
-  color: #00ff88;
-
-  margin-bottom: 12px;
-}
-
-p {
-  color: #b5b5b5;
-
-  line-height: 1.8;
 }
 
 /* =========================================
@@ -307,11 +301,11 @@ p {
 
   justify-content: center;
 
+  flex-wrap: wrap;
+
   gap: 14px;
 
   margin-top: 30px;
-
-  flex-wrap: wrap;
 }
 
 .btn {
@@ -323,7 +317,7 @@ p {
 
   border:
     1px solid
-    rgba(0,255,136,0.4);
+    rgba(0,255,136,0.35);
 
   background:
     rgba(0,255,136,0.05);
@@ -339,12 +333,11 @@ p {
 
 .btn:hover {
   transform:
-    translateY(-3px)
-    scale(1.03);
+    translateY(-3px);
 
   box-shadow:
-    0 0 22px
-    rgba(0,255,136,0.45);
+    0 0 18px
+    rgba(0,255,136,0.35);
 }
 
 .btn.primary {
@@ -369,7 +362,7 @@ p {
 
   border:
     1px solid
-    rgba(0,255,136,0.22);
+    rgba(0,255,136,0.18);
 
   border-radius: 24px;
 
@@ -378,11 +371,29 @@ p {
   backdrop-filter: blur(10px);
 
   box-shadow:
-    0 0 40px
+    0 0 30px
     rgba(0,255,136,0.08);
+}
 
-  animation:
-    float 4s ease-in-out infinite;
+.card-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 22px;
+
+  margin-top: 35px;
+}
+
+pre {
+  overflow-x: auto;
+
+  white-space: pre-wrap;
+
+  color: #00ff88;
+
+  line-height: 1.7;
 }
 
 .window-bar {
@@ -404,65 +415,9 @@ p {
     0 0 12px #00ff88;
 }
 
-pre {
-  overflow-x: auto;
-
-  white-space: pre-wrap;
-  word-wrap: break-word;
-
-  color: #00ff88;
-
-  line-height: 1.7;
-}
-
 /* =========================================
-   SECTIONS
+   STATUS BAR
 ========================================= */
-
-.section {
-  padding: 90px 8%;
-}
-
-.card-grid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(3, 1fr);
-
-  gap: 22px;
-
-  margin-top: 35px;
-}
-
-.split {
-  display: grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap: 35px;
-
-  align-items: center;
-}
-
-.center {
-  text-align: center;
-}
-
-.page {
-  min-height: 80vh;
-}
-
-/* =========================================
-   STATUS PAGE
-========================================= */
-
-.status-card {
-  max-width: 700px;
-
-  margin:
-    40px auto;
-}
 
 .status-bar {
   width: 100%;
@@ -493,15 +448,11 @@ pre {
 
   border-radius: 999px;
 
-  box-shadow:
-    0 0 18px
-    rgba(0,255,136,0.45);
-
   transition: width 0.2s linear;
 }
 
 .status-text {
-  margin-top: 15px;
+  margin-top: 14px;
 
   color: #00ff88;
 
@@ -513,36 +464,18 @@ pre {
 ========================================= */
 
 footer {
-  position: relative;
+  margin-top: 80px;
 
-  overflow: hidden;
-
-  padding: 45px 6%;
+  padding: 50px 8%;
 
   border-top:
     1px solid
-    rgba(0,255,136,0.18);
+    rgba(0,255,136,0.12);
 
   background:
     rgba(0,0,0,0.55);
 
-  backdrop-filter: blur(10px);
-
   text-align: center;
-}
-
-.footer-glow {
-  position: absolute;
-  inset: 0;
-
-  background:
-    radial-gradient(
-      circle at center,
-      rgba(0,255,136,0.08),
-      transparent 70%
-    );
-
-  pointer-events: none;
 }
 
 .footer-title {
@@ -552,7 +485,7 @@ footer {
 
   color: #00ff88;
 
-  margin-bottom: 25px;
+  margin-bottom: 30px;
 
   text-shadow:
     0 0 10px #00ff88,
@@ -561,6 +494,53 @@ footer {
 
   animation:
     footerGlow 3s ease-in-out infinite;
+}
+
+.footer-links {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 12px;
+
+  max-width: 650px;
+
+  margin:
+    0 auto
+    30px;
+}
+
+.footer-links a {
+  padding: 12px;
+
+  border-radius: 12px;
+
+  text-decoration: none;
+
+  color: #00ff88;
+
+  background:
+    rgba(0,255,136,0.05);
+
+  border:
+    1px solid
+    rgba(0,255,136,0.15);
+
+  transition: 0.25s;
+}
+
+.footer-links a:hover {
+  transform:
+    translateY(-3px);
+
+  box-shadow:
+    0 0 16px
+    rgba(0,255,136,0.25);
+}
+
+footer p {
+  color: #7f7f7f;
 }
 
 @keyframes footerGlow {
@@ -580,68 +560,6 @@ footer {
   }
 }
 
-.footer-links {
-  display: grid;
-
-  grid-template-columns:
-    repeat(3, 1fr);
-
-  gap: 12px;
-
-  max-width: 650px;
-
-  margin:
-    0 auto
-    25px;
-}
-
-.footer-links a {
-  padding: 10px 16px;
-
-  border-radius: 12px;
-
-  text-decoration: none;
-
-  color: #00ff88;
-
-  background:
-    rgba(0,255,136,0.04);
-
-  border:
-    1px solid
-    rgba(0,255,136,0.2);
-
-  transition: 0.25s;
-}
-
-.footer-links a:hover {
-  transform:
-    translateY(-3px);
-
-  box-shadow:
-    0 0 18px
-    rgba(0,255,136,0.25);
-}
-
-footer p {
-  color: #7f7f7f;
-}
-
-/* =========================================
-   ANIMATIONS
-========================================= */
-
-@keyframes float {
-
-  0%,100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-14px);
-  }
-}
-
 /* =========================================
    MOBILE
 ========================================= */
@@ -649,7 +567,6 @@ footer p {
 @media (max-width: 850px) {
 
   .hero,
-  .split,
   .card-grid {
     grid-template-columns: 1fr;
   }
@@ -660,113 +577,14 @@ footer p {
   }
 
   h1 {
-    font-size: 4rem;
-  }
-}
-
-@media (max-width: 850px) {
-
-  h1 {
-    font-size: 3.4rem;
+    font-size: 3.5rem;
   }
 
   h2 {
     font-size: 2.3rem;
   }
 
-  .hero {
-    grid-template-columns: 1fr;
+  .section {
+    padding: 70px 6%;
   }
-
-  .card-grid,
-  .split {
-    grid-template-columns: 1fr;
-  }
-
-  .footer-links {
-    grid-template-columns:
-      1fr 1fr;
-  }
-
-  .holo-card,
-  .code-box,
-  .card,
-  .info-box,
-  .status-card {
-    width: 100%;
-    max-width: 100%;
-  }
-}
-
-/* =========================================
-   OPERATING SYSTEM DETECTION
-========================================= */
-
-const osText =
-document.getElementById(
-  "detected-os"
-);
-
-const downloadButton =
-document.getElementById(
-  "recommended-download"
-);
-
-if (osText && downloadButton) {
-
-  const userAgent =
-  navigator.userAgent;
-
-  let os = "Unknown OS";
-  let download = "#";
-
-  if (
-    userAgent.includes("Win")
-  ) {
-
-    os = "Windows";
-
-    download =
-    "downloads/ZOS-Windows.zip";
-
-  } else if (
-    userAgent.includes("Mac")
-  ) {
-
-    os = "macOS";
-
-    download =
-    "downloads/ZOS-Mac.zip";
-
-  } else if (
-    userAgent.includes("Linux")
-  ) {
-
-    os = "Linux";
-
-    download =
-    "downloads/ZOS-Linux.zip";
-
-  } else if (
-    /Android/i.test(userAgent)
-  ) {
-
-    os = "Android";
-
-  } else if (
-    /iPhone|iPad|iPod/i.test(userAgent)
-  ) {
-
-    os = "iOS";
-
-  }
-
-  osText.textContent =
-  `Detected Platform: ${os}`;
-
-  downloadButton.textContent =
-  `Download for ${os}`;
-
-  downloadButton.href =
-  download;
 }
