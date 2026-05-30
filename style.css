@@ -208,6 +208,16 @@ p {
   flex-wrap: wrap;
 }
 
+.social-buttons .btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.social-buttons i {
+  font-size: 1rem;
+}
+
 .btn {
   padding: 14px 22px;
 
