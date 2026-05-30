@@ -1,20 +1,4 @@
-/* =========================
-   FOOTER YEAR
-========================= */
-
-const year = document.getElementById("year");
-
-if(year){
-    year.textContent =
-        new Date().getFullYear();
-}
-
-/* =========================
-   TERMINAL SYSTEM
-========================= */
-
-const terminal =
-    document.getElementById("shell-text");
+const shellText = document.getElementById("shell-text");
 
 const shellMessages = [
 
@@ -24,127 +8,121 @@ const shellMessages = [
 
 SYSTEM ONLINE`,
 
-`> initializing runtime
-> syncing UI systems
+`> initialize runtime
 > loading modules
+> checking kernel
 
-READY`,
+RUNTIME READY`,
 
-`> startup.sequence()
-> verify ecosystem
-> connect runtime
+`> connect ecosystem
+> sync packages
+> verify systems
 
-CONNECTED`,
+CONNECTION STABLE`,
 
-`> compile ZSharp
-> verify kernel
-> initialize engine
+`> launch prototype
+> enable holographic ui
+> initialize shell
 
-NO ERRORS DETECTED`,
+PROTOTYPE ACTIVE`,
 
-`> import system.core
-> import ui.framework
-> import runtime.engine
+`> load runtime api
+> initialize events
+> verify permissions
 
-INITIALIZED`,
+EVENT SYSTEM READY`,
 
-`> checking updates
-> validating systems
-> scanning modules
+`> scanning future systems
+> checking app support
+> loading extensions
 
-ALL SYSTEMS STABLE`
+ECOSYSTEM EXPANDING`,
+
+`> connect Z#
+> compile runtime
+> execute startup
+
+ZSHARP ACTIVE`,
+
+`> verifying systems
+> monitoring uptime
+> securing runtime
+
+ALL SYSTEMS NOMINAL`
 
 ];
 
-let typingSpeed = 22;
+let currentMessage = 0;
 
-function typeMessage(text){
+function typeMessage(message) {
 
-    if(!terminal) return;
-
-    terminal.textContent = "";
+    shellText.textContent = "";
 
     let index = 0;
 
-    function type(){
+    const typing = setInterval(() => {
 
-        if(index < text.length){
+        shellText.textContent += message.charAt(index);
 
-            terminal.textContent +=
-                text.charAt(index);
+        index++;
 
-            index++;
-
-            setTimeout(
-                type,
-                typingSpeed
-            );
+        if (index >= message.length) {
+            clearInterval(typing);
         }
-    }
 
-    type();
+    }, 25);
 }
 
-function randomShellMessage(){
+function randomShellMessage() {
 
-    const randomMessage =
-        shellMessages[
-            Math.floor(
-                Math.random() *
-                shellMessages.length
-            )
-        ];
+    const randomIndex = Math.floor(Math.random() * shellMessages.length);
 
-    terminal.style.opacity = "0";
+    currentMessage = randomIndex;
 
-    setTimeout(() => {
-
-        terminal.style.opacity = "1";
-
-        typeMessage(randomMessage);
-
-    },250);
+    typeMessage(shellMessages[randomIndex]);
 }
 
-/* Random message on page load */
 randomShellMessage();
 
-/* Rotate every 30 seconds */
-setInterval(
-    randomShellMessage,
-    30000
-);
+setInterval(() => {
+    randomShellMessage();
+}, 10000);
 
-/* =========================
-   STATUS BARS
-========================= */
 
-const uptimeBars =
-    document.querySelectorAll(".uptime-fill");
 
-uptimeBars.forEach(bar => {
+/* STATUS PAGE ANIMATION */
 
-    const target =
-        parseInt(
-            bar.getAttribute("data-percent")
-        );
+const uptimeFill = document.querySelector(".uptime-fill");
+const uptimePercent = document.querySelector(".uptime-percent");
 
-    let width = 0;
+if (uptimeFill && uptimePercent) {
 
-    const interval =
-        setInterval(() => {
+    const target = 98;
 
-            if(width >= target){
+    let current = 0;
 
-                clearInterval(interval);
+    const uptimeAnimation = setInterval(() => {
 
-            }else{
+        current++;
 
-                width++;
+        uptimeFill.style.width = current + "%";
 
-                bar.style.width =
-                    width + "%";
-            }
+        uptimePercent.textContent = current + "% Uptime";
 
-        },10);
-});
+        if (current >= target) {
+            clearInterval(uptimeAnimation);
+        }
+
+    }, 20);
+
+}
+
+
+
+/* COPYRIGHT YEAR */
+
+const yearText = document.getElementById("copyright-year");
+
+if (yearText) {
+    yearText.textContent = new Date().getFullYear();
+}
