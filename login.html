@@ -1,44 +1,45 @@
+<!-- login.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ZOS Login</title>
+<title>Login - ZombieOS</title>
 
 <link rel="stylesheet" href="style.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<div class="background-grid"></div>
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
+<div class="bg-orb orb1"></div>
+<div class="bg-orb orb2"></div>
 
-<nav class="navbar">
+<header class="navbar">
 
 <div class="nav-container">
 
-<a href="index.html" class="logo">ZOS</a>
+<a href="index.html" class="logo">
+ZOS
+</a>
 
-<div class="nav-links">
-
+<nav class="nav-links">
 <a href="index.html">Home</a>
 <a href="downloads.html">Downloads</a>
 <a href="status.html">Status</a>
 <a href="signup.html">Sign Up</a>
-
-</div>
-
-</div>
-
 </nav>
 
-<section class="auth-page">
+</div>
+
+</header>
+
+<section class="auth-section">
 
 <div class="auth-card">
 
@@ -50,32 +51,23 @@ ACCOUNT SYSTEM
 Login
 </h1>
 
-<input
-type="email"
-id="login-email"
-class="zos-input"
-placeholder="Email"
->
+<form class="auth-form">
 
-<input
-type="password"
-id="login-password"
-class="zos-input"
-placeholder="Password"
->
+<input type="email" placeholder="Email" class="zos-input">
 
-<button
-id="login-btn"
-class="primary-btn">
+<input type="password" placeholder="Password" class="zos-input">
+
+<button type="submit" class="primary-btn">
 Login
 </button>
 
-<button
-id="google-login"
-class="oauth-btn">
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg">
+<button type="button" class="oauth-btn">
+<img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg">
+
 Continue with Google
 </button>
+
+</form>
 
 <p class="auth-switch">
 Don't have an account?
@@ -86,67 +78,7 @@ Don't have an account?
 
 </section>
 
-<script type="module">
-
-import { auth, googleProvider }
-from "./firebase.js";
-
-import {
-signInWithEmailAndPassword,
-signInWithPopup
-}
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-
-document.getElementById("login-btn")
-.addEventListener("click", async () => {
-
-const email =
-document.getElementById("login-email").value;
-
-const password =
-document.getElementById("login-password").value;
-
-try {
-
-await signInWithEmailAndPassword(
-auth,
-email,
-password
-);
-
-window.location.href =
-"dashboard/index.html";
-
-} catch(error) {
-
-alert(error.message);
-
-}
-
-});
-
-document.getElementById("google-login")
-.addEventListener("click", async () => {
-
-try {
-
-await signInWithPopup(
-auth,
-googleProvider
-);
-
-window.location.href =
-"dashboard/index.html";
-
-} catch(error) {
-
-alert(error.message);
-
-}
-
-});
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
