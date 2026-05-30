@@ -1,106 +1,126 @@
-const copyright = document.getElementById("copyright-text");
+/* =========================
+   FOOTER YEAR
+========================= */
 
-if (copyright) {
-  const year = new Date().getFullYear();
-  copyright.textContent = `ZombieOS / ZOS © ${year}`;
+const currentYear =
+    new Date().getFullYear();
+
+const yearText =
+    document.getElementById("year");
+
+if(yearText){
+    yearText.textContent = currentYear;
 }
 
-const terminal = document.getElementById("terminal-text");
+/* =========================
+   RUNTIME SHELL MESSAGES
+========================= */
 
-if (terminal) {
-  const terminalSets = [
-    `> boot ZombieOS
+const shellMessages = [
+
+`> boot ZombieOS
 > load ZSharp
 > ecosystem.status()
 
 SYSTEM ONLINE`,
 
-    `> initialize runtime
-> compiling modules
-> loading assets
+`> initializing runtime
+> loading UI modules
+> syncing ecosystem
 
-RUNTIME READY`,
+READY`,
 
-    `> connect services
-> validating shell
-> syncing modules
+`> compile ZSharp
+> connect runtime
+> verify kernel
 
-NETWORK STABLE`,
+NO ERRORS DETECTED`,
 
-    `> import ZSharp.Core
-> launch subsystem
-> checking ecosystem
+`> startup.sequence()
+> launch services
+> establish network
 
-ALL SYSTEMS ACTIVE`,
+CONNECTED`,
 
-    `> loading prototype
-> checking memory
-> waking shell
+`> import system.core
+> import ui.framework
+> import runtime.engine
 
-PROTOTYPE ACTIVE`
-  ];
+INITIALIZED`,
 
-  let terminalIndex = 0;
+`> checking updates
+> scanning modules
+> validating systems
 
-  function updateTerminal() {
-    terminal.textContent = terminalSets[terminalIndex];
-    terminalIndex = (terminalIndex + 1) % terminalSets.length;
-  }
+ALL SYSTEMS STABLE`
 
-  updateTerminal();
-  setInterval(updateTerminal, 30000);
-}
+];
 
-const osText = document.getElementById("detected-os");
-const downloadButton = document.getElementById("recommended-download");
+const shellText =
+    document.getElementById("shellText");
 
-if (osText && downloadButton) {
-  const userAgent = navigator.userAgent.toLowerCase();
+function randomShellMessage(){
 
-  let os = "Unknown OS";
-  let download = "#";
+    const random =
+        shellMessages[
+            Math.floor(
+                Math.random() *
+                shellMessages.length
+            )
+        ];
 
-  if (userAgent.includes("android")) {
-    os = "Android";
-    download = "#";
-  } else if (userAgent.includes("iphone") || userAgent.includes("ipad") || userAgent.includes("ipod")) {
-    os = "iOS";
-    download = "#";
-  } else if (userAgent.includes("windows")) {
-    os = "Windows";
-    download = "downloads/ZOS-Windows.zip";
-  } else if (userAgent.includes("mac")) {
-    os = "macOS";
-    download = "downloads/ZOS-Mac.zip";
-  } else if (userAgent.includes("linux") || userAgent.includes("x11")) {
-    os = "Linux";
-    download = "downloads/ZOS-Linux.zip";
-  }
+    if(shellText){
 
-  osText.textContent = `Detected Platform: ${os}`;
+        shellText.style.opacity = "0";
 
-  if (download === "#") {
-    downloadButton.textContent = `${os} Download Not Available Yet`;
-    downloadButton.href = "#";
-  } else {
-    downloadButton.textContent = `Download for ${os}`;
-    downloadButton.href = download;
-  }
-}
+        setTimeout(() => {
 
-const fills = document.querySelectorAll(".status-fill");
+            shellText.innerHTML =
+                random.replace(/\n/g,"<br>");
 
-fills.forEach((fill) => {
-  const percent = parseInt(fill.getAttribute("data-percent"), 10) || 0;
-  let current = 0;
+            shellText.style.opacity = "1";
 
-  const interval = setInterval(() => {
-    if (current >= percent) {
-      clearInterval(interval);
-      return;
+        },300);
     }
+}
 
-    current++;
-    fill.style.width = current + "%";
-  }, 15);
+/* Randomize on page load */
+randomShellMessage();
+
+/* Change every 30 seconds */
+setInterval(
+    randomShellMessage,
+    30000
+);
+
+/* =========================
+   STATUS PAGE BARS
+========================= */
+
+const uptimeBars =
+    document.querySelectorAll(".uptime-fill");
+
+uptimeBars.forEach(bar => {
+
+    const target =
+        bar.getAttribute("data-percent");
+
+    let width = 0;
+
+    const interval =
+        setInterval(() => {
+
+            if(width >= target){
+
+                clearInterval(interval);
+
+            }else{
+
+                width++;
+
+                bar.style.width =
+                    width + "%";
+            }
+
+        },12);
 });
