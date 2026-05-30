@@ -95,13 +95,20 @@ text-shadow:
 display:flex;
 flex-wrap:wrap;
 justify-content:center;
-gap:18px;
+align-items:center;
+
+gap:14px;
+
+max-width:100%;
 }
 
 .nav-links a{
 color:white;
 text-decoration:none;
-font-size:0.95rem;
+
+font-size:0.82rem;
+
+white-space:nowrap;
 
 transition:0.25s;
 }
@@ -110,6 +117,17 @@ transition:0.25s;
 color:#00ff99;
 }
 
+@media(max-width:768px){
+
+.nav-links{
+gap:10px 16px;
+}
+
+.nav-links a{
+font-size:0.74rem;
+}
+
+}
 /* HERO */
 
 .hero-section{
