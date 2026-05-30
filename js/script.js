@@ -11,7 +11,7 @@ const messages = [
 SYSTEM ONLINE`,
 
 `> connect ecosystem
-> mount services
+> verify services
 > load modules
 
 RUNTIME READY`,
@@ -40,6 +40,6 @@ current = 0;
 
 updateShell();
 
-setInterval(updateShell, 7000);
+setInterval(updateShell,7000);
 
 }
