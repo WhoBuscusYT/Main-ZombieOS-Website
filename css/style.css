@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+/* css/style.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;800;900&display=swap');
 
 *{
     margin:0;
@@ -6,13 +8,9 @@
     box-sizing:border-box;
 }
 
-html{
-    scroll-behavior:smooth;
-}
-
 body{
 
-    background:#040404;
+    background:#050505;
 
     color:white;
 
@@ -23,9 +21,7 @@ body{
     position:relative;
 }
 
-/* =========================
-   BACKGROUND
-========================= */
+/* BACKGROUND */
 
 .background-grid{
 
@@ -74,29 +70,23 @@ body{
     background:#00ff66;
 }
 
-/* =========================
-   NAVBAR
-========================= */
+/* NAVBAR */
 
 .navbar{
-
-    width:100%;
 
     position:sticky;
     top:0;
 
-    z-index:999;
+    width:100%;
 
-    background:
-    rgba(0,0,0,0.82);
+    padding:24px;
+
+    background:rgba(0,0,0,0.82);
 
     backdrop-filter:blur(14px);
 
     border-bottom:
     1px solid rgba(0,255,120,0.12);
-
-    padding:
-    24px 20px;
 
     display:flex;
 
@@ -104,9 +94,9 @@ body{
 
     align-items:center;
 
-    justify-content:center;
-
     gap:18px;
+
+    z-index:999;
 }
 
 .logo{
@@ -132,8 +122,6 @@ body{
 
     flex-wrap:wrap;
 
-    align-items:center;
-
     justify-content:center;
 
     gap:18px;
@@ -145,26 +133,18 @@ body{
 
     text-decoration:none;
 
-    font-size:0.95rem;
-
     transition:0.25s;
 }
 
 .navbar nav a:hover{
 
     color:#00ff88;
-
-    text-shadow:
-    0 0 12px rgba(0,255,120,0.7);
 }
 
-/* =========================
-   HERO
-========================= */
+/* HERO */
 
-.hero{
-
-    width:100%;
+.hero,
+.error-page{
 
     min-height:100vh;
 
@@ -192,39 +172,47 @@ body{
 
 .hero-title{
 
-    width:100%;
-
     font-size:
-    clamp(2.2rem, 8vw, 6rem);
-
-    line-height:1;
+    clamp(2.2rem,8vw,6rem);
 
     white-space:nowrap;
 
-    overflow:hidden;
-
     margin-bottom:30px;
-
-    text-shadow:
-    0 0 30px rgba(255,255,255,0.08);
 }
 
-.hero-description{
+.hero-description,
+.error-description{
 
     max-width:700px;
 
     color:#d0d0d0;
 
-    font-size:1.15rem;
+    line-height:1.8;
 
-    line-height:1.9;
-
-    margin-bottom:50px;
+    margin-bottom:40px;
 }
 
-/* =========================
-   BUTTONS
-========================= */
+.error-code{
+
+    color:#00ff88;
+
+    font-size:
+    clamp(5rem,18vw,10rem);
+
+    line-height:1;
+
+    margin-bottom:20px;
+}
+
+.error-title{
+
+    font-size:
+    clamp(2rem,7vw,4rem);
+
+    margin-bottom:20px;
+}
+
+/* BUTTONS */
 
 .button-row{
 
@@ -240,8 +228,7 @@ body{
 .primary-button,
 .secondary-button{
 
-    padding:
-    20px 34px;
+    padding:20px 34px;
 
     border-radius:24px;
 
@@ -250,8 +237,6 @@ body{
     font-weight:700;
 
     transition:0.25s;
-
-    text-align:center;
 }
 
 .primary-button{
@@ -259,17 +244,6 @@ body{
     background:#00ff88;
 
     color:black;
-
-    box-shadow:
-    0 0 30px rgba(0,255,120,0.35);
-}
-
-.primary-button:hover{
-
-    transform:translateY(-4px);
-
-    box-shadow:
-    0 0 45px rgba(0,255,120,0.55);
 }
 
 .secondary-button{
@@ -283,15 +257,7 @@ body{
     rgba(0,0,0,0.55);
 }
 
-.secondary-button:hover{
-
-    background:
-    rgba(0,255,120,0.08);
-}
-
-/* =========================
-   RUNTIME SHELL
-========================= */
+/* RUNTIME SHELL */
 
 .runtime-shell{
 
@@ -308,11 +274,6 @@ body{
     border-radius:30px;
 
     padding:34px;
-
-    box-shadow:
-    0 0 40px rgba(0,255,120,0.1);
-
-    margin-bottom:90px;
 }
 
 .shell-dots{
@@ -332,23 +293,16 @@ body{
     border-radius:50%;
 
     background:#00ff88;
-
-    box-shadow:
-    0 0 12px rgba(0,255,120,0.7);
 }
 
 .runtime-shell h2{
 
     color:#00ff88;
 
-    font-size:2rem;
-
     margin-bottom:22px;
 }
 
 #shell-text{
-
-    font-family:monospace;
 
     color:#d0d0d0;
 
@@ -357,137 +311,9 @@ body{
     white-space:pre-wrap;
 }
 
-/* =========================
-   INFO CARDS
-========================= */
-
-.info-grid{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(280px,1fr));
-
-    gap:28px;
-}
-
-.info-card{
-
-    background:
-    rgba(0,0,0,0.72);
-
-    border:
-    1px solid rgba(0,255,120,0.14);
-
-    border-radius:28px;
-
-    padding:34px;
-
-    transition:0.25s;
-}
-
-.info-card:hover{
-
-    transform:translateY(-5px);
-
-    border-color:
-    rgba(0,255,120,0.35);
-}
-
-.info-card h3{
-
-    color:#00ff88;
-
-    font-size:1.7rem;
-
-    margin-bottom:18px;
-}
-
-.info-card p{
-
-    color:#d0d0d0;
-
-    line-height:1.8;
-}
-
-/* =========================
-   COMMUNITY
-========================= */
-
-.community{
-
-    padding:
-    0 7vw
-    120px;
-
-    text-align:center;
-}
-
-.community h2{
-
-    font-size:4rem;
-
-    margin:
-    24px 0;
-}
-
-.community p{
-
-    max-width:800px;
-
-    margin:
-    0 auto
-    50px;
-
-    color:#d0d0d0;
-
-    line-height:1.9;
-}
-
-.social-grid{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(220px,1fr));
-
-    gap:20px;
-}
-
-.social-grid a{
-
-    padding:22px;
-
-    border-radius:24px;
-
-    background:
-    rgba(0,0,0,0.68);
-
-    border:
-    1px solid rgba(0,255,120,0.14);
-
-    color:#00ff88;
-
-    text-decoration:none;
-
-    transition:0.25s;
-}
-
-.social-grid a:hover{
-
-    transform:translateY(-4px);
-
-    background:
-    rgba(0,255,120,0.08);
-}
-
-/* =========================
-   FOOTER
-========================= */
+/* FOOTER */
 
 footer{
-
-    width:100%;
 
     padding:
     80px 7vw
@@ -509,9 +335,6 @@ footer h2{
     font-size:3rem;
 
     margin-bottom:34px;
-
-    text-shadow:
-    0 0 20px rgba(0,255,120,0.45);
 }
 
 .footer-links{
@@ -532,102 +355,15 @@ footer h2{
     color:white;
 
     text-decoration:none;
-
-    transition:0.25s;
 }
 
-.footer-links a:hover{
-
-    color:#00ff88;
-}
-
-footer p{
-
-    color:#8d8d8d;
-}
-
-/* =========================
-   ERROR PAGE
-========================= */
-
-.error-page{
-
-    min-height:100vh;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    text-align:center;
-
-    padding:
-    140px 24px
-    80px;
-}
-
-.error-code{
-
-    color:#00ff88;
-
-    font-size:
-    clamp(5rem, 18vw, 10rem);
-
-    line-height:1;
-
-    margin-bottom:20px;
-
-    text-shadow:
-    0 0 25px rgba(0,255,120,0.45);
-}
-
-.error-title{
-
-    font-size:
-    clamp(2rem, 7vw, 4rem);
-
-    margin-bottom:20px;
-}
-
-.error-description{
-
-    max-width:700px;
-
-    color:#d0d0d0;
-
-    line-height:1.8;
-
-    margin-bottom:40px;
-}
-
-.error-buttons{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    justify-content:center;
-
-    gap:20px;
-}
-
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media(max-width:768px){
 
     .logo{
 
-        font-size:2.1rem;
-    }
-
-    .navbar{
-
-        padding:20px 14px;
+        font-size:2rem;
     }
 
     .navbar nav{
@@ -635,58 +371,15 @@ footer p{
         gap:14px;
     }
 
-    .navbar nav a{
-
-        font-size:0.85rem;
-    }
-
-    .hero{
-
-        padding:
-        90px 24px
-        70px;
-    }
-
     .hero-title{
 
         font-size:
-        clamp(2rem, 9vw, 4rem);
-    }
-
-    .hero-description{
-
-        font-size:1rem;
+        clamp(2rem,9vw,4rem);
     }
 
     .button-row{
 
         flex-direction:column;
-    }
-
-    .primary-button,
-    .secondary-button{
-
-        width:100%;
-    }
-
-    .community h2{
-
-        font-size:3rem;
-    }
-
-    .runtime-shell h2{
-
-        font-size:1.6rem;
-    }
-
-    .error-buttons{
-
-        flex-direction:column;
-    }
-
-    .error-buttons a{
-
-        width:100%;
     }
 
 }
