@@ -3,54 +3,52 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>ZOS Login</title>
 
 <link rel="stylesheet" href="style.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;800&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
 
 <div class="background-grid"></div>
-
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
-<div class="orb orb3"></div>
 
 <nav class="navbar">
 
-<a href="index.html" class="logo">
-ZOS
-</a>
+<div class="nav-container">
+
+<a href="index.html" class="logo">ZOS</a>
 
 <div class="nav-links">
 
 <a href="index.html">Home</a>
 <a href="downloads.html">Downloads</a>
 <a href="status.html">Status</a>
-<a href="login.html">Login</a>
+<a href="signup.html">Sign Up</a>
+
+</div>
 
 </div>
 
 </nav>
 
-<section class="auth-section">
+<section class="auth-page">
+
+<div class="auth-card">
 
 <p class="section-tag">
 ACCOUNT SYSTEM
 </p>
 
-<h1 class="hero-title">
+<h1 class="auth-title">
 Login
 </h1>
-
-<div class="auth-card">
 
 <input
 type="email"
@@ -69,33 +67,19 @@ placeholder="Password"
 <button
 id="login-btn"
 class="primary-btn">
-
 Login
-
 </button>
-
-<div class="oauth-buttons">
 
 <button
 id="google-login"
 class="oauth-btn">
-
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg">
-
 Continue with Google
-
 </button>
 
-</div>
-
 <p class="auth-switch">
-
 Don't have an account?
-
-<a href="signup.html">
-Create one
-</a>
-
+<a href="signup.html">Create one</a>
 </p>
 
 </div>
@@ -104,38 +88,14 @@ Create one
 
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import { auth, googleProvider }
+from "./firebase.js";
 
 import {
-getAuth,
 signInWithEmailAndPassword,
-GoogleAuthProvider,
 signInWithPopup
 }
 from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-
-const firebaseConfig = {
-
-apiKey: "AIzaSyDG0hSabeqYdGgSISOgvSnkOwATXDLiV9g",
-
-authDomain: "zombieos.firebaseapp.com",
-
-projectId: "zombieos",
-
-storageBucket: "zombieos.firebasestorage.app",
-
-messagingSenderId: "577624378484",
-
-appId: "1:577624378484:web:3e88e693724bde8e89d521",
-
-measurementId: "G-LV0T97LGWP"
-
-};
-
-const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
 
 document.getElementById("login-btn")
 .addEventListener("click", async () => {
@@ -155,20 +115,15 @@ password
 );
 
 window.location.href =
-"dashboard.html";
+"dashboard/index.html";
 
-}
-
-catch(error) {
+} catch(error) {
 
 alert(error.message);
 
 }
 
 });
-
-const googleProvider =
-new GoogleAuthProvider();
 
 document.getElementById("google-login")
 .addEventListener("click", async () => {
@@ -181,11 +136,9 @@ googleProvider
 );
 
 window.location.href =
-"dashboard.html";
+"dashboard/index.html";
 
-}
-
-catch(error) {
+} catch(error) {
 
 alert(error.message);
 
