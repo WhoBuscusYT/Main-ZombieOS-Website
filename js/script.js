@@ -1,153 +1,60 @@
-import {
-initializeApp
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+const shellText = document.getElementById("shell-text");
 
-import {
-getAuth,
-onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+const shellLines = [
+"> boot ZombieOS",
+"> load ZSharp",
+"> initialize runtime",
+"> connect ecosystem",
+"> prepare future_ui",
+"> enable plugins",
+"",
+"ZSHARP ACTIVE",
+"UI READY"
+];
 
-const firebaseConfig = {
+let currentLine = 0;
+let currentChar = 0;
 
-apiKey: "AIzaSyDG0hSabeqYdGgSISOgvSnkOwATXDLiV9g",
+function typeShell(){
 
-authDomain: "zombieos.firebaseapp.com",
+if(currentLine >= shellLines.length){
+return;
+}
 
-projectId: "zombieos",
+const line = shellLines[currentLine];
 
-storageBucket: "zombieos.firebasestorage.app",
+if(currentChar < line.length){
 
-messagingSenderId: "577624378484",
+shellText.textContent += line.charAt(currentChar);
 
-appId: "1:577624378484:web:3e88e693724bde8e89d521",
+currentChar++;
 
-measurementId: "G-LV0T97LGWP"
+setTimeout(typeShell, 30);
 
-};
+}else{
 
-const app =
-initializeApp(firebaseConfig);
+shellText.textContent += "\n";
 
-const auth =
-getAuth(app);
+currentLine++;
+currentChar = 0;
+
+setTimeout(typeShell, 220);
+
+}
+
+}
+
+typeShell();
 
 const accountLink =
 document.getElementById("account-link");
 
-onAuthStateChanged(auth, (user) => {
+const savedUser =
+localStorage.getItem("zosUsername");
 
-if (!accountLink) return;
+if(savedUser){
 
-if (user) {
-
-accountLink.textContent =
-"Dashboard";
-
-accountLink.href =
-"dashboard/index.html";
-
-document.title =
-"ZombieOS";
-
-} else {
-
-accountLink.textContent =
-"Login";
-
-accountLink.href =
-"login.html";
-
-document.title =
-"ZombieOS";
+accountLink.textContent = "Dashboard";
+accountLink.href = "dashboard/index.html";
 
 }
-
-});
-
-const year =
-document.getElementById("year");
-
-if (year) {
-
-year.textContent =
-new Date().getFullYear();
-
-}
-
-const shellMessages = [
-
-`> boot ZombieOS
-> load ZSharp
-> initialize runtime
-
-SYSTEM ONLINE`,
-
-`> connect Z#
-> compile runtime
-> execute startup
-
-ZSHARP ACTIVE`,
-
-`> sync ecosystem
-> load future_ui
-> enable plugins
-
-UI READY`,
-
-`> verify modules
-> mount services
-> render interface
-
-ECOSYSTEM READY`
-
-];
-
-const shell =
-document.getElementById("shell-text");
-
-let shellIndex = 0;
-
-function typeShell(message) {
-
-if (!shell) return;
-
-shell.textContent = "";
-
-let i = 0;
-
-function typing() {
-
-if (i < message.length) {
-
-shell.textContent +=
-message.charAt(i);
-
-i++;
-
-setTimeout(typing, 28);
-
-}
-
-}
-
-typing();
-
-}
-
-function rotateShell() {
-
-typeShell(shellMessages[shellIndex]);
-
-shellIndex++;
-
-if (shellIndex >= shellMessages.length) {
-
-shellIndex = 0;
-
-}
-
-}
-
-rotateShell();
-
-setInterval(rotateShell, 7000);
