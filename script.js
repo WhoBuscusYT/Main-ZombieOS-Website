@@ -3,8 +3,8 @@ const shellText = document.getElementById("shell-text");
 const shellMessages = [
 
 `> boot ZombieOS
-> load ZSharp
-> ecosystem.status()
+> initialize runtime
+> load ecosystem
 
 SYSTEM ONLINE`,
 
@@ -14,71 +14,88 @@ SYSTEM ONLINE`,
 
 ZSHARP ACTIVE`,
 
-`> initialize shell
-> check modules
-> launch prototype
+`> mount system_core
+> validate packages
+> start interface
 
-RUNTIME READY`,
+CORE READY`,
 
-`> sync ecosystem
-> verify runtime
-> load packages
+`> authenticate runtime
+> sync cloud nodes
+> launch services
 
-ALL SYSTEMS ONLINE`,
+NETWORK STABLE`,
 
-`> compile application
-> mount runtime
-> execute environment
+`> load future_ui
+> enable plugins
+> prepare apps
 
-EXECUTION SUCCESSFUL`
-
+UI READY`
 ];
 
-function typeText(text, i = 0) {
+function typeMessage(message) {
 
     if (!shellText) return;
 
-    shellText.textContent = text.substring(0, i);
+    shellText.textContent = "";
 
-    if (i < text.length) {
+    let i = 0;
 
-        setTimeout(() => {
+    const typing = setInterval(() => {
 
-            typeText(text, i + 1);
+        shellText.textContent += message.charAt(i);
 
-        }, 22);
-    }
+        i++;
+
+        if (i >= message.length) {
+
+            clearInterval(typing);
+        }
+
+    }, 22);
 }
 
-function loadRandomShell() {
+function randomShellMessage() {
 
-    const randomText =
-        shellMessages[Math.floor(Math.random() * shellMessages.length)];
+    const random =
+        shellMessages[
+            Math.floor(Math.random() * shellMessages.length)
+        ];
 
-    typeText(randomText);
+    typeMessage(random);
 }
 
-window.addEventListener("load", () => {
+randomShellMessage();
 
-    loadRandomShell();
+setInterval(randomShellMessage, 10000);
 
-    setInterval(() => {
+/* STATUS BAR */
 
-        loadRandomShell();
+const statusFill =
+    document.querySelector(".status-fill");
 
-    }, 10000);
+const statusText =
+    document.querySelector(".status-text");
 
-    // STATUS BAR
+if (statusFill && statusText) {
 
-    const progressFill =
-        document.querySelector(".progress-fill");
+    const target = 98;
 
-    if (progressFill) {
+    let current = 0;
 
-        setTimeout(() => {
+    const animation = setInterval(() => {
 
-            progressFill.style.width = "98%";
+        current++;
 
-        }, 300);
-    }
-});
+        statusFill.style.width = current + "%";
+
+        statusText.textContent =
+            current + "% Uptime";
+
+        if (current >= target) {
+
+            clearInterval(animation);
+        }
+
+    }, 15);
+}
