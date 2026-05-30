@@ -3,31 +3,27 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>Create Account</title>
+<title>Create ZOS Account</title>
 
 <link rel="stylesheet" href="style.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;800&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
 
 <div class="background-grid"></div>
-
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
-<div class="orb orb3"></div>
 
 <nav class="navbar">
 
-<a href="index.html" class="logo">
-ZOS
-</a>
+<div class="nav-container">
+
+<a href="index.html" class="logo">ZOS</a>
 
 <div class="nav-links">
 
@@ -38,19 +34,21 @@ ZOS
 
 </div>
 
+</div>
+
 </nav>
 
-<section class="auth-section">
+<section class="auth-page">
+
+<div class="auth-card">
 
 <p class="section-tag">
 CREATE ACCOUNT
 </p>
 
-<h1 class="hero-title">
+<h1 class="auth-title">
 Sign Up
 </h1>
-
-<div class="auth-card">
 
 <input
 type="text"
@@ -76,19 +74,19 @@ placeholder="Password"
 <button
 id="signup-btn"
 class="primary-btn">
-
 Create Account
+</button>
 
+<button
+id="google-signup"
+class="oauth-btn">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg">
+Continue with Google
 </button>
 
 <p class="auth-switch">
-
 Already have an account?
-
-<a href="login.html">
-Login
-</a>
-
+<a href="login.html">Login</a>
 </p>
 
 </div>
@@ -97,54 +95,30 @@ Login
 
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import { auth, db, googleProvider }
+from "./firebase.js";
 
 import {
-getAuth,
-createUserWithEmailAndPassword
+createUserWithEmailAndPassword,
+signInWithPopup
 }
 from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
 import {
-getFirestore,
 doc,
-setDoc
+setDoc,
+getDoc
 }
 from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
-
-const firebaseConfig = {
-
-apiKey: "AIzaSyDG0hSabeqYdGgSISOgvSnkOwATXDLiV9g",
-
-authDomain: "zombieos.firebaseapp.com",
-
-projectId: "zombieos",
-
-storageBucket: "zombieos.firebasestorage.app",
-
-messagingSenderId: "577624378484",
-
-appId: "1:577624378484:web:3e88e693724bde8e89d521",
-
-measurementId: "G-LV0T97LGWP"
-
-};
-
-const app =
-initializeApp(firebaseConfig);
-
-const auth =
-getAuth(app);
-
-const db =
-getFirestore(app);
 
 document.getElementById("signup-btn")
 .addEventListener("click", async () => {
 
 const username =
-document.getElementById("signup-username").value;
+document.getElementById("signup-username")
+.value
+.trim()
+.toLowerCase();
 
 const email =
 document.getElementById("signup-email").value;
@@ -152,7 +126,27 @@ document.getElementById("signup-email").value;
 const password =
 document.getElementById("signup-password").value;
 
+if(!username || !email || !password){
+
+alert("Fill out all fields.");
+
+return;
+}
+
 try {
+
+const usernameRef =
+doc(db, "usernames", username);
+
+const usernameSnap =
+await getDoc(usernameRef);
+
+if(usernameSnap.exists()){
+
+alert("Username already exists. Use a different username.");
+
+return;
+}
 
 const userCredential =
 await createUserWithEmailAndPassword(
@@ -169,16 +163,74 @@ doc(db, "users", user.uid),
 {
 username: username,
 email: email,
+handle: username,
+bio: "",
+profilePublic: false,
+photoURL: "",
 createdAt: Date.now()
 }
 );
 
+await setDoc(
+usernameRef,
+{
+uid: user.uid
+}
+);
+
 window.location.href =
-"dashboard.html";
+"dashboard/index.html";
+
+} catch(error) {
+
+if(error.code === "auth/email-already-in-use"){
+
+alert("Email already exists. Use a different email or login.");
+
+} else {
+
+alert(error.message);
 
 }
 
-catch(error) {
+}
+
+});
+
+document.getElementById("google-signup")
+.addEventListener("click", async () => {
+
+try {
+
+const result =
+await signInWithPopup(
+auth,
+googleProvider
+);
+
+const user =
+result.user;
+
+await setDoc(
+doc(db, "users", user.uid),
+{
+username: user.displayName || "ZOS User",
+email: user.email,
+handle: "",
+bio: "",
+profilePublic: false,
+photoURL: user.photoURL || "",
+createdAt: Date.now()
+},
+{
+merge: true
+}
+);
+
+window.location.href =
+"dashboard/index.html";
+
+} catch(error) {
 
 alert(error.message);
 
