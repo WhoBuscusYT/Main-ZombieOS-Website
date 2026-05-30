@@ -1,3 +1,5 @@
+/* script.js */
+
 const shell = document.getElementById("shell-text");
 
 if(shell){
@@ -22,11 +24,11 @@ RUNTIME READY`,
 
 ZSHARP ACTIVE`,
 
-`> easter_egg.scan()
-> anomaly detected
-> zombie protocol awake
+`> checking dimensional stability...
+> WARNING:
+> reality.exe unstable
 
-BRAINS... JUST KIDDING`
+...just kidding :)`
 
 ];
 
@@ -35,9 +37,11 @@ let currentChar = 0;
 
 function typeMessage(){
 
-const message = messages[currentMessage];
+const message =
+messages[currentMessage];
 
-shell.textContent = message.substring(0,currentChar);
+shell.textContent =
+message.substring(0,currentChar);
 
 currentChar++;
 
@@ -50,6 +54,7 @@ setTimeout(typeMessage,25);
 setTimeout(() => {
 
 currentChar = 0;
+
 currentMessage++;
 
 if(currentMessage >= messages.length){
@@ -68,8 +73,48 @@ typeMessage();
 
 }
 
-const year = document.getElementById("year");
+/* EASTER EGG */
+
+let typedKeys = "";
+
+document.addEventListener(
+"keydown",
+(event)=>{
+
+typedKeys +=
+event.key.toLowerCase();
+
+if(
+typedKeys.includes("zombie")
+){
+
+alert(
+"ZombieOS Easter Egg Activated."
+);
+
+typedKeys = "";
+
+}
+
+if(
+typedKeys.length > 30
+){
+
+typedKeys =
+typedKeys.slice(-30);
+
+}
+
+});
+
+/* YEAR */
+
+const year =
+document.getElementById("year");
 
 if(year){
-year.textContent = new Date().getFullYear();
+
+year.textContent =
+new Date().getFullYear();
+
 }
