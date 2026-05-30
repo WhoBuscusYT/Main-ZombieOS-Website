@@ -1,88 +1,110 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ZombieOS Status</title>
+<title>ZOS Status</title>
 
-    <link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-    <div class="background-grid"></div>
-    <div class="scanlines"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
 
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-    <div class="orb orb3"></div>
+<nav class="navbar">
 
-    <nav class="navbar">
+<div class="nav-container">
 
-        <div class="nav-inner">
+<a href="index.html" class="logo">
+ZOS
+</a>
 
-            <div class="logo">
-                ZOS
-            </div>
+<div class="nav-links">
 
-            <div class="nav-links">
+<a href="index.html">Home</a>
+<a href="zsharp.html">Z#</a>
+<a href="downloads.html">Downloads</a>
+<a href="versions.html">Versions</a>
+<a href="status.html">Status</a>
+<a href="devlog.html">Devlog</a>
+<a href="docs.html">Docs</a>
+<a href="community.html">Community</a>
 
-                <a href="index.html">Home</a>
-                <a href="status.html">Status</a>
+<a href="login.html" class="login-nav-btn">
+Login
+</a>
 
-            </div>
+</div>
 
-        </div>
+</div>
 
-    </nav>
+</nav>
 
-    <section class="section">
+<section class="section">
 
-        <p class="section-tag">
-            SYSTEM STATUS
-        </p>
+<div class="section-top">
+SYSTEM STATUS
+</div>
 
-        <h2>
-            Service Status
-        </h2>
+<h1 class="section-title">
+Service Status
+</h1>
 
-        <div class="status-card">
+<div class="info-card">
 
-            <div style="
-                display:flex;
-                justify-content:space-between;
-                align-items:center;
-            ">
+<div style="display:flex;justify-content:space-between;align-items:center;">
 
-                <h3 style="color:#00ff88;">
-                    Main Website
-                </h3>
+<h3>Main Website</h3>
 
-                <h3 style="color:#00ff88;">
-                    98%
-                </h3>
+<h3>98%</h3>
 
-            </div>
+</div>
 
-            <div class="status-bar">
-                <div class="uptime-fill"></div>
-            </div>
+<div style="
+width:100%;
+height:40px;
+background:#5f0000;
+border-radius:999px;
+overflow:hidden;
+margin-top:30px;
+">
 
-            <div class="uptime-percent">
-                0% Uptime
-            </div>
+<div class="status-fill" style="
+width:0%;
+height:100%;
+background:#00ff88;
+border-radius:999px;
+transition:1s;
+"></div>
 
-        </div>
+</div>
 
-    </section>
+<h3 class="status-text" style="
+margin-top:25px;
+text-align:center;
+">
+0% Uptime
+</h3>
 
-    <script src="script.js"></script>
+</div>
+
+</section>
+
+<script src="script.js"></script>
 
 </body>
 
