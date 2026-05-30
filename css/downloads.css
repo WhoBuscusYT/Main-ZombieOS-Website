@@ -1,0 +1,252 @@
+/* HERO */
+
+.hero{
+
+padding:
+120px 7vw
+80px;
+}
+
+.section-eyebrow{
+
+color:#00ff99;
+
+letter-spacing:10px;
+
+font-size:0.85rem;
+
+margin-bottom:22px;
+}
+
+.hero-title{
+
+font-size:clamp(4rem,14vw,8rem);
+
+line-height:1.05;
+
+margin-bottom:28px;
+}
+
+.hero-description{
+
+font-size:1.2rem;
+
+line-height:1.8;
+
+max-width:850px;
+
+color:#d0d0d0;
+
+margin-bottom:50px;
+}
+
+/* DETECTED CARD */
+
+.detected-card{
+
+padding:40px;
+
+background:
+rgba(0,0,0,0.72);
+
+border:
+1px solid rgba(0,255,153,0.12);
+
+border-radius:30px;
+
+backdrop-filter:blur(14px);
+
+margin-bottom:60px;
+}
+
+.detected-card h2{
+
+font-size:2rem;
+
+color:#00ff99;
+
+margin-bottom:18px;
+}
+
+.detected-card p{
+
+line-height:1.8;
+
+color:#d0d0d0;
+
+margin-bottom:24px;
+}
+
+/* DOWNLOAD GRID */
+
+.downloads-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(320px,1fr));
+
+gap:30px;
+
+padding:
+0 7vw
+100px;
+}
+
+/* CARDS */
+
+.download-card{
+
+padding:40px;
+
+background:
+rgba(0,0,0,0.72);
+
+border:
+1px solid rgba(0,255,153,0.12);
+
+border-radius:30px;
+
+backdrop-filter:blur(14px);
+
+transition:
+0.25s;
+}
+
+.download-card:hover{
+
+transform:
+translateY(-8px)
+scale(1.02);
+
+box-shadow:
+0 0 35px rgba(0,255,153,0.2);
+}
+
+.download-card h2{
+
+font-size:2rem;
+
+color:#00ff99;
+
+margin-bottom:18px;
+}
+
+.download-card p{
+
+line-height:1.8;
+
+color:#d0d0d0;
+
+margin-bottom:24px;
+}
+
+/* BUTTONS */
+
+.download-button,
+.comingsoon-button{
+
+width:100%;
+
+padding:
+20px 24px;
+
+border-radius:20px;
+
+font-weight:700;
+
+text-decoration:none;
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+gap:10px;
+
+font-family:'Orbitron',sans-serif;
+
+transition:
+0.25s;
+}
+
+/* DOWNLOAD */
+
+.download-button{
+
+background:#00ff99;
+
+color:black;
+
+box-shadow:
+0 0 18px rgba(0,255,153,0.2);
+}
+
+.download-button:hover{
+
+transform:
+translateY(-8px)
+scale(1.03);
+
+box-shadow:
+0 0 35px rgba(0,255,153,0.45);
+}
+
+/* COMING SOON */
+
+.comingsoon-button{
+
+background:
+rgba(255,255,255,0.05);
+
+border:
+1px solid rgba(255,255,255,0.12);
+
+color:white;
+
+cursor:not-allowed;
+}
+
+.comingsoon-button:hover{
+
+transform:
+translateY(-8px)
+scale(1.03);
+
+box-shadow:
+0 0 30px rgba(255,255,255,0.3);
+}
+
+/* WARNING */
+
+.unsupported-warning{
+
+padding:
+18px 22px;
+
+border-radius:18px;
+
+background:
+rgba(255,0,0,0.08);
+
+border:
+1px solid rgba(255,0,0,0.2);
+
+color:#ff9d9d;
+
+display:inline-block;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.hero-title{
+font-size:4rem;
+}
+
+.downloads-grid{
+grid-template-columns:1fr;
+}
+
+}
