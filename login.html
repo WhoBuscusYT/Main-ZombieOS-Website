@@ -1,132 +1,167 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ZOS Login</title>
+<title>ZOS Login</title>
 
-    <link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getAuth,
+signInWithEmailAndPassword
+}
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyDG0hSabeqYdGgSISOgvSnkOwATXDLiV9g",
+
+authDomain: "zombieos.firebaseapp.com",
+
+projectId: "zombieos",
+
+storageBucket: "zombieos.firebasestorage.app",
+
+messagingSenderId: "577624378484",
+
+appId: "1:577624378484:web:3e88e693724bde8e89d521",
+
+measurementId: "G-LV0T97LGWP"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+window.addEventListener("DOMContentLoaded", () => {
+
+const form =
+document.getElementById("login-form");
+
+form.addEventListener("submit", async (e) => {
+
+e.preventDefault();
+
+const email =
+document.getElementById("email").value;
+
+const password =
+document.getElementById("password").value;
+
+try {
+
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+window.location.href =
+"dashboard.html";
+
+} catch(error){
+
+alert(
+"Invalid email or password."
+);
+
+}
+
+});
+
+});
+
+</script>
 
 </head>
 
 <body>
-
-<div class="background-grid"></div>
 
 <div class="orb orb1"></div>
 <div class="orb orb2"></div>
 
 <nav class="navbar">
 
-    <div class="nav-container">
+<div class="nav-container">
 
-        <a href="index.html" class="logo">
-            ZOS
-        </a>
+<a href="index.html" class="logo">
+ZOS
+</a>
 
-        <div class="nav-links">
+<div class="nav-links">
 
-            <a href="index.html">Home</a>
+<a href="index.html">Home</a>
 
-            <a href="signup.html">Sign Up</a>
+<a href="signup.html">
+Sign Up
+</a>
 
-        </div>
+</div>
 
-    </div>
+</div>
 
 </nav>
 
 <section class="section auth-section">
 
-    <div class="auth-card">
+<div class="auth-card">
 
-        <p class="section-tag">
-            ACCOUNT ACCESS
-        </p>
+<div class="section-top">
+ACCOUNT ACCESS
+</div>
 
-        <h1 class="section-title">
-            Login
-        </h1>
+<h1 class="section-title">
+Login
+</h1>
 
-        <form class="auth-form">
+<form id="login-form" class="auth-form">
 
-            <input type="email" placeholder="Email">
+<input
+type="email"
+id="email"
+placeholder="Email"
+required
+>
 
-            <input type="password" placeholder="Password">
+<input
+type="password"
+id="password"
+placeholder="Password"
+required
+>
 
-            <button class="primary-btn" type="submit">
-                Login
-            </button>
+<button
+type="submit"
+class="primary-btn"
+>
 
-        </form>
+Login
 
-    </div>
+</button>
+
+</form>
+
+</div>
 
 </section>
 
-<footer class="footer">
-
-    <div class="footer-inner">
-
-        <h2 class="footer-logo">
-            ZombieOS
-        </h2>
-
-        <div class="footer-links">
-
-            <a href="index.html">
-                Home
-            </a>
-
-            <a href="zsharp.html">
-                Z#
-            </a>
-
-            <a href="downloads.html">
-                Downloads
-            </a>
-
-            <a href="versions.html">
-                Versions
-            </a>
-
-            <a href="status.html">
-                Status
-            </a>
-
-            <a href="devlog.html">
-                Devlog
-            </a>
-
-            <a href="docs.html">
-                Docs
-            </a>
-
-            <a href="community.html">
-                Community
-            </a>
-
-            <a href="login.html">
-                Login
-            </a>
-
-        </div>
-
-        <p class="footer-copy">
-
-            ZombieOS / ZOS © 2026
-
-        </p>
-
-    </div>
-
-</footer>
-
-<script src="script.js"></script>
-
 </body>
+
 </html>
