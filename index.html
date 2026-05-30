@@ -1,134 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZombieOS | ZOS</title>
-  <link rel="icon" type="image/png" href="favicon.png">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>ZombieOS</title>
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="favicon.png"
+  >
+
   <link rel="stylesheet" href="style.css">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
+
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 </head>
+
 <body>
+
+  <!-- BACKGROUND -->
+
   <div class="bg-grid"></div>
+
   <div class="orb-container">
     <div class="orb"></div>
     <div class="orb"></div>
     <div class="orb"></div>
   </div>
 
+  <!-- NAVBAR -->
+
   <header class="nav">
-    <div class="logo">ZOS</div>
+
+    <div class="logo">
+      ZOS
+    </div>
+
     <nav>
+
       <a href="index.html">Home</a>
+
       <a href="zsharp.html">Z#</a>
+
       <a href="downloads.html">Downloads</a>
+
       <a href="versions.html">Versions</a>
+
       <a href="status.html">Status</a>
+
       <a href="devlog.html">Devlog</a>
+
       <a href="docs.html">Docs</a>
+
       <a href="community.html">Community</a>
+
     </nav>
+
   </header>
 
+  <!-- MAIN -->
+
   <main>
+
+    <!-- HERO -->
+
     <section class="hero">
+
       <div class="hero-text">
-        <p class="tag">INITIALIZING FUTURE RUNTIME</p>
-        <h1>ZombieOS</h1>
-        <h2>The future operating ecosystem.</h2>
-        <p>ZOS is a futuristic operating system, runtime platform, and development ecosystem powered by Z#.</p>
+
+        <p class="tag">
+          INITIALIZING FUTURE RUNTIME
+        </p>
+
+        <h1>
+          ZombieOS
+        </h1>
+
+        <h2>
+          The future operating ecosystem.
+        </h2>
+
+        <p>
+          ZOS is a futuristic operating system,
+          runtime platform, and development
+          ecosystem powered by Z#.
+        </p>
+
         <div class="buttons">
-          <a class="btn primary" href="downloads.html">Launch Prototype</a>
-          <a class="btn" href="zsharp.html">Explore Z#</a>
+
+          <a
+            href="downloads.html"
+            class="btn primary"
+          >
+            Launch Prototype
+          </a>
+
+          <a
+            href="zsharp.html"
+            class="btn"
+          >
+            Explore Z#
+          </a>
+
         </div>
+
       </div>
+
+      <!-- TERMINAL -->
 
       <div class="holo-card">
+
         <div class="window-bar">
-          <span></span><span></span><span></span>
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
-        <h3>ZOS Runtime Shell</h3>
-        <pre><code id="terminal-text"></code></pre>
+
+        <h3 id="shell-title">
+          ZOS Runtime Shell
+        </h3>
+
+<pre id="shell-text">
+> boot ZombieOS
+> load ZSharp
+> ecosystem.status()
+
+SYSTEM ONLINE
+</pre>
+
       </div>
+
     </section>
+
+    <!-- WHAT IS ZOS -->
 
     <section class="section">
-      <p class="tag">OPERATING ECOSYSTEM</p>
-      <h2>What is ZOS?</h2>
+
+      <p class="tag">
+        OPERATING ECOSYSTEM
+      </p>
+
+      <h2>
+        What is ZOS?
+      </h2>
+
       <div class="card-grid">
+
         <div class="card">
-          <h3>Operating System Vision</h3>
-          <p>A futuristic runtime and operating ecosystem built around modular systems and advanced UI concepts.</p>
+
+          <h3>
+            Operating System Vision
+          </h3>
+
+          <p>
+            A futuristic runtime and operating
+            ecosystem built around modular systems
+            and advanced UI concepts.
+          </p>
+
         </div>
+
         <div class="card">
-          <h3>Z# Runtime Language</h3>
-          <p>Z# powers events, runtime systems, applications, and future ecosystem integrations.</p>
+
+          <h3>
+            Z# Runtime Language
+          </h3>
+
+          <p>
+            Z# powers events, runtime systems,
+            applications, and future ecosystem
+            integrations.
+          </p>
+
         </div>
+
         <div class="card">
-          <h3>Future Ecosystem</h3>
-          <p>Planned support for apps, games, tools, runtimes, plugins, and community systems.</p>
+
+          <h3>
+            Future Ecosystem
+          </h3>
+
+          <p>
+            Planned support for apps, games,
+            tools, runtimes, plugins,
+            and community systems.
+          </p>
+
         </div>
+
       </div>
+
     </section>
 
-    <section class="section split">
-      <div>
-        <p class="tag">Z# LANGUAGE</p>
-        <h2>The Language Behind ZOS</h2>
-        <p>Z# is an experimental runtime-focused language designed for modular systems and ecosystem development.</p>
-        <div class="buttons">
-          <a class="btn" href="zsharp.html">Explore Z#</a>
-        </div>
-      </div>
-      <pre class="code-box"><code>ZSharp.Event[Startup]
-(
-  Runtime[
-    initialized: true
-    mode: "prototype"
-  ]
-)
-
-Tick[40]
-
-System[
-  status: "online"
-]</code></pre>
-    </section>
+    <!-- STATUS -->
 
     <section class="section center">
-      <p class="tag">COMMUNITY NETWORK</p>
-      <h2>Join the Network</h2>
-      <p>Follow development progress, future prototypes, Z# updates, and ecosystem expansion.</p>
-      <div class="buttons social-buttons">
-        <a class="btn" href="#"><i class="fa-brands fa-discord"></i> Discord</a>
-        <a class="btn" href="#"><i class="fa-brands fa-youtube"></i> YouTube</a>
-        <a class="btn" href="#"><i class="fa-brands fa-tiktok"></i> TikTok</a>
-        <a class="btn" href="#"><i class="fa-brands fa-x-twitter"></i> Twitter</a>
-        <a class="btn" href="#"><i class="fa-brands fa-facebook"></i> Facebook</a>
-        <a class="btn" href="#"><i class="fa-brands fa-reddit"></i> Subreddit</a>
-        <a class="btn" href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
+
+      <p class="tag">
+        SYSTEM STATUS
+      </p>
+
+      <h2>
+        Runtime Online
+      </h2>
+
+      <div class="status-card">
+
+        <div class="status-row">
+
+          <h3>
+            ZOS Prototype v0.1 Alpha
+          </h3>
+
+          <h3>
+            98%
+          </h3>
+
+        </div>
+
+        <div class="status-bar">
+
+          <div
+            class="status-fill"
+            data-percent="98"
+          ></div>
+
+        </div>
+
+        <p class="status-text">
+          SYSTEM ONLINE
+        </p>
+
       </div>
+
     </section>
+
+    <!-- COMMUNITY -->
+
+    <section class="section center">
+
+      <p class="tag">
+        COMMUNITY NETWORK
+      </p>
+
+      <h2>
+        Join the Network
+      </h2>
+
+      <p>
+        Follow development progress,
+        future prototypes, Z# updates,
+        and ecosystem expansion.
+      </p>
+
+      <div class="buttons social-buttons">
+
+        <a class="btn" href="#">
+          🎮 Discord
+        </a>
+
+        <a class="btn" href="#">
+          ▶️ YouTube
+        </a>
+
+        <a class="btn" href="#">
+          🎵 TikTok
+        </a>
+
+        <a class="btn" href="#">
+          ✖ Twitter
+        </a>
+
+        <a class="btn" href="#">
+          📘 Facebook
+        </a>
+
+        <a class="btn" href="#">
+          👽 Subreddit
+        </a>
+
+        <a class="btn" href="#">
+          📷 Instagram
+        </a>
+
+      </div>
+
+    </section>
+
   </main>
 
+  <!-- FOOTER -->
+
   <footer>
+
     <div class="footer-glow"></div>
-    <h2 class="footer-title">ZombieOS</h2>
+
+    <h2 class="footer-title">
+      ZombieOS
+    </h2>
+
     <div class="footer-links">
+
       <a href="index.html">Home</a>
+
       <a href="zsharp.html">Z#</a>
+
       <a href="downloads.html">Downloads</a>
+
       <a href="versions.html">Versions</a>
+
       <a href="status.html">Status</a>
+
       <a href="devlog.html">Devlog</a>
+
       <a href="docs.html">Docs</a>
+
       <a href="community.html">Community</a>
+
     </div>
+
     <p id="copyright-text"></p>
+
   </footer>
 
   <script src="script.js"></script>
+
 </body>
 </html>
