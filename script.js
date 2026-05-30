@@ -2,19 +2,19 @@
    FOOTER YEAR
 ========================= */
 
-const currentYear =
-    new Date().getFullYear();
+const year = document.getElementById("year");
 
-const yearText =
-    document.getElementById("year");
-
-if(yearText){
-    yearText.textContent = currentYear;
+if(year){
+    year.textContent =
+        new Date().getFullYear();
 }
 
 /* =========================
-   RUNTIME SHELL MESSAGES
+   TERMINAL SYSTEM
 ========================= */
+
+const terminal =
+    document.getElementById("shell-text");
 
 const shellMessages = [
 
@@ -25,22 +25,22 @@ const shellMessages = [
 SYSTEM ONLINE`,
 
 `> initializing runtime
-> loading UI modules
-> syncing ecosystem
+> syncing UI systems
+> loading modules
 
 READY`,
 
-`> compile ZSharp
-> connect runtime
-> verify kernel
-
-NO ERRORS DETECTED`,
-
 `> startup.sequence()
-> launch services
-> establish network
+> verify ecosystem
+> connect runtime
 
 CONNECTED`,
+
+`> compile ZSharp
+> verify kernel
+> initialize engine
+
+NO ERRORS DETECTED`,
 
 `> import system.core
 > import ui.framework
@@ -49,19 +49,45 @@ CONNECTED`,
 INITIALIZED`,
 
 `> checking updates
-> scanning modules
 > validating systems
+> scanning modules
 
 ALL SYSTEMS STABLE`
 
 ];
 
-const shellText =
-    document.getElementById("shell-text");
+let typingSpeed = 22;
+
+function typeMessage(text){
+
+    if(!terminal) return;
+
+    terminal.textContent = "";
+
+    let index = 0;
+
+    function type(){
+
+        if(index < text.length){
+
+            terminal.textContent +=
+                text.charAt(index);
+
+            index++;
+
+            setTimeout(
+                type,
+                typingSpeed
+            );
+        }
+    }
+
+    type();
+}
 
 function randomShellMessage(){
 
-    const random =
+    const randomMessage =
         shellMessages[
             Math.floor(
                 Math.random() *
@@ -69,32 +95,28 @@ function randomShellMessage(){
             )
         ];
 
-    if(shellText){
+    terminal.style.opacity = "0";
 
-        shellText.style.opacity = "0";
+    setTimeout(() => {
 
-        setTimeout(() => {
+        terminal.style.opacity = "1";
 
-            shellText.textContent =
-                random.replace(/\n/g,"<br>");
+        typeMessage(randomMessage);
 
-            shellText.style.opacity = "1";
-
-        },300);
-    }
+    },250);
 }
 
-/* Randomize on page load */
+/* Random message on page load */
 randomShellMessage();
 
-/* Change every 30 seconds */
+/* Rotate every 30 seconds */
 setInterval(
     randomShellMessage,
     30000
 );
 
 /* =========================
-   STATUS PAGE BARS
+   STATUS BARS
 ========================= */
 
 const uptimeBars =
@@ -103,7 +125,9 @@ const uptimeBars =
 uptimeBars.forEach(bar => {
 
     const target =
-        bar.getAttribute("data-percent");
+        parseInt(
+            bar.getAttribute("data-percent")
+        );
 
     let width = 0;
 
@@ -122,5 +146,5 @@ uptimeBars.forEach(bar => {
                     width + "%";
             }
 
-        },12);
+        },10);
 });
