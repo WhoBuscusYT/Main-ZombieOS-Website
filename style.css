@@ -10,21 +10,28 @@ html {
 
 body {
   background:
-    radial-gradient(circle at top,
-    rgba(0,255,136,0.12),
-    transparent 40%),
+    radial-gradient(
+      circle at top,
+      rgba(0,255,136,0.12),
+      transparent 40%
+    ),
     #050505;
 
   color: #f5f5f5;
+
   font-family: 'Inter', sans-serif;
+
   overflow-x: hidden;
 }
 
 body::before {
   content: "";
+
   position: fixed;
   inset: 0;
+
   pointer-events: none;
+
   background:
     repeating-linear-gradient(
       to bottom,
@@ -33,38 +40,56 @@ body::before {
       transparent 1px,
       transparent 3px
     );
+
   z-index: 999;
 }
 
 .bg-grid {
   position: fixed;
   inset: 0;
+
   background:
-    linear-gradient(rgba(0,255,136,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,255,136,0.04) 1px, transparent 1px);
+    linear-gradient(
+      rgba(0,255,136,0.04) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0,255,136,0.04) 1px,
+      transparent 1px
+    );
 
   background-size: 40px 40px;
+
   z-index: -2;
 }
 
 .nav {
   position: sticky;
   top: 0;
+
   z-index: 100;
+
   padding: 18px 8%;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   background: rgba(0,0,0,0.7);
+
   backdrop-filter: blur(12px);
 
-  border-bottom: 1px solid rgba(0,255,136,0.2);
+  border-bottom:
+    1px solid
+    rgba(0,255,136,0.2);
 }
 
 .logo {
   font-family: 'Orbitron', sans-serif;
+
   font-size: 2rem;
+
   color: #00ff88;
 
   text-shadow:
@@ -79,7 +104,9 @@ nav {
 
 .nav a {
   color: #d0d0d0;
+
   text-decoration: none;
+
   transition: 0.25s;
 }
 
@@ -95,7 +122,10 @@ nav {
     80px;
 
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+
+  grid-template-columns:
+    1.1fr 0.9fr;
+
   gap: 40px;
 
   align-items: center;
@@ -105,8 +135,11 @@ nav {
 
 .tag {
   color: #00ff88;
+
   letter-spacing: 5px;
+
   margin-bottom: 16px;
+
   font-size: 0.8rem;
 }
 
@@ -115,7 +148,8 @@ h1 {
 
   font-family: 'Orbitron', sans-serif;
 
-  font-size: clamp(3rem, 10vw, 7rem);
+  font-size:
+    clamp(3rem, 10vw, 7rem);
 
   margin-bottom: 10px;
 
@@ -140,25 +174,33 @@ h1::after {
 }
 
 h2 {
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size:
+    clamp(2rem, 5vw, 3.5rem);
+
   margin-bottom: 18px;
 }
 
 h3 {
   color: #00ff88;
+
   margin-bottom: 12px;
 }
 
 p {
   color: #b5b5b5;
+
   line-height: 1.8;
 }
 
 .buttons {
   display: flex;
   gap: 14px;
+
   margin-top: 30px;
+
   flex-wrap: wrap;
+
+  justify-content: center;
 }
 
 .btn {
@@ -192,7 +234,9 @@ p {
 
 .btn.primary {
   background: #00ff88;
+
   color: #001a0d;
+
   font-weight: bold;
 }
 
@@ -217,15 +261,15 @@ p {
   box-shadow:
     0 0 40px
     rgba(0,255,136,0.08);
-}
 
-.holo-card {
-  animation: float 4s ease-in-out infinite;
+  animation:
+    float 4s ease-in-out infinite;
 }
 
 .window-bar {
   display: flex;
   gap: 8px;
+
   margin-bottom: 18px;
 }
 
@@ -243,7 +287,9 @@ p {
 
 pre {
   overflow-x: auto;
+
   color: #00ff88;
+
   line-height: 1.7;
 }
 
@@ -253,7 +299,10 @@ pre {
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
   gap: 22px;
 
   margin-top: 35px;
@@ -264,14 +313,21 @@ pre {
 }
 
 .card:hover {
-  transform: translateY(-6px);
+  transform:
+    translateY(-6px)
+    scale(1.02);
+
   border-color: #00ff88;
 }
 
 .split {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+
+  grid-template-columns:
+    1fr 1fr;
+
   gap: 35px;
+
   align-items: center;
 }
 
@@ -292,15 +348,67 @@ pre {
 }
 
 footer {
-  padding: 30px 8%;
+  padding: 50px 8%;
+
   border-top:
     1px solid
     rgba(0,255,136,0.2);
 
+  background:
+    rgba(0,0,0,0.45);
+
+  backdrop-filter: blur(10px);
+
   text-align: center;
 }
 
+.footer-links {
+  display: flex;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 16px;
+
+  margin-bottom: 25px;
+}
+
+.footer-links a {
+  padding: 12px 18px;
+
+  border-radius: 12px;
+
+  text-decoration: none;
+
+  color: #00ff88;
+
+  background:
+    rgba(0,255,136,0.05);
+
+  border:
+    1px solid
+    rgba(0,255,136,0.25);
+
+  transition: 0.25s;
+}
+
+.footer-links a:hover {
+  transform:
+    translateY(-3px)
+    scale(1.03);
+
+  box-shadow:
+    0 0 20px
+    rgba(0,255,136,0.35);
+}
+
+footer p {
+  color: #888;
+}
+
 @keyframes float {
+
   0%,100% {
     transform: translateY(0);
   }
@@ -311,44 +419,7 @@ footer {
 }
 
 @keyframes fadeUp {
+
   from {
     opacity: 0;
-    transform: translateY(25px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (max-width: 850px) {
-
-  .nav {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  nav {
-    overflow-x: auto;
-    white-space: nowrap;
-    width: 100%;
-    padding-bottom: 5px;
-
-    justify-content: center;
-  }
-
-  nav::-webkit-scrollbar {
-    display: none;
-  }
-
-  .hero,
-  .split,
-  .card-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero {
-    padding-top: 50px;
-  }
-}
+    transform: translateY(
