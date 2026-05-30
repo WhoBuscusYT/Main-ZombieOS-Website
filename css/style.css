@@ -371,6 +371,17 @@ text-decoration:none;
 transition:0.25s;
 }
 
+.community-buttons a{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:10px;
+}
+
+.community-buttons i{
+font-size:1.1rem;
+}
+
 .community-buttons a:hover{
 transform:translateY(-3px);
 
