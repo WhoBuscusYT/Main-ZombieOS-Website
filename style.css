@@ -7,6 +7,7 @@
 
 html,
 body {
+  overflow-x: hidden;
   width: 100%;
   max-width: 100%;
 
@@ -216,6 +217,17 @@ nav::-webkit-scrollbar {
 ========================================= */
 
 .hero {
+  main,
+section,
+.hero,
+.card-grid,
+.split,
+.nav,
+footer {
+  width: 100%;
+  max-width: 100%;
+
+  overflow-x: hidden;
   min-height: 75vh;
 
   padding:
@@ -252,9 +264,15 @@ h1 {
   font-family: 'Orbitron', sans-serif;
 
   font-size:
-    clamp(3rem, 10vw, 7rem);
+    clamp(2.5rem, 9vw, 7rem);
+
+  line-height: 1;
 
   margin-bottom: 10px;
+
+  word-break: break-word;
+
+  overflow-wrap: break-word;
 
   text-shadow:
     0 0 20px
