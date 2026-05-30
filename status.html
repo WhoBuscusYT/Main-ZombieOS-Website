@@ -1,121 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
->
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-<title>ZOS Status</title>
+    <title>ZombieOS Status</title>
 
-<link rel="stylesheet" href="style.css">
-
-<link
-rel="icon"
-type="image/png"
-href="favicon.png"
->
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-<div class="bg-grid"></div>
+    <div class="background-grid"></div>
+    <div class="scanlines"></div>
 
-<div class="orb-container">
-<div class="orb"></div>
-<div class="orb"></div>
-<div class="orb"></div>
-</div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
 
-<header class="nav">
+    <nav class="navbar">
 
-<div class="logo">
-ZOS
-</div>
+        <div class="nav-inner">
 
-<nav>
+            <div class="logo">
+                ZOS
+            </div>
 
-<a href="index.html">Home</a>
-<a href="status.html">Status</a>
+            <div class="nav-links">
 
-</nav>
+                <a href="index.html">Home</a>
+                <a href="status.html">Status</a>
 
-</header>
+            </div>
 
-<main class="page">
+        </div>
 
-<section class="section center">
+    </nav>
 
-<p class="tag">
-SYSTEM STATUS
-</p>
+    <section class="section">
 
-<h1>
-Service Status
-</h1>
+        <p class="section-tag">
+            SYSTEM STATUS
+        </p>
 
-<div class="status-card">
+        <h2>
+            Service Status
+        </h2>
 
-<div class="status-row">
+        <div class="status-card">
 
-<h3>
-Main Website
-</h3>
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+            ">
 
-<h3>
-98%
-</h3>
+                <h3 style="color:#00ff88;">
+                    Main Website
+                </h3>
 
-</div>
+                <h3 style="color:#00ff88;">
+                    98%
+                </h3>
 
-<div class="status-bar">
+            </div>
 
-<div
-class="status-fill"
-data-percent="98"
-></div>
+            <div class="status-bar">
+                <div class="uptime-fill"></div>
+            </div>
 
-</div>
+            <div class="uptime-percent">
+                0% Uptime
+            </div>
 
-<p class="status-text">
-98% Uptime
-</p>
+        </div>
 
-</div>
+    </section>
 
-</section>
-
-</main>
-
-<footer>
-
-<div class="footer-glow"></div>
-
-<h2 class="footer-title">
-ZombieOS
-</h2>
-
-<div class="footer-links">
-
-<a href="index.html">Home</a>
-<a href="status.html">Status</a>
-<a href="downloads.html">Downloads</a>
-
-</div>
-
-<p id="copyright-text"></p>
-
-</footer>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
+
 </html>
