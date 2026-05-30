@@ -1,107 +1,97 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Z# Language</title>
+<title>Z#</title>
 
-    <link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-    <div class="background-grid"></div>
-    <div class="scanlines"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
 
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-    <div class="orb orb3"></div>
+<nav class="navbar">
 
-    <nav class="navbar">
+<div class="nav-container">
 
-        <div class="nav-inner">
+<a href="index.html" class="logo">
+ZOS
+</a>
 
-            <div class="logo">
-                ZOS
-            </div>
+<div class="nav-links">
 
-            <div class="nav-links">
+<a href="index.html">Home</a>
+<a href="zsharp.html">Z#</a>
+<a href="downloads.html">Downloads</a>
+<a href="versions.html">Versions</a>
+<a href="status.html">Status</a>
+<a href="devlog.html">Devlog</a>
+<a href="docs.html">Docs</a>
+<a href="community.html">Community</a>
 
-                <a href="index.html">Home</a>
-                <a href="zsharp.html">Z#</a>
-                <a href="docs.html">Docs</a>
+<a href="login.html" class="login-nav-btn">
+Login
+</a>
 
-            </div>
+</div>
 
-        </div>
+</div>
 
-    </nav>
+</nav>
 
-    <section class="section">
+<section class="section">
 
-        <p class="section-tag">
-            Z# LANGUAGE
-        </p>
+<div class="section-top">
+Z# LANGUAGE
+</div>
 
-        <h2>
-            The Language Behind ZOS
-        </h2>
+<h1 class="section-title">
+Z#
+</h1>
 
-        <div class="card-grid">
+<div class="info-card">
 
-            <div class="card">
+<h3>Runtime Focused</h3>
 
-                <h3>
-                    Runtime Focused
-                </h3>
+<p>
 
-                <p>
-                    Designed around systems,
-                    events, modular runtimes,
-                    and ecosystem expansion.
-                </p>
+Z# is the experimental runtime and
+programming language powering the
+ZombieOS ecosystem.
 
-            </div>
+</p>
 
-            <div class="card">
+<br>
 
-                <h3>
-                    Clean Syntax
-                </h3>
+<pre id="shell-text">
+ZSharp.Event[Startup]
+(
+ Runtime[
+  initialized: true
+ ]
+)
+</pre>
 
-                <p>
-                    Structured and readable
-                    syntax designed for future
-                    operating ecosystems.
-                </p>
+</div>
 
-            </div>
+</section>
 
-            <div class="card">
-
-                <h3>
-                    Future Expansion
-                </h3>
-
-                <p>
-                    Planned support for apps,
-                    plugins, APIs, games,
-                    runtimes, and more.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
 
