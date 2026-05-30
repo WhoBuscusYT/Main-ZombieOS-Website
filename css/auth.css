@@ -109,49 +109,39 @@ color:#8f8f8f;
 /* DATE OF BIRTH */
 
 .dob-grid{
-
 display:grid;
-
-grid-template-columns:
-repeat(3,1fr);
-
+grid-template-columns:repeat(3,1fr);
 gap:14px;
 }
 
 .dob-grid select{
-
 width:100%;
-
 padding:18px 20px;
-
-background:
-rgba(255,255,255,0.04);
-
-border:
-1px solid rgba(0,255,153,0.12);
-
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(0,255,153,0.12);
 border-radius:18px;
-
 color:white;
-
 font-size:1rem;
-
 font-family:'Orbitron',sans-serif;
-
 outline:none;
-
 transition:0.25s;
-
-appearance:none;
 }
 
 .dob-grid select:focus{
-
 border-color:#00ff99;
-
-box-shadow:
-0 0 25px rgba(0,255,153,0.18);
+box-shadow:0 0 25px rgba(0,255,153,0.18);
 }
+
+.dob-grid option{
+background:#020302;
+color:white;
+}
+
+@media(max-width:768px){
+.dob-grid{
+grid-template-columns:1fr;
+}
+
 
 /* PASSWORD */
 
