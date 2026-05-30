@@ -148,22 +148,16 @@ checkPasswords
 
 /* DATE OF BIRTH */
 
-const dobMonth =
-document.getElementById("dob-month");
+document.addEventListener("DOMContentLoaded", () => {
 
-const dobDay =
-document.getElementById("dob-day");
+const dobMonth = document.getElementById("dob-month");
+const dobDay = document.getElementById("dob-day");
+const dobYear = document.getElementById("dob-year");
+const dobStatus = document.getElementById("dob-status");
 
-const dobYear =
-document.getElementById("dob-year");
-
-const dobStatus =
-document.getElementById("dob-status");
-
-/* MONTHS */
+if(!dobMonth || !dobDay || !dobYear) return;
 
 const months = [
-
 "January",
 "February",
 "March",
@@ -176,131 +170,66 @@ const months = [
 "October",
 "November",
 "December"
-
 ];
 
 months.forEach((month,index)=>{
-
-const option =
-document.createElement("option");
-
+const option = document.createElement("option");
 option.value = index + 1;
-
 option.textContent = month;
-
 dobMonth.appendChild(option);
-
 });
 
-/* DAYS */
-
-for(let i = 1; i <= 31; i++){
-
-const option =
-document.createElement("option");
-
-option.value = i;
-
-option.textContent = i;
-
+for(let day = 1; day <= 31; day++){
+const option = document.createElement("option");
+option.value = day;
+option.textContent = day;
 dobDay.appendChild(option);
-
 }
 
-/* YEARS */
+const currentYear = new Date().getFullYear();
 
-const currentYear =
-new Date().getFullYear();
-
-for(
-let year = currentYear - 13;
-year >= 1900;
-year--
-){
-
-const option =
-document.createElement("option");
-
+for(let year = currentYear - 13; year >= 1900; year--){
+const option = document.createElement("option");
 option.value = year;
-
 option.textContent = year;
-
 dobYear.appendChild(option);
-
 }
-
-/* AGE CHECK */
 
 function validateDOB(){
 
-if(
-!dobMonth.value ||
-!dobDay.value ||
-!dobYear.value
-)return;
+if(!dobMonth.value || !dobDay.value || !dobYear.value) return;
 
-const birthDate =
-new Date(
+const birthDate = new Date(
 dobYear.value,
 dobMonth.value - 1,
 dobDay.value
 );
 
-const today =
-new Date();
+const today = new Date();
 
-let age =
-today.getFullYear() -
-birthDate.getFullYear();
+let age = today.getFullYear() - birthDate.getFullYear();
 
-const monthDifference =
-today.getMonth() -
-birthDate.getMonth();
+const monthDifference = today.getMonth() - birthDate.getMonth();
 
 if(
 monthDifference < 0 ||
-(
-monthDifference === 0 &&
-today.getDate() <
-birthDate.getDate()
-)
+(monthDifference === 0 && today.getDate() < birthDate.getDate())
 ){
-
 age--;
-
 }
 
 if(age >= 13){
-
-dobStatus.textContent =
-"Standard account available.";
-
-dobStatus.style.color =
-"#00ff99";
-
+dobStatus.textContent = "Standard account available.";
+dobStatus.style.color = "#00ff99";
 }else{
-
-dobStatus.textContent =
-"Child account setup required.";
-
-dobStatus.style.color =
-"#ff7070";
-
+dobStatus.textContent = "Child account setup required.";
+dobStatus.style.color = "#ff7070";
 }
 
 }
 
-dobMonth.addEventListener(
-"change",
-validateDOB
-);
+dobMonth.addEventListener("change", validateDOB);
+dobDay.addEventListener("change", validateDOB);
+dobYear.addEventListener("change", validateDOB);
 
-dobDay.addEventListener(
-"change",
-validateDOB
-);
-
-dobYear.addEventListener(
-"change",
-validateDOB
-);
+});
