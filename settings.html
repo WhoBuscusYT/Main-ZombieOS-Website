@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZOS Settings</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body data-protected="true">
+<div class="bg-grid"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<nav class="navbar"><div class="nav-container"><a href="../index.html" class="logo">ZOS</a><div class="nav-links">
+<a href="index.html">Dashboard</a>
+<a href="settings.html">Settings</a>
+<a href="details.html">Details</a>
+<a href="profile.html">Profile</a>
+<button class="logout-btn primary-btn" data-logout>Logout</button>
+</div></div></nav>
+<section class="page">
+  <p class="section-tag">ACCOUNT SETTINGS</p>
+  <h1 class="page-title">Settings</h1>
+
+  <div class="card">
+    <div data-message class="message"></div>
+
+    <p class="page-subtitle">Current email: <span data-user-email></span></p>
+
+    <form id="settings-form" class="auth-form">
+      <input id="settings-email" class="input" type="email" placeholder="New email">
+      <input id="settings-password" class="input" type="password" placeholder="New password">
+      <button class="btn" type="submit">Save Settings</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h2>Linked Accounts</h2>
+    <p>Google works now. Discord requires a backend or Firebase Identity Platform, so it is planned for later.</p>
+    <div class="button-row">
+      <button class="oauth-btn" data-google-auth>Link / Login with Google</button>
+      <button class="oauth-btn" data-discord-soon>Discord Coming Later</button>
+    </div>
+  </div>
+
+  <div class="card danger-zone">
+    <h2>Delete Account</h2>
+    <p class="danger-text">Deleting your account is permanent and cannot be undone.</p>
+    <button class="primary-btn delete-btn" data-delete-account>Delete Account</button>
+  </div>
+</section>
+<footer class="footer"><div class="footer-logo">ZombieOS</div><div class="footer-grid">
+<a href="../index.html" class="footer-btn">Home</a>
+<a href="../downloads.html" class="footer-btn">Downloads</a>
+<a href="../status.html" class="footer-btn">Status</a>
+<a href="index.html" class="footer-btn">Dashboard</a>
+<a href="settings.html" class="footer-btn">Settings</a>
+<a href="details.html" class="footer-btn">Details</a>
+<a href="profile.html" class="footer-btn">Profile</a>
+</div><p class="footer-copy">© <span id="year"></span> ZombieOS</p></footer>
+<script type="module" src="../script.js"></script>
+</body>
+</html>
