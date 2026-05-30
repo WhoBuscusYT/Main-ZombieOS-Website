@@ -112,3 +112,17 @@ if (terminal) {
 
   setTimeout(typeTerminal, 500);
 }
+
+/* Auto Copyright Year */
+
+const copyright =
+document.getElementById("copyright-text");
+
+if (copyright) {
+
+  const year =
+  new Date().getFullYear();
+
+  copyright.textContent =
+  `ZombieOS / ZOS © ${year}`;
+}
