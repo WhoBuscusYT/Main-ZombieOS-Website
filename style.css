@@ -143,10 +143,43 @@ body {
 /* HERO */
 
 .hero {
-    min-height: 100vh;
+
+    position: relative;
+
     display: flex;
     align-items: center;
-    padding: 100px 5%;
+    justify-content: center;
+
+    gap: 60px;
+
+    padding-top: 180px;
+    padding-bottom: 120px;
+    padding-left: 8%;
+    padding-right: 8%;
+
+    min-height: auto;
+
+    flex-wrap: wrap;
+
+    z-index: 2;
+}
+
+.hero-left {
+
+    flex: 1;
+    min-width: 320px;
+    max-width: 650px;
+}
+
+.hero-right {
+
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+
+    min-width: 320px;
+    max-width: 500px;
 }
 
 .hero-grid {
