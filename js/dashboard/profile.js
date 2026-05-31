@@ -3,7 +3,8 @@ from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 
 import {
 getAuth,
-onAuthStateChanged
+onAuthStateChanged,
+updateProfile
 }
 from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
@@ -11,7 +12,7 @@ import {
 getFirestore,
 doc,
 getDoc,
-updateDoc
+setDoc
 }
 from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
@@ -48,6 +49,13 @@ getAuth(app);
 const db =
 getFirestore(app);
 
+/* SAVE BUTTON */
+
+const saveButton =
+document.getElementById(
+"profile-save-button"
+);
+
 /* AUTH */
 
 onAuthStateChanged(
@@ -82,7 +90,7 @@ return;
 const data =
 userSnap.data();
 
-/* LOAD DATA */
+/* LOAD PROFILE */
 
 document.getElementById(
 "profile-username"
@@ -151,32 +159,97 @@ document.getElementById(
 
 /* SAVE */
 
-document.getElementById(
-"profile-save-button"
-).addEventListener(
-"click",
+saveButton.onclick =
 async()=>{
 
 try{
 
-await updateDoc(
+const username =
+document.getElementById(
+"profile-username"
+).value.trim();
+
+const handle =
+document.getElementById(
+"profile-handle"
+).value
+.trim()
+.toLowerCase();
+
+const bio =
+document.getElementById(
+"profile-bio"
+).value.trim();
+
+const pronouns =
+document.getElementById(
+"profile-pronouns"
+).value.trim();
+
+/* HANDLE LIMIT */
+
+const lastHandleChange =
+data.lastHandleChange || 0;
+
+const daysSinceChange =
+(Date.now() - lastHandleChange)
+/
+86400000;
+
+if(
+handle !== data.handle &&
+daysSinceChange < 30
+){
+
+alert(
+"You can only change your handle once every 30 days."
+);
+
+return;
+
+}
+
+/* UPDATE AUTH DISPLAY NAME */
+
+await updateProfile(
+user,
+{
+displayName:
+username
+}
+);
+
+/* SAVE FIRESTORE */
+
+await setDoc(
 userRef,
 {
 
 username:
-document.getElementById(
-"profile-username"
-).value.trim(),
+username,
+
+handle:
+handle,
 
 bio:
-document.getElementById(
-"profile-bio"
-).value.trim(),
+bio,
 
 pronouns:
-document.getElementById(
-"profile-pronouns"
-).value.trim(),
+pronouns,
+
+subscription:
+data.subscription || "FREE",
+
+badges:
+data.badges || [],
+
+createdAt:
+data.createdAt || Date.now(),
+
+lastHandleChange:
+handle !== data.handle
+? Date.now()
+: lastHandleChange,
 
 socials:{
 
@@ -212,6 +285,9 @@ document.getElementById(
 
 }
 
+},
+{
+merge:true
 }
 );
 
@@ -221,7 +297,10 @@ alert(
 
 }catch(error){
 
-console.error(error);
+console.error(
+"Profile Save Error:",
+error
+);
 
 alert(
 "Failed to save profile."
@@ -229,8 +308,7 @@ alert(
 
 }
 
-}
-);
+};
 
 }
 );
