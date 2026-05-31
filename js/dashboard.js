@@ -82,8 +82,8 @@ document.getElementById(
 
 if(!user){
 
-greeting.textContent =
-`${getGreeting()}, Guest`;
+window.location.href =
+"/login";
 
 return;
 
