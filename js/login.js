@@ -57,7 +57,7 @@ event.preventDefault();
 const email =
 document.getElementById(
 "email"
-).value;
+).value.trim();
 
 const password =
 document.getElementById(
@@ -78,6 +78,8 @@ window.location.href =
 "/dashboard";
 
 }catch(error){
+
+console.error(error);
 
 let message =
 "Login failed.";
@@ -154,6 +156,8 @@ window.location.href =
 "/dashboard";
 
 }catch(error){
+
+console.error(error);
 
 alert(
 "Google login failed."
