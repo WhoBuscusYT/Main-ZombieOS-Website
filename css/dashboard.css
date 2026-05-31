@@ -1,28 +1,16 @@
-/* =========================
-   DASHBOARD MAIN
-========================= */
+/* MAIN */
 
 .dashboard-main{
 
-width:100%;
-
-max-width:1400px;
+max-width:1200px;
 
 margin:auto;
 
 padding:
-180px 24px 80px;
-
-display:flex;
-
-flex-direction:column;
-
-gap:28px;
+190px 24px 80px;
 }
 
-/* =========================
-   NAVBAR
-========================= */
+/* NAVBAR */
 
 .dashboard-navbar{
 
@@ -66,9 +54,7 @@ gap:16px;
 margin-top:14px;
 }
 
-/* =========================
-   LOGO
-========================= */
+/* LOGO */
 
 .dashboard-logo{
 
@@ -86,9 +72,7 @@ text-shadow:
 white-space:nowrap;
 }
 
-/* =========================
-   NAV LINKS
-========================= */
+/* NAV LINKS */
 
 .dashboard-links,
 .dashboard-navbar-bottom{
@@ -135,25 +119,7 @@ box-shadow:
 0 0 20px rgba(0,255,153,0.15);
 }
 
-/* =========================
-   HERO GRID
-========================= */
-
-.dashboard-grid{
-
-display:grid;
-
-grid-template-columns:
-repeat(auto-fit,minmax(340px,1fr));
-
-gap:28px;
-
-width:100%;
-}
-
-/* =========================
-   HERO CARDS
-========================= */
+/* HERO CARD */
 
 .dashboard-card{
 
@@ -161,7 +127,7 @@ position:relative;
 
 overflow:hidden;
 
-padding:30px;
+padding:36px;
 
 border-radius:30px;
 
@@ -180,175 +146,31 @@ blur(18px);
 
 box-shadow:
 0 0 40px rgba(0,255,153,0.08);
-
-transition:
-0.35s;
 }
 
-.dashboard-card::before{
-
-content:"";
-
-position:absolute;
-
-top:-100px;
-right:-100px;
-
-width:220px;
-height:220px;
-
-background:
-radial-gradient(
-circle,
-rgba(0,255,153,0.14),
-transparent 70%
-);
-
-pointer-events:none;
-}
-
-.dashboard-card:hover{
-
-transform:
-translateY(-6px);
-
-border-color:
-rgba(0,255,153,0.28);
-
-box-shadow:
-0 0 60px rgba(0,255,153,0.14);
-}
-
-/* =========================
-   TITLES
-========================= */
-
-.dashboard-card h2{
-
-font-size:1.7rem;
-
-margin-bottom:20px;
-
-color:white;
-}
+/* GREETING */
 
 .dashboard-greeting h1{
 
 font-size:3rem;
 
-margin-bottom:10px;
+margin-bottom:14px;
 
 color:white;
 }
 
 .dashboard-greeting p{
 
-color:#9f9f9f;
-
 font-size:1.05rem;
+
+color:#a0a0a0;
 }
 
-/* =========================
-   EMPTY STATE
-========================= */
-
-.dashboard-empty-state{
-
-padding:
-24px;
-
-border-radius:20px;
-
-background:
-rgba(255,255,255,0.03);
-
-border:
-1px dashed rgba(255,255,255,0.08);
-
-text-align:center;
-
-color:#7f7f7f;
-}
-
-/* =========================
-   DETAILS
-========================= */
-
-.dashboard-details{
-
-display:flex;
-
-flex-direction:column;
-
-gap:18px;
-}
-
-.dashboard-details p{
-
-display:flex;
-
-justify-content:space-between;
-align-items:center;
-
-flex-wrap:wrap;
-
-gap:10px;
-
-color:#d0d0d0;
-}
-
-.dashboard-type-row{
-
-display:flex;
-
-align-items:center;
-
-gap:12px;
-
-flex-wrap:wrap;
-}
-
-/* =========================
-   UPGRADE BUTTON
-========================= */
-
-.upgrade-button{
-
-padding:
-10px 16px;
-
-border-radius:14px;
-
-background:
-linear-gradient(
-135deg,
-#ffd700,
-#ffb700
-);
-
-color:black;
-
-text-decoration:none;
-
-transition:0.25s;
-}
-
-.upgrade-button:hover{
-
-transform:
-translateY(-2px);
-
-box-shadow:
-0 0 24px rgba(255,215,0,0.35);
-}
-
-/* =========================
-   FOOTER
-========================= */
+/* FOOTER */
 
 .dashboard-footer{
 
-margin-top:60px;
+margin-top:70px;
 
 padding:
 40px 24px;
@@ -361,14 +183,14 @@ text-align:center;
 
 .dashboard-footer h2{
 
-font-size:2.5rem;
+font-size:2.4rem;
 
 margin-bottom:24px;
 
 color:#00ff99;
 
 text-shadow:
-0 0 20px rgba(0,255,153,0.4);
+0 0 20px rgba(0,255,153,0.45);
 }
 
 .dashboard-footer-links{
@@ -437,9 +259,7 @@ border:
 1px solid rgba(255,215,0,0.24);
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media(max-width:768px){
 
