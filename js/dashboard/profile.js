@@ -186,7 +186,19 @@ document.getElementById(
 "profile-pronouns"
 ).value.trim();
 
-/* HANDLE LIMIT */
+/* HANDLE VALIDATION */
+
+if(handle.includes(" ")){
+
+alert(
+"Handles cannot contain spaces."
+);
+
+return;
+
+}
+
+/* HANDLE COOLDOWN */
 
 const lastHandleChange =
 data.lastHandleChange || 0;
@@ -209,7 +221,7 @@ return;
 
 }
 
-/* UPDATE AUTH DISPLAY NAME */
+/* UPDATE AUTH PROFILE */
 
 await updateProfile(
 user,
@@ -225,17 +237,14 @@ await setDoc(
 userRef,
 {
 
+userId:
+data.userId || 0,
+
 username:
 username,
 
-handle:
-handle,
-
-bio:
-bio,
-
-pronouns:
-pronouns,
+email:
+data.email || user.email,
 
 subscription:
 data.subscription || "FREE",
@@ -246,10 +255,31 @@ data.badges || [],
 createdAt:
 data.createdAt || Date.now(),
 
+/* PROFILE */
+
+bio:
+bio,
+
+pronouns:
+pronouns,
+
+handle:
+handle,
+
+customHandle:
+handle !== data.handle
+? true
+: data.customHandle || false,
+
+profileColor:
+data.profileColor || "default",
+
 lastHandleChange:
 handle !== data.handle
 ? Date.now()
 : lastHandleChange,
+
+/* SOCIALS */
 
 socials:{
 
