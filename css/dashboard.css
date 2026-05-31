@@ -1,4 +1,6 @@
-/* MAIN */
+/* =========================
+   MAIN
+========================= */
 
 .dashboard-main{
 
@@ -7,7 +9,7 @@ max-width:1400px;
 margin:auto;
 
 padding:
-220px 20px 80px;
+320px 20px 80px;
 
 display:flex;
 
@@ -16,7 +18,9 @@ flex-direction:column;
 gap:28px;
 }
 
-/* NAVBAR */
+/* =========================
+   NAVBAR
+========================= */
 
 .dashboard-navbar{
 
@@ -42,29 +46,41 @@ border-bottom:
 z-index:9999;
 }
 
-.dashboard-navbar-top,
-.dashboard-navbar-bottom{
+/* TOP NAV */
+
+.dashboard-navbar-top{
 
 display:flex;
 
 justify-content:space-between;
+
 align-items:center;
 
-flex-wrap:wrap;
-
-gap:16px;
+gap:20px;
 }
+
+/* BOTTOM NAV */
 
 .dashboard-navbar-bottom{
 
-margin-top:14px;
+display:flex;
+
+justify-content:flex-start;
+
+flex-wrap:wrap;
+
+gap:14px;
+
+margin-top:16px;
 }
 
-/* LOGO */
+/* =========================
+   LOGO
+========================= */
 
 .dashboard-logo{
 
-font-size:2rem;
+font-size:2.3rem;
 
 font-weight:700;
 
@@ -78,25 +94,38 @@ text-shadow:
 white-space:nowrap;
 }
 
-/* LINKS */
+/* =========================
+   NAV LINKS
+========================= */
 
-.dashboard-links,
-.dashboard-navbar-bottom{
+.dashboard-links{
 
 display:flex;
+
+align-items:center;
 
 flex-wrap:wrap;
 
 gap:14px;
 }
 
+/* NAV BUTTONS */
+
 .dashboard-links a,
 .dashboard-navbar-bottom a{
 
-padding:
-10px 16px;
+display:flex;
 
-border-radius:14px;
+align-items:center;
+
+justify-content:center;
+
+min-width:140px;
+
+padding:
+14px 18px;
+
+border-radius:18px;
 
 background:
 rgba(255,255,255,0.03);
@@ -125,7 +154,9 @@ box-shadow:
 0 0 20px rgba(0,255,153,0.15);
 }
 
-/* HERO GRID */
+/* =========================
+   GRID
+========================= */
 
 .dashboard-grid{
 
@@ -137,7 +168,9 @@ repeat(auto-fit,minmax(280px,1fr));
 gap:24px;
 }
 
-/* HERO CARDS */
+/* =========================
+   HERO CARDS
+========================= */
 
 .dashboard-card{
 
@@ -202,7 +235,9 @@ box-shadow:
 0 0 60px rgba(0,255,153,0.14);
 }
 
-/* GREETING */
+/* =========================
+   GREETING
+========================= */
 
 .dashboard-greeting h1{
 
@@ -224,7 +259,9 @@ font-size:1.05rem;
 color:#a0a0a0;
 }
 
-/* STAT CARDS */
+/* =========================
+   STATS
+========================= */
 
 .dashboard-stat-card{
 
@@ -265,14 +302,22 @@ color:#b0b0b0;
 margin-bottom:18px;
 }
 
-/* BUTTON */
+/* =========================
+   BUTTON
+========================= */
 
 .upgrade-button{
 
-padding:
-10px 16px;
+display:inline-flex;
 
-border-radius:14px;
+align-items:center;
+
+justify-content:center;
+
+padding:
+12px 18px;
+
+border-radius:16px;
 
 background:
 linear-gradient(
@@ -284,6 +329,8 @@ linear-gradient(
 color:black;
 
 text-decoration:none;
+
+font-weight:600;
 
 transition:0.25s;
 }
@@ -297,7 +344,9 @@ box-shadow:
 0 0 24px rgba(255,215,0,0.35);
 }
 
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
 
 .dashboard-footer{
 
@@ -346,6 +395,14 @@ gap:16px;
 
 .dashboard-footer-button{
 
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+min-width:140px;
+
 padding:
 12px 18px;
 
@@ -390,18 +447,21 @@ border:
 1px solid rgba(255,215,0,0.24);
 }
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:768px){
 
 .dashboard-main{
 
 padding:
-250px 18px 70px;
+420px 18px 70px;
 }
 
-.dashboard-navbar-top,
-.dashboard-navbar-bottom{
+/* STACK NAV */
+
+.dashboard-navbar-top{
 
 flex-direction:column;
 
@@ -413,64 +473,31 @@ align-items:flex-start;
 
 width:100%;
 
-display:grid;
+display:flex;
 
-grid-template-columns:
-1fr 1fr;
+flex-direction:column;
 
 gap:12px;
 }
 
+/* FULL WIDTH BUTTONS */
+
 .dashboard-links a,
 .dashboard-navbar-bottom a{
 
-text-align:center;
+width:100%;
+
+min-width:unset;
 }
+
+/* LOGO */
 
 .dashboard-logo{
 
-font-size:1.7rem;
+font-size:2rem;
 }
 
-.dashboard-greeting h1{
-
-font-size:2.2rem;
-}
-
-.dashboard-footer-row{
-
-flex-direction:column;
-}
-
-.dashboard-footer-button{
-
-width:100%;
-}
-
-}
-
-/* MOBILE IMPROVEMENTS */
-
-@media(max-width:768px){
-
-.dashboard-navbar{
-
-padding:
-18px 16px;
-}
-
-.dashboard-links,
-.dashboard-navbar-bottom{
-
-grid-template-columns:
-1fr 1fr;
-}
-
-.dashboard-navbar-bottom a:last-child{
-
-grid-column:
-span 2;
-}
+/* GREETING */
 
 .dashboard-greeting h1{
 
@@ -484,6 +511,8 @@ line-height:1.05;
 font-size:0.95rem;
 }
 
+/* CARDS */
+
 .dashboard-card{
 
 padding:26px;
@@ -494,9 +523,23 @@ padding:26px;
 min-height:180px;
 }
 
+/* FOOTER */
+
 .dashboard-footer h2{
 
 font-size:2rem;
+}
+
+.dashboard-footer-row{
+
+flex-direction:column;
+}
+
+.dashboard-footer-button{
+
+width:100%;
+
+min-width:unset;
 }
 
 }
