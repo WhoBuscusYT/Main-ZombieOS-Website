@@ -17,23 +17,18 @@ ZombieOS - Dashboard
 <link
 rel="icon"
 type="image/png"
-href="/images/favicon.png"
+href="/favicon.png"
 >
 
 <link
 rel="stylesheet"
-href="/css/global.css"
+href="/css/global.css?v=1"
 >
 
 <link
 rel="stylesheet"
-href="/css/dashboard.css"
+href="/css/dashboard.css?v=1"
 >
-
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-/>
 
 </head>
 
@@ -115,7 +110,7 @@ CREATOR PROGRAM
 
 <!-- GREETING -->
 
-<section class="dashboard-greeting dashboard-card">
+<section class="dashboard-card dashboard-greeting">
 
 <h1 id="dashboard-greeting-text">
 
@@ -128,120 +123,6 @@ Loading...
 Welcome back to the ZombieOS ecosystem.
 
 </p>
-
-</section>
-
-<!-- GRID -->
-
-<section class="dashboard-grid">
-
-<!-- MOST PLAYED -->
-
-<div class="dashboard-card">
-
-<h2>
-
-Most Played Games
-
-</h2>
-
-<div
-class="dashboard-empty-state"
-id="games-container"
->
-
-No Data Available
-
-</div>
-
-</div>
-
-<!-- ACHIEVEMENTS -->
-
-<div class="dashboard-card">
-
-<h2>
-
-Recent Achievements
-
-</h2>
-
-<div
-class="dashboard-empty-state"
-id="achievements-container"
->
-
-No Data Available
-
-</div>
-
-</div>
-
-<!-- DETAILS -->
-
-<div class="dashboard-card dashboard-details-card">
-
-<h2>
-
-Details
-
-</h2>
-
-<div class="dashboard-details">
-
-<p>
-
-Type:
-
-<span class="dashboard-type-row">
-
-<span id="dashboard-subscription">
-
-FREE
-
-</span>
-
-<a
-href="/dashboard/zos-plus"
-id="upgrade-button"
-class="upgrade-button"
->
-
-Upgrade To ZOS+
-
-</a>
-
-</span>
-
-</p>
-
-<p>
-
-Age:
-
-<span id="dashboard-age">
-
-0 days
-
-</span>
-
-</p>
-
-<p>
-
-Created:
-
-<span id="dashboard-created">
-
-Loading...
-
-</span>
-
-</p>
-
-</div>
-
-</div>
 
 </section>
 
@@ -334,11 +215,9 @@ DATA
 
 </footer>
 
-<script src="/js/global.js"></script>
-
 <script
 type="module"
-src="/js/dashboard.js">
+src="/js/dashboard.js?v=1">
 </script>
 
 </body>
