@@ -3,25 +3,23 @@
 function togglePassword(){
 
 const input =
-document.getElementById("password-input");
-
-if(input){
+document.getElementById(
+"signup-password"
+);
 
 input.type =
 input.type === "password"
 ? "text"
 : "password";
-
-}
 
 }
 
 function toggleConfirmPassword(){
 
 const input =
-document.getElementById("confirm-password-input");
-
-if(input){
+document.getElementById(
+"confirm-password-input"
+);
 
 input.type =
 input.type === "password"
@@ -30,62 +28,71 @@ input.type === "password"
 
 }
 
-}
+/* POPUP */
 
-/* CAPTCHA + FIREBASE SIGNUP */
+function showPopup(
+title,
+message
+){
 
-async function onSubmit(token){
+const popup =
+document.createElement("div");
 
-const email =
-document.getElementById("signup-email").value;
+popup.className =
+"zos-popup";
 
-const password =
-document.getElementById("signup-password").value;
+popup.innerHTML = `
 
-try{
+<div class="zos-popup-card">
 
-const userCredential =
-await window.createUserWithEmailAndPassword(
-window.firebaseAuth,
-email,
-password
+<h2>${title}</h2>
+
+<p>${message}</p>
+
+<button id="popup-close">
+
+Continue
+
+</button>
+
+</div>
+
+`;
+
+document.body.appendChild(
+popup
 );
 
-await window.sendEmailVerification(
-userCredential.user
+document
+.getElementById("popup-close")
+.addEventListener(
+"click",
+()=>{
+
+popup.remove();
+
+}
 );
-
-showPopup(
-"Account Created",
-"Verification email sent successfully."
-);
-
-}catch(error){
-
-alert(error.message);
 
 }
 
-}
-
-window.onSubmit =
-onSubmit;
-
-/* PAGE LOAD */
+/* PAGE */
 
 document.addEventListener(
 "DOMContentLoaded",
 ()=>{
 
-/* HANDLE VALIDATION */
+/* HANDLE */
 
 const handleInput =
-document.getElementById("handle-input");
+document.getElementById(
+"handle-input"
+);
 
 const handleStatus =
-document.getElementById("handle-status");
-
-if(handleInput){
+document.getElementById(
+"handle-status"
+);
 
 handleInput.addEventListener(
 "input",
@@ -96,8 +103,6 @@ handleInput.value;
 
 const valid =
 /^[a-zA-Z0-9_.-]+$/.test(value);
-
-/* ROOT */
 
 if(
 value.toLowerCase() === "root"
@@ -113,8 +118,6 @@ return;
 
 }
 
-/* ZOMBIEOS */
-
 if(
 value.toLowerCase() === "zombieos"
 ){
@@ -124,22 +127,6 @@ handleStatus.textContent =
 
 handleStatus.style.color =
 "#ff7070";
-
-return;
-
-}
-
-/* SUDO */
-
-if(
-value.toLowerCase() === "sudo"
-){
-
-handleStatus.textContent =
-"Permission elevation denied.";
-
-handleStatus.style.color =
-"#ffaa00";
 
 return;
 
@@ -166,18 +153,22 @@ handleStatus.style.color =
 }
 );
 
-}
-
 /* PASSWORD MATCH */
 
 const passwordInput =
-document.getElementById("password-input");
+document.getElementById(
+"signup-password"
+);
 
 const confirmPasswordInput =
-document.getElementById("confirm-password-input");
+document.getElementById(
+"confirm-password-input"
+);
 
 const passwordStatus =
-document.getElementById("password-status");
+document.getElementById(
+"password-status"
+);
 
 function checkPasswords(){
 
@@ -231,16 +222,24 @@ checkPasswords
 /* DOB EASTER EGG */
 
 const dobMonth =
-document.getElementById("dob-month");
+document.getElementById(
+"dob-month"
+);
 
 const dobDay =
-document.getElementById("dob-day");
+document.getElementById(
+"dob-day"
+);
 
 const dobYear =
-document.getElementById("dob-year");
+document.getElementById(
+"dob-year"
+);
 
 const createButton =
-document.querySelector(".primary-auth-button");
+document.getElementById(
+"create-account-button"
+);
 
 function checkDOB(){
 
@@ -253,22 +252,10 @@ dobYear.value === "2001"
 createButton.textContent =
 "Rest in peace to all the people that helped.";
 
-createButton.style.background =
-"#555555";
-
-createButton.style.color =
-"white";
-
 }else{
 
 createButton.textContent =
 "Create Account";
-
-createButton.style.background =
-"#00ff99";
-
-createButton.style.color =
-"black";
 
 }
 
@@ -289,16 +276,9 @@ dobYear.addEventListener(
 checkDOB
 );
 
-/* SIGNUP BUTTON */
+/* FIREBASE SIGNUP */
 
-const createAccountButton =
-document.getElementById(
-"create-account-button"
-);
-
-if(createAccountButton){
-
-createAccountButton.addEventListener(
+createButton.addEventListener(
 "click",
 async()=>{
 
@@ -314,18 +294,6 @@ document.getElementById(
 
 try{
 
-/* CAPTCHA
-
-const token =
-await grecaptcha.enterprise.execute(
-"6Ld0DgUtAAAAAJwI_aGUNIqDmeQoOtvfdt-SgfiU",
-{
-action:"signup"
-}
-); */
-
-/* FIREBASE */
-
 const userCredential =
 await window.createUserWithEmailAndPassword(
 window.firebaseAuth,
@@ -337,72 +305,23 @@ await window.sendEmailVerification(
 userCredential.user
 );
 
-alert(
-"Verification email sent."
+showPopup(
+"Account Created",
+"Verification email sent successfully."
 );
 
 }catch(error){
 
-alert(error.message);
-
 console.error(error);
 
-}
-
-}
+showPopup(
+"Error",
+error.message
 );
 
 }
 
-/* POPUP SYSTEM */
-
-function showPopup(
-title,
-message
-){
-
-const popup =
-document.createElement("div");
-
-popup.className =
-"zos-popup";
-
-popup.innerHTML = `
-
-<div class="zos-popup-card">
-
-<h2>${title}</h2>
-
-<p>${message}</p>
-
-<button id="popup-close">
-
-Continue
-
-</button>
-
-</div>
-
-`;
-
-document.body.appendChild(
-popup
-);
-
-const closeButton =
-document.getElementById(
-"popup-close"
-);
-
-closeButton.addEventListener(
-"click",
-()=>{
-
-popup.remove();
-
 }
 );
-
-}
 
 });
