@@ -177,43 +177,6 @@ dobDay &&
 dobYear
 ){
 
-/* DAYS */
-
-for(let i = 1; i <= 31; i++){
-
-const option =
-document.createElement("option");
-
-option.value = i;
-
-option.textContent = i;
-
-dobDay.appendChild(option);
-
-}
-
-/* YEARS */
-
-const currentYear =
-new Date().getFullYear();
-
-for(
-let year = currentYear - 13;
-year >= 1900;
-year--
-){
-
-const option =
-document.createElement("option");
-
-option.value = year;
-
-option.textContent = year;
-
-dobYear.appendChild(option);
-
-}
-
 /* VALIDATE */
 
 function validateDOB(){
