@@ -51,6 +51,9 @@ document.getElementById("dob-status");
 const ageDisplay =
 document.getElementById("age-display");
 
+const createButton =
+document.querySelector(".primary-auth-button");
+
 if(
 !dobMonth.value ||
 !dobDay.value ||
@@ -62,6 +65,9 @@ ageDisplay.textContent =
 
 ageDisplay.style.color =
 "#8f8f8f";
+
+createButton.textContent =
+"Create Account";
 
 return;
 
@@ -101,6 +107,8 @@ age--;
 ageDisplay.textContent =
 `You are ${age} years old.`;
 
+/* AGE STATUS */
+
 if(age >= 13){
 
 dobStatus.textContent =
@@ -122,6 +130,36 @@ dobStatus.style.color =
 
 ageDisplay.style.color =
 "#ff7070";
+
+}
+
+/* 9/11 EASTER EGG */
+
+if(
+dobMonth.value === "9" &&
+dobDay.value === "11" &&
+dobYear.value === "2001"
+){
+
+createButton.textContent =
+"Rest in peace to all the people that helped.";
+
+createButton.style.background =
+"#555555";
+
+createButton.style.color =
+"white";
+
+}else{
+
+createButton.textContent =
+"Create Account";
+
+createButton.style.background =
+"#00ff99";
+
+createButton.style.color =
+"black";
 
 }
 
@@ -152,6 +190,64 @@ handleInput.value;
 
 const valid =
 /^[a-zA-Z0-9_.-]+$/.test(value);
+
+/* ROOT EASTER EGG */
+
+if(
+value.toLowerCase() === "root"
+){
+
+handleStatus.textContent =
+"ROOT ACCESS DETECTED";
+
+handleStatus.style.color =
+"#ff0000";
+
+document.body.style.animation =
+"shake 0.2s linear 3";
+
+setTimeout(()=>{
+
+document.body.style.animation =
+"";
+
+},600);
+
+return;
+
+}
+
+/* ZOMBIEOS RESERVED */
+
+if(
+value.toLowerCase() === "zombieos"
+){
+
+handleStatus.textContent =
+"WARNING: SYSTEM HANDLE RESERVED";
+
+handleStatus.style.color =
+"#ff7070";
+
+return;
+
+}
+
+/* SUDO EASTER EGG */
+
+if(
+value.toLowerCase() === "sudo"
+){
+
+handleStatus.textContent =
+"Permission elevation denied.";
+
+handleStatus.style.color =
+"#ffaa00";
+
+return;
+
+}
 
 if(valid){
 
@@ -235,5 +331,39 @@ confirmPasswordInput.addEventListener(
 "input",
 checkPasswords
 );
+
+/* GLOBAL KONAMI EASTER EGG */
+
+let typedKeys = "";
+
+document.addEventListener(
+"keydown",
+(event)=>{
+
+typedKeys +=
+event.key.toLowerCase();
+
+if(
+typedKeys.includes("zombie")
+){
+
+console.log(
+"ZombieOS Runtime Initialized"
+);
+
+typedKeys = "";
+
+}
+
+if(
+typedKeys.length > 30
+){
+
+typedKeys =
+typedKeys.slice(-30);
+
+}
+
+});
 
 });
