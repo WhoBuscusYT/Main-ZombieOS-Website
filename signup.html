@@ -35,78 +35,18 @@ rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 />
 
-<!-- FIREBASE -->
-
-<script type="module">
-
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-
-import {
-getAuth,
-createUserWithEmailAndPassword,
-sendEmailVerification,
-GoogleAuthProvider,
-signInWithRedirect
-}
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-
-const firebaseConfig = {
-
-apiKey:
-"AIzaSyDG0hSabeqYdGgSISOgvSnkOwATXDLiV9g",
-
-authDomain:
-"zombieos.firebaseapp.com",
-
-projectId:
-"zombieos",
-
-storageBucket:
-"zombieos.firebasestorage.app",
-
-messagingSenderId:
-"577624378484",
-
-appId:
-"1:577624378484:web:3e88e693724bde8e89d521",
-
-measurementId:
-"G-LV0T97LGWP"
-
-};
-
-const app =
-initializeApp(firebaseConfig);
-
-const auth =
-getAuth(app);
-
-window.firebaseAuth =
-auth;
-
-window.createUserWithEmailAndPassword =
-createUserWithEmailAndPassword;
-
-window.sendEmailVerification =
-sendEmailVerification;
-
-window.GoogleAuthProvider =
-GoogleAuthProvider;
-
-window.signInWithRedirect =
-signInWithRedirect;
-
-</script>
-
 </head>
 
 <body>
+
+<!-- BACKGROUND -->
 
 <div class="background-grid"></div>
 
 <div class="background-glow glow1"></div>
 <div class="background-glow glow2"></div>
+
+<!-- NAVBAR -->
 
 <header class="navbar">
 
@@ -137,25 +77,27 @@ Login
 
 </header>
 
+<!-- MAIN -->
+
 <main>
 
 <section class="auth-section">
 
 <div class="auth-card floating-card">
 
-<p class="section-eyebrow" style="font-align:center;">
+<p class="section-eyebrow">
 
 INITIALIZE IDENTITY
 
 </p>
 
-<h1 class="auth-title" style="font-align:center;">
+<h1 class="auth-title">
 
 Create Runtime Account
 
 </h1>
 
-<p class="auth-description" style="font-align:center;">
+<p class="auth-description">
 
 Connect to the ZombieOS ecosystem.
 
@@ -231,47 +173,7 @@ onclick="togglePassword()"
 
 </div>
 
-<!-- CONFIRM PASSWORD -->
-
-<div class="input-group">
-
-<label>
-Confirm Password
-</label>
-
-<div class="password-wrapper">
-
-<input
-type="password"
-id="confirm-password-input"
-placeholder="Confirm password"
-required
->
-
-<button
-type="button"
-class="password-toggle"
-onclick="toggleConfirmPassword()"
->
-
-<i class="fa-solid fa-eye"></i>
-
-</button>
-
-</div>
-
-<p
-id="password-status"
-class="input-status"
->
-
-Passwords must match.
-
-</p>
-
-</div>
-
-<!-- BUTTON -->
+<!-- CREATE ACCOUNT -->
 
 <button
 type="button"
@@ -283,7 +185,15 @@ Create Account
 
 </button>
 
-<p style="text-align:center; class="input-status">OR</p>
+<!-- DIVIDER -->
+
+<div class="auth-divider">
+
+<span>
+OR
+</span>
+
+</div>
 
 <!-- GOOGLE -->
 
@@ -303,19 +213,47 @@ Continue with Google
 
 <button
 type="button"
-class="oauth-button discord-button"
+class="oauth-button disabled-oauth"
 disabled
 >
 
 <i class="fa-brands fa-discord"></i>
 
-Discord Auth Coming Soon
+Discord Coming Soon
 
 </button>
 
-</form>
+<!-- APPLE -->
 
-<p class="auth-switch-text" style="font-align:center;">
+<button
+type="button"
+class="oauth-button disabled-oauth"
+disabled
+>
+
+<i class="fa-brands fa-apple"></i>
+
+Apple Coming Soon
+
+</button>
+
+<!-- MICROSOFT -->
+
+<button
+type="button"
+class="oauth-button disabled-oauth"
+disabled
+>
+
+<i class="fa-brands fa-microsoft"></i>
+
+Microsoft Coming Soon
+
+</button>
+
+<!-- LOGIN LINK -->
+
+<p class="auth-switch-text">
 
 Already have an account?
 
@@ -327,16 +265,22 @@ Login
 
 </p>
 
+</form>
+
 </div>
 
 </section>
 
 </main>
 
+<!-- FOOTER -->
+
 <footer>
 
 <h2>
+
 ZombieOS
+
 </h2>
 
 <p>
@@ -348,8 +292,14 @@ ZombieOS / ZOS ©
 
 </footer>
 
+<!-- SCRIPTS -->
+
 <script src="js/global.js"></script>
-<script src="js/auth.js"></script>
+
+<script
+type="module"
+src="js/auth.js">
+</script>
 
 </body>
 </html>
