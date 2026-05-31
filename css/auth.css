@@ -1,31 +1,23 @@
-/* DOB */
+/* OAUTH */
 
-.dob-grid{
-
-display:grid;
-
-grid-template-columns:
-repeat(3,1fr);
-
-gap:14px;
-
-margin-top:10px;
-}
-
-.dob-select{
+.oauth-button{
 
 width:100%;
 
 padding:
-18px 20px;
+16px 20px;
+
+margin-top:14px;
+
+border:none;
+
+border-radius:20px;
 
 background:
-rgba(0,255,153,0.05);
+rgba(255,255,255,0.04);
 
 border:
-1px solid rgba(0,255,153,0.16);
-
-border-radius:18px;
+1px solid rgba(255,255,255,0.08);
 
 color:white;
 
@@ -33,33 +25,40 @@ font-size:1rem;
 
 font-family:'Orbitron',sans-serif;
 
-outline:none;
-
 cursor:pointer;
 
 transition:0.25s;
 
-appearance:none;
--webkit-appearance:none;
--moz-appearance:none;
+display:flex;
 
-box-shadow:
-0 0 18px rgba(0,255,153,0.08);
+justify-content:center;
+align-items:center;
+
+gap:12px;
 }
 
-.dob-select:hover{
+.oauth-button:hover{
+
+transform:
+translateY(-2px);
 
 border-color:#00ff99;
 
 box-shadow:
-0 0 24px rgba(0,255,153,0.18);
+0 0 25px rgba(0,255,153,0.14);
 }
 
-.dob-select option{
+.google-button:hover{
 
-background:#020302;
+background:
+rgba(0,255,153,0.08);
+}
 
-color:white;
+.discord-button{
+
+opacity:0.7;
+
+cursor:not-allowed;
 }
 
 /* POPUP */
@@ -83,6 +82,9 @@ justify-content:center;
 align-items:center;
 
 z-index:99999;
+
+backdrop-filter:
+blur(10px);
 }
 
 .zos-popup-card{
@@ -92,13 +94,16 @@ width:min(90%,420px);
 background:#050805;
 
 border:
-1px solid rgba(0,255,153,0.2);
+1px solid rgba(0,255,153,0.18);
 
 border-radius:28px;
 
 padding:32px;
 
 text-align:center;
+
+box-shadow:
+0 0 50px rgba(0,255,153,0.16);
 }
 
 .zos-popup-card h2{
@@ -111,6 +116,8 @@ margin-bottom:14px;
 .zos-popup-card p{
 
 color:#bdbdbd;
+
+line-height:1.6;
 
 margin-bottom:24px;
 }
@@ -127,6 +134,8 @@ border-radius:18px;
 background:#00ff99;
 
 color:black;
+
+font-family:'Orbitron',sans-serif;
 
 cursor:pointer;
 }
