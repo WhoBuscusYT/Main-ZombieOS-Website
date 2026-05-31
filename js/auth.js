@@ -177,38 +177,6 @@ dobDay &&
 dobYear
 ){
 
-/* MONTHS */
-
-const months = [
-
-"January",
-"February",
-"March",
-"April",
-"May",
-"June",
-"July",
-"August",
-"September",
-"October",
-"November",
-"December"
-
-];
-
-months.forEach((month,index)=>{
-
-const option =
-document.createElement("option");
-
-option.value = index + 1;
-
-option.textContent = month;
-
-dobMonth.appendChild(option);
-
-});
-
 /* DAYS */
 
 for(let i = 1; i <= 31; i++){
@@ -246,7 +214,7 @@ dobYear.appendChild(option);
 
 }
 
-/* VALIDATE DOB */
+/* VALIDATE */
 
 function validateDOB(){
 
@@ -287,16 +255,8 @@ age--;
 
 }
 
-/* AGE DISPLAY */
-
-if(ageDisplay){
-
 ageDisplay.textContent =
 `You are ${age} years old.`;
-
-}
-
-/* AGE STATUS */
 
 if(age >= 13){
 
@@ -306,12 +266,8 @@ dobStatus.textContent =
 dobStatus.style.color =
 "#00ff99";
 
-if(ageDisplay){
-
 ageDisplay.style.color =
 "#00ff99";
-
-}
 
 }else{
 
@@ -321,18 +277,12 @@ dobStatus.textContent =
 dobStatus.style.color =
 "#ff7070";
 
-if(ageDisplay){
-
 ageDisplay.style.color =
 "#ff7070";
 
 }
 
 }
-
-}
-
-/* RUN DOB CHECK */
 
 dobMonth.addEventListener(
 "change",
