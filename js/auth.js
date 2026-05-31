@@ -1,4 +1,4 @@
-/* PASSWORD TOGGLE */
+/* PASSWORD TOGGLES */
 
 function togglePassword(){
 
@@ -81,7 +81,7 @@ handleStatus.style.color =
 
 }
 
-/* PASSWORD MATCH */
+/* PASSWORD MATCHING */
 
 const passwordInput =
 document.getElementById("password-input");
@@ -168,6 +168,9 @@ document.getElementById("dob-year");
 const dobStatus =
 document.getElementById("dob-status");
 
+const ageDisplay =
+document.getElementById("age-display");
+
 if(
 dobMonth &&
 dobDay &&
@@ -243,7 +246,7 @@ dobYear.appendChild(option);
 
 }
 
-/* AGE CHECK */
+/* VALIDATE DOB */
 
 function validateDOB(){
 
@@ -284,6 +287,17 @@ age--;
 
 }
 
+/* AGE DISPLAY */
+
+if(ageDisplay){
+
+ageDisplay.textContent =
+`You are ${age} years old.`;
+
+}
+
+/* AGE STATUS */
+
 if(age >= 13){
 
 dobStatus.textContent =
@@ -291,6 +305,13 @@ dobStatus.textContent =
 
 dobStatus.style.color =
 "#00ff99";
+
+if(ageDisplay){
+
+ageDisplay.style.color =
+"#00ff99";
+
+}
 
 }else{
 
@@ -300,9 +321,18 @@ dobStatus.textContent =
 dobStatus.style.color =
 "#ff7070";
 
+if(ageDisplay){
+
+ageDisplay.style.color =
+"#ff7070";
+
 }
 
 }
+
+}
+
+/* RUN DOB CHECK */
 
 dobMonth.addEventListener(
 "change",
