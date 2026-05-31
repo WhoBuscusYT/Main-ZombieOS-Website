@@ -1,4 +1,4 @@
-/* PASSWORD TOGGLES */
+/* PASSWORD TOGGLE */
 
 function togglePassword(){
 
@@ -154,29 +154,6 @@ checkPasswords
 
 }
 
-/* DATE OF BIRTH */
-
-const dobMonth =
-document.getElementById("dob-month");
-
-const dobDay =
-document.getElementById("dob-day");
-
-const dobYear =
-document.getElementById("dob-year");
-
-const dobStatus =
-document.getElementById("dob-status");
-
-const ageDisplay =
-document.getElementById("age-display");
-
-if(
-dobMonth &&
-dobDay &&
-dobYear
-){
-
 /* DOB VALIDATION */
 
 const dobMonth =
@@ -272,6 +249,12 @@ ageDisplay.style.color =
 
 }
 
+if(
+dobMonth &&
+dobDay &&
+dobYear
+){
+
 dobMonth.addEventListener(
 "change",
 validateDOB
@@ -286,5 +269,7 @@ dobYear.addEventListener(
 "change",
 validateDOB
 );
+
+}
 
 });
