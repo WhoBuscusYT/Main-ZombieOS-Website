@@ -89,14 +89,51 @@ return;
 
 }
 
-const username =
+/* GET USERNAME */
 
-user.displayName ||
-
-user.email
-.split("@")[0] ||
-
+let username =
 "User";
+
+try{
+
+const response =
+await fetch(
+`https://firestore.googleapis.com/v1/projects/zombieos/databases/(default)/documents/users/${user.uid}`
+);
+
+const data =
+await response.json();
+
+/* FIRESTORE USERNAME */
+
+if(
+data.fields &&
+data.fields.username &&
+data.fields.username.stringValue
+){
+
+username =
+data.fields.username.stringValue;
+
+}
+
+/* FALLBACK */
+
+else if(user.displayName){
+
+username =
+user.displayName;
+
+}
+
+}catch(error){
+
+console.error(
+"Username Load Error:",
+error
+);
+
+}
 
 /* GREETING */
 
