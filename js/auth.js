@@ -174,10 +174,20 @@ document.getElementById("age-display");
 function validateDOB(){
 
 if(
+!dobMonth ||
+!dobDay ||
+!dobYear
+){
+return;
+}
+
+if(
 !dobMonth.value ||
 !dobDay.value ||
 !dobYear.value
 ){
+
+if(ageDisplay){
 
 ageDisplay.textContent =
 "Select your date of birth.";
@@ -185,15 +195,17 @@ ageDisplay.textContent =
 ageDisplay.style.color =
 "#8f8f8f";
 
+}
+
 return;
 
 }
 
 const birthDate =
 new Date(
-dobYear.value,
-dobMonth.value - 1,
-dobDay.value
+parseInt(dobYear.value),
+parseInt(dobMonth.value) - 1,
+parseInt(dobDay.value)
 );
 
 const today =
@@ -220,10 +232,20 @@ age--;
 
 }
 
+/* AGE TEXT */
+
+if(ageDisplay){
+
 ageDisplay.textContent =
 `You are ${age} years old.`;
 
+}
+
+/* STATUS */
+
 if(age >= 13){
+
+if(dobStatus){
 
 dobStatus.textContent =
 "Standard account available.";
@@ -231,10 +253,18 @@ dobStatus.textContent =
 dobStatus.style.color =
 "#00ff99";
 
+}
+
+if(ageDisplay){
+
 ageDisplay.style.color =
 "#00ff99";
 
+}
+
 }else{
+
+if(dobStatus){
 
 dobStatus.textContent =
 "Child account setup required.";
@@ -242,6 +272,10 @@ dobStatus.textContent =
 dobStatus.style.color =
 "#ff7070";
 
+}
+
+if(ageDisplay){
+
 ageDisplay.style.color =
 "#ff7070";
 
@@ -249,21 +283,29 @@ ageDisplay.style.color =
 
 }
 
-if(
-dobMonth &&
-dobDay &&
-dobYear
-){
+}
+
+/* EVENTS */
+
+if(dobMonth){
 
 dobMonth.addEventListener(
 "change",
 validateDOB
 );
 
+}
+
+if(dobDay){
+
 dobDay.addEventListener(
 "change",
 validateDOB
 );
+
+}
+
+if(dobYear){
 
 dobYear.addEventListener(
 "change",
