@@ -32,7 +32,45 @@ input.type === "password"
 
 }
 
-/* WAIT FOR PAGE */
+/* CAPTCHA + FIREBASE SIGNUP */
+
+async function onSubmit(token){
+
+const email =
+document.getElementById("signup-email").value;
+
+const password =
+document.getElementById("signup-password").value;
+
+try{
+
+const userCredential =
+await window.createUserWithEmailAndPassword(
+window.firebaseAuth,
+email,
+password
+);
+
+await window.sendEmailVerification(
+userCredential.user
+);
+
+alert(
+"Verification email sent."
+);
+
+}catch(error){
+
+alert(error.message);
+
+}
+
+}
+
+window.onSubmit =
+onSubmit;
+
+/* PAGE LOAD */
 
 document.addEventListener(
 "DOMContentLoaded",
