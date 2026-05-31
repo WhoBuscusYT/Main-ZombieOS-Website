@@ -288,4 +288,69 @@ dobYear.addEventListener(
 checkDOB
 );
 
+/* SIGNUP BUTTON */
+
+const createAccountButton =
+document.getElementById(
+"create-account-button"
+);
+
+if(createAccountButton){
+
+createAccountButton.addEventListener(
+"click",
+async()=>{
+
+const email =
+document.getElementById(
+"signup-email"
+).value;
+
+const password =
+document.getElementById(
+"signup-password"
+).value;
+
+try{
+
+/* CAPTCHA */
+
+const token =
+await grecaptcha.enterprise.execute(
+"6Ld0DgUtAAAAAJwI_aGUNIqDmeQoOtvfdt-SgfiU",
+{
+action:"signup"
+}
+);
+
+/* FIREBASE */
+
+const userCredential =
+await window.createUserWithEmailAndPassword(
+window.firebaseAuth,
+email,
+password
+);
+
+await window.sendEmailVerification(
+userCredential.user
+);
+
+alert(
+"Verification email sent."
+);
+
+}catch(error){
+
+alert(error.message);
+
+console.error(error);
+
+}
+
+}
+);
+
+}
+
 });
