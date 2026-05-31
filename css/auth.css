@@ -37,8 +37,7 @@ outline:none;
 
 cursor:pointer;
 
-transition:
-0.25s;
+transition:0.25s;
 
 appearance:none;
 -webkit-appearance:none;
@@ -46,28 +45,6 @@ appearance:none;
 
 box-shadow:
 0 0 18px rgba(0,255,153,0.08);
-
-background-image:
-linear-gradient(
-45deg,
-transparent 50%,
-#00ff99 50%
-),
-linear-gradient(
-135deg,
-#00ff99 50%,
-transparent 50%
-);
-
-background-position:
-calc(100% - 20px) calc(50% - 3px),
-calc(100% - 14px) calc(50% - 3px);
-
-background-size:
-6px 6px,
-6px 6px;
-
-background-repeat:no-repeat;
 }
 
 .dob-select:hover{
@@ -76,14 +53,6 @@ border-color:#00ff99;
 
 box-shadow:
 0 0 24px rgba(0,255,153,0.18);
-}
-
-.dob-select:focus{
-
-border-color:#00ff99;
-
-box-shadow:
-0 0 32px rgba(0,255,153,0.28);
 }
 
 .dob-select option{
@@ -108,26 +77,19 @@ height:100%;
 background:
 rgba(0,0,0,0.7);
 
-backdrop-filter:
-blur(10px);
-
 display:flex;
 
 justify-content:center;
 align-items:center;
 
 z-index:99999;
-
-animation:
-popupFade 0.25s ease;
 }
 
 .zos-popup-card{
 
 width:min(90%,420px);
 
-background:
-#050805;
+background:#050805;
 
 border:
 1px solid rgba(0,255,153,0.2);
@@ -137,9 +99,6 @@ border-radius:28px;
 padding:32px;
 
 text-align:center;
-
-box-shadow:
-0 0 50px rgba(0,255,153,0.18);
 }
 
 .zos-popup-card h2{
@@ -147,15 +106,11 @@ box-shadow:
 color:#00ff99;
 
 margin-bottom:14px;
-
-font-size:2rem;
 }
 
 .zos-popup-card p{
 
 color:#bdbdbd;
-
-line-height:1.6;
 
 margin-bottom:24px;
 }
@@ -163,7 +118,7 @@ margin-bottom:24px;
 .zos-popup-card button{
 
 padding:
-16px 24px;
+14px 24px;
 
 border:none;
 
@@ -173,36 +128,5 @@ background:#00ff99;
 
 color:black;
 
-font-family:'Orbitron',sans-serif;
-
-font-size:1rem;
-
 cursor:pointer;
-
-transition:0.25s;
-}
-
-.zos-popup-card button:hover{
-
-transform:
-translateY(-2px);
-
-box-shadow:
-0 0 25px rgba(0,255,153,0.3);
-}
-
-@keyframes popupFade{
-
-from{
-
-opacity:0;
-
-}
-
-to{
-
-opacity:1;
-
-}
-
 }
