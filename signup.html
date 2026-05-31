@@ -4,44 +4,165 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Signup - ZombieOS</title>
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
 
-<link rel="icon" type="image/png" href="favicon.png">
+<title>
+Signup - ZombieOS
+</title>
 
-<link rel="stylesheet" href="css/global.css">
-<link rel="stylesheet" href="css/auth.css">
+<link
+rel="icon"
+type="image/png"
+href="favicon.png"
+>
+
+<link
+rel="stylesheet"
+href="css/global.css"
+>
+
+<link
+rel="stylesheet"
+href="css/auth.css"
+>
 
 <link
 rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 />
 
+<!-- RECAPTCHA -->
+
+<script src="https://www.google.com/recaptcha/enterprise.js?render=6Ld0DgUtAAAAAJwI_aGUNIqDmeQoOtvfdt-SgfiU"></script>
+
+<!-- FIREBASE -->
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getAuth,
+createUserWithEmailAndPassword,
+sendEmailVerification,
+GoogleAuthProvider,
+signInWithPopup
+}
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+import {
+getFirestore
+}
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+/* CONFIG */
+
+const firebaseConfig = {
+
+apiKey:
+"AIzaSyDG0hSabeqYdGgSISOgvSnkOwATXDLiV9g",
+
+authDomain:
+"zombieos.firebaseapp.com",
+
+projectId:
+"zombieos",
+
+storageBucket:
+"zombieos.firebasestorage.app",
+
+messagingSenderId:
+"577624378484",
+
+appId:
+"1:577624378484:web:3e88e693724bde8e89d521",
+
+measurementId:
+"G-LV0T97LGWP"
+
+};
+
+/* INIT */
+
+const app =
+initializeApp(firebaseConfig);
+
+const auth =
+getAuth(app);
+
+const db =
+getFirestore(app);
+
+/* GLOBAL */
+
+window.firebaseAuth =
+auth;
+
+window.firebaseDB =
+db;
+
+window.createUserWithEmailAndPassword =
+createUserWithEmailAndPassword;
+
+window.sendEmailVerification =
+sendEmailVerification;
+
+window.GoogleAuthProvider =
+GoogleAuthProvider;
+
+window.signInWithPopup =
+signInWithPopup;
+
+</script>
+
 </head>
 
 <body>
+
+<!-- BACKGROUND -->
 
 <div class="background-grid"></div>
 
 <div class="background-glow glow1"></div>
 <div class="background-glow glow2"></div>
 
+<!-- NAVBAR -->
+
 <header class="navbar">
 
-<a href="/" class="logo">
+<a
+href="/"
+class="logo"
+>
+
 ZombieOS
+
 </a>
 
 <nav class="nav-links">
 
-<a href="/">Home</a>
-<a href="/downloads">Downloads</a>
-<a href="/login">Login</a>
+<a href="/">
+Home
+</a>
+
+<a href="/downloads">
+Downloads
+</a>
+
+<a href="/login">
+Login
+</a>
 
 </nav>
 
 </header>
+
+<!-- MAIN -->
 
 <main>
 
@@ -50,23 +171,38 @@ ZombieOS
 <div class="auth-card floating-card">
 
 <p class="section-eyebrow">
+
 INITIALIZE IDENTITY
+
 </p>
 
 <h1 class="auth-title">
+
 Create Runtime Account
+
 </h1>
 
 <p class="auth-description">
+
 Create your ZombieOS identity and connect to the future runtime ecosystem.
+
 </p>
 
-<form class="auth-form">
+<!-- FORM -->
+
+<form
+class="auth-form"
+id="signup-form"
+>
+
+<!-- USERNAME -->
 
 <div class="input-group">
 
 <label>
+
 Username
+
 </label>
 
 <input
@@ -77,10 +213,14 @@ required
 
 </div>
 
+<!-- HANDLE -->
+
 <div class="input-group">
 
 <label>
+
 Handle
+
 </label>
 
 <input
@@ -92,7 +232,8 @@ required
 
 <p
 id="handle-status"
-class="input-status">
+class="input-status"
+>
 
 Only letters, numbers, _, ., and - allowed.
 
@@ -100,24 +241,33 @@ Only letters, numbers, _, ., and - allowed.
 
 </div>
 
+<!-- EMAIL -->
+
 <div class="input-group">
 
 <label>
+
 Email
+
 </label>
 
 <input
 type="email"
+id="signup-email"
 placeholder="you@example.com"
 required
 >
 
 </div>
 
+<!-- PHONE -->
+
 <div class="input-group">
 
 <label>
+
 Phone Number (Optional)
+
 </label>
 
 <input
@@ -127,18 +277,25 @@ placeholder="+1 123 456 7890"
 
 </div>
 
+<!-- DOB -->
+
 <div class="input-group">
 
 <label>
+
 Date of Birth
+
 </label>
 
 <div class="dob-grid">
 
+<!-- MONTH -->
+
 <select
 id="dob-month"
 class="dob-select"
-required>
+required
+>
 
 <option value="">
 Month
@@ -159,10 +316,13 @@ Month
 
 </select>
 
+<!-- DAY -->
+
 <select
 id="dob-day"
 class="dob-select"
-required>
+required
+>
 
 <option value="">
 Day
@@ -202,10 +362,13 @@ Day
 
 </select>
 
+<!-- YEAR -->
+
 <select
 id="dob-year"
 class="dob-select"
-required>
+required
+>
 
 <option value="">
 Year
@@ -255,7 +418,8 @@ Year
 
 <p
 id="dob-status"
-class="input-status">
+class="input-status"
+>
 
 Users under 13 require parent verification.
 
@@ -263,17 +427,21 @@ Users under 13 require parent verification.
 
 </div>
 
+<!-- PASSWORD -->
+
 <div class="input-group">
 
 <label>
+
 Password
+
 </label>
 
 <div class="password-wrapper">
 
 <input
 type="password"
-id="password-input"
+id="signup-password"
 placeholder="Enter password"
 required
 >
@@ -281,7 +449,8 @@ required
 <button
 type="button"
 class="password-toggle"
-onclick="togglePassword()">
+onclick="togglePassword()"
+>
 
 <i class="fa-solid fa-eye"></i>
 
@@ -291,10 +460,14 @@ onclick="togglePassword()">
 
 </div>
 
+<!-- CONFIRM PASSWORD -->
+
 <div class="input-group">
 
 <label>
+
 Confirm Password
+
 </label>
 
 <div class="password-wrapper">
@@ -309,7 +482,8 @@ required
 <button
 type="button"
 class="password-toggle"
-onclick="toggleConfirmPassword()">
+onclick="toggleConfirmPassword()"
+>
 
 <i class="fa-solid fa-eye"></i>
 
@@ -319,13 +493,16 @@ onclick="toggleConfirmPassword()">
 
 <p
 id="password-status"
-class="input-status">
+class="input-status"
+>
 
 Passwords must match.
 
 </p>
 
 </div>
+
+<!-- TOS -->
 
 <div class="tos-box">
 
@@ -341,13 +518,17 @@ required
 I agree to the
 
 <a href="/tos">
+
 Terms of Service
+
 </a>
 
 and
 
 <a href="/privacy">
+
 Privacy Policy
+
 </a>
 
 </span>
@@ -356,19 +537,29 @@ Privacy Policy
 
 </div>
 
+<!-- CAPTCHA -->
+
 <div class="captcha-box">
 
 <i class="fa-solid fa-shield"></i>
 
 <span>
-CAPTCHA verification will appear here.
+
+Protected by reCAPTCHA Enterprise
+
 </span>
 
 </div>
 
+<!-- BUTTON -->
+
 <button
 type="submit"
-class="primary-auth-button">
+class="primary-auth-button g-recaptcha"
+data-sitekey="6Ld0DgUtAAAAAJwI_aGUNIqDmeQoOtvfdt-SgfiU"
+data-callback="onSubmit"
+data-action="signup"
+>
 
 Create Account
 
@@ -382,17 +573,26 @@ Create Account
 
 </main>
 
+<!-- FOOTER -->
+
 <footer>
 
 <h2>
+
 ZombieOS
+
 </h2>
 
 <p>
-ZombieOS / ZOS © <span id="year"></span>
+
+ZombieOS / ZOS ©
+<span id="year"></span>
+
 </p>
 
 </footer>
+
+<!-- SCRIPTS -->
 
 <script src="js/global.js"></script>
 <script src="js/auth.js"></script>
