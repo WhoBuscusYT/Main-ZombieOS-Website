@@ -1,32 +1,47 @@
-/* PASSWORD TOGGLE */
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 
-function togglePassword(){
-
-const input =
-document.getElementById(
-"signup-password"
-);
-
-input.type =
-input.type === "password"
-? "text"
-: "password";
-
+import {
+getAuth,
+createUserWithEmailAndPassword,
+sendEmailVerification,
+GoogleAuthProvider,
+signInWithRedirect
 }
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
-function toggleConfirmPassword(){
+/* FIREBASE */
 
-const input =
-document.getElementById(
-"confirm-password-input"
-);
+const firebaseConfig = {
 
-input.type =
-input.type === "password"
-? "text"
-: "password";
+apiKey:
+"AIzaSyDG0hSabeqYdGgSISOgvSnkOwATXDLiV9g",
 
-}
+authDomain:
+"zombieos.firebaseapp.com",
+
+projectId:
+"zombieos",
+
+storageBucket:
+"zombieos.firebasestorage.app",
+
+messagingSenderId:
+"577624378484",
+
+appId:
+"1:577624378484:web:3e88e693724bde8e89d521",
+
+measurementId:
+"G-LV0T97LGWP"
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const auth =
+getAuth(app);
 
 /* POPUP */
 
@@ -78,77 +93,28 @@ popup.remove();
 
 }
 
+/* PASSWORD TOGGLE */
+
+window.togglePassword =
+function(){
+
+const input =
+document.getElementById(
+"signup-password"
+);
+
+input.type =
+input.type === "password"
+? "text"
+: "password";
+
+};
+
 /* PAGE */
 
 document.addEventListener(
 "DOMContentLoaded",
 ()=>{
-
-/* PASSWORD MATCH */
-
-const passwordInput =
-document.getElementById(
-"signup-password"
-);
-
-const confirmPasswordInput =
-document.getElementById(
-"confirm-password-input"
-);
-
-const passwordStatus =
-document.getElementById(
-"password-status"
-);
-
-function checkPasswords(){
-
-if(
-confirmPasswordInput.value.length === 0
-){
-
-passwordStatus.textContent =
-"Passwords must match.";
-
-passwordStatus.style.color =
-"#8f8f8f";
-
-return;
-
-}
-
-if(
-passwordInput.value ===
-confirmPasswordInput.value
-){
-
-passwordStatus.textContent =
-"Passwords match.";
-
-passwordStatus.style.color =
-"#00ff99";
-
-}else{
-
-passwordStatus.textContent =
-"Passwords do not match.";
-
-passwordStatus.style.color =
-"#ff7070";
-
-}
-
-}
-
-passwordInput.addEventListener(
-"input",
-checkPasswords
-);
-
-confirmPasswordInput.addEventListener(
-"input",
-checkPasswords
-);
 
 /* EMAIL SIGNUP */
 
@@ -174,13 +140,13 @@ document.getElementById(
 try{
 
 const userCredential =
-await window.createUserWithEmailAndPassword(
-window.firebaseAuth,
+await createUserWithEmailAndPassword(
+auth,
 email,
 password
 );
 
-await window.sendEmailVerification(
+await sendEmailVerification(
 userCredential.user
 );
 
@@ -194,7 +160,7 @@ showPopup(
 console.error(error);
 
 showPopup(
-"Error",
+"Signup Error",
 error.message
 );
 
@@ -203,7 +169,7 @@ error.message
 }
 );
 
-/* GOOGLE AUTH */
+/* GOOGLE */
 
 const googleSignup =
 document.getElementById(
@@ -217,10 +183,10 @@ async()=>{
 try{
 
 const provider =
-new window.GoogleAuthProvider();
+new GoogleAuthProvider();
 
-await window.signInWithRedirect(
-window.firebaseAuth,
+await signInWithRedirect(
+auth,
 provider
 );
 
