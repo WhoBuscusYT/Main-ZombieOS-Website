@@ -138,9 +138,7 @@ Date of Birth
 <select
 id="dob-month"
 class="dob-select"
-required
-onchange="validateDOB()"
-oninput="validateDOB()">
+required>
 
 <option value="">
 Month
@@ -164,9 +162,7 @@ Month
 <select
 id="dob-day"
 class="dob-select"
-required
-onchange="validateDOB()"
-oninput="validateDOB()">
+required>
 
 <option value="">
 Day
@@ -209,9 +205,7 @@ Day
 <select
 id="dob-year"
 class="dob-select"
-required
-onchange="validateDOB()"
-oninput="validateDOB()">
+required>
 
 <option value="">
 Year
@@ -263,15 +257,7 @@ Year
 id="dob-status"
 class="input-status">
 
-You must be at least 13 years old to create a standard account.
-
-</p>
-
-<p
-id="age-display"
-class="age-display">
-
-Select your date of birth.
+Users under 13 require parent verification.
 
 </p>
 
@@ -347,7 +333,6 @@ Passwords must match.
 
 <input
 type="checkbox"
-id="tos-checkbox"
 required
 >
 
@@ -390,48 +375,6 @@ Create Account
 </button>
 
 </form>
-
-<div class="oauth-divider">
-
-<span>
-OR
-</span>
-
-</div>
-
-<div class="oauth-buttons">
-
-<button class="oauth-button discord-button">
-
-<i class="fa-brands fa-discord"></i>
-
-<span>
-Continue with Discord
-</span>
-
-</button>
-
-<button class="oauth-button google-button">
-
-<i class="fa-brands fa-google"></i>
-
-<span>
-Continue with Google
-</span>
-
-</button>
-
-</div>
-
-<p class="auth-footer">
-
-Already have an account?
-
-<a href="/login">
-Login
-</a>
-
-</p>
 
 </div>
 
