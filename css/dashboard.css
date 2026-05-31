@@ -589,3 +589,91 @@ min-width:unset;
 }
 
 }
+
+/* BADGES */
+
+#dashboard-badges{
+
+display:flex;
+
+flex-wrap:wrap;
+
+gap:14px;
+}
+
+/* BADGE */
+
+.dashboard-badge{
+
+padding:
+12px 18px;
+
+border-radius:16px;
+
+background:
+rgba(255,255,255,0.04);
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+color:#d0d0d0;
+
+font-size:0.95rem;
+
+backdrop-filter:
+blur(10px);
+}
+
+/* PROTOTYPE */
+
+.badge-prototype{
+
+border-color:
+rgba(0,255,153,0.24);
+
+box-shadow:
+0 0 18px rgba(0,255,153,0.12);
+}
+
+/* ZOS */
+
+.badge-zos{
+
+border-color:
+rgba(0,255,153,0.4);
+
+color:#00ff99;
+
+box-shadow:
+0 0 24px rgba(0,255,153,0.2);
+}
+
+/* DEV */
+
+.badge-dev{
+
+border-color:
+rgba(0,200,255,0.28);
+
+color:#6ad9ff;
+}
+
+/* CREATOR */
+
+.badge-creator{
+
+border-color:
+rgba(180,0,255,0.28);
+
+color:#d18cff;
+}
+
+/* ZOS+ */
+
+.badge-zosplus{
+
+border-color:
+rgba(255,215,0,0.28);
+
+color:#ffd700;
+}
