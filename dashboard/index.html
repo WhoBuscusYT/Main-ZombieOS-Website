@@ -57,25 +57,25 @@ href="/"
 class="logo"
 >
 
-ZombieOS - Dashboard
+ZOS DASH
 
 </a>
 
 <nav class="dashboard-links">
 
-<a href="/dashboard/profile.html">
+<a href="/dashboard/profile">
 
 Profile
 
 </a>
 
-<a href="/dashboard/details.html">
+<a href="/dashboard/details">
 
 Details
 
 </a>
 
-<a href="/dashboard/settings.html">
+<a href="/dashboard/settings">
 
 Settings
 
@@ -87,19 +87,19 @@ Settings
 
 <div class="dashboard-navbar-bottom">
 
-<a href="/dashboard/zos-plus.html">
+<a href="/dashboard/zos-plus">
 
 ZOS+
 
 </a>
 
-<a href="/dashboard/dev.html">
+<a href="/dashboard/dev">
 
 DEV PROGRAM
 
 </a>
 
-<a href="/dashboard/creator.html">
+<a href="/dashboard/creator">
 
 CREATOR PROGRAM
 
@@ -145,55 +145,12 @@ Most Played Games
 
 </h2>
 
-<div class="dashboard-list">
+<div
+class="dashboard-empty-state"
+id="games-container"
+>
 
-<div class="dashboard-list-item">
-
-<span>
-Game 1
-</span>
-
-<span>
-12h
-</span>
-
-</div>
-
-<div class="dashboard-list-item">
-
-<span>
-Game 2
-</span>
-
-<span>
-7h
-</span>
-
-</div>
-
-<div class="dashboard-list-item">
-
-<span>
-Game 3
-</span>
-
-<span>
-4h
-</span>
-
-</div>
-
-<div class="dashboard-list-item">
-
-<span>
-Game 4
-</span>
-
-<span>
-2h
-</span>
-
-</div>
+No Data Available
 
 </div>
 
@@ -209,31 +166,12 @@ Recent Achievements
 
 </h2>
 
-<div class="dashboard-list">
+<div
+class="dashboard-empty-state"
+id="achievements-container"
+>
 
-<div class="dashboard-achievement">
-
-🏆 Prototype User
-
-</div>
-
-<div class="dashboard-achievement">
-
-⚡ Runtime Access
-
-</div>
-
-<div class="dashboard-achievement">
-
-🛠 Account Created
-
-</div>
-
-<div class="dashboard-achievement">
-
-🔥 Dashboard Access
-
-</div>
+No Data Available
 
 </div>
 
@@ -254,26 +192,33 @@ Details
 <p>
 
 Type:
+
+<span class="dashboard-type-row">
+
 <span id="dashboard-subscription">
 
 FREE
 
 </span>
 
-<button
+<a
+href="/dashboard/zos-plus"
 id="upgrade-button"
 class="upgrade-button"
 >
 
 Upgrade To ZOS+
 
-</button>
+</a>
+
+</span>
 
 </p>
 
 <p>
 
 Age:
+
 <span id="dashboard-age">
 
 0 days
@@ -285,6 +230,7 @@ Age:
 <p>
 
 Created:
+
 <span id="dashboard-created">
 
 Loading...
@@ -313,21 +259,30 @@ ZOS DASH
 
 <div class="dashboard-footer-links">
 
-<div>
+<div class="dashboard-footer-row">
 
-<a href="/dashboard/creator.html">
+<a
+href="/dashboard/creator"
+class="dashboard-footer-button"
+>
 
 CREATOR
 
 </a>
 
-<a href="/dashboard/dev.html">
+<a
+href="/dashboard/dev"
+class="dashboard-footer-button"
+>
 
 DEV
 
 </a>
 
-<a href="/dashboard/zos-plus.html">
+<a
+href="/dashboard/zos-plus"
+class="dashboard-footer-button zos-plus-footer"
+>
 
 ZOS+
 
@@ -335,27 +290,39 @@ ZOS+
 
 </div>
 
-<div>
+<div class="dashboard-footer-row">
 
-<a href="/dashboard/settings.html">
+<a
+href="/dashboard/settings"
+class="dashboard-footer-button"
+>
 
 SETTINGS
 
 </a>
 
-<a href="/dashboard/details.html">
+<a
+href="/dashboard/details"
+class="dashboard-footer-button"
+>
 
 DETAILS
 
 </a>
 
-<a href="/dashboard/profile.html">
+<a
+href="/dashboard/profile"
+class="dashboard-footer-button"
+>
 
 PROFILE
 
 </a>
 
-<a href="/dashboard/data.html">
+<a
+href="/dashboard/data"
+class="dashboard-footer-button"
+>
 
 DATA
 
