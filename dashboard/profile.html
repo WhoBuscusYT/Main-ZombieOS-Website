@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+ZombieOS - Profile
+</title>
+
+<link
+rel="icon"
+type="image/png"
+href="/favicon.png"
+>
+
+<link
+rel="stylesheet"
+href="/css/global.css?v=1"
+>
+
+<link
+rel="stylesheet"
+href="/css/dashboard.css?v=1"
+>
+
+<link
+rel="stylesheet"
+href="/css/dashboard/profile.css?v=1"
+>
+
+</head>
+
+<body>
+
+<!-- BACKGROUND -->
+
+<div class="background-grid"></div>
+
+<div class="background-glow glow1"></div>
+<div class="background-glow glow2"></div>
+
+<!-- NAVBAR -->
+
+<header class="dashboard-navbar">
+
+<div class="dashboard-navbar-top">
+
+<a
+href="/dashboard"
+class="dashboard-logo"
+>
+
+ZOS DASH
+
+</a>
+
+<nav class="dashboard-links">
+
+<a href="/dashboard/profile">
+
+Profile
+
+</a>
+
+<a href="/dashboard/details">
+
+Details
+
+</a>
+
+<a href="/dashboard/settings">
+
+Settings
+
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+<!-- MAIN -->
+
+<main class="profile-main">
+
+<!-- PROFILE HEADER -->
+
+<section class="dashboard-card profile-header">
+
+<div class="profile-banner-container">
+
+<img
+id="profile-banner-preview"
+class="profile-banner"
+src="/images/default-banner.png"
+alt="Banner"
+>
+
+<label
+for="banner-upload"
+class="profile-upload-button"
+>
+
+Upload Banner
+
+</label>
+
+<input
+type="file"
+id="banner-upload"
+accept="image/*"
+hidden
+>
+
+</div>
+
+<div class="profile-avatar-section">
+
+<img
+id="profile-avatar-preview"
+class="profile-avatar"
+src="/images/default-avatar.png"
+alt="Avatar"
+>
+
+<label
+for="avatar-upload"
+class="profile-avatar-button"
+>
+
+Upload Avatar
+
+</label>
+
+<input
+type="file"
+id="avatar-upload"
+accept="image/*"
+hidden
+>
+
+</div>
+
+</section>
+
+<!-- PROFILE SETTINGS -->
+
+<section class="dashboard-card">
+
+<h2>
+
+Profile Customization
+
+</h2>
+
+<div class="profile-form">
+
+<div class="profile-input-group">
+
+<label>
+
+Username
+
+</label>
+
+<input
+type="text"
+id="profile-username"
+placeholder="Username"
+>
+
+</div>
+
+<div class="profile-input-group">
+
+<label>
+
+Handle
+
+</label>
+
+<input
+type="text"
+id="profile-handle"
+placeholder="@username"
+>
+
+<p class="profile-note">
+
+Handles can only be changed once every 30 days.
+
+</p>
+
+</div>
+
+<div class="profile-input-group">
+
+<label>
+
+Bio
+
+</label>
+
+<textarea
+id="profile-bio"
+placeholder="Tell people about yourself..."
+></textarea>
+
+</div>
+
+<div class="profile-input-group">
+
+<label>
+
+Pronouns
+
+</label>
+
+<input
+type="text"
+id="profile-pronouns"
+placeholder="he/him, she/her, they/them..."
+>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- SOCIALS -->
+
+<section class="dashboard-card">
+
+<h2>
+
+Social Links
+
+</h2>
+
+<div class="profile-form">
+
+<input
+type="text"
+id="social-youtube"
+placeholder="YouTube URL"
+>
+
+<input
+type="text"
+id="social-github"
+placeholder="GitHub URL"
+>
+
+<input
+type="text"
+id="social-discord"
+placeholder="Discord Username"
+>
+
+<input
+type="text"
+id="social-instagram"
+placeholder="Instagram URL"
+>
+
+<input
+type="text"
+id="social-facebook"
+placeholder="Facebook URL"
+>
+
+<input
+type="text"
+id="social-twitter"
+placeholder="Twitter/X URL"
+>
+
+</div>
+
+</section>
+
+<!-- ZOS+ -->
+
+<section
+id="profile-color-section"
+class="dashboard-card profile-coming-soon"
+>
+
+<h2>
+
+Profile Colors
+
+</h2>
+
+<p>
+
+Coming Soon For ZOS+ Members
+
+</p>
+
+</section>
+
+<!-- SAVE -->
+
+<section class="profile-save-section">
+
+<button
+id="profile-save-button"
+class="profile-save-button"
+>
+
+Save Changes
+
+</button>
+
+</section>
+
+</main>
+
+<script
+type="module"
+src="/js/dashboard/profile.js?v=1">
+</script>
+
+</body>
+</html>
