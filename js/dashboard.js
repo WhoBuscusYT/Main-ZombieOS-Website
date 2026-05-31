@@ -90,8 +90,12 @@ return;
 }
 
 const username =
+
 user.displayName ||
-user.email ||
+
+user.email
+.split("@")[0] ||
+
 "User";
 
 greeting.textContent =
