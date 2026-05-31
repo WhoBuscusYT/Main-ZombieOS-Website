@@ -45,7 +45,9 @@ from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import {
 getAuth,
 createUserWithEmailAndPassword,
-sendEmailVerification
+sendEmailVerification,
+GoogleAuthProvider,
+signInWithRedirect
 }
 from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
@@ -88,6 +90,12 @@ createUserWithEmailAndPassword;
 
 window.sendEmailVerification =
 sendEmailVerification;
+
+window.GoogleAuthProvider =
+GoogleAuthProvider;
+
+window.signInWithRedirect =
+signInWithRedirect;
 
 </script>
 
@@ -136,16 +144,20 @@ Login
 <div class="auth-card floating-card">
 
 <p class="section-eyebrow">
+
 INITIALIZE IDENTITY
+
 </p>
 
 <h1 class="auth-title">
+
 Create Runtime Account
+
 </h1>
 
 <p class="auth-description">
 
-Create your ZombieOS identity and connect to the future runtime ecosystem.
+Connect to the ZombieOS ecosystem.
 
 </p>
 
@@ -164,35 +176,10 @@ Username
 
 <input
 type="text"
+id="signup-username"
 placeholder="ZombieOS Developer"
 required
 >
-
-</div>
-
-<!-- HANDLE -->
-
-<div class="input-group">
-
-<label>
-Handle
-</label>
-
-<input
-type="text"
-id="handle-input"
-placeholder="@zombieos"
-required
->
-
-<p
-id="handle-status"
-class="input-status"
->
-
-Only letters, numbers, _, ., and - allowed.
-
-</p>
 
 </div>
 
@@ -210,163 +197,6 @@ id="signup-email"
 placeholder="you@example.com"
 required
 >
-
-</div>
-
-<!-- PHONE -->
-
-<div class="input-group">
-
-<label>
-Phone Number (Optional)
-</label>
-
-<input
-type="tel"
-placeholder="+1 123 456 7890"
->
-
-</div>
-
-<!-- DOB -->
-
-<div class="input-group">
-
-<label>
-Date of Birth
-</label>
-
-<div class="dob-grid">
-
-<select
-id="dob-month"
-class="dob-select"
-required
->
-
-<option value="">
-Month
-</option>
-
-<option value="1">January</option>
-<option value="2">February</option>
-<option value="3">March</option>
-<option value="4">April</option>
-<option value="5">May</option>
-<option value="6">June</option>
-<option value="7">July</option>
-<option value="8">August</option>
-<option value="9">September</option>
-<option value="10">October</option>
-<option value="11">November</option>
-<option value="12">December</option>
-
-</select>
-
-<select
-id="dob-day"
-class="dob-select"
-required
->
-
-<option value="">
-Day
-</option>
-
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="5">5</option>
-<option value="6">6</option>
-<option value="7">7</option>
-<option value="8">8</option>
-<option value="9">9</option>
-<option value="10">10</option>
-<option value="11">11</option>
-<option value="12">12</option>
-<option value="13">13</option>
-<option value="14">14</option>
-<option value="15">15</option>
-<option value="16">16</option>
-<option value="17">17</option>
-<option value="18">18</option>
-<option value="19">19</option>
-<option value="20">20</option>
-<option value="21">21</option>
-<option value="22">22</option>
-<option value="23">23</option>
-<option value="24">24</option>
-<option value="25">25</option>
-<option value="26">26</option>
-<option value="27">27</option>
-<option value="28">28</option>
-<option value="29">29</option>
-<option value="30">30</option>
-<option value="31">31</option>
-
-</select>
-
-<select
-id="dob-year"
-class="dob-select"
-required
->
-
-<option value="">
-Year
-</option>
-
-<option value="2026">2026</option>
-<option value="2025">2025</option>
-<option value="2024">2024</option>
-<option value="2023">2023</option>
-<option value="2022">2022</option>
-<option value="2021">2021</option>
-<option value="2020">2020</option>
-<option value="2019">2019</option>
-<option value="2018">2018</option>
-<option value="2017">2017</option>
-<option value="2016">2016</option>
-<option value="2015">2015</option>
-<option value="2014">2014</option>
-<option value="2013">2013</option>
-<option value="2012">2012</option>
-<option value="2011">2011</option>
-<option value="2010">2010</option>
-<option value="2009">2009</option>
-<option value="2008">2008</option>
-<option value="2007">2007</option>
-<option value="2006">2006</option>
-<option value="2005">2005</option>
-<option value="2004">2004</option>
-<option value="2003">2003</option>
-<option value="2002">2002</option>
-<option value="2001">2001</option>
-<option value="2000">2000</option>
-<option value="1999">1999</option>
-<option value="1998">1998</option>
-<option value="1997">1997</option>
-<option value="1996">1996</option>
-<option value="1995">1995</option>
-<option value="1994">1994</option>
-<option value="1993">1993</option>
-<option value="1992">1992</option>
-<option value="1991">1991</option>
-<option value="1990">1990</option>
-
-</select>
-
-</div>
-
-<p
-id="dob-status"
-class="input-status"
->
-
-Users under 13 require parent verification.
-
-</p>
 
 </div>
 
@@ -441,37 +271,6 @@ Passwords must match.
 
 </div>
 
-<!-- TOS -->
-
-<div class="tos-box">
-
-<label class="tos-label">
-
-<input
-type="checkbox"
-required
->
-
-<span>
-
-I agree to the
-
-<a href="/tos">
-Terms of Service
-</a>
-
-and
-
-<a href="/privacy">
-Privacy Policy
-</a>
-
-</span>
-
-</label>
-
-</div>
-
 <!-- BUTTON -->
 
 <button
@@ -481,6 +280,34 @@ id="create-account-button"
 >
 
 Create Account
+
+</button>
+
+<!-- GOOGLE -->
+
+<button
+type="button"
+class="oauth-button google-button"
+id="google-signup"
+>
+
+<i class="fa-brands fa-google"></i>
+
+Continue with Google
+
+</button>
+
+<!-- DISCORD -->
+
+<button
+type="button"
+class="oauth-button discord-button"
+disabled
+>
+
+<i class="fa-brands fa-discord"></i>
+
+Discord Auth Coming Soon
 
 </button>
 
