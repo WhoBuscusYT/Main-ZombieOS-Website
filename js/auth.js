@@ -4,10 +4,9 @@ from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import {
 getAuth,
 createUserWithEmailAndPassword,
-sendEmailVerification,
+updateProfile,
 GoogleAuthProvider,
-signInWithRedirect,
-getRedirectResult
+signInWithPopup
 }
 from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
@@ -15,11 +14,11 @@ import {
 getFirestore,
 doc,
 setDoc,
-getDoc
+serverTimestamp
 }
 from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
-/* FIREBASE CONFIG */
+/* FIREBASE */
 
 const firebaseConfig = {
 
@@ -39,14 +38,9 @@ messagingSenderId:
 "577624378484",
 
 appId:
-"1:577624378484:web:3e88e693724bde8e89d521",
-
-measurementId:
-"G-LV0T97LGWP"
+"1:577624378484:web:3e88e693724bde8e89d521"
 
 };
-
-/* INIT */
 
 const app =
 initializeApp(firebaseConfig);
@@ -57,366 +51,110 @@ getAuth(app);
 const db =
 getFirestore(app);
 
-/* GOOGLE REDIRECT RESULT */
+/* SIGNUP */
 
-getRedirectResult(auth)
-
-.then(async(result)=>{
-
-if(result){
-
-console.log(
-"GOOGLE LOGIN SUCCESS"
-);
-
-const user =
-result.user;
-
-/* USER DOC */
-
-const userRef =
-doc(
-db,
-"users",
-user.uid
-);
-
-const userSnap =
-await getDoc(userRef);
-
-/* CREATE PROFILE IF NEW */
-
-if(!userSnap.exists()){
-
-/* COUNTER */
-
-const counterRef =
-doc(
-db,
-"metadata",
-"counters"
-);
-
-const counterSnap =
-await getDoc(counterRef);
-
-let newUserId = 1;
-
-if(counterSnap.exists()){
-
-newUserId =
-counterSnap.data().lastUserId + 1;
-
-}
-
-/* UPDATE COUNTER */
-
-await setDoc(
-counterRef,
-{
-lastUserId:newUserId
-}
-);
-
-/* CREATE USER */
-
-await setDoc(
-userRef,
-{
-
-userId:newUserId,
-
-username:
-user.displayName || "Google User",
-
-email:
-user.email,
-
-subscription:"FREE",
-
-badges:[
-{
-
-id:"PROTOTYPE",
-
-earnedAt:Date.now()
-
-}
-],
-
-createdAt:Date.now()
-
-}
-
-);
-
-console.log(
-"GOOGLE USER PROFILE CREATED"
-);
-
-}
-
-showPopup(
-"Google Auth Success",
-`Signed in as ${user.email}`
-);
-
-}
-
-})
-
-.catch((error)=>{
-
-console.error(
-"REDIRECT ERROR:",
-error
-);
-
-console.log(
-"ZombieOS Auth Initialized"
-);
-
-/* POPUP */
-
-function showPopup(
-title,
-message
-){
-
-const popup =
-document.createElement("div");
-
-popup.className =
-"zos-popup";
-
-popup.innerHTML = `
-
-<div class="zos-popup-card">
-
-<h2>${title}</h2>
-
-<p>${message}</p>
-
-<button id="popup-close">
-
-Continue
-
-</button>
-
-</div>
-
-`;
-
-document.body.appendChild(
-popup
-);
-
-document
-.getElementById(
-"popup-close"
-)
-.addEventListener(
-"click",
-()=>{
-
-popup.remove();
-
-}
-);
-
-}
-
-/* PAGE */
-
-document.addEventListener(
-"DOMContentLoaded",
-()=>{
-
-console.log(
-"DOM LOADED"
-);
-
-/* PASSWORD TOGGLE */
-
-const passwordToggle =
+const signupForm =
 document.getElementById(
-"password-toggle"
+"signup-form"
 );
 
-const passwordInput =
-document.getElementById(
-"signup-password"
-);
+if(signupForm){
 
-if(passwordToggle){
+signupForm.addEventListener(
+"submit",
+async(event)=>{
 
-passwordToggle.addEventListener(
-"click",
-()=>{
-
-passwordInput.type =
-passwordInput.type === "password"
-? "text"
-: "password";
-
-}
-);
-
-}
-
-/* EMAIL SIGNUP */
-
-const createButton =
-document.getElementById(
-"create-account-button"
-);
-
-if(createButton){
-
-createButton.addEventListener(
-"click",
-async()=>{
-
-console.log(
-"CREATE ACCOUNT CLICKED"
-);
+event.preventDefault();
 
 const username =
 document.getElementById(
-"signup-username"
+"username"
 ).value.trim();
 
 const email =
 document.getElementById(
-"signup-email"
+"email"
 ).value.trim();
 
 const password =
 document.getElementById(
-"signup-password"
+"password"
 ).value;
-
-if(
-!username ||
-!email ||
-!password
-){
-
-showPopup(
-"Missing Fields",
-"Please fill out all fields."
-);
-
-return;
-
-}
 
 try{
 
-console.log(
-"ATTEMPTING SIGNUP"
-);
-
-/* CREATE AUTH ACCOUNT */
-
-const userCredential =
+const credential =
 await createUserWithEmailAndPassword(
 auth,
 email,
 password
 );
 
-console.log(
-"AUTH ACCOUNT CREATED"
+const user =
+credential.user;
+
+/* DISPLAY NAME */
+
+await updateProfile(
+user,
+{
+displayName:
+username
+}
 );
 
-/* VERIFY EMAIL */
+/* FIRESTORE */
 
-await sendEmailVerification(
-userCredential.user
-);
-
-console.log(
-"EMAIL VERIFICATION SENT"
-);
-
-/* FIRESTORE PROFILE */
-
-const uid =
-userCredential.user.uid;
-
-/* COUNTER */
-
-const counterRef =
+await setDoc(
 doc(
 db,
-"metadata",
-"counters"
-);
-
-const counterSnap =
-await getDoc(counterRef);
-
-let newUserId = 1;
-
-if(counterSnap.exists()){
-
-newUserId =
-counterSnap.data().lastUserId + 1;
-
-}
-
-/* UPDATE COUNTER */
-
-await setDoc(
-counterRef,
-{
-lastUserId:newUserId
-}
-);
-
-/* USER PROFILE */
-
-await setDoc(
-doc(db,"users",uid),
+"users",
+user.uid
+),
 {
 
-userId:newUserId,
+username:
+username,
 
-username:username,
+email:
+email,
 
-email:email,
+subscription:
+"FREE",
 
-subscription:"FREE",
+badges:[
+"prototype"
+],
 
-badges:[],
+createdAt:
+Date.now(),
 
-createdAt:Date.now()
+bio:"",
+pronouns:"",
+handle:
+username.toLowerCase(),
+
+socials:{},
+
+profileColor:
+"default",
+
+lastHandleChange:
+Date.now()
 
 }
-
 );
 
-console.log(
-"USER PROFILE CREATED"
-);
+/* REDIRECT */
 
-/* SUCCESS */
-
-showPopup(
-"Account Created",
-"Check your email for the verification link."
-);
+window.location.href =
+"/dashboard";
 
 }catch(error){
 
-console.error(
-"SIGNUP ERROR:",
-error
-);
+console.error(error);
 
-showPopup(
-"Signup Error",
+alert(
 error.message
 );
 
@@ -427,43 +165,89 @@ error.message
 
 }
 
-/* GOOGLE AUTH */
+/* GOOGLE SIGNUP */
 
-const googleSignup =
+const googleButton =
 document.getElementById(
 "google-signup"
 );
 
-if(googleSignup){
+if(googleButton){
 
-googleSignup.addEventListener(
+googleButton.addEventListener(
 "click",
 async()=>{
 
 try{
 
-console.log(
-"GOOGLE AUTH START"
-);
-
 const provider =
 new GoogleAuthProvider();
 
-await signInWithRedirect(
+const result =
+await signInWithPopup(
 auth,
 provider
 );
 
+const user =
+result.user;
+
+await setDoc(
+doc(
+db,
+"users",
+user.uid
+),
+{
+
+username:
+user.displayName ||
+
+user.email.split("@")[0],
+
+email:
+user.email,
+
+subscription:
+"FREE",
+
+badges:[
+"prototype"
+],
+
+createdAt:
+Date.now(),
+
+bio:"",
+pronouns:"",
+handle:
+(user.displayName ||
+user.email.split("@")[0])
+.toLowerCase(),
+
+socials:{},
+
+profileColor:
+"default",
+
+lastHandleChange:
+Date.now()
+
+},
+{
+merge:true
+}
+);
+
+window.location.href =
+"/dashboard";
+
 }catch(error){
 
-console.error(
-"GOOGLE AUTH ERROR:",
-error
-);
+console.error(error);
 
-showPopup(
-"Google Auth Error",
-error.message
+alert(
+"Google signup failed."
 );
 
 }
@@ -472,5 +256,3 @@ error.message
 );
 
 }
-
-});
