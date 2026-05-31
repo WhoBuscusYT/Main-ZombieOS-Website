@@ -177,7 +177,22 @@ dobDay &&
 dobYear
 ){
 
-/* VALIDATE */
+/* DOB VALIDATION */
+
+const dobMonth =
+document.getElementById("dob-month");
+
+const dobDay =
+document.getElementById("dob-day");
+
+const dobYear =
+document.getElementById("dob-year");
+
+const dobStatus =
+document.getElementById("dob-status");
+
+const ageDisplay =
+document.getElementById("age-display");
 
 function validateDOB(){
 
@@ -185,7 +200,17 @@ if(
 !dobMonth.value ||
 !dobDay.value ||
 !dobYear.value
-)return;
+){
+
+ageDisplay.textContent =
+"Select your date of birth.";
+
+ageDisplay.style.color =
+"#8f8f8f";
+
+return;
+
+}
 
 const birthDate =
 new Date(
@@ -261,7 +286,5 @@ dobYear.addEventListener(
 "change",
 validateDOB
 );
-
-}
 
 });
