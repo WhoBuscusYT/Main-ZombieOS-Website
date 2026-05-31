@@ -115,13 +115,18 @@ return;
 const userData =
 userSnap.data();
 
+/* USERNAME */
+
+const username =
+userData.username || "User";
+
 /* GREETING */
 
 document.getElementById(
 "dashboard-greeting-text"
 ).textContent =
 
-`${getGreeting()}, ${userData.username}`;
+`${getGreeting()}, ${username}`;
 
 /* SUBSCRIPTION */
 
@@ -151,10 +156,11 @@ upgradeButton.style.display =
 
 /* CREATED DATE */
 
+const createdAt =
+userData.createdAt || Date.now();
+
 const createdDate =
-new Date(
-userData.createdAt
-);
+new Date(createdAt);
 
 document.getElementById(
 "dashboard-created"
@@ -165,7 +171,7 @@ document.getElementById(
 /* ACCOUNT AGE */
 
 const ageMs =
-Date.now() - userData.createdAt;
+Date.now() - createdAt;
 
 const ageDays =
 Math.floor(
@@ -180,7 +186,10 @@ document.getElementById(
 
 }catch(error){
 
-console.error(error);
+console.error(
+"Dashboard Error:",
+error
+);
 
 }
 
