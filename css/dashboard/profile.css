@@ -269,3 +269,84 @@ width:100%;
 }
 
 }
+
+/* MOBILE NAV TOGGLE */
+
+.mobile-navbar-toggle{
+
+display:none;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+/* TOGGLE BUTTON */
+
+.mobile-navbar-toggle{
+
+position:fixed;
+
+top:18px;
+right:18px;
+
+width:52px;
+height:52px;
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+border:none;
+
+border-radius:18px;
+
+background:
+rgba(0,0,0,0.72);
+
+backdrop-filter:
+blur(18px);
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+color:#00ff99;
+
+font-size:1.5rem;
+
+z-index:10001;
+
+box-shadow:
+0 0 24px rgba(0,255,153,0.14);
+}
+
+/* NAVBAR */
+
+.dashboard-navbar{
+
+transition:
+transform 0.35s,
+opacity 0.35s;
+}
+
+/* HIDDEN */
+
+.dashboard-navbar.hidden-navbar{
+
+transform:
+translateY(-120%);
+
+opacity:0;
+
+pointer-events:none;
+}
+
+/* PROFILE PADDING */
+
+.profile-main{
+
+padding-top:120px;
+}
+
+}
