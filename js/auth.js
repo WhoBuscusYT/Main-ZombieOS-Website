@@ -64,7 +64,9 @@ popup
 );
 
 document
-.getElementById("popup-close")
+.getElementById(
+"popup-close"
+)
 .addEventListener(
 "click",
 ()=>{
@@ -81,77 +83,6 @@ popup.remove();
 document.addEventListener(
 "DOMContentLoaded",
 ()=>{
-
-/* HANDLE */
-
-const handleInput =
-document.getElementById(
-"handle-input"
-);
-
-const handleStatus =
-document.getElementById(
-"handle-status"
-);
-
-handleInput.addEventListener(
-"input",
-()=>{
-
-const value =
-handleInput.value;
-
-const valid =
-/^[a-zA-Z0-9_.-]+$/.test(value);
-
-if(
-value.toLowerCase() === "root"
-){
-
-handleStatus.textContent =
-"ROOT ACCESS DETECTED";
-
-handleStatus.style.color =
-"#ff0000";
-
-return;
-
-}
-
-if(
-value.toLowerCase() === "zombieos"
-){
-
-handleStatus.textContent =
-"WARNING: SYSTEM HANDLE RESERVED";
-
-handleStatus.style.color =
-"#ff7070";
-
-return;
-
-}
-
-if(valid){
-
-handleStatus.textContent =
-"Valid handle format.";
-
-handleStatus.style.color =
-"#00ff99";
-
-}else{
-
-handleStatus.textContent =
-"Only letters, numbers, _, ., and - allowed.";
-
-handleStatus.style.color =
-"#ff7070";
-
-}
-
-}
-);
 
 /* PASSWORD MATCH */
 
@@ -219,64 +150,12 @@ confirmPasswordInput.addEventListener(
 checkPasswords
 );
 
-/* DOB EASTER EGG */
-
-const dobMonth =
-document.getElementById(
-"dob-month"
-);
-
-const dobDay =
-document.getElementById(
-"dob-day"
-);
-
-const dobYear =
-document.getElementById(
-"dob-year"
-);
+/* EMAIL SIGNUP */
 
 const createButton =
 document.getElementById(
 "create-account-button"
 );
-
-function checkDOB(){
-
-if(
-dobMonth.value === "9" &&
-dobDay.value === "11" &&
-dobYear.value === "2001"
-){
-
-createButton.textContent =
-"Rest in peace to all the people that helped.";
-
-}else{
-
-createButton.textContent =
-"Create Account";
-
-}
-
-}
-
-dobMonth.addEventListener(
-"change",
-checkDOB
-);
-
-dobDay.addEventListener(
-"change",
-checkDOB
-);
-
-dobYear.addEventListener(
-"change",
-checkDOB
-);
-
-/* FIREBASE SIGNUP */
 
 createButton.addEventListener(
 "click",
@@ -316,6 +195,41 @@ console.error(error);
 
 showPopup(
 "Error",
+error.message
+);
+
+}
+
+}
+);
+
+/* GOOGLE AUTH */
+
+const googleSignup =
+document.getElementById(
+"google-signup"
+);
+
+googleSignup.addEventListener(
+"click",
+async()=>{
+
+try{
+
+const provider =
+new window.GoogleAuthProvider();
+
+await window.signInWithRedirect(
+window.firebaseAuth,
+provider
+);
+
+}catch(error){
+
+console.error(error);
+
+showPopup(
+"Google Auth Error",
 error.message
 );
 
