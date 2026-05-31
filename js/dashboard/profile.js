@@ -252,13 +252,35 @@ navbar &&
 toggleButton
 ){
 
+let navbarVisible =
+true;
+
 toggleButton.addEventListener(
 "click",
 ()=>{
 
-navbar.classList.toggle(
+navbarVisible =
+!navbarVisible;
+
+if(navbarVisible){
+
+navbar.classList.remove(
 "hidden-navbar"
 );
+
+toggleButton.textContent =
+"Hide Menu";
+
+}else{
+
+navbar.classList.add(
+"hidden-navbar"
+);
+
+toggleButton.textContent =
+"Show Menu";
+
+}
 
 }
 );
