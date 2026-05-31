@@ -197,6 +197,17 @@ background:#020302;
 color:white;
 }
 
+.age-display{
+
+font-size:0.9rem;
+
+margin-top:6px;
+
+color:#8f8f8f;
+
+transition:0.25s;
+}
+
 /* MOBILE */
 
 @media(max-width:768px){
