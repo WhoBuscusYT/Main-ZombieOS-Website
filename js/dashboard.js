@@ -7,13 +7,6 @@ onAuthStateChanged
 }
 from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
-import {
-getFirestore,
-doc,
-getDoc
-}
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
-
 /* FIREBASE */
 
 const firebaseConfig = {
@@ -47,10 +40,7 @@ initializeApp(firebaseConfig);
 const auth =
 getAuth(app);
 
-const db =
-getFirestore(app);
-
-/* GREETING */
+/* TIME GREETING */
 
 function getGreeting(){
 
@@ -83,115 +73,29 @@ return "Evening";
 
 onAuthStateChanged(
 auth,
-async(user)=>{
+(user)=>{
+
+const greeting =
+document.getElementById(
+"dashboard-greeting-text"
+);
 
 if(!user){
 
-window.location.href =
-"/login";
+greeting.textContent =
+`${getGreeting()}, Guest`;
 
 return;
 
 }
-
-try{
-
-const userRef =
-doc(
-db,
-"users",
-user.uid
-);
-
-const userSnap =
-await getDoc(userRef);
-
-if(!userSnap.exists()){
-
-return;
-
-}
-
-const userData =
-userSnap.data();
-
-/* USERNAME */
 
 const username =
-userData.username || "User";
+user.displayName ||
+user.email ||
+"User";
 
-/* GREETING */
-
-document.getElementById(
-"dashboard-greeting-text"
-).textContent =
-
+greeting.textContent =
 `${getGreeting()}, ${username}`;
-
-/* SUBSCRIPTION */
-
-const subscription =
-userData.subscription || "FREE";
-
-document.getElementById(
-"dashboard-subscription"
-).textContent =
-subscription;
-
-/* UPGRADE BUTTON */
-
-const upgradeButton =
-document.getElementById(
-"upgrade-button"
-);
-
-if(
-subscription === "ZOS+"
-){
-
-upgradeButton.style.display =
-"none";
-
-}
-
-/* CREATED DATE */
-
-const createdAt =
-userData.createdAt || Date.now();
-
-const createdDate =
-new Date(createdAt);
-
-document.getElementById(
-"dashboard-created"
-).textContent =
-
-`${createdDate.getMonth()+1}/${createdDate.getDate()}/${createdDate.getFullYear()}`;
-
-/* ACCOUNT AGE */
-
-const ageMs =
-Date.now() - createdAt;
-
-const ageDays =
-Math.floor(
-ageMs / 86400000
-);
-
-document.getElementById(
-"dashboard-age"
-).textContent =
-
-`${ageDays} day${ageDays !== 1 ? "s" : ""}`;
-
-}catch(error){
-
-console.error(
-"Dashboard Error:",
-error
-);
-
-}
 
 }
 );
