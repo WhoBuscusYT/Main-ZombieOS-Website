@@ -296,11 +296,63 @@ window.location.href =
 
 console.error(error);
 
+let errorMessage =
+"Something went wrong.";
+
+if(
+error.code ===
+"auth/user-not-found"
+){
+
+errorMessage =
+"No account exists with that email.";
+
+}
+
+else if(
+error.code ===
+"auth/wrong-password"
+){
+
+errorMessage =
+"Incorrect password.";
+
+}
+
+else if(
+error.code ===
+"auth/invalid-credential"
+){
+
+errorMessage =
+"Incorrect email or password.";
+
+}
+
+else if(
+error.code ===
+"auth/user-disabled"
+){
+
+errorMessage =
+"This account has been disabled.";
+
+}
+
+else if(
+error.code ===
+"auth/too-many-requests"
+){
+
+errorMessage =
+"Too many login attempts. Try again later.";
+
+}
+
 showPopup(
 "Login Error",
-error.message
+errorMessage
 );
-
 }
 
 }
