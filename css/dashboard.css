@@ -448,3 +448,55 @@ width:100%;
 }
 
 }
+
+/* MOBILE IMPROVEMENTS */
+
+@media(max-width:768px){
+
+.dashboard-navbar{
+
+padding:
+18px 16px;
+}
+
+.dashboard-links,
+.dashboard-navbar-bottom{
+
+grid-template-columns:
+1fr 1fr;
+}
+
+.dashboard-navbar-bottom a:last-child{
+
+grid-column:
+span 2;
+}
+
+.dashboard-greeting h1{
+
+font-size:1.9rem;
+
+line-height:1.05;
+}
+
+.dashboard-greeting p{
+
+font-size:0.95rem;
+}
+
+.dashboard-card{
+
+padding:26px;
+}
+
+.dashboard-stat-card{
+
+min-height:180px;
+}
+
+.dashboard-footer h2{
+
+font-size:2rem;
+}
+
+}
