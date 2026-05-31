@@ -5,18 +5,9 @@ import {
 getAuth,
 signInWithEmailAndPassword,
 GoogleAuthProvider,
-signInWithRedirect,
-getRedirectResult
+signInWithPopup
 }
 from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-
-import {
-getFirestore,
-doc,
-getDoc,
-setDoc
-}
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 /* FIREBASE */
 
@@ -38,10 +29,7 @@ messagingSenderId:
 "577624378484",
 
 appId:
-"1:577624378484:web:3e88e693724bde8e89d521",
-
-measurementId:
-"G-LV0T97LGWP"
+"1:577624378484:web:3e88e693724bde8e89d521"
 
 };
 
@@ -51,321 +39,104 @@ initializeApp(firebaseConfig);
 const auth =
 getAuth(app);
 
-const db =
-getFirestore(app);
+/* LOGIN */
 
-/* POPUP */
-
-function showPopup(
-title,
-message
-){
-
-const popup =
-document.createElement("div");
-
-popup.className =
-"zos-popup";
-
-popup.innerHTML = `
-
-<div class="zos-popup-card">
-
-<h2>${title}</h2>
-
-<p>${message}</p>
-
-<button id="popup-close">
-
-Continue
-
-</button>
-
-</div>
-
-`;
-
-document.body.appendChild(
-popup
-);
-
-document
-.getElementById(
-"popup-close"
-)
-.addEventListener(
-"click",
-()=>{
-
-popup.remove();
-
-}
-);
-
-}
-
-/* GOOGLE REDIRECT */
-
-getRedirectResult(auth)
-
-.then(async(result)=>{
-
-if(result){
-
-const user =
-result.user;
-
-const userRef =
-doc(
-db,
-"users",
-user.uid
-);
-
-const userSnap =
-await getDoc(userRef);
-
-if(!userSnap.exists()){
-
-const counterRef =
-doc(
-db,
-"metadata",
-"counters"
-);
-
-const counterSnap =
-await getDoc(counterRef);
-
-let newUserId = 1;
-
-if(counterSnap.exists()){
-
-newUserId =
-counterSnap.data().lastUserId + 1;
-
-}
-
-await setDoc(
-counterRef,
-{
-lastUserId:newUserId
-}
-);
-
-await setDoc(
-userRef,
-{
-
-userId:newUserId,
-
-username:
-user.displayName || "Google User",
-
-email:
-user.email,
-
-subscription:"FREE",
-
-badges:[
-{
-
-id:"PROTOTYPE",
-
-earnedAt:Date.now()
-
-}
-],
-
-createdAt:Date.now()
-
-}
-
-);
-
-}
-
-showPopup(
-"Google Login Success",
-`Welcome ${user.email}`
-);
-
-setTimeout(()=>{
-
-window.location.href =
-"/dashboard";
-
-},1500);
-
-}
-
-})
-
-.catch((error)=>{
-
-console.error(error);
-
-});
-
-/* PAGE */
-
-document.addEventListener(
-"DOMContentLoaded",
-()=>{
-
-/* PASSWORD TOGGLE */
-
-const passwordToggle =
+const loginForm =
 document.getElementById(
-"password-toggle"
+"login-form"
 );
 
-const passwordInput =
-document.getElementById(
-"login-password"
-);
+if(loginForm){
 
-passwordToggle.addEventListener(
-"click",
-()=>{
+loginForm.addEventListener(
+"submit",
+async(event)=>{
 
-passwordInput.type =
-passwordInput.type === "password"
-? "text"
-: "password";
-
-}
-);
-
-/* EMAIL LOGIN */
-
-const loginButton =
-document.getElementById(
-"login-button"
-);
-
-loginButton.addEventListener(
-"click",
-async()=>{
+event.preventDefault();
 
 const email =
 document.getElementById(
-"login-email"
-).value.trim();
+"email"
+).value;
 
 const password =
 document.getElementById(
-"login-password"
+"password"
 ).value;
 
 try{
 
-const userCredential =
 await signInWithEmailAndPassword(
 auth,
 email,
 password
 );
 
-if(
-!userCredential.user.emailVerified
-){
-
-showPopup(
-"Verify Email",
-"Please verify your email before logging in."
-);
-
-return;
-
-}
-
-showPopup(
-"Login Success",
-`Welcome back ${email}`
-);
-
-setTimeout(()=>{
+/* REDIRECT */
 
 window.location.href =
 "/dashboard";
 
-},1500);
-
 }catch(error){
 
-console.error(error);
+let message =
+"Login failed.";
 
-let errorMessage =
-"Something went wrong.";
+switch(error.code){
 
-if(
-error.code ===
-"auth/user-not-found"
-){
+case
+"auth/user-not-found":
 
-errorMessage =
-"No account exists with that email.";
+message =
+"No account with that email.";
 
-}
+break;
 
-else if(
-error.code ===
-"auth/wrong-password"
-){
+case
+"auth/wrong-password":
 
-errorMessage =
+message =
 "Incorrect password.";
 
-}
+break;
 
-else if(
-error.code ===
-"auth/invalid-credential"
-){
+case
+"auth/invalid-credential":
 
-errorMessage =
+message =
 "Incorrect email or password.";
 
-}
+break;
 
-else if(
-error.code ===
-"auth/user-disabled"
-){
+case
+"auth/user-disabled":
 
-errorMessage =
-"This account has been disabled.";
+message =
+"This account is disabled.";
 
-}
-
-else if(
-error.code ===
-"auth/too-many-requests"
-){
-
-errorMessage =
-"Too many login attempts. Try again later.";
+break;
 
 }
 
-showPopup(
-"Login Error",
-errorMessage
-);
+alert(message);
+
 }
 
 }
 );
+
+}
 
 /* GOOGLE LOGIN */
 
-const googleLogin =
+const googleButton =
 document.getElementById(
 "google-login"
 );
 
-googleLogin.addEventListener(
+if(googleButton){
+
+googleButton.addEventListener(
 "click",
 async()=>{
 
@@ -374,18 +145,18 @@ try{
 const provider =
 new GoogleAuthProvider();
 
-await signInWithRedirect(
+await signInWithPopup(
 auth,
 provider
 );
 
+window.location.href =
+"/dashboard";
+
 }catch(error){
 
-console.error(error);
-
-showPopup(
-"Google Error",
-error.message
+alert(
+"Google login failed."
 );
 
 }
@@ -393,4 +164,4 @@ error.message
 }
 );
 
-});
+}
