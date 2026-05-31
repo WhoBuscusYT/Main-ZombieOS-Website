@@ -139,3 +139,31 @@ font-family:'Orbitron',sans-serif;
 
 cursor:pointer;
 }
+
+/* AUTH SWITCH */
+
+.auth-switch-text{
+
+margin-top:24px;
+
+text-align:center;
+
+color:#8f8f8f;
+
+font-size:0.95rem;
+}
+
+.auth-switch-text a{
+
+color:#00ff99;
+
+text-decoration:none;
+
+transition:0.25s;
+}
+
+.auth-switch-text a:hover{
+
+text-shadow:
+0 0 12px rgba(0,255,153,0.6);
+}
