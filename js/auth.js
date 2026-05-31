@@ -314,7 +314,7 @@ document.getElementById(
 
 try{
 
-/* CAPTCHA */
+/* CAPTCHA
 
 const token =
 await grecaptcha.enterprise.execute(
@@ -322,7 +322,7 @@ await grecaptcha.enterprise.execute(
 {
 action:"signup"
 }
-);
+); */
 
 /* FIREBASE */
 
