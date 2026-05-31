@@ -234,3 +234,33 @@ alert(
 
 }
 );
+
+/* MOBILE NAVBAR */
+
+const navbar =
+document.getElementById(
+"dashboard-navbar"
+);
+
+const toggleButton =
+document.getElementById(
+"mobile-navbar-toggle"
+);
+
+if(
+navbar &&
+toggleButton
+){
+
+toggleButton.addEventListener(
+"click",
+()=>{
+
+navbar.classList.toggle(
+"hidden-navbar"
+);
+
+}
+);
+
+}
