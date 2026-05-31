@@ -57,6 +57,113 @@ getAuth(app);
 const db =
 getFirestore(app);
 
+/* GOOGLE REDIRECT RESULT */
+
+getRedirectResult(auth)
+
+.then(async(result)=>{
+
+if(result){
+
+console.log(
+"GOOGLE LOGIN SUCCESS"
+);
+
+const user =
+result.user;
+
+/* USER DOC */
+
+const userRef =
+doc(
+db,
+"users",
+user.uid
+);
+
+const userSnap =
+await getDoc(userRef);
+
+/* CREATE PROFILE IF NEW */
+
+if(!userSnap.exists()){
+
+/* COUNTER */
+
+const counterRef =
+doc(
+db,
+"metadata",
+"counters"
+);
+
+const counterSnap =
+await getDoc(counterRef);
+
+let newUserId = 1;
+
+if(counterSnap.exists()){
+
+newUserId =
+counterSnap.data().lastUserId + 1;
+
+}
+
+/* UPDATE COUNTER */
+
+await setDoc(
+counterRef,
+{
+lastUserId:newUserId
+}
+);
+
+/* CREATE USER */
+
+await setDoc(
+userRef,
+{
+
+userId:newUserId,
+
+username:
+user.displayName || "Google User",
+
+email:
+user.email,
+
+subscription:"FREE",
+
+badges:[],
+
+createdAt:Date.now()
+
+}
+
+);
+
+console.log(
+"GOOGLE USER PROFILE CREATED"
+);
+
+}
+
+showPopup(
+"Google Auth Success",
+`Signed in as ${user.email}`
+);
+
+}
+
+})
+
+.catch((error)=>{
+
+console.error(
+"REDIRECT ERROR:",
+error
+);
+
 console.log(
 "ZombieOS Auth Initialized"
 );
@@ -290,7 +397,7 @@ console.log(
 
 showPopup(
 "Account Created",
-"Verification email sent successfully."
+"Check your email for the verification link."
 );
 
 }catch(error){
