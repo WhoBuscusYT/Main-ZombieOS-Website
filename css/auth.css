@@ -106,30 +106,30 @@ font-size:0.85rem;
 color:#8f8f8f;
 }
 
-/* DATE OF BIRTH */
+/* DOB */
 
 .dob-grid{
 
-display:grid;
-
-grid-template-columns:
-repeat(3,1fr);
+display:flex;
+flex-wrap:wrap;
 
 gap:14px;
+
+margin-top:10px;
 }
 
 .dob-select{
 
-width:100%;
-
 padding:
 18px 20px;
+
+min-width:120px;
 
 background:
 rgba(0,255,153,0.05);
 
 border:
-1px solid rgba(0,255,153,0.16);
+1px solid rgba(0,255,153,0.14);
 
 border-radius:18px;
 
@@ -141,15 +141,16 @@ font-family:'Orbitron',sans-serif;
 
 outline:none;
 
-transition:
-0.25s;
-
 cursor:pointer;
 
-appearance:none;
+transition:0.25s;
 
+appearance:none;
 -webkit-appearance:none;
 -moz-appearance:none;
+
+box-shadow:
+0 0 18px rgba(0,255,153,0.06);
 
 background-image:
 linear-gradient(
@@ -164,8 +165,8 @@ transparent 50%
 );
 
 background-position:
-calc(100% - 22px) calc(50% - 3px),
-calc(100% - 16px) calc(50% - 3px);
+calc(100% - 20px) calc(50% - 3px),
+calc(100% - 14px) calc(50% - 3px);
 
 background-size:
 6px 6px,
@@ -179,7 +180,7 @@ background-repeat:no-repeat;
 border-color:#00ff99;
 
 box-shadow:
-0 0 18px rgba(0,255,153,0.12);
+0 0 24px rgba(0,255,153,0.18);
 }
 
 .dob-select:focus{
@@ -187,7 +188,7 @@ box-shadow:
 border-color:#00ff99;
 
 box-shadow:
-0 0 28px rgba(0,255,153,0.22);
+0 0 32px rgba(0,255,153,0.28);
 }
 
 .dob-select option{
@@ -199,13 +200,13 @@ color:white;
 
 .age-display{
 
-font-size:0.9rem;
+margin-top:12px;
 
-margin-top:6px;
-
-color:#8f8f8f;
+font-size:0.95rem;
 
 transition:0.25s;
+
+color:#8f8f8f;
 }
 
 /* MOBILE */
@@ -214,7 +215,12 @@ transition:0.25s;
 
 .dob-grid{
 
-grid-template-columns:1fr;
+flex-direction:column;
+}
+
+.dob-select{
+
+width:100%;
 }
 
 }
