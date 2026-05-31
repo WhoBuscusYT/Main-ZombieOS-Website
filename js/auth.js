@@ -10,7 +10,15 @@ signInWithRedirect
 }
 from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
-/* FIREBASE */
+import {
+getFirestore,
+doc,
+setDoc,
+getDoc
+}
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+/* FIREBASE CONFIG */
 
 const firebaseConfig = {
 
@@ -37,11 +45,20 @@ measurementId:
 
 };
 
+/* INIT */
+
 const app =
 initializeApp(firebaseConfig);
 
 const auth =
 getAuth(app);
+
+const db =
+getFirestore(app);
+
+console.log(
+"ZombieOS Auth Initialized"
+);
 
 /* POPUP */
 
@@ -93,28 +110,43 @@ popup.remove();
 
 }
 
-/* PASSWORD TOGGLE */
-
-window.togglePassword =
-function(){
-
-const input =
-document.getElementById(
-"signup-password"
-);
-
-input.type =
-input.type === "password"
-? "text"
-: "password";
-
-};
-
 /* PAGE */
 
 document.addEventListener(
 "DOMContentLoaded",
 ()=>{
+
+console.log(
+"DOM LOADED"
+);
+
+/* PASSWORD TOGGLE */
+
+const passwordToggle =
+document.getElementById(
+"password-toggle"
+);
+
+const passwordInput =
+document.getElementById(
+"signup-password"
+);
+
+if(passwordToggle){
+
+passwordToggle.addEventListener(
+"click",
+()=>{
+
+passwordInput.type =
+passwordInput.type === "password"
+? "text"
+: "password";
+
+}
+);
+
+}
 
 /* EMAIL SIGNUP */
 
@@ -123,21 +155,53 @@ document.getElementById(
 "create-account-button"
 );
 
+if(createButton){
+
 createButton.addEventListener(
 "click",
 async()=>{
 
+console.log(
+"CREATE ACCOUNT CLICKED"
+);
+
+const username =
+document.getElementById(
+"signup-username"
+).value.trim();
+
 const email =
 document.getElementById(
 "signup-email"
-).value;
+).value.trim();
 
 const password =
 document.getElementById(
 "signup-password"
 ).value;
 
+if(
+!username ||
+!email ||
+!password
+){
+
+showPopup(
+"Missing Fields",
+"Please fill out all fields."
+);
+
+return;
+
+}
+
 try{
+
+console.log(
+"ATTEMPTING SIGNUP"
+);
+
+/* CREATE AUTH ACCOUNT */
 
 const userCredential =
 await createUserWithEmailAndPassword(
@@ -146,9 +210,82 @@ email,
 password
 );
 
+console.log(
+"AUTH ACCOUNT CREATED"
+);
+
+/* VERIFY EMAIL */
+
 await sendEmailVerification(
 userCredential.user
 );
+
+console.log(
+"EMAIL VERIFICATION SENT"
+);
+
+/* FIRESTORE PROFILE */
+
+const uid =
+userCredential.user.uid;
+
+/* COUNTER */
+
+const counterRef =
+doc(
+db,
+"metadata",
+"counters"
+);
+
+const counterSnap =
+await getDoc(counterRef);
+
+let newUserId = 1;
+
+if(counterSnap.exists()){
+
+newUserId =
+counterSnap.data().lastUserId + 1;
+
+}
+
+/* UPDATE COUNTER */
+
+await setDoc(
+counterRef,
+{
+lastUserId:newUserId
+}
+);
+
+/* USER PROFILE */
+
+await setDoc(
+doc(db,"users",uid),
+{
+
+userId:newUserId,
+
+username:username,
+
+email:email,
+
+subscription:"FREE",
+
+badges:[],
+
+createdAt:Date.now()
+
+}
+
+);
+
+console.log(
+"USER PROFILE CREATED"
+);
+
+/* SUCCESS */
 
 showPopup(
 "Account Created",
@@ -157,7 +294,10 @@ showPopup(
 
 }catch(error){
 
-console.error(error);
+console.error(
+"SIGNUP ERROR:",
+error
+);
 
 showPopup(
 "Signup Error",
@@ -169,18 +309,26 @@ error.message
 }
 );
 
-/* GOOGLE */
+}
+
+/* GOOGLE AUTH */
 
 const googleSignup =
 document.getElementById(
 "google-signup"
 );
 
+if(googleSignup){
+
 googleSignup.addEventListener(
 "click",
 async()=>{
 
 try{
+
+console.log(
+"GOOGLE AUTH START"
+);
 
 const provider =
 new GoogleAuthProvider();
@@ -192,7 +340,10 @@ provider
 
 }catch(error){
 
-console.error(error);
+console.error(
+"GOOGLE AUTH ERROR:",
+error
+);
 
 showPopup(
 "Google Auth Error",
@@ -203,5 +354,7 @@ error.message
 
 }
 );
+
+}
 
 });
