@@ -14,7 +14,7 @@ import {
 getFirestore,
 doc,
 setDoc,
-serverTimestamp
+getDoc
 }
 from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
@@ -51,7 +51,7 @@ getAuth(app);
 const db =
 getFirestore(app);
 
-/* SIGNUP */
+/* SIGNUP FORM */
 
 const signupForm =
 document.getElementById(
@@ -65,6 +65,8 @@ signupForm.addEventListener(
 async(event)=>{
 
 event.preventDefault();
+
+/* INPUTS */
 
 const username =
 document.getElementById(
@@ -81,7 +83,25 @@ document.getElementById(
 "password"
 ).value;
 
+/* VALIDATION */
+
+if(
+!username ||
+!email ||
+!password
+){
+
+alert(
+"Please fill out all fields."
+);
+
+return;
+
+}
+
 try{
+
+/* CREATE ACCOUNT */
 
 const credential =
 await createUserWithEmailAndPassword(
@@ -93,7 +113,7 @@ password
 const user =
 credential.user;
 
-/* DISPLAY NAME */
+/* UPDATE AUTH PROFILE */
 
 await updateProfile(
 user,
@@ -103,7 +123,54 @@ username
 }
 );
 
-/* FIRESTORE */
+/* USER COUNTER */
+
+const counterRef =
+doc(
+db,
+"system",
+"counters"
+);
+
+const counterSnap =
+await getDoc(counterRef);
+
+/* CURRENT ID */
+
+let currentUserId =
+0;
+
+if(counterSnap.exists()){
+
+currentUserId =
+counterSnap.data().currentUserId || 0;
+
+}
+
+/* NEXT ID */
+
+const nextUserId =
+currentUserId + 1;
+
+/* SAVE COUNTER */
+
+await setDoc(
+counterRef,
+{
+currentUserId:
+nextUserId
+},
+{
+merge:true
+}
+);
+
+/* DEFAULT HANDLE */
+
+const defaultHandle =
+`zoz-${nextUserId}`;
+
+/* SAVE USER */
 
 await setDoc(
 doc(
@@ -112,6 +179,9 @@ db,
 user.uid
 ),
 {
+
+userId:
+nextUserId,
 
 username:
 username,
@@ -129,18 +199,36 @@ badges:[
 createdAt:
 Date.now(),
 
-bio:"",
-pronouns:"",
-handle:
-username.toLowerCase(),
+/* PROFILE */
 
-socials:{},
+bio:"",
+
+pronouns:"",
+
+handle:
+defaultHandle,
+
+customHandle:
+false,
 
 profileColor:
 "default",
 
 lastHandleChange:
-Date.now()
+0,
+
+/* SOCIALS */
+
+socials:{
+
+youtube:"",
+github:"",
+discord:"",
+instagram:"",
+facebook:"",
+twitter:""
+
+}
 
 }
 );
@@ -152,7 +240,10 @@ window.location.href =
 
 }catch(error){
 
-console.error(error);
+console.error(
+"Signup Error:",
+error
+);
 
 alert(
 error.message
@@ -192,6 +283,64 @@ provider
 const user =
 result.user;
 
+/* USER COUNTER */
+
+const counterRef =
+doc(
+db,
+"system",
+"counters"
+);
+
+const counterSnap =
+await getDoc(counterRef);
+
+/* CURRENT ID */
+
+let currentUserId =
+0;
+
+if(counterSnap.exists()){
+
+currentUserId =
+counterSnap.data().currentUserId || 0;
+
+}
+
+/* NEXT ID */
+
+const nextUserId =
+currentUserId + 1;
+
+/* SAVE COUNTER */
+
+await setDoc(
+counterRef,
+{
+currentUserId:
+nextUserId
+},
+{
+merge:true
+}
+);
+
+/* DEFAULT HANDLE */
+
+const defaultHandle =
+`zoz-${nextUserId}`;
+
+/* USERNAME */
+
+const username =
+
+user.displayName ||
+
+user.email
+.split("@")[0];
+
+/* SAVE USER */
+
 await setDoc(
 doc(
 db,
@@ -200,10 +349,11 @@ user.uid
 ),
 {
 
-username:
-user.displayName ||
+userId:
+nextUserId,
 
-user.email.split("@")[0],
+username:
+username,
 
 email:
 user.email,
@@ -218,20 +368,36 @@ badges:[
 createdAt:
 Date.now(),
 
-bio:"",
-pronouns:"",
-handle:
-(user.displayName ||
-user.email.split("@")[0])
-.toLowerCase(),
+/* PROFILE */
 
-socials:{},
+bio:"",
+
+pronouns:"",
+
+handle:
+defaultHandle,
+
+customHandle:
+false,
 
 profileColor:
 "default",
 
 lastHandleChange:
-Date.now()
+0,
+
+/* SOCIALS */
+
+socials:{
+
+youtube:"",
+github:"",
+discord:"",
+instagram:"",
+facebook:"",
+twitter:""
+
+}
 
 },
 {
@@ -239,12 +405,17 @@ merge:true
 }
 );
 
+/* REDIRECT */
+
 window.location.href =
 "/dashboard";
 
 }catch(error){
 
-console.error(error);
+console.error(
+"Google Signup Error:",
+error
+);
 
 alert(
 "Google signup failed."
