@@ -232,8 +232,6 @@ age--;
 
 }
 
-/* AGE TEXT */
-
 if(ageDisplay){
 
 ageDisplay.textContent =
@@ -285,9 +283,14 @@ ageDisplay.style.color =
 
 }
 
-/* EVENTS */
+/* DOB EVENTS */
 
 if(dobMonth){
+
+dobMonth.addEventListener(
+"input",
+validateDOB
+);
 
 dobMonth.addEventListener(
 "change",
@@ -299,6 +302,11 @@ validateDOB
 if(dobDay){
 
 dobDay.addEventListener(
+"input",
+validateDOB
+);
+
+dobDay.addEventListener(
 "change",
 validateDOB
 );
@@ -306,6 +314,11 @@ validateDOB
 }
 
 if(dobYear){
+
+dobYear.addEventListener(
+"input",
+validateDOB
+);
 
 dobYear.addEventListener(
 "change",
