@@ -109,39 +109,104 @@ color:#8f8f8f;
 /* DATE OF BIRTH */
 
 .dob-grid{
+
 display:grid;
-grid-template-columns:repeat(3,1fr);
+
+grid-template-columns:
+repeat(3,1fr);
+
 gap:14px;
 }
 
-.dob-grid select{
+.dob-select{
+
 width:100%;
-padding:18px 20px;
-background:rgba(255,255,255,0.04);
-border:1px solid rgba(0,255,153,0.12);
+
+padding:
+18px 20px;
+
+background:
+rgba(0,255,153,0.05);
+
+border:
+1px solid rgba(0,255,153,0.16);
+
 border-radius:18px;
+
 color:white;
+
 font-size:1rem;
+
 font-family:'Orbitron',sans-serif;
+
 outline:none;
-transition:0.25s;
+
+transition:
+0.25s;
+
+cursor:pointer;
+
+appearance:none;
+
+-webkit-appearance:none;
+-moz-appearance:none;
+
+background-image:
+linear-gradient(
+45deg,
+transparent 50%,
+#00ff99 50%
+),
+linear-gradient(
+135deg,
+#00ff99 50%,
+transparent 50%
+);
+
+background-position:
+calc(100% - 22px) calc(50% - 3px),
+calc(100% - 16px) calc(50% - 3px);
+
+background-size:
+6px 6px,
+6px 6px;
+
+background-repeat:no-repeat;
 }
 
-.dob-grid select:focus{
+.dob-select:hover{
+
 border-color:#00ff99;
-box-shadow:0 0 25px rgba(0,255,153,0.18);
+
+box-shadow:
+0 0 18px rgba(0,255,153,0.12);
 }
 
-.dob-grid option{
+.dob-select:focus{
+
+border-color:#00ff99;
+
+box-shadow:
+0 0 28px rgba(0,255,153,0.22);
+}
+
+.dob-select option{
+
 background:#020302;
+
 color:white;
 }
+
+/* MOBILE */
 
 @media(max-width:768px){
+
 .dob-grid{
+
 grid-template-columns:1fr;
 }
 
+}
 
 /* PASSWORD */
 
