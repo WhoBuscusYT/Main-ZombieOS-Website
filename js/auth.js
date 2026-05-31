@@ -134,7 +134,15 @@ user.email,
 
 subscription:"FREE",
 
-badges:[],
+badges:[
+{
+
+id:"PROTOTYPE",
+
+earnedAt:Date.now()
+
+}
+],
 
 createdAt:Date.now()
 
