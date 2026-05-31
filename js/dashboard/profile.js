@@ -7,6 +7,14 @@ onAuthStateChanged
 }
 from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc
+}
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
 /* FIREBASE */
 
 const firebaseConfig = {
@@ -37,11 +45,14 @@ initializeApp(firebaseConfig);
 const auth =
 getAuth(app);
 
+const db =
+getFirestore(app);
+
 /* AUTH */
 
 onAuthStateChanged(
 auth,
-(user)=>{
+async(user)=>{
 
 if(!user){
 
@@ -52,96 +63,83 @@ return;
 
 }
 
-/* LOAD USER */
+const userRef =
+doc(
+db,
+"users",
+user.uid
+);
+
+const userSnap =
+await getDoc(userRef);
+
+if(!userSnap.exists()){
+
+return;
+
+}
+
+const data =
+userSnap.data();
+
+/* LOAD DATA */
 
 document.getElementById(
 "profile-username"
 ).value =
-
-user.displayName ||
-
-user.email.split("@")[0];
-
-/* BANNER PREVIEW */
-
-const bannerUpload =
-document.getElementById(
-"banner-upload"
-);
-
-const bannerPreview =
-document.getElementById(
-"profile-banner-preview"
-);
-
-bannerUpload.addEventListener(
-"change",
-(event)=>{
-
-const file =
-event.target.files[0];
-
-if(file){
-
-bannerPreview.src =
-URL.createObjectURL(file);
-
-}
-
-}
-);
-
-/* AVATAR PREVIEW */
-
-const avatarUpload =
-document.getElementById(
-"avatar-upload"
-);
-
-const avatarPreview =
-document.getElementById(
-"profile-avatar-preview"
-);
-
-avatarUpload.addEventListener(
-"change",
-(event)=>{
-
-const file =
-event.target.files[0];
-
-if(file){
-
-avatarPreview.src =
-URL.createObjectURL(file);
-
-}
-
-}
-);
-
-/* SAVE */
+data.username || "";
 
 document.getElementById(
-"profile-save-button"
-).addEventListener(
-"click",
-()=>{
+"profile-handle"
+).value =
+data.handle || "";
 
-alert(
-"Profile saving coming soon."
-);
+document.getElementById(
+"profile-bio"
+).value =
+data.bio || "";
 
-}
-);
+document.getElementById(
+"profile-pronouns"
+).value =
+data.pronouns || "";
+
+/* SOCIALS */
+
+document.getElementById(
+"social-youtube"
+).value =
+data.socials?.youtube || "";
+
+document.getElementById(
+"social-github"
+).value =
+data.socials?.github || "";
+
+document.getElementById(
+"social-discord"
+).value =
+data.socials?.discord || "";
+
+document.getElementById(
+"social-instagram"
+).value =
+data.socials?.instagram || "";
+
+document.getElementById(
+"social-facebook"
+).value =
+data.socials?.facebook || "";
+
+document.getElementById(
+"social-twitter"
+).value =
+data.socials?.twitter || "";
 
 /* ZOS+ */
 
-const subscription =
-"FREE";
-
 if(
-subscription === "ZOS+"
+data.subscription === "ZOS+"
 ){
 
 document.getElementById(
@@ -150,6 +148,89 @@ document.getElementById(
 "block";
 
 }
+
+/* SAVE */
+
+document.getElementById(
+"profile-save-button"
+).addEventListener(
+"click",
+async()=>{
+
+try{
+
+await updateDoc(
+userRef,
+{
+
+username:
+document.getElementById(
+"profile-username"
+).value.trim(),
+
+bio:
+document.getElementById(
+"profile-bio"
+).value.trim(),
+
+pronouns:
+document.getElementById(
+"profile-pronouns"
+).value.trim(),
+
+socials:{
+
+youtube:
+document.getElementById(
+"social-youtube"
+).value.trim(),
+
+github:
+document.getElementById(
+"social-github"
+).value.trim(),
+
+discord:
+document.getElementById(
+"social-discord"
+).value.trim(),
+
+instagram:
+document.getElementById(
+"social-instagram"
+).value.trim(),
+
+facebook:
+document.getElementById(
+"social-facebook"
+).value.trim(),
+
+twitter:
+document.getElementById(
+"social-twitter"
+).value.trim()
+
+}
+
+}
+);
+
+alert(
+"Profile saved successfully."
+);
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"Failed to save profile."
+);
+
+}
+
+}
+);
 
 }
 );
