@@ -55,8 +55,9 @@ await window.sendEmailVerification(
 userCredential.user
 );
 
-alert(
-"Verification email sent."
+showPopup(
+"Account Created",
+"Verification email sent successfully."
 );
 
 }catch(error){
@@ -347,6 +348,57 @@ alert(error.message);
 console.error(error);
 
 }
+
+}
+);
+
+}
+
+/* POPUP SYSTEM */
+
+function showPopup(
+title,
+message
+){
+
+const popup =
+document.createElement("div");
+
+popup.className =
+"zos-popup";
+
+popup.innerHTML = `
+
+<div class="zos-popup-card">
+
+<h2>${title}</h2>
+
+<p>${message}</p>
+
+<button id="popup-close">
+
+Continue
+
+</button>
+
+</div>
+
+`;
+
+document.body.appendChild(
+popup
+);
+
+const closeButton =
+document.getElementById(
+"popup-close"
+);
+
+closeButton.addEventListener(
+"click",
+()=>{
+
+popup.remove();
 
 }
 );
