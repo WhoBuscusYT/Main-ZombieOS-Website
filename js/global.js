@@ -1,98 +1,74 @@
-/* FOOTER YEAR */
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 
-const year =
-document.getElementById("year");
-
-if(year){
-
-year.textContent =
-new Date().getFullYear();
-
+import {
+getAuth,
+onAuthStateChanged
 }
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
-/* GLOBAL EASTER EGG */
+/* FIREBASE */
 
-let typedKeys = "";
+const firebaseConfig = {
 
-document.addEventListener(
-"keydown",
-(event)=>{
+apiKey:
+"AIzaSyDG0hSabeqYdGgSISOgvSnkOwATXDLiV9g",
 
-typedKeys +=
-event.key.toLowerCase();
+authDomain:
+"zombieos.firebaseapp.com",
 
-if(
-typedKeys.includes("zombie")
-){
+projectId:
+"zombieos",
 
-console.log(
-"ZombieOS Runtime Initialized"
+storageBucket:
+"zombieos.firebasestorage.app",
+
+messagingSenderId:
+"577624378484",
+
+appId:
+"1:577624378484:web:3e88e693724bde8e89d521"
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const auth =
+getAuth(app);
+
+/* NAVBAR LOGIN BUTTON */
+
+const loginButton =
+document.getElementById(
+"navbar-login-button"
 );
 
-typedKeys = "";
+if(loginButton){
+
+onAuthStateChanged(
+auth,
+(user)=>{
+
+if(user){
+
+loginButton.textContent =
+"Dashboard";
+
+loginButton.href =
+"/dashboard";
+
+}else{
+
+loginButton.textContent =
+"Login";
+
+loginButton.href =
+"/login";
 
 }
 
-if(
-typedKeys.length > 30
-){
-
-typedKeys =
-typedKeys.slice(-30);
+}
+);
 
 }
-
-});
-
-/* GLOBAL FLOAT EFFECT */
-
-const floatingCards =
-document.querySelectorAll(".floating-card");
-
-floatingCards.forEach((card)=>{
-
-card.addEventListener(
-"mousemove",
-(event)=>{
-
-const rect =
-card.getBoundingClientRect();
-
-const x =
-event.clientX - rect.left;
-
-const y =
-event.clientY - rect.top;
-
-const centerX =
-rect.width / 2;
-
-const centerY =
-rect.height / 2;
-
-const rotateX =
-((y - centerY) / 25) * -1;
-
-const rotateY =
-(x - centerX) / 25;
-
-card.style.transform =
-`
-perspective(1000px)
-rotateX(${rotateX}deg)
-rotateY(${rotateY}deg)
-translateY(-8px)
-`;
-
-});
-
-card.addEventListener(
-"mouseleave",
-()=>{
-
-card.style.transform =
-"translateY(0px)";
-
-});
-
-});
