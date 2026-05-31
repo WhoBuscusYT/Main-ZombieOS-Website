@@ -40,7 +40,7 @@ initializeApp(firebaseConfig);
 const auth =
 getAuth(app);
 
-/* TIME GREETING */
+/* GREETING */
 
 function getGreeting(){
 
@@ -98,8 +98,47 @@ user.email
 
 "User";
 
+/* GREETING */
+
 greeting.textContent =
 `${getGreeting()}, ${username}`;
+
+/* PLAYTIME */
+
+document.getElementById(
+"dashboard-playtime"
+).textContent =
+"No Data Available";
+
+/* ACHIEVEMENTS */
+
+document.getElementById(
+"dashboard-achievements"
+).textContent =
+"No Data Available";
+
+/* SUBSCRIPTION */
+
+const subscription =
+"FREE";
+
+document.getElementById(
+"dashboard-subscription"
+).textContent =
+subscription;
+
+/* UPGRADE BUTTON */
+
+if(
+subscription === "ZOS+"
+){
+
+document.getElementById(
+"upgrade-button"
+).style.display =
+"none";
+
+}
 
 }
 );
