@@ -35,10 +35,6 @@ rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 />
 
-<!-- RECAPTCHA -->
-
-<script src="https://www.google.com/recaptcha/enterprise.js?render=6Ld0DgUtAAAAAJwI_aGUNIqDmeQoOtvfdt-SgfiU"></script>
-
 <!-- FIREBASE -->
 
 <script type="module">
@@ -49,18 +45,9 @@ from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import {
 getAuth,
 createUserWithEmailAndPassword,
-sendEmailVerification,
-GoogleAuthProvider,
-signInWithPopup
+sendEmailVerification
 }
 from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-
-import {
-getFirestore
-}
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
-
-/* CONFIG */
 
 const firebaseConfig = {
 
@@ -87,24 +74,14 @@ measurementId:
 
 };
 
-/* INIT */
-
 const app =
 initializeApp(firebaseConfig);
 
 const auth =
 getAuth(app);
 
-const db =
-getFirestore(app);
-
-/* GLOBAL */
-
 window.firebaseAuth =
 auth;
-
-window.firebaseDB =
-db;
 
 window.createUserWithEmailAndPassword =
 createUserWithEmailAndPassword;
@@ -112,26 +89,16 @@ createUserWithEmailAndPassword;
 window.sendEmailVerification =
 sendEmailVerification;
 
-window.GoogleAuthProvider =
-GoogleAuthProvider;
-
-window.signInWithPopup =
-signInWithPopup;
-
 </script>
 
 </head>
 
 <body>
 
-<!-- BACKGROUND -->
-
 <div class="background-grid"></div>
 
 <div class="background-glow glow1"></div>
 <div class="background-glow glow2"></div>
-
-<!-- NAVBAR -->
 
 <header class="navbar">
 
@@ -162,8 +129,6 @@ Login
 
 </header>
 
-<!-- MAIN -->
-
 <main>
 
 <section class="auth-section">
@@ -171,15 +136,11 @@ Login
 <div class="auth-card floating-card">
 
 <p class="section-eyebrow">
-
 INITIALIZE IDENTITY
-
 </p>
 
 <h1 class="auth-title">
-
 Create Runtime Account
-
 </h1>
 
 <p class="auth-description">
@@ -187,8 +148,6 @@ Create Runtime Account
 Create your ZombieOS identity and connect to the future runtime ecosystem.
 
 </p>
-
-<!-- FORM -->
 
 <form
 class="auth-form"
@@ -200,14 +159,12 @@ id="signup-form"
 <div class="input-group">
 
 <label>
-
 Username
-
 </label>
 
 <input
 type="text"
-placeholder="Zombie OS Developer"
+placeholder="ZombieOS Developer"
 required
 >
 
@@ -218,9 +175,7 @@ required
 <div class="input-group">
 
 <label>
-
 Handle
-
 </label>
 
 <input
@@ -246,9 +201,7 @@ Only letters, numbers, _, ., and - allowed.
 <div class="input-group">
 
 <label>
-
 Email
-
 </label>
 
 <input
@@ -265,9 +218,7 @@ required
 <div class="input-group">
 
 <label>
-
 Phone Number (Optional)
-
 </label>
 
 <input
@@ -282,14 +233,10 @@ placeholder="+1 123 456 7890"
 <div class="input-group">
 
 <label>
-
 Date of Birth
-
 </label>
 
 <div class="dob-grid">
-
-<!-- MONTH -->
 
 <select
 id="dob-month"
@@ -315,8 +262,6 @@ Month
 <option value="12">December</option>
 
 </select>
-
-<!-- DAY -->
 
 <select
 id="dob-day"
@@ -361,8 +306,6 @@ Day
 <option value="31">31</option>
 
 </select>
-
-<!-- YEAR -->
 
 <select
 id="dob-year"
@@ -432,9 +375,7 @@ Users under 13 require parent verification.
 <div class="input-group">
 
 <label>
-
 Password
-
 </label>
 
 <div class="password-wrapper">
@@ -465,9 +406,7 @@ onclick="togglePassword()"
 <div class="input-group">
 
 <label>
-
 Confirm Password
-
 </label>
 
 <div class="password-wrapper">
@@ -518,17 +457,13 @@ required
 I agree to the
 
 <a href="/tos">
-
 Terms of Service
-
 </a>
 
 and
 
 <a href="/privacy">
-
 Privacy Policy
-
 </a>
 
 </span>
@@ -537,26 +472,13 @@ Privacy Policy
 
 </div>
 
-<!-- CAPTCHA -->
-
-<div class="captcha-box">
-
-<i class="fa-solid fa-shield"></i>
-
-<span>
-
-Protected by reCAPTCHA Enterprise™
-
-</span>
-
-</div>
-
 <!-- BUTTON -->
 
 <button
 type="button"
 class="primary-auth-button"
-id="create-account-button">
+id="create-account-button"
+>
 
 Create Account
 
@@ -570,14 +492,10 @@ Create Account
 
 </main>
 
-<!-- FOOTER -->
-
 <footer>
 
 <h2>
-
 ZombieOS
-
 </h2>
 
 <p>
@@ -588,8 +506,6 @@ ZombieOS / ZOS ©
 </p>
 
 </footer>
-
-<!-- SCRIPTS -->
 
 <script src="js/global.js"></script>
 <script src="js/auth.js"></script>
