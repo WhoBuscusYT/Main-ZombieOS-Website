@@ -79,7 +79,10 @@ window.location.href =
 
 }catch(error){
 
-console.error(error);
+console.error(
+"Login Error:",
+error
+);
 
 let message =
 "Login failed.";
@@ -157,7 +160,10 @@ window.location.href =
 
 }catch(error){
 
-console.error(error);
+console.error(
+"Google Login Error:",
+error
+);
 
 alert(
 "Google login failed."
