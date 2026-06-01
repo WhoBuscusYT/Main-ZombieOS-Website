@@ -1,543 +1,163 @@
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+/* IMAGE STORAGE */
 
-import {
-getAuth,
-onAuthStateChanged,
-updateProfile
-}
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-
-import {
-getFirestore,
-doc,
-getDoc,
-setDoc
-}
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
-
-/* FIREBASE */
-
-const firebaseConfig = {
-
-apiKey:
-"AIzaSyDG0hSabeqYdGgSISOgvSnkOwATXDLiV9g",
-
-authDomain:
-"zombieos.firebaseapp.com",
-
-projectId:
-"zombieos",
-
-storageBucket:
-"zombieos.firebasestorage.app",
-
-messagingSenderId:
-"577624378484",
-
-appId:
-"1:577624378484:web:3e88e693724bde8e89d521"
-
-};
-
-const app =
-initializeApp(firebaseConfig);
-
-const auth =
-getAuth(app);
-
-const db =
-getFirestore(app);
+let avatarBase64 = "";
+let bannerBase64 = "";
 
 /* ELEMENTS */
 
-const saveButton =
+const bannerUpload =
 document.getElementById(
-"profile-save-button"
+"banner-upload"
 );
 
-/* AUTH */
+const bannerPreview =
+document.getElementById(
+"profile-banner-preview"
+);
 
-onAuthStateChanged(
-auth,
-async(user)=>{
+const avatarUpload =
+document.getElementById(
+"avatar-upload"
+);
 
-if(!user){
+const avatarPreview =
+document.getElementById(
+"profile-avatar-preview"
+);
 
-window.location.href =
-"/login";
+/* LOAD SAVED IMAGES */
 
-return;
+if(data.avatarBase64){
+
+avatarPreview.src =
+data.avatarBase64;
+
+avatarBase64 =
+data.avatarBase64;
 
 }
 
-const userRef =
-doc(
-db,
-"users",
-user.uid
-);
+if(data.bannerBase64){
 
-const userSnap =
-await getDoc(userRef);
+bannerPreview.src =
+data.bannerBase64;
 
-if(!userSnap.exists()){
-
-return;
+bannerBase64 =
+data.bannerBase64;
 
 }
 
-const data =
-userSnap.data();
+/* MAX SIZE */
 
-/* LOAD PROFILE */
+const MAX_FILE_SIZE =
+5 * 1024 * 1024;
 
-document.getElementById(
-"profile-username"
-).value =
-data.username || "";
-
-document.getElementById(
-"profile-handle"
-).value =
-data.handle || "";
-
-document.getElementById(
-"profile-bio"
-).value =
-data.bio || "";
-
-document.getElementById(
-"profile-pronouns"
-).value =
-data.pronouns || "";
-
-/* SOCIALS */
-
-document.getElementById(
-"social-youtube"
-).value =
-data.socials?.youtube || "";
-
-document.getElementById(
-"social-github"
-).value =
-data.socials?.github || "";
-
-document.getElementById(
-"social-discord"
-).value =
-data.socials?.discord || "";
-
-document.getElementById(
-"social-instagram"
-).value =
-data.socials?.instagram || "";
-
-document.getElementById(
-"social-facebook"
-).value =
-data.socials?.facebook || "";
-
-document.getElementById(
-"social-twitter"
-).value =
-data.socials?.twitter || "";
-
-/* TOGGLES */
-
-document.getElementById(
-"toggle-public-profile"
-).checked =
-data.publicProfile ?? true;
-
-document.getElementById(
-"toggle-display-badges"
-).checked =
-data.displayBadges ?? true;
-
-document.getElementById(
-"toggle-zosplus-profile"
-).checked =
-data.zosPlusProfile ?? false;
-
-/* BADGE OPTIONS */
-
-const badgeOptions =
-document.getElementById(
-"badge-display-options"
-);
-
-const displayBadgesToggle =
-document.getElementById(
-"toggle-display-badges"
-);
-
-if(displayBadgesToggle.checked){
-
-badgeOptions.style.display =
-"block";
-
-}
-
-displayBadgesToggle.addEventListener(
-"change",
-()=>{
-
-badgeOptions.style.display =
-
-displayBadgesToggle.checked
-? "block"
-: "none";
-
-}
-);
-
-/* BADGE LIST */
-
-const badgeList =
-document.getElementById(
-"badge-toggle-list"
-);
-
-badgeList.innerHTML = "";
-
-if(data.badges){
-
-data.badges.forEach(
-(badge)=>{
-
-const badgeId =
-`badge-${badge}`;
-
-const badgeEnabled =
-
-data.visibleBadges?.[badge]
-?? true;
-
-const badgeElement =
-document.createElement(
-"div"
-);
-
-badgeElement.className =
-"extra-setting-header";
-
-badgeElement.innerHTML =
-
-`
-<span>${badge}</span>
-
-<label class="switch">
-
-<input
-type="checkbox"
-id="${badgeId}"
-${badgeEnabled ? "checked" : ""}
-
->
-
-<span class="slider"></span>
-
-</label>
-`;
-
-badgeList.appendChild(
-badgeElement
-);
-
-}
-);
-
-}
-
-/* ZOS+ */
+/* BANNER */
 
 if(
-data.subscription === "ZOS+"
+bannerUpload &&
+bannerPreview
 ){
 
-document.getElementById(
-"profile-color-section"
-).style.display =
-"block";
+bannerUpload.onchange =
+(event)=>{
 
-}
+const file =
+event.target.files[0];
 
-/* SAVE */
-
-saveButton.onclick =
-async()=>{
-
-try{
-
-const username =
-document.getElementById(
-"profile-username"
-).value.trim();
-
-const handle =
-document.getElementById(
-"profile-handle"
-).value
-.trim()
-.toLowerCase();
-
-const bio =
-document.getElementById(
-"profile-bio"
-).value.trim();
-
-const pronouns =
-document.getElementById(
-"profile-pronouns"
-).value.trim();
-
-/* HANDLE VALIDATION */
-
-if(handle.includes(" ")){
-
-alert(
-"Handles cannot contain spaces."
-);
+if(!file){
 
 return;
 
 }
 
-/* HANDLE COOLDOWN */
-
-const lastHandleChange =
-data.lastHandleChange || 0;
-
-const daysSinceChange =
-(Date.now() - lastHandleChange)
-/
-86400000;
+/* SIZE CHECK */
 
 if(
-handle !== data.handle &&
-daysSinceChange < 30
+file.size > MAX_FILE_SIZE
 ){
 
 alert(
-"You can only change your handle once every 30 days."
+"Banner image exceeds 5MB limit."
 );
 
 return;
 
 }
 
-/* BADGE VISIBILITY */
+const reader =
+new FileReader();
 
-const visibleBadges = {};
+reader.onload =
+(e)=>{
 
-if(data.badges){
+bannerBase64 =
+e.target.result;
 
-data.badges.forEach(
-(badge)=>{
+bannerPreview.src =
+bannerBase64;
 
-const toggle =
-document.getElementById(
-`badge-${badge}`
+};
+
+reader.readAsDataURL(
+file
 );
-
-visibleBadges[badge] =
-toggle
-? toggle.checked
-: true;
-
-}
-);
-
-}
-
-/* UPDATE AUTH */
-
-await updateProfile(
-user,
-{
-displayName:
-username
-}
-);
-
-/* SAVE */
-
-await setDoc(
-userRef,
-{
-
-userId:
-data.userId || 0,
-
-username:
-username,
-
-email:
-data.email || user.email,
-
-subscription:
-data.subscription || "FREE",
-
-badges:
-data.badges || [],
-
-createdAt:
-data.createdAt || Date.now(),
-
-bio:
-bio,
-
-pronouns:
-pronouns,
-
-handle:
-handle,
-
-customHandle:
-handle !== data.handle
-? true
-: data.customHandle || false,
-
-profileColor:
-data.profileColor || "default",
-
-lastHandleChange:
-handle !== data.handle
-? Date.now()
-: lastHandleChange,
-
-socials:{
-
-youtube:
-document.getElementById(
-"social-youtube"
-).value.trim(),
-
-github:
-document.getElementById(
-"social-github"
-).value.trim(),
-
-discord:
-document.getElementById(
-"social-discord"
-).value.trim(),
-
-instagram:
-document.getElementById(
-"social-instagram"
-).value.trim(),
-
-facebook:
-document.getElementById(
-"social-facebook"
-).value.trim(),
-
-twitter:
-document.getElementById(
-"social-twitter"
-).value.trim()
-
-},
-
-/* EXTRAS */
-
-publicProfile:
-document.getElementById(
-"toggle-public-profile"
-).checked,
-
-displayBadges:
-document.getElementById(
-"toggle-display-badges"
-).checked,
-
-zosPlusProfile:
-document.getElementById(
-"toggle-zosplus-profile"
-).checked,
-
-visibleBadges:
-visibleBadges
-
-},
-{
-merge:true
-}
-);
-
-alert(
-"Profile saved successfully."
-);
-
-}catch(error){
-
-console.error(
-"Profile Save Error:",
-error
-);
-
-alert(
-"Failed to save profile."
-);
-
-}
 
 };
 
 }
-);
 
-/* MOBILE NAVBAR */
-
-const navbar =
-document.getElementById(
-"dashboard-navbar"
-);
-
-const toggleButton =
-document.getElementById(
-"mobile-navbar-toggle"
-);
+/* AVATAR */
 
 if(
-navbar &&
-toggleButton
+avatarUpload &&
+avatarPreview
 ){
 
-let navbarVisible =
-true;
+avatarUpload.onchange =
+(event)=>{
 
-toggleButton.addEventListener(
-"click",
-()=>{
+const file =
+event.target.files[0];
 
-navbarVisible =
-!navbarVisible;
+if(!file){
 
-if(navbarVisible){
-
-navbar.classList.remove(
-"hidden-navbar"
-);
-
-toggleButton.textContent =
-"Hide Menu";
-
-}else{
-
-navbar.classList.add(
-"hidden-navbar"
-);
-
-toggleButton.textContent =
-"Show Menu";
+return;
 
 }
 
-}
+/* SIZE CHECK */
+
+if(
+file.size > MAX_FILE_SIZE
+){
+
+alert(
+"Profile picture exceeds 5MB limit."
 );
+
+return;
+
+}
+
+const reader =
+new FileReader();
+
+reader.onload =
+(e)=>{
+
+avatarBase64 =
+e.target.result;
+
+avatarPreview.src =
+avatarBase64;
+
+};
+
+reader.readAsDataURL(
+file
+);
+
+};
 
 }
