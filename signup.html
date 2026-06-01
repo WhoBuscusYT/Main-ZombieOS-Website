@@ -11,249 +11,140 @@ content="width=device-width, initial-scale=1.0"
 >
 
 <title>
-Signup - ZombieOS
+
+ZombieOS - Sign Up
+
 </title>
 
 <link
 rel="icon"
 type="image/png"
-href="favicon.png"
+href="/favicon.png"
 >
 
 <link
 rel="stylesheet"
-href="css/global.css"
+href="/css/global.css?v=3"
 >
 
 <link
 rel="stylesheet"
-href="css/auth.css"
+href="/css/auth.css?v=3"
 >
-
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-/>
 
 </head>
 
 <body>
-
-<!-- BACKGROUND -->
 
 <div class="background-grid"></div>
 
 <div class="background-glow glow1"></div>
 <div class="background-glow glow2"></div>
 
-<!-- NAVBAR -->
+<main class="auth-container">
 
-<header class="navbar">
+<div class="auth-card">
 
-<a
-href="/"
-class="logo"
->
+<h1>
 
-ZombieOS
-
-</a>
-
-<nav class="nav-links">
-
-<a href="/">
-Home
-</a>
-
-<a href="/downloads">
-Downloads
-</a>
-
-<a href="/login">
-Login
-</a>
-
-</nav>
-
-</header>
-
-<!-- MAIN -->
-
-<main>
-
-<section class="auth-section">
-
-<div class="auth-card floating-card">
-
-<p class="section-eyebrow">
-
-INITIALIZE IDENTITY
-
-</p>
-
-<h1 class="auth-title">
-
-Create Runtime Account
+Create Account
 
 </h1>
 
-<p class="auth-description">
+<p class="auth-subtitle">
 
-Connect to the ZombieOS ecosystem.
+Join the ZombieOS ecosystem.
 
 </p>
 
 <form
-class="auth-form"
 id="signup-form"
+class="auth-form"
 >
-
-<!-- USERNAME -->
-
-<div class="input-group">
-
-<label>
-Username
-</label>
 
 <input
 type="text"
-id="signup-username"
-placeholder="ZombieOS Developer"
+id="username"
+placeholder="Username"
 required
 >
-
-</div>
-
-<!-- EMAIL -->
-
-<div class="input-group">
-
-<label>
-Email
-</label>
 
 <input
 type="email"
-id="signup-email"
-placeholder="you@example.com"
+id="email"
+placeholder="Email"
 required
 >
-
-</div>
-
-<!-- PASSWORD -->
-
-<div class="input-group">
-
-<label>
-Password
-</label>
-
-<div class="password-wrapper">
 
 <input
 type="password"
-id="signup-password"
-placeholder="Enter password"
+id="password"
+placeholder="Password"
 required
 >
 
 <button
-type="button"
-class="password-toggle"
-onclick="togglePassword()"
->
-
-<i class="fa-solid fa-eye"></i>
-
-</button>
-
-</div>
-
-</div>
-
-<!-- CREATE ACCOUNT -->
-
-<button
-type="button"
-class="primary-auth-button"
-id="create-account-button"
+type="submit"
+class="auth-button"
 >
 
 Create Account
 
 </button>
 
-<!-- DIVIDER -->
+</form>
 
 <div class="auth-divider">
 
 <span>
+
 OR
+
 </span>
 
 </div>
 
-<!-- GOOGLE -->
+<div class="social-auths">
 
 <button
-type="button"
-class="oauth-button google-button"
 id="google-signup"
+class="social-button"
 >
 
-<i class="fa-brands fa-google"></i>
-
-Continue with Google
+Google
 
 </button>
 
-<!-- DISCORD -->
-
 <button
-type="button"
-class="oauth-button disabled-oauth"
+class="social-button disabled-button"
 disabled
 >
 
-<i class="fa-brands fa-discord"></i>
-
-Discord Coming Soon
+Discord
 
 </button>
 
-<!-- APPLE -->
-
 <button
-type="button"
-class="oauth-button disabled-oauth"
+class="social-button disabled-button"
 disabled
 >
 
-<i class="fa-brands fa-apple"></i>
-
-Apple Coming Soon
+Apple
 
 </button>
 
-<!-- MICROSOFT -->
-
 <button
-type="button"
-class="oauth-button disabled-oauth"
+class="social-button disabled-button"
 disabled
 >
 
-<i class="fa-brands fa-microsoft"></i>
-
-Microsoft Coming Soon
+Microsoft
 
 </button>
 
-<!-- LOGIN LINK -->
+</div>
 
-<p class="auth-switch-text">
+<p class="auth-footer">
 
 Already have an account?
 
@@ -265,41 +156,14 @@ Login
 
 </p>
 
-</form>
-
 </div>
-
-</section>
 
 </main>
 
-<!-- FOOTER -->
-
-<footer>
-
-<h2>
-
-ZombieOS
-
-</h2>
-
-<p>
-
-ZombieOS / ZOS ©
-<span id="year"></span>
-
-</p>
-
-</footer>
-
-<!-- SCRIPTS -->
-
-<script src="js/global.js"></script>
-
 <script
 type="module"
-src="js/auth.js">
-</script>
+src="/js/auth.js?v=3"
+></script>
 
 </body>
 </html>
