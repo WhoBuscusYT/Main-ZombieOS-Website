@@ -1,0 +1,211 @@
+/* /css/tickets/create.css */
+
+.create-ticket-main{
+
+max-width:1000px;
+
+margin:auto;
+
+padding:
+180px 20px 80px;
+}
+
+.create-ticket-card{
+
+display:flex;
+
+flex-direction:column;
+
+gap:28px;
+}
+
+.create-ticket-card h1{
+
+font-size:3rem;
+
+color:#00ff99;
+
+text-shadow:
+0 0 24px rgba(0,255,153,0.2);
+}
+
+.create-ticket-card p{
+
+color:#cfcfcf;
+
+line-height:1.7;
+}
+
+/* FORM */
+
+.create-ticket-form{
+
+display:flex;
+
+flex-direction:column;
+
+gap:22px;
+}
+
+.ticket-input-group{
+
+display:flex;
+
+flex-direction:column;
+
+gap:10px;
+}
+
+.ticket-input-group label{
+
+font-size:0.95rem;
+
+color:#d0d0d0;
+}
+
+/* INPUTS */
+
+.ticket-input-group input,
+.ticket-input-group textarea,
+.ticket-input-group select{
+
+width:100%;
+
+padding:
+16px;
+
+border-radius:18px;
+
+background:
+rgba(255,255,255,0.04);
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+color:white;
+
+outline:none;
+
+transition:0.25s;
+}
+
+.ticket-input-group textarea{
+
+min-height:240px;
+
+resize:vertical;
+}
+
+.ticket-input-group input:focus,
+.ticket-input-group textarea:focus,
+.ticket-input-group select:focus{
+
+border-color:#00ff99;
+
+box-shadow:
+0 0 18px rgba(0,255,153,0.15);
+}
+
+/* BUTTON */
+
+.create-ticket-button{
+
+padding:
+16px;
+
+border:none;
+
+border-radius:18px;
+
+background:
+linear-gradient(
+135deg,
+#00ff99,
+#00d47f
+);
+
+color:black;
+
+font-weight:700;
+
+font-size:1rem;
+
+cursor:pointer;
+
+transition:0.25s;
+}
+
+.create-ticket-button:hover{
+
+transform:
+translateY(-2px);
+
+box-shadow:
+0 0 24px rgba(0,255,153,0.2);
+}
+
+/* MOBILE NAV */
+
+.mobile-navbar-toggle{
+
+display:none;
+}
+
+@media(max-width:768px){
+
+.mobile-navbar-toggle{
+
+position:fixed;
+
+top:16px;
+right:16px;
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+padding:
+14px 18px;
+
+border:none;
+
+border-radius:18px;
+
+background:
+rgba(0,0,0,0.82);
+
+backdrop-filter:
+blur(18px);
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+color:#00ff99;
+
+font-size:1rem;
+
+font-weight:700;
+
+z-index:100000;
+}
+
+.dashboard-navbar.hidden-navbar{
+
+opacity:0;
+
+pointer-events:none;
+}
+
+.create-ticket-main{
+
+padding:
+120px 18px 70px;
+}
+
+.create-ticket-card h1{
+
+font-size:2.4rem;
+}
+
+}
