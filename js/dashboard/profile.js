@@ -1,769 +1,313 @@
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 
 import {
-getAuth,
-onAuthStateChanged,
-updateProfile
-}
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+  getAuth,
+  onAuthStateChanged,
+  updateProfile
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
 import {
-getFirestore,
-doc,
-getDoc,
-setDoc
-}
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
-
-/* FIREBASE */
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
-
-apiKey:
-"AIzaSyDG0hSabeqYdGgSISOgvSnkOwATXDLiV9g",
-
-authDomain:
-"zombieos.firebaseapp.com",
-
-projectId:
-"zombieos",
-
-storageBucket:
-"zombieos.firebasestorage.app",
-
-messagingSenderId:
-"577624378484",
-
-appId:
-"1:577624378484:web:3e88e693724bde8e89d521"
-
+  apiKey: "AIzaSyDG0hSabeqYdGgSISOgvSnkOwATXDLiV9g",
+  authDomain: "zombieos.firebaseapp.com",
+  projectId: "zombieos",
+  storageBucket: "zombieos.firebasestorage.app",
+  messagingSenderId: "577624378484",
+  appId: "1:577624378484:web:3e88e693724bde8e89d521"
 };
 
-const app =
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-const auth =
-getAuth(app);
+const $ = (id) => document.getElementById(id);
 
-const db =
-getFirestore(app);
+function setValue(id, value) {
+  const el = $(id);
+  if (el) el.value = value || "";
+}
+
+function setChecked(id, value) {
+  const el = $(id);
+  if (el) el.checked = !!value;
+}
+
+function getValue(id) {
+  const el = $(id);
+  return el ? el.value.trim() : "";
+}
 
 /* MOBILE NAVBAR */
 
-const navbar =
-document.getElementById(
-"dashboard-navbar"
-);
+const navbar = $("dashboard-navbar");
+const toggleButton = $("mobile-navbar-toggle");
 
-const toggleButton =
-document.getElementById(
-"mobile-navbar-toggle"
-);
+if (navbar && toggleButton) {
+  let navbarVisible = true;
 
-if(
-navbar &&
-toggleButton
-){
+  toggleButton.addEventListener("click", () => {
+    navbarVisible = !navbarVisible;
 
-let navbarVisible =
-true;
-
-toggleButton.addEventListener(
-"click",
-()=>{
-
-navbarVisible =
-!navbarVisible;
-
-if(navbarVisible){
-
-navbar.classList.remove(
-"hidden-navbar"
-);
-
-toggleButton.textContent =
-"Hide Menu";
-
-}else{
-
-navbar.classList.add(
-"hidden-navbar"
-);
-
-toggleButton.textContent =
-"Show Menu";
-
-}
-
-}
-);
-
+    if (navbarVisible) {
+      navbar.classList.remove("hidden-navbar");
+      toggleButton.textContent = "Hide Menu";
+    } else {
+      navbar.classList.add("hidden-navbar");
+      toggleButton.textContent = "Show Menu";
+    }
+  });
 }
 
 /* AUTH */
 
-onAuthStateChanged(
-auth,
-async(user)=>{
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    window.location.href = "/login";
+    return;
+  }
 
-if(!user){
+  const userRef = doc(db, "users", user.uid);
+  const userSnap = await getDoc(userRef);
 
-window.location.href =
-"/login";
+  if (!userSnap.exists()) {
+    alert("Profile data was not found.");
+    return;
+  }
 
-return;
+  const data = userSnap.data();
 
-}
+  let avatarBase64 = data.avatarBase64 || "";
+  let bannerBase64 = data.bannerBase64 || "";
 
-/* USER */
+  /* LOAD SAVED IMAGES */
 
-const userRef =
-doc(
-db,
-"users",
-user.uid
-);
+  if (avatarBase64 && $("profile-avatar-preview")) {
+    $("profile-avatar-preview").src = avatarBase64;
+  }
 
-const userSnap =
-await getDoc(userRef);
+  if (bannerBase64 && $("profile-banner-preview")) {
+    $("profile-banner-preview").src = bannerBase64;
+  }
 
-if(!userSnap.exists()){
+  /* LOAD TEXT DATA */
 
-return;
+  setValue("profile-username", data.username);
+  setValue("profile-handle", data.handle);
+  setValue("profile-bio", data.bio);
+  setValue("profile-pronouns", data.pronouns);
 
-}
+  setValue("social-youtube", data.socials?.youtube);
+  setValue("social-github", data.socials?.github);
+  setValue("social-discord", data.socials?.discord);
+  setValue("social-instagram", data.socials?.instagram);
+  setValue("social-facebook", data.socials?.facebook);
+  setValue("social-twitter", data.socials?.twitter);
 
-const data =
-userSnap.data();
+  setChecked("toggle-public-profile", data.publicProfile ?? true);
+  setChecked("toggle-display-badges", data.displayBadges ?? true);
+  setChecked("toggle-zosplus-profile", data.zosPlusProfile ?? false);
 
-/* IMAGE STORAGE */
+  /* IMAGE PREVIEW */
 
-let avatarBase64 =
-data.avatarBase64 || "";
+  const MAX_FILE_SIZE = 5 * 1024 * 1024;
 
-let bannerBase64 =
-data.bannerBase64 || "";
+  function setupImageUpload(inputId, previewId, type) {
+    const input = $(inputId);
+    const preview = $(previewId);
 
-/* ELEMENTS */
+    if (!input || !preview) return;
 
-const bannerUpload =
-document.getElementById(
-"banner-upload"
-);
+    input.addEventListener("change", () => {
+      const file = input.files[0];
 
-const bannerPreview =
-document.getElementById(
-"profile-banner-preview"
-);
+      if (!file) return;
 
-const avatarUpload =
-document.getElementById(
-"avatar-upload"
-);
+      if (file.size > MAX_FILE_SIZE) {
+        alert("Image must be 5MB or smaller.");
+        return;
+      }
 
-const avatarPreview =
-document.getElementById(
-"profile-avatar-preview"
-);
+      const reader = new FileReader();
 
-/* LOAD SAVED IMAGES */
+      reader.onload = (event) => {
+        if (type === "avatar") {
+          avatarBase64 = event.target.result;
+        }
 
-if(
-avatarBase64 &&
-avatarPreview
-){
-
-avatarPreview.src =
-avatarBase64;
-
-}
-
-if(
-bannerBase64 &&
-bannerPreview
-){
-
-bannerPreview.src =
-bannerBase64;
-
-}
-
-/* MAX SIZE */
-
-const MAX_FILE_SIZE =
-5 * 1024 * 1024;
-
-/* BANNER PREVIEW */
-
-if(
-bannerUpload &&
-bannerPreview
-){
-
-bannerUpload.onchange =
-(event)=>{
-
-const file =
-event.target.files[0];
-
-if(!file){
-
-return;
-
-}
-
-/* SIZE CHECK */
-
-if(
-file.size > MAX_FILE_SIZE
-){
-
-alert(
-"Banner exceeds 5MB limit."
-);
-
-return;
-
-}
-
-/* READ IMAGE */
-
-const reader =
-new FileReader();
-
-reader.onload =
-(e)=>{
-
-bannerBase64 =
-e.target.result;
-
-bannerPreview.src =
-bannerBase64;
-
-};
-
-reader.readAsDataURL(
-file
-);
-
-};
-
-}
-
-/* AVATAR PREVIEW */
-
-if(
-avatarUpload &&
-avatarPreview
-){
-
-avatarUpload.onchange =
-(event)=>{
-
-const file =
-event.target.files[0];
-
-if(!file){
-
-return;
-
-}
-
-/* SIZE CHECK */
-
-if(
-file.size > MAX_FILE_SIZE
-){
-
-alert(
-"Profile picture exceeds 5MB limit."
-);
-
-return;
-
-}
-
-/* READ IMAGE */
-
-const reader =
-new FileReader();
-
-reader.onload =
-(e)=>{
-
-avatarBase64 =
-e.target.result;
-
-avatarPreview.src =
-avatarBase64;
-
-};
-
-reader.readAsDataURL(
-file
-);
-
-};
-
-}
-
-/* PROFILE */
-
-document.getElementById(
-"profile-username"
-).value =
-data.username || "";
-
-document.getElementById(
-"profile-handle"
-).value =
-data.handle || "";
-
-document.getElementById(
-"profile-bio"
-).value =
-data.bio || "";
-
-document.getElementById(
-"profile-pronouns"
-).value =
-data.pronouns || "";
-
-/* SOCIALS */
-
-document.getElementById(
-"social-youtube"
-).value =
-data.socials?.youtube || "";
-
-document.getElementById(
-"social-github"
-).value =
-data.socials?.github || "";
-
-document.getElementById(
-"social-discord"
-).value =
-data.socials?.discord || "";
-
-document.getElementById(
-"social-instagram"
-).value =
-data.socials?.instagram || "";
-
-document.getElementById(
-"social-facebook"
-).value =
-data.socials?.facebook || "";
-
-document.getElementById(
-"social-twitter"
-).value =
-data.socials?.twitter || "";
-
-/* TOGGLES */
-
-document.getElementById(
-"toggle-public-profile"
-).checked =
-data.publicProfile ?? true;
-
-document.getElementById(
-"toggle-display-badges"
-).checked =
-data.displayBadges ?? true;
-
-document.getElementById(
-"toggle-zosplus-profile"
-).checked =
-data.zosPlusProfile ?? false;
-
-/* BADGE DROPDOWN */
-
-const badgeOptions =
-document.getElementById(
-"badge-display-options"
-);
-
-const displayBadgesToggle =
-document.getElementById(
-"toggle-display-badges"
-);
-
-if(displayBadgesToggle.checked){
-
-badgeOptions.style.display =
-"block";
-
-}
-
-displayBadgesToggle.addEventListener(
-"change",
-()=>{
-
-badgeOptions.style.display =
-
-displayBadgesToggle.checked
-? "block"
-: "none";
-
-}
-);
-
-/* BADGES */
-
-const badgeList =
-document.getElementById(
-"badge-toggle-list"
-);
-
-badgeList.innerHTML = "";
-
-if(data.badges){
-
-data.badges.forEach(
-(badge)=>{
-
-const badgeId =
-`badge-${badge}`;
-
-const badgeEnabled =
-
-data.visibleBadges?.[badge]
-?? true;
-
-const badgeElement =
-document.createElement(
-"div"
-);
-
-badgeElement.className =
-"extra-setting-header";
-
-badgeElement.innerHTML =
-
-`
-<span>${badge}</span>
-
-<label class="switch">
-
-<input
-type="checkbox"
-id="${badgeId}"
-${badgeEnabled ? "checked" : ""}
-
->
-
-<span class="slider"></span>
-
-</label>
-`;
-
-badgeList.appendChild(
-badgeElement
-);
-
-}
-);
-
-}
-
-/* ZOS+ */
-
-if(
-data.subscription === "ZOS+"
-){
-
-document.getElementById(
-"profile-color-section"
-).style.display =
-"block";
-
-}
-
-/* SAVE BUTTON */
-
-const saveButton =
-document.getElementById(
-"profile-save-button"
-);
-
-saveButton.onclick =
-async()=>{
-
-try{
-
-const username =
-document.getElementById(
-"profile-username"
-).value.trim();
-
-const handle =
-document.getElementById(
-"profile-handle"
-).value
-.trim()
-.toLowerCase();
-
-const bio =
-document.getElementById(
-"profile-bio"
-).value.trim();
-
-const pronouns =
-document.getElementById(
-"profile-pronouns"
-).value.trim();
-
-/* FILTERS */
-
-const blockedWords = [
-
-"fuck",
-"shit",
-"bitch",
-"sex",
-"porn",
-"nazi",
-"hitler",
-"admin",
-"moderator",
-"official",
-"zombieos",
-"zos"
-
-];
-
-/* HANDLE FILTER */
-
-if(
-!data.bypassUsernameFilter
-){
-
-for(
-const word of blockedWords
-){
-
-if(
-handle.includes(word)
-){
-
-alert(
-"That handle is not allowed."
-);
-
-return;
-
-}
-
-}
-
-}
-
-/* HANDLE VALIDATION */
-
-if(handle.includes(" ")){
-
-alert(
-"Handles cannot contain spaces."
-);
-
-return;
-
-}
-
-/* HANDLE COOLDOWN */
-
-const lastHandleChange =
-data.lastHandleChange || 0;
-
-const daysSinceChange =
-(Date.now() - lastHandleChange)
-/
-86400000;
-
-if(
-handle !== data.handle &&
-daysSinceChange < 30
-){
-
-alert(
-"You can only change your handle once every 30 days."
-);
-
-return;
-
-}
-
-/* BADGE VISIBILITY */
-
-const visibleBadges = {};
-
-if(data.badges){
-
-data.badges.forEach(
-(badge)=>{
-
-const toggle =
-document.getElementById(
-`badge-${badge}`
-);
-
-visibleBadges[badge] =
-toggle
-? toggle.checked
-: true;
-
-}
-);
-
-}
-
-/* UPDATE AUTH */
-
-await updateProfile(
-user,
-{
-displayName:
-username
-}
-);
-
-/* SAVE FIRESTORE */
-
-await setDoc(
-userRef,
-{
-
-userId:
-data.userId || 0,
-
-username:
-username,
-
-email:
-data.email || user.email,
-
-subscription:
-data.subscription || "FREE",
-
-badges:
-data.badges || [],
-
-createdAt:
-data.createdAt || Date.now(),
-
-bio:
-bio,
-
-pronouns:
-pronouns,
-
-handle:
-handle,
-
-customHandle:
-handle !== data.handle
-? true
-: data.customHandle || false,
-
-profileColor:
-data.profileColor || "default",
-
-lastHandleChange:
-handle !== data.handle
-? Date.now()
-: lastHandleChange,
-
-/* IMAGES */
-
-avatarBase64:
-avatarBase64,
-
-bannerBase64:
-bannerBase64,
-
-/* SOCIALS */
-
-socials:{
-
-youtube:
-document.getElementById(
-"social-youtube"
-).value.trim(),
-
-github:
-document.getElementById(
-"social-github"
-).value.trim(),
-
-discord:
-document.getElementById(
-"social-discord"
-).value.trim(),
-
-instagram:
-document.getElementById(
-"social-instagram"
-).value.trim(),
-
-facebook:
-document.getElementById(
-"social-facebook"
-).value.trim(),
-
-twitter:
-document.getElementById(
-"social-twitter"
-).value.trim()
-
-},
-
-/* EXTRAS */
-
-publicProfile:
-document.getElementById(
-"toggle-public-profile"
-).checked,
-
-displayBadges:
-document.getElementById(
-"toggle-display-badges"
-).checked,
-
-zosPlusProfile:
-document.getElementById(
-"toggle-zosplus-profile"
-).checked,
-
-visibleBadges:
-visibleBadges
-
-},
-{
-merge:true
-}
-);
-
-alert(
-"Profile saved successfully."
-);
-
-}catch(error){
-
-console.error(
-"Profile Save Error:",
-error
-);
-
-alert(
-"Failed to save profile."
-);
-
-}
-
-};
-
-}
-);
+        if (type === "banner") {
+          bannerBase64 = event.target.result;
+        }
+
+        preview.src = event.target.result;
+      };
+
+      reader.readAsDataURL(file);
+    });
+  }
+
+  setupImageUpload("avatar-upload", "profile-avatar-preview", "avatar");
+  setupImageUpload("banner-upload", "profile-banner-preview", "banner");
+
+  /* BADGE DROPDOWN */
+
+  const displayBadgesToggle = $("toggle-display-badges");
+  const badgeOptions = $("badge-display-options");
+  const badgeList = $("badge-toggle-list");
+
+  if (displayBadgesToggle && badgeOptions) {
+    badgeOptions.style.display = displayBadgesToggle.checked ? "block" : "none";
+
+    displayBadgesToggle.addEventListener("change", () => {
+      badgeOptions.style.display = displayBadgesToggle.checked ? "block" : "none";
+    });
+  }
+
+  if (badgeList) {
+    badgeList.innerHTML = "";
+
+    const badges = data.badges || [];
+
+    if (badges.length === 0) {
+      badgeList.innerHTML = "<p class='profile-note'>You have no badges.</p>";
+    } else {
+      badges.forEach((badge) => {
+        const badgeEnabled = data.visibleBadges?.[badge] ?? true;
+
+        const badgeRow = document.createElement("div");
+        badgeRow.className = "extra-setting-header";
+
+        badgeRow.innerHTML = `
+          <span>${badge}</span>
+
+          <label class="switch">
+            <input type="checkbox" id="badge-${badge}" ${badgeEnabled ? "checked" : ""}>
+            <span class="slider"></span>
+          </label>
+        `;
+
+        badgeList.appendChild(badgeRow);
+      });
+    }
+  }
+
+  /* ZOS+ SECTION */
+
+  if (data.subscription === "ZOS+" && $("profile-color-section")) {
+    $("profile-color-section").style.display = "block";
+  }
+
+  /* SAVE */
+
+  const saveButton = $("profile-save-button");
+
+  if (saveButton) {
+    saveButton.onclick = async () => {
+      const username = getValue("profile-username");
+      const handle = getValue("profile-handle").toLowerCase();
+      const bio = getValue("profile-bio");
+      const pronouns = getValue("profile-pronouns");
+
+      if (!username || !handle) {
+        alert("Username and handle are required.");
+        return;
+      }
+
+      if (handle.includes(" ")) {
+        alert("Handles cannot contain spaces.");
+        return;
+      }
+
+      const blockedWords = [
+        "fuck",
+        "shit",
+        "bitch",
+        "sex",
+        "porn",
+        "nazi",
+        "hitler",
+        "admin",
+        "moderator",
+        "official",
+        "zombieos",
+        "zos"
+      ];
+
+      if (!data.bypassUsernameFilter) {
+        for (const word of blockedWords) {
+          if (
+            username.toLowerCase().includes(word) ||
+            handle.includes(word)
+          ) {
+            alert("That username or handle is not allowed.");
+            return;
+          }
+        }
+      }
+
+      const lastHandleChange = data.lastHandleChange || 0;
+      const daysSinceChange = (Date.now() - lastHandleChange) / 86400000;
+
+      if (handle !== data.handle && daysSinceChange < 30) {
+        alert("You can only change your handle once every 30 days.");
+        return;
+      }
+
+      const visibleBadges = {};
+
+      if (data.badges) {
+        data.badges.forEach((badge) => {
+          const toggle = $(`badge-${badge}`);
+          visibleBadges[badge] = toggle ? toggle.checked : true;
+        });
+      }
+
+      await updateProfile(user, {
+        displayName: username
+      });
+
+      await setDoc(
+        userRef,
+        {
+          username,
+          handle,
+          bio,
+          pronouns,
+
+          customHandle:
+            handle !== data.handle ? true : data.customHandle || false,
+
+          lastHandleChange:
+            handle !== data.handle ? Date.now() : lastHandleChange,
+
+          avatarBase64,
+          bannerBase64,
+
+          socials: {
+            youtube: getValue("social-youtube"),
+            github: getValue("social-github"),
+            discord: getValue("social-discord"),
+            instagram: getValue("social-instagram"),
+            facebook: getValue("social-facebook"),
+            twitter: getValue("social-twitter")
+          },
+
+          publicProfile: $("toggle-public-profile")?.checked ?? true,
+          displayBadges: $("toggle-display-badges")?.checked ?? true,
+          zosPlusProfile: $("toggle-zosplus-profile")?.checked ?? false,
+          visibleBadges
+        },
+        {
+          merge: true
+        }
+      );
+
+      alert("Profile saved successfully.");
+    };
+  }
+});
