@@ -11,29 +11,26 @@ content="width=device-width, initial-scale=1.0"
 >
 
 <title>
-Login - ZombieOS
+
+ZombieOS - Login
+
 </title>
 
 <link
 rel="icon"
 type="image/png"
-href="favicon.png"
+href="/favicon.png"
 >
 
 <link
 rel="stylesheet"
-href="css/global.css"
+href="/css/global.css?v=3"
 >
 
 <link
 rel="stylesheet"
-href="css/auth.css"
+href="/css/auth.css?v=3"
 >
-
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-/>
 
 </head>
 
@@ -44,245 +41,131 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 <div class="background-glow glow1"></div>
 <div class="background-glow glow2"></div>
 
-<header class="navbar">
+<main class="auth-container">
 
-<a
-href="/"
-class="logo"
->
+<div class="auth-card">
 
-ZombieOS
+<h1>
 
-</a>
-
-<nav class="nav-links">
-
-<a href="/">
-Home
-</a>
-
-<a href="/downloads">
-Downloads
-</a>
-
-<a href="/signup">
-Signup
-</a>
-
-</nav>
-
-</header>
-
-<main>
-
-<section class="auth-section">
-
-<div class="auth-card floating-card">
-
-<p class="section-eyebrow">
-
-ACCESS RUNTIME
-
-</p>
-
-<h1 class="auth-title">
-
-Login To ZombieOS
+Login
 
 </h1>
 
-<p class="auth-description">
+<p class="auth-subtitle">
 
-Access your runtime identity and dashboard.
+Access the ZombieOS ecosystem.
 
 </p>
 
 <form
-class="auth-form"
 id="login-form"
+class="auth-form"
 >
-
-<!-- EMAIL -->
-
-<div class="input-group">
-
-<label>
-Email
-</label>
 
 <input
 type="email"
-id="login-email"
-placeholder="you@example.com"
+id="email"
+placeholder="Email"
 required
 >
-
-</div>
-
-<!-- PASSWORD -->
-
-<div class="input-group">
-
-<label>
-Password
-</label>
-
-<div class="password-wrapper">
 
 <input
 type="password"
-id="login-password"
-placeholder="Enter password"
+id="password"
+placeholder="Password"
 required
 >
 
-<button
-type="button"
-class="password-toggle"
-id="password-toggle"
+<a
+href="/forgot-password"
+class="auth-link"
 >
 
-<i class="fa-solid fa-eye"></i>
-
-</button>
-
-</div>
-
-</div>
-
-<p class="forgot-password-text">
-
-<a href="/forgot-password">
-
-Forgot password?
+Forgot Password?
 
 </a>
 
-</p>
-
-<!-- LOGIN BUTTON -->
-
 <button
-type="button"
-class="primary-auth-button"
-id="login-button"
+type="submit"
+class="auth-button"
 >
 
 Login
 
 </button>
 
-<!-- DIVIDER -->
+</form>
 
 <div class="auth-divider">
 
 <span>
+
 OR
+
 </span>
 
 </div>
 
-<!-- GOOGLE -->
+<div class="social-auths">
 
 <button
-type="button"
-class="oauth-button google-button"
 id="google-login"
+class="social-button"
 >
 
-<i class="fa-brands fa-google"></i>
-
-Continue with Google
+Google
 
 </button>
 
-<!-- DISCORD -->
-
 <button
-type="button"
-class="oauth-button disabled-oauth"
+class="social-button disabled-button"
 disabled
 >
 
-<i class="fa-brands fa-discord"></i>
-
-Discord Coming Soon
+Discord
 
 </button>
 
-<!-- APPLE -->
-
 <button
-type="button"
-class="oauth-button disabled-oauth"
+class="social-button disabled-button"
 disabled
 >
 
-<i class="fa-brands fa-apple"></i>
-
-Apple Coming Soon
+Apple
 
 </button>
 
-<!-- MICROSOFT -->
-
 <button
-type="button"
-class="oauth-button disabled-oauth"
+class="social-button disabled-button"
 disabled
 >
 
-<i class="fa-brands fa-microsoft"></i>
-
-Microsoft Coming Soon
+Microsoft
 
 </button>
 
-<!-- SIGNUP LINK -->
+</div>
 
-<p class="auth-switch-text">
+<p class="auth-footer">
 
 Don't have an account?
 
 <a href="/signup">
 
-Sign up
+Sign Up
 
 </a>
 
 </p>
 
-</form>
-
 </div>
-
-</section>
 
 </main>
 
-<footer>
-
-<h2>
-
-ZombieOS
-
-</h2>
-
-<p>
-
-ZombieOS / ZOS ©
-<span id="year"></span>
-
-</p>
-
-</footer>
-
-<script src="js/global.js"></script>
-
 <script
 type="module"
-src="js/login.js">
-</script>
+src="/js/login.js?v=3"
+></script>
 
 </body>
 </html>
