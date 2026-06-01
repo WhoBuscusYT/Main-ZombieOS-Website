@@ -49,7 +49,7 @@ getAuth(app);
 const db =
 getFirestore(app);
 
-/* SAVE BUTTON */
+/* ELEMENTS */
 
 const saveButton =
 document.getElementById(
@@ -144,6 +144,113 @@ document.getElementById(
 ).value =
 data.socials?.twitter || "";
 
+/* TOGGLES */
+
+document.getElementById(
+"toggle-public-profile"
+).checked =
+data.publicProfile ?? true;
+
+document.getElementById(
+"toggle-display-badges"
+).checked =
+data.displayBadges ?? true;
+
+document.getElementById(
+"toggle-zosplus-profile"
+).checked =
+data.zosPlusProfile ?? false;
+
+/* BADGE OPTIONS */
+
+const badgeOptions =
+document.getElementById(
+"badge-display-options"
+);
+
+const displayBadgesToggle =
+document.getElementById(
+"toggle-display-badges"
+);
+
+if(displayBadgesToggle.checked){
+
+badgeOptions.style.display =
+"block";
+
+}
+
+displayBadgesToggle.addEventListener(
+"change",
+()=>{
+
+badgeOptions.style.display =
+
+displayBadgesToggle.checked
+? "block"
+: "none";
+
+}
+);
+
+/* BADGE LIST */
+
+const badgeList =
+document.getElementById(
+"badge-toggle-list"
+);
+
+badgeList.innerHTML = "";
+
+if(data.badges){
+
+data.badges.forEach(
+(badge)=>{
+
+const badgeId =
+`badge-${badge}`;
+
+const badgeEnabled =
+
+data.visibleBadges?.[badge]
+?? true;
+
+const badgeElement =
+document.createElement(
+"div"
+);
+
+badgeElement.className =
+"extra-setting-header";
+
+badgeElement.innerHTML =
+
+`
+<span>${badge}</span>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="${badgeId}"
+${badgeEnabled ? "checked" : ""}
+
+>
+
+<span class="slider"></span>
+
+</label>
+`;
+
+badgeList.appendChild(
+badgeElement
+);
+
+}
+);
+
+}
+
 /* ZOS+ */
 
 if(
@@ -221,7 +328,31 @@ return;
 
 }
 
-/* UPDATE AUTH PROFILE */
+/* BADGE VISIBILITY */
+
+const visibleBadges = {};
+
+if(data.badges){
+
+data.badges.forEach(
+(badge)=>{
+
+const toggle =
+document.getElementById(
+`badge-${badge}`
+);
+
+visibleBadges[badge] =
+toggle
+? toggle.checked
+: true;
+
+}
+);
+
+}
+
+/* UPDATE AUTH */
 
 await updateProfile(
 user,
@@ -231,7 +362,7 @@ username
 }
 );
 
-/* SAVE FIRESTORE */
+/* SAVE */
 
 await setDoc(
 userRef,
@@ -255,8 +386,6 @@ data.badges || [],
 createdAt:
 data.createdAt || Date.now(),
 
-/* PROFILE */
-
 bio:
 bio,
 
@@ -278,8 +407,6 @@ lastHandleChange:
 handle !== data.handle
 ? Date.now()
 : lastHandleChange,
-
-/* SOCIALS */
 
 socials:{
 
@@ -313,7 +440,27 @@ document.getElementById(
 "social-twitter"
 ).value.trim()
 
-}
+},
+
+/* EXTRAS */
+
+publicProfile:
+document.getElementById(
+"toggle-public-profile"
+).checked,
+
+displayBadges:
+document.getElementById(
+"toggle-display-badges"
+).checked,
+
+zosPlusProfile:
+document.getElementById(
+"toggle-zosplus-profile"
+).checked,
+
+visibleBadges:
+visibleBadges
 
 },
 {
