@@ -82,6 +82,20 @@ onAuthStateChanged(auth, async (user) => {
 
   const data = userSnap.data();
 
+/* PROFILE PREVIEW */
+
+const previewButton =
+document.getElementById(
+"profile-preview-button"
+);
+
+if(previewButton){
+
+previewButton.href =
+`https://social.zombieos.com/@${data.handle}`;
+
+}
+
   let avatarBase64 = data.avatarBase64 || "";
   let bannerBase64 = data.bannerBase64 || "";
 
