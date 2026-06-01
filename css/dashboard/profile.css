@@ -76,6 +76,17 @@ box-shadow:
 0 0 30px rgba(0,255,153,0.18);
 }
 
+/* NOTES */
+
+.upload-note{
+
+font-size:0.85rem;
+
+color:#8f8f8f;
+
+margin-top:4px;
+}
+
 /* BUTTONS */
 
 .profile-upload-button,
@@ -190,8 +201,6 @@ border-color:#00ff99;
 box-shadow:
 0 0 18px rgba(0,255,153,0.12);
 }
-
-/* NOTES */
 
 .profile-note{
 
@@ -333,13 +342,6 @@ flex-direction:column;
 gap:14px;
 }
 
-/* COMING SOON */
-
-.profile-coming-soon{
-
-display:none;
-}
-
 /* SAVE */
 
 .profile-save-section{
@@ -363,14 +365,12 @@ color:black;
 font-weight:700;
 }
 
-/* MOBILE NAVBAR */
+/* MOBILE */
 
 .mobile-navbar-toggle{
 
 display:none;
 }
-
-/* MOBILE */
 
 @media(max-width:768px){
 
@@ -409,15 +409,6 @@ font-size:1rem;
 font-weight:700;
 
 z-index:100000;
-
-box-shadow:
-0 0 24px rgba(0,255,153,0.14);
-}
-
-.dashboard-navbar{
-
-transition:
-opacity 0.3s;
 }
 
 .dashboard-navbar.hidden-navbar{
@@ -442,13 +433,6 @@ height:180px;
 
 width:110px;
 height:110px;
-}
-
-.profile-avatar-section{
-
-margin-top:-55px;
-
-padding-left:18px;
 }
 
 .profile-save-section{
