@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+
+ZombieOS - Settings
+
+</title>
+
+<link
+rel="icon"
+type="image/png"
+href="/favicon.png"
+>
+
+<link
+rel="stylesheet"
+href="/css/global.css?v=1"
+>
+
+<link
+rel="stylesheet"
+href="/css/dashboard.css?v=1"
+>
+
+<link
+rel="stylesheet"
+href="/css/dashboard/settings.css?v=1"
+>
+
+</head>
+
+<body>
+
+<div class="background-grid"></div>
+
+<div class="background-glow glow1"></div>
+<div class="background-glow glow2"></div>
+
+<!-- MOBILE NAV -->
+
+<button
+id="mobile-navbar-toggle"
+class="mobile-navbar-toggle"
+>
+
+Hide Menu
+
+</button>
+
+<!-- NAVBAR -->
+
+<header
+id="dashboard-navbar"
+class="dashboard-navbar"
+>
+
+<div class="dashboard-navbar-top">
+
+<a
+href="/dashboard"
+class="dashboard-logo"
+>
+
+ZOS DASH
+
+</a>
+
+<nav class="dashboard-links">
+
+<a href="/dashboard/profile">
+
+Profile
+
+</a>
+
+<a href="/dashboard/details">
+
+Details
+
+</a>
+
+<a href="/dashboard/settings">
+
+Settings
+
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+<!-- MAIN -->
+
+<main class="settings-main">
+
+<!-- MAIN SETTINGS -->
+
+<section class="dashboard-card">
+
+<h2>
+
+Main Settings
+
+</h2>
+
+<div class="settings-form">
+
+<div class="settings-input-group">
+
+<label>
+
+Email
+
+</label>
+
+<input
+type="email"
+id="settings-email"
+placeholder="Email"
+>
+
+</div>
+
+<div class="settings-input-group">
+
+<label>
+
+Phone Number
+
+</label>
+
+<input
+type="tel"
+id="settings-phone"
+placeholder="Phone Number"
+>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- PASSWORD -->
+
+<section class="dashboard-card">
+
+<h2>
+
+Password
+
+</h2>
+
+<div class="settings-form">
+
+<input
+type="password"
+id="current-password"
+placeholder="Current Password"
+>
+
+<input
+type="password"
+id="new-password"
+placeholder="New Password"
+>
+
+<input
+type="password"
+id="confirm-password"
+placeholder="Confirm New Password"
+>
+
+<button
+id="change-password-button"
+class="settings-save-button"
+>
+
+Change Password
+
+</button>
+
+</div>
+
+</section>
+
+<!-- PRIVACY -->
+
+<section class="dashboard-card">
+
+<h2>
+
+Privacy
+
+</h2>
+
+<div class="settings-toggles">
+
+<div class="settings-toggle-row">
+
+<span>
+
+Accept Friend Requests
+
+</span>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="toggle-friends"
+>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+<div class="settings-toggle-row">
+
+<span>
+
+Accept DMs
+
+</span>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="toggle-dms"
+>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ACCOUNT -->
+
+<section class="dashboard-card">
+
+<h2>
+
+Account
+
+</h2>
+
+<div class="account-actions">
+
+<button
+id="disable-account-button"
+class="disable-button"
+>
+
+Disable Account
+
+</button>
+
+<button
+id="delete-account-button"
+class="delete-button"
+>
+
+Delete Account
+
+</button>
+
+<p class="delete-warning">
+
+Deleting your account is permanent.
+All account data will be permanently removed and cannot be recovered.
+This action cannot be undone.
+
+</p>
+
+</div>
+
+</section>
+
+<!-- SAVE -->
+
+<section class="settings-save-section">
+
+<button
+id="save-settings-button"
+class="settings-save-button"
+>
+
+Save Settings
+
+</button>
+
+</section>
+
+</main>
+
+<script
+type="module"
+src="/js/dashboard/settings.js?v=1"
+></script>
+
+</body>
+</html>
