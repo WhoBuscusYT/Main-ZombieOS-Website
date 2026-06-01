@@ -51,7 +51,7 @@ getAuth(app);
 const db =
 getFirestore(app);
 
-/* SIGNUP FORM */
+/* SIGNUP */
 
 const signupForm =
 document.getElementById(
@@ -113,7 +113,7 @@ password
 const user =
 credential.user;
 
-/* UPDATE AUTH PROFILE */
+/* DISPLAY NAME */
 
 await updateProfile(
 user,
@@ -135,8 +135,6 @@ db,
 const counterSnap =
 await getDoc(counterRef);
 
-/* CURRENT ID */
-
 let currentUserId =
 0;
 
@@ -146,8 +144,6 @@ currentUserId =
 counterSnap.data().currentUserId || 0;
 
 }
-
-/* NEXT ID */
 
 const nextUserId =
 currentUserId + 1;
@@ -165,12 +161,12 @@ merge:true
 }
 );
 
-/* DEFAULT HANDLE */
+/* HANDLE */
 
 const defaultHandle =
 `zoz-${nextUserId}`;
 
-/* SAVE USER */
+/* USER DATA */
 
 await setDoc(
 doc(
@@ -199,10 +195,7 @@ badges:[
 createdAt:
 Date.now(),
 
-/* PROFILE */
-
 bio:"",
-
 pronouns:"",
 
 handle:
@@ -217,8 +210,6 @@ profileColor:
 lastHandleChange:
 0,
 
-/* SOCIALS */
-
 socials:{
 
 youtube:"",
@@ -228,6 +219,16 @@ instagram:"",
 facebook:"",
 twitter:""
 
+},
+
+publicProfile:true,
+
+displayBadges:true,
+
+zosPlusProfile:false,
+
+visibleBadges:{
+prototype:true
 }
 
 }
@@ -295,8 +296,6 @@ db,
 const counterSnap =
 await getDoc(counterRef);
 
-/* CURRENT ID */
-
 let currentUserId =
 0;
 
@@ -306,8 +305,6 @@ currentUserId =
 counterSnap.data().currentUserId || 0;
 
 }
-
-/* NEXT ID */
 
 const nextUserId =
 currentUserId + 1;
@@ -325,19 +322,18 @@ merge:true
 }
 );
 
-/* DEFAULT HANDLE */
-
-const defaultHandle =
-`zoz-${nextUserId}`;
-
 /* USERNAME */
 
 const username =
 
 user.displayName ||
 
-user.email
-.split("@")[0];
+user.email.split("@")[0];
+
+/* HANDLE */
+
+const defaultHandle =
+`zoz-${nextUserId}`;
 
 /* SAVE USER */
 
@@ -368,10 +364,7 @@ badges:[
 createdAt:
 Date.now(),
 
-/* PROFILE */
-
 bio:"",
-
 pronouns:"",
 
 handle:
@@ -386,8 +379,6 @@ profileColor:
 lastHandleChange:
 0,
 
-/* SOCIALS */
-
 socials:{
 
 youtube:"",
@@ -397,6 +388,16 @@ instagram:"",
 facebook:"",
 twitter:""
 
+},
+
+publicProfile:true,
+
+displayBadges:true,
+
+zosPlusProfile:false,
+
+visibleBadges:{
+prototype:true
 }
 
 },
@@ -404,8 +405,6 @@ twitter:""
 merge:true
 }
 );
-
-/* REDIRECT */
 
 window.location.href =
 "/dashboard";
