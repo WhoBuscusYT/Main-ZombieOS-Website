@@ -1,0 +1,189 @@
+<!-- /tickets/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+
+ZombieOS - Support
+
+</title>
+
+<link
+rel="icon"
+type="image/png"
+href="/favicon.png"
+>
+
+<link
+rel="stylesheet"
+href="/css/global.css?v=1"
+>
+
+<link
+rel="stylesheet"
+href="/css/dashboard.css?v=1"
+>
+
+<link
+rel="stylesheet"
+href="/css/tickets/dashboard.css?v=1"
+>
+
+</head>
+
+<body>
+
+<div class="background-grid"></div>
+
+<div class="background-glow glow1"></div>
+<div class="background-glow glow2"></div>
+
+<!-- MOBILE NAV -->
+
+<button
+id="mobile-navbar-toggle"
+class="mobile-navbar-toggle"
+>
+
+Hide Menu
+
+</button>
+
+<!-- NAVBAR -->
+
+<header
+id="dashboard-navbar"
+class="dashboard-navbar"
+>
+
+<div class="dashboard-navbar-top">
+
+<a
+href="/dashboard"
+class="dashboard-logo"
+>
+
+ZOS SUPPORT
+
+</a>
+
+<nav class="dashboard-links">
+
+<a href="/dashboard">
+
+Dashboard
+
+</a>
+
+<a href="/tickets">
+
+Tickets
+
+</a>
+
+<a href="/dashboard/settings">
+
+Settings
+
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+<!-- MAIN -->
+
+<main class="tickets-main">
+
+<!-- HERO -->
+
+<section class="dashboard-card tickets-hero">
+
+<h1>
+
+Support Center
+
+</h1>
+
+<p>
+
+Need help with ZombieOS?
+Create tickets, manage support requests,
+and communicate directly with staff.
+
+</p>
+
+<div class="tickets-hero-buttons">
+
+<a
+href="/tickets/create"
+class="tickets-create-button"
+>
+
+Create Ticket
+
+</a>
+
+<a
+href="/tickets/staff"
+class="tickets-staff-button"
+>
+
+Staff Dashboard
+
+</a>
+
+</div>
+
+</section>
+
+<!-- USER TICKETS -->
+
+<section class="dashboard-card">
+
+<div class="tickets-section-header">
+
+<h2>
+
+Your Tickets
+
+</h2>
+
+</div>
+
+<div
+id="tickets-container"
+class="tickets-container"
+>
+
+<div class="tickets-loading">
+
+Loading tickets...
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+<script
+type="module"
+src="/js/tickets/dashboard.js?v=1"
+></script>
+
+</body>
+</html>
