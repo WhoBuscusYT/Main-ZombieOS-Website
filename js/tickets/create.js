@@ -250,7 +250,7 @@ uid:
 user.uid,
 
 username:
-userData.username,
+userData.username || user.displayName || "Unknown User",
 
 title:
 title,
@@ -284,7 +284,7 @@ messages:[
 
 {
 author:
-userData.username,
+userData.username || user.displayName || "Unknown User",
 
 uid:
 user.uid,
