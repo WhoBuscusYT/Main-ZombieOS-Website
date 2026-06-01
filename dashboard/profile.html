@@ -11,7 +11,9 @@ content="width=device-width, initial-scale=1.0"
 >
 
 <title>
+
 ZombieOS - Profile
+
 </title>
 
 <link
@@ -22,17 +24,17 @@ href="/favicon.png"
 
 <link
 rel="stylesheet"
-href="/css/global.css?v=1"
+href="/css/global.css?v=7"
 >
 
 <link
 rel="stylesheet"
-href="/css/dashboard.css?v=1"
+href="/css/dashboard.css?v=7"
 >
 
 <link
 rel="stylesheet"
-href="/css/dashboard/profile.css?v=1"
+href="/css/dashboard/profile.css?v=7"
 >
 
 </head>
@@ -46,14 +48,14 @@ href="/css/dashboard/profile.css?v=1"
 <div class="background-glow glow1"></div>
 <div class="background-glow glow2"></div>
 
-<!-- MOBILE NAV TOGGLE -->
+<!-- MOBILE NAVBAR BUTTON -->
 
 <button
 id="mobile-navbar-toggle"
 class="mobile-navbar-toggle"
 >
 
-☰
+Hide Menu
 
 </button>
 
@@ -61,7 +63,8 @@ class="mobile-navbar-toggle"
 
 <header
 id="dashboard-navbar"
-class="dashboard-navbar">
+class="dashboard-navbar"
+>
 
 <div class="dashboard-navbar-top">
 
@@ -164,7 +167,7 @@ hidden
 
 </section>
 
-<!-- PROFILE SETTINGS -->
+<!-- PROFILE -->
 
 <section class="dashboard-card">
 
@@ -301,6 +304,125 @@ placeholder="Twitter/X URL"
 
 </section>
 
+<!-- EXTRAS -->
+
+<section class="dashboard-card">
+
+<h2>
+
+Extras
+
+</h2>
+
+<div class="extras-container">
+
+<!-- PUBLIC PROFILE -->
+
+<div class="extra-setting">
+
+<div class="extra-setting-header">
+
+<span>
+
+Public Profile
+
+</span>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="toggle-public-profile"
+>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+</div>
+
+<!-- DISPLAY BADGES -->
+
+<div class="extra-setting">
+
+<div class="extra-setting-header">
+
+<span>
+
+Display Badges
+
+</span>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="toggle-display-badges"
+>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+<!-- BADGE OPTIONS -->
+
+<div
+id="badge-display-options"
+class="badge-display-options"
+>
+
+<p class="profile-note">
+
+Choose which badges appear publicly.
+
+</p>
+
+<div
+id="badge-toggle-list"
+class="badge-toggle-list"
+>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ZOS+ PROFILE -->
+
+<div class="extra-setting">
+
+<div class="extra-setting-header">
+
+<span>
+
+Toggle ZOS+ Profile
+
+</span>
+
+<label class="switch">
+
+<input
+type="checkbox"
+id="toggle-zosplus-profile"
+>
+
+<span class="slider"></span>
+
+</label>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
 <!-- ZOS+ -->
 
 <section
@@ -341,8 +463,8 @@ Save Changes
 
 <script
 type="module"
-src="/js/dashboard/profile.js?v=1">
-</script>
+src="/js/dashboard/profile.js?v=7"
+></script>
 
 </body>
 </html>
