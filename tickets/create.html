@@ -1,0 +1,251 @@
+<!-- /tickets/create.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+
+ZombieOS - Create Ticket
+
+</title>
+
+<link
+rel="icon"
+type="image/png"
+href="/favicon.png"
+>
+
+<link
+rel="stylesheet"
+href="/css/global.css?v=1"
+>
+
+<link
+rel="stylesheet"
+href="/css/dashboard.css?v=1"
+>
+
+<link
+rel="stylesheet"
+href="/css/tickets/create.css?v=1"
+>
+
+</head>
+
+<body>
+
+<div class="background-grid"></div>
+
+<div class="background-glow glow1"></div>
+<div class="background-glow glow2"></div>
+
+<!-- MOBILE NAV -->
+
+<button
+id="mobile-navbar-toggle"
+class="mobile-navbar-toggle"
+>
+
+Hide Menu
+
+</button>
+
+<!-- NAVBAR -->
+
+<header
+id="dashboard-navbar"
+class="dashboard-navbar"
+>
+
+<div class="dashboard-navbar-top">
+
+<a
+href="/dashboard"
+class="dashboard-logo"
+>
+
+ZOS SUPPORT
+
+</a>
+
+<nav class="dashboard-links">
+
+<a href="/dashboard">
+
+Dashboard
+
+</a>
+
+<a href="/tickets">
+
+Tickets
+
+</a>
+
+<a href="/dashboard/settings">
+
+Settings
+
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+<!-- MAIN -->
+
+<main class="create-ticket-main">
+
+<section class="dashboard-card create-ticket-card">
+
+<h1>
+
+Create Ticket
+
+</h1>
+
+<p>
+
+Need help?
+Create a support ticket and our team will assist you.
+
+</p>
+
+<div class="create-ticket-form">
+
+<!-- TITLE -->
+
+<div class="ticket-input-group">
+
+<label>
+
+Ticket Title
+
+</label>
+
+<input
+type="text"
+id="ticket-title"
+placeholder="Issue title..."
+maxlength="100"
+>
+
+</div>
+
+<!-- CATEGORY -->
+
+<div class="ticket-input-group">
+
+<label>
+
+Category
+
+</label>
+
+<select id="ticket-category">
+
+<option value="Account">
+
+Account
+
+</option>
+
+<option value="Billing">
+
+Billing
+
+</option>
+
+<option value="Bug Report">
+
+Bug Report
+
+</option>
+
+<option value="Creator Program">
+
+Creator Program
+
+</option>
+
+<option value="Dev Program">
+
+Dev Program
+
+</option>
+
+<option value="Technical Support">
+
+Technical Support
+
+</option>
+
+<option value="Appeal">
+
+Appeal
+
+</option>
+
+<option value="Other">
+
+Other
+
+</option>
+
+</select>
+
+</div>
+
+<!-- DESCRIPTION -->
+
+<div class="ticket-input-group">
+
+<label>
+
+Description
+
+</label>
+
+<textarea
+id="ticket-description"
+placeholder="Describe your issue..."
+maxlength="4000"
+></textarea>
+
+</div>
+
+<!-- BUTTON -->
+
+<button
+id="create-ticket-button"
+class="create-ticket-button"
+>
+
+Create Ticket
+
+</button>
+
+</div>
+
+</section>
+
+</main>
+
+<script
+type="module"
+src="/js/tickets/create.js?v=1"
+></script>
+
+</body>
+</html>
