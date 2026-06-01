@@ -446,3 +446,55 @@ width:100%;
 }
 
 }
+
+.profile-save-section{
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+gap:18px;
+
+flex-wrap:wrap;
+}
+
+.profile-preview-button{
+
+display:inline-flex;
+
+align-items:center;
+
+justify-content:center;
+
+padding:
+14px 18px;
+
+border-radius:18px;
+
+background:
+rgba(255,255,255,0.04);
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+color:#d0d0d0;
+
+text-decoration:none;
+
+transition:0.25s;
+}
+
+.profile-preview-button:hover{
+
+transform:
+translateY(-2px);
+
+border-color:#00ff99;
+
+color:#00ff99;
+
+box-shadow:
+0 0 20px rgba(0,255,153,0.14);
+}
