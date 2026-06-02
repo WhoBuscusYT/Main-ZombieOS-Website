@@ -159,7 +159,7 @@ if(
 ){
 
 window.location.href =
-"/errors/403";
+"/403";
 
 return;
 
