@@ -126,6 +126,8 @@ onAuthStateChanged(
 auth,
 async(user)=>{
 
+try{
+
 if(!user){
 
 window.location.href =
@@ -134,6 +136,8 @@ window.location.href =
 return;
 
 }
+
+/* TICKET */
 
 const ticketRef =
 doc(
@@ -163,7 +167,45 @@ return;
 let ticket =
 ticketSnap.data();
 
-/* STAFF BYPASS */
+/* USER */
+
+const userRef =
+doc(
+db,
+"users",
+user.uid
+);
+
+const userSnap =
+await getDoc(
+userRef
+);
+
+if(!userSnap.exists()){
+
+alert(
+"User profile not found."
+);
+
+window.location.href =
+"/dashboard";
+
+return;
+
+}
+
+const userData =
+userSnap.data();
+
+const username =
+
+userData.username ||
+
+user.displayName ||
+
+"Unknown User";
+
+/* STAFF CHECK */
 
 const badges =
 userData.badges || [];
@@ -181,7 +223,7 @@ normalizedBadges.includes(
 "STAFF"
 );
 
-/* ACCESS */
+/* PARTICIPANT CHECK */
 
 const isParticipant =
 
@@ -207,33 +249,6 @@ window.location.href =
 return;
 
 }
-
-/* USER */
-
-const userRef =
-doc(
-db,
-"users",
-user.uid
-);
-
-const userSnap =
-await getDoc(
-userRef
-);
-
-const userData =
-userSnap.exists()
-? userSnap.data()
-: {};
-
-const username =
-
-userData.username ||
-
-user.displayName ||
-
-"Unknown User";
 
 /* RENDER */
 
@@ -356,6 +371,18 @@ return;
 
 }
 
+/* ROLE */
+
+let role =
+"USER";
+
+if(isStaff){
+
+role =
+"SUPPORT";
+
+}
+
 /* USER MESSAGE */
 
 const newMessage = {
@@ -372,7 +399,7 @@ reply,
 timestamp:
 Date.now(),
 
-role:"USER"
+role:role
 
 };
 
@@ -583,6 +610,45 @@ replyBox.value =
 renderTicket();
 
 };
+
+}catch(error){
+
+console.error(error);
+
+document.body.innerHTML =
+
+`
+<div style="
+padding:40px;
+background:black;
+color:white;
+font-family:sans-serif;
+min-height:100vh;
+">
+
+<h1>ZOS-E500</h1>
+
+<p>
+
+Ticket system crashed.
+
+</p>
+
+<hr>
+
+<pre style="
+white-space:pre-wrap;
+word-break:break-word;
+">
+
+${error}
+
+</pre>
+
+</div>
+`;
+
+}
 
 }
 );
