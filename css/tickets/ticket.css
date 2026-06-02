@@ -135,3 +135,55 @@ font-size:2.2rem;
 }
 
 }
+
+.ticket-role-badge{
+
+display:inline-flex;
+
+align-items:center;
+justify-content:center;
+
+margin-left:10px;
+
+padding:
+4px 10px;
+
+border-radius:999px;
+
+font-size:0.72rem;
+
+font-weight:700;
+}
+
+.bot-badge{
+
+background:
+rgba(59,130,246,0.15);
+
+border:
+1px solid rgba(59,130,246,0.3);
+
+color:#60a5fa;
+}
+
+.support-badge{
+
+background:
+rgba(0,255,153,0.14);
+
+border:
+1px solid rgba(0,255,153,0.3);
+
+color:#00ff99;
+}
+
+.system-badge{
+
+background:
+rgba(168,85,247,0.14);
+
+border:
+1px solid rgba(168,85,247,0.3);
+
+color:#c084fc;
+}
