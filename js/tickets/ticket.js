@@ -242,81 +242,75 @@ ticket.status || "OPEN";
 
 /* MESSAGES */
 
-ticketMessages.innerHTML =
-"";
+ticketMessages.innerHTML = "";
 
 const messages =
 ticket.messages || [];
 
-for(
-let i = 0;
-i < messages.length;
-i++
-){
+messages.forEach((msg)=>{
 
-const msg =
-messages[i];
-
-const div =
+const card =
 document.createElement("div");
 
-div.className =
-"ticket-message";
+card.className =
+"ticket-message-card";
 
-let badge =
-"";
+let badgeHTML = "";
 
 if(msg.role === "BOT"){
 
-badge =
-'<span class="ticket-role-badge bot-badge">BOT</span>';
+badgeHTML =
+`<span class="ticket-badge bot-badge">BOT</span>`;
 
 }
 
 if(msg.role === "SUPPORT"){
 
-badge =
-'<span class="ticket-role-badge support-badge">SUPPORT</span>';
+badgeHTML =
+`<span class="ticket-badge support-badge">SUPPORT</span>`;
 
 }
 
 if(msg.role === "SYSTEM"){
 
-badge =
-'<span class="ticket-role-badge system-badge">SYSTEM</span>';
+badgeHTML =
+`<span class="ticket-badge system-badge">SYSTEM</span>`;
 
 }
 
-div.innerHTML =
+card.innerHTML =
 
-'<div class="ticket-message-author">' +
+`
+<div class="ticket-message-header">
 
-(msg.author || "Unknown") +
+<span class="ticket-author">
 
-" " +
+${msg.author || "Unknown"}
 
-badge +
+</span>
 
-'</div>' +
+${badgeHTML}
 
-'<div class="ticket-message-text">' +
+</div>
 
-(msg.message || "") +
+<div class="ticket-message-content">
 
-'</div>' +
+${msg.message || ""}
 
-'<div class="ticket-message-time">' +
+</div>
 
-new Date(msg.timestamp)
-.toLocaleString() +
+<div class="ticket-message-time">
 
-'</div>';
+${new Date(
+msg.timestamp
+).toLocaleString()}
 
-ticketMessages.appendChild(div);
+</div>
+`;
 
-}
+ticketMessages.appendChild(card);
 
-/* AUTO SCROLL */
+});
 
 ticketMessages.scrollTop =
 ticketMessages.scrollHeight;

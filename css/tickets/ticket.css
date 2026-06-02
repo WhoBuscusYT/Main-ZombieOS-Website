@@ -123,3 +123,138 @@ translateY(-2px);
 box-shadow:
 0 0 22px rgba(0,255,153,0.35);
 }
+
+/* MESSAGE CARDS */
+
+.ticket-message-card{
+
+background:
+rgba(0,0,0,0.35);
+
+border:
+1px solid rgba(255,255,255,0.06);
+
+border-radius:28px;
+
+padding:24px;
+
+margin-top:20px;
+
+backdrop-filter:blur(10px);
+}
+
+.ticket-message-header{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+margin-bottom:18px;
+}
+
+.ticket-author{
+
+font-size:1.5rem;
+
+font-weight:700;
+
+color:#00ff99;
+}
+
+.ticket-message-content{
+
+font-size:1.15rem;
+
+line-height:1.7;
+
+color:white;
+
+word-wrap:break-word;
+}
+
+.ticket-message-time{
+
+margin-top:18px;
+
+font-size:0.95rem;
+
+opacity:0.7;
+}
+
+/* BADGES */
+
+.ticket-badge{
+
+padding:
+6px 14px;
+
+border-radius:999px;
+
+font-size:0.8rem;
+
+font-weight:700;
+}
+
+.bot-badge{
+
+background:
+rgba(0,140,255,0.15);
+
+border:
+1px solid rgba(0,140,255,0.4);
+
+color:#6ab7ff;
+}
+
+.support-badge{
+
+background:
+rgba(0,255,153,0.15);
+
+border:
+1px solid rgba(0,255,153,0.4);
+
+color:#00ff99;
+}
+
+.system-badge{
+
+background:
+rgba(255,180,0,0.15);
+
+border:
+1px solid rgba(255,180,0,0.4);
+
+color:#ffc14d;
+}
+
+@media (min-width: 901px){
+
+.dashboard-navbar{
+
+display:flex !important;
+
+flex-direction:row !important;
+
+align-items:center !important;
+
+justify-content:space-between !important;
+}
+
+.dashboard-links{
+
+display:flex !important;
+
+flex-direction:row !important;
+
+gap:24px !important;
+}
+
+.mobile-navbar-toggle{
+
+display:none !important;
+}
+
+}
