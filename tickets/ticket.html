@@ -1,5 +1,3 @@
-<!-- /tickets/ticket.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,29 +12,29 @@ content="width=device-width, initial-scale=1.0"
 
 <title>
 
-ZombieOS - Ticket
+Ticket - ZombieOS
 
 </title>
+
+<link
+rel="stylesheet"
+href="/css/global.css?v=100"
+>
+
+<link
+rel="stylesheet"
+href="/css/dashboard.css?v=100"
+>
+
+<link
+rel="stylesheet"
+href="/css/tickets/ticket.css?v=100"
+>
 
 <link
 rel="icon"
 type="image/png"
 href="/favicon.png"
->
-
-<link
-rel="stylesheet"
-href="/css/global.css?v=1"
->
-
-<link
-rel="stylesheet"
-href="/css/dashboard.css?v=1"
->
-
-<link
-rel="stylesheet"
-href="/css/tickets/ticket.css?v=2"
 >
 
 </head>
@@ -101,7 +99,7 @@ Settings
 
 <main class="ticket-main">
 
-<section class="dashboard-card ticket-header-card">
+<section class="dashboard-card">
 
 <h1 id="ticket-title">
 
@@ -117,7 +115,7 @@ Loading ticket data...
 
 <div
 id="ticket-status"
-class="ticket-status-pill"
+class="ticket-status"
 >
 
 OPEN
@@ -125,6 +123,52 @@ OPEN
 </div>
 
 </section>
+
+<!-- STAFF COMMANDS -->
+
+<section
+id="staff-commands"
+class="dashboard-card"
+style="display:none;"
+>
+
+<h2>
+
+Staff Commands
+
+</h2>
+
+<div class="staff-command-grid">
+
+<button id="claim-ticket">
+
+Claim Ticket
+
+</button>
+
+<button id="close-ticket">
+
+Close Ticket
+
+</button>
+
+<button id="reopen-ticket">
+
+Reopen Ticket
+
+</button>
+
+<button id="priority-10">
+
+Priority 10
+
+</button>
+
+</div>
+
+</section>
+
+<!-- MESSAGES -->
 
 <section class="dashboard-card">
 
@@ -134,31 +178,22 @@ Messages
 
 </h2>
 
-<div
-id="ticket-messages"
-class="ticket-messages"
->
+<div id="ticket-messages">
 
 Loading messages...
 
 </div>
-
-<div class="ticket-reply-box">
 
 <textarea
 id="ticket-reply"
 placeholder="Write a reply..."
 ></textarea>
 
-<button
-id="send-reply-button"
->
+<button id="send-reply-button">
 
 Send Reply
 
 </button>
-
-</div>
 
 </section>
 
@@ -166,7 +201,7 @@ Send Reply
 
 <script
 type="module"
-src="/js/tickets/ticket.js?v=2"
+src="/js/tickets/ticket.js?v=5000"
 ></script>
 
 </body>
