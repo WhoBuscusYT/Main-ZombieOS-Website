@@ -130,8 +130,27 @@ await getDoc(userRef);
 
 if(!userSnap.exists()){
 
-window.location.href =
-"/dashboard";
+document.body.innerHTML =
+
+`
+<div style="
+padding:40px;
+font-family:sans-serif;
+background:black;
+color:white;
+min-height:100vh;
+">
+
+<h1>ZOS-E404</h1>
+
+<p>
+
+User profile not found.
+
+</p>
+
+</div>
+`;
 
 return;
 
@@ -149,7 +168,7 @@ const normalizedBadges =
 
 badges.map(
 badge =>
-badge.toUpperCase()
+String(badge).toUpperCase()
 );
 
 const isStaff =
@@ -157,6 +176,30 @@ const isStaff =
 normalizedBadges.includes(
 "STAFF"
 );
+
+/* DEBUG */
+
+console.log(
+"USER DATA:",
+userData
+);
+
+console.log(
+"BADGES:",
+badges
+);
+
+console.log(
+"NORMALIZED:",
+normalizedBadges
+);
+
+console.log(
+"IS STAFF:",
+isStaff
+);
+
+/* BLOCK */
 
 if(!isStaff){
 
@@ -166,22 +209,27 @@ document.body.innerHTML =
 <div style="
 padding:40px;
 font-family:sans-serif;
-color:white;
 background:black;
+color:white;
 min-height:100vh;
 ">
 
 <h1>ZOS-E403</h1>
 
 <p>
+
 You do not have permission to access the staff dashboard.
+
 </p>
 
 <hr>
 
 <h2>DEBUG</h2>
 
-<pre>
+<pre style="
+white-space:pre-wrap;
+word-break:break-word;
+">
 
 ${JSON.stringify(userData,null,2)}
 
@@ -209,6 +257,8 @@ $("staff-ticket-list");
 
 ticketContainer.innerHTML =
 "";
+
+/* GET TICKETS */
 
 const ticketSnapshot =
 await getDocs(
@@ -240,7 +290,17 @@ tickets.sort(
 if(tickets.length === 0){
 
 ticketContainer.innerHTML =
-"No tickets found.";
+
+`
+<div style="
+padding:20px;
+color:#b8b8b8;
+">
+
+No tickets found.
+
+</div>
+`;
 
 return;
 
@@ -361,7 +421,7 @@ ticketEl
 
 });
 
-/* CLAIM BUTTONS */
+/* CLAIM */
 
 document
 .querySelectorAll(".staff-claim")
@@ -379,15 +439,6 @@ db,
 "tickets",
 ticketId
 );
-
-const ticketSnap =
-await getDoc(ticketRef);
-
-if(!ticketSnap.exists()){
-
-return;
-
-}
 
 await setDoc(
 ticketRef,
