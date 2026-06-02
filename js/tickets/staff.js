@@ -397,6 +397,6 @@ true;
 const DEV_STAFF = [
 
 "whobuscusyt",
-"YourAltHere"
+"WhoBuscusYT"
 
 ];
