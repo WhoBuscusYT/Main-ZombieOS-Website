@@ -127,11 +127,39 @@ messages.forEach((msg) => {
 const msgEl = document.createElement("div");
 msgEl.className = "ticket-message";
 
+let badge =
+"";
+
+if(msg.role === "BOT"){
+
+badge =
+`<span class="ticket-role-badge bot-badge">BOT</span>`;
+
+}
+
+if(msg.role === "SUPPORT"){
+
+badge =
+`<span class="ticket-role-badge support-badge">SUPPORT</span>`;
+
+}
+
+if(msg.role === "SYSTEM"){
+
+badge =
+`<span class="ticket-role-badge system-badge">SYSTEM</span>`;
+
+}
+
 msgEl.innerHTML = `
-<div class="ticket-message-author">${msg.author || "Unknown User"}</div>
-<div class="ticket-message-text">${msg.message || ""}</div>
-<div class="ticket-message-time">${new Date(msg.timestamp).toLocaleString()}</div>
-`;
+
+<div class="ticket-message-author">
+
+${msg.author || "Unknown User"}
+
+${badge}
+
+</div>
 
 messagesBox.appendChild(msgEl);
 
