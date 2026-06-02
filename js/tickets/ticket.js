@@ -64,6 +64,9 @@ document.getElementById("staff-commands");
 const claimButton =
 document.getElementById("claim-ticket");
 
+const tabTitle =
+document.getElementById("tab-title");
+
 /* PARAMS */
 
 const params =
@@ -604,3 +607,11 @@ mobileToggle.textContent =
 }
 
 };
+
+/* Tab name */
+const tabName =
+document.getElementById(
+"title"
+);
+
+tabName.textContent = "Ticket - " + ticketId + " - ZombieOS"

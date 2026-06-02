@@ -137,8 +137,12 @@ error
 
 /* GREETING */
 
+let count = 0;
+
+while(count < 5) {
 greeting.textContent =
 `${getGreeting()}, ${username}`;
+}
 
 /* PLAYTIME */
 
