@@ -1,65 +1,146 @@
+<!-- /tickets/ticket.html -->
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ZombieOS - Ticket</title>
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
 
-<link rel="icon" type="image/png" href="/favicon.png">
-<link rel="stylesheet" href="/css/global.css?v=1">
-<link rel="stylesheet" href="/css/dashboard.css?v=1">
-<link rel="stylesheet" href="/css/tickets/ticket.css?v=1">
+<title>
+
+ZombieOS - Ticket
+
+</title>
+
+<link
+rel="icon"
+type="image/png"
+href="/favicon.png"
+>
+
+<link
+rel="stylesheet"
+href="/css/global.css?v=1"
+>
+
+<link
+rel="stylesheet"
+href="/css/dashboard.css?v=1"
+>
+
+<link
+rel="stylesheet"
+href="/css/tickets/ticket.css?v=2"
+>
+
 </head>
 
 <body>
 
 <div class="background-grid"></div>
+
 <div class="background-glow glow1"></div>
 <div class="background-glow glow2"></div>
 
-<button id="mobile-navbar-toggle" class="mobile-navbar-toggle">
+<button
+id="mobile-navbar-toggle"
+class="mobile-navbar-toggle"
+>
+
 Hide Menu
+
 </button>
 
-<header id="dashboard-navbar" class="dashboard-navbar">
+<header
+id="dashboard-navbar"
+class="dashboard-navbar"
+>
+
 <div class="dashboard-navbar-top">
 
-<a href="/dashboard" class="dashboard-logo">
+<a
+href="/dashboard"
+class="dashboard-logo"
+>
+
 ZOS SUPPORT
+
 </a>
 
 <nav class="dashboard-links">
-<a href="/dashboard">Dashboard</a>
-<a href="/tickets">Tickets</a>
-<a href="/dashboard/settings">Settings</a>
+
+<a href="/dashboard">
+
+Dashboard
+
+</a>
+
+<a href="/tickets">
+
+Tickets
+
+</a>
+
+<a href="/dashboard/settings">
+
+Settings
+
+</a>
+
 </nav>
 
 </div>
+
 </header>
 
 <main class="ticket-main">
 
 <section class="dashboard-card ticket-header-card">
 
-<h1 id="ticket-title">Loading...</h1>
+<h1 id="ticket-title">
+
+Loading...
+
+</h1>
 
 <p id="ticket-meta">
+
 Loading ticket data...
+
 </p>
 
-<div id="ticket-status" class="ticket-status-pill">
+<div
+id="ticket-status"
+class="ticket-status-pill"
+>
+
 OPEN
+
 </div>
 
 </section>
 
 <section class="dashboard-card">
 
-<h2>Messages</h2>
+<h2>
 
-<div id="ticket-messages" class="ticket-messages">
+Messages
+
+</h2>
+
+<div
+id="ticket-messages"
+class="ticket-messages"
+>
+
 Loading messages...
+
 </div>
 
 <div class="ticket-reply-box">
@@ -69,8 +150,12 @@ id="ticket-reply"
 placeholder="Write a reply..."
 ></textarea>
 
-<button id="send-reply-button">
+<button
+id="send-reply-button"
+>
+
 Send Reply
+
 </button>
 
 </div>
@@ -79,7 +164,10 @@ Send Reply
 
 </main>
 
-<script type="module" src="/js/tickets/ticket.js?v=1"></script>
+<script
+type="module"
+src="/js/tickets/ticket.js?v=2"
+></script>
 
 </body>
 </html>
