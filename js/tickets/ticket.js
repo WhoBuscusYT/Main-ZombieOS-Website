@@ -561,3 +561,46 @@ merge:true
 
 }
 );
+
+/* MOBILE NAVBAR */
+
+const mobileToggle =
+document.getElementById(
+"mobile-navbar-toggle"
+);
+
+const navbar =
+document.getElementById(
+"dashboard-navbar"
+);
+
+let navbarVisible =
+true;
+
+mobileToggle.onclick =
+function(){
+
+navbarVisible =
+!navbarVisible;
+
+if(navbarVisible){
+
+navbar.classList.remove(
+"hidden"
+);
+
+mobileToggle.textContent =
+"Hide Menu";
+
+}else{
+
+navbar.classList.add(
+"hidden"
+);
+
+mobileToggle.textContent =
+"Show Menu";
+
+}
+
+};

@@ -258,3 +258,105 @@ display:none !important;
 }
 
 }
+
+/* MOBILE NAVBAR TOGGLE */
+
+.mobile-navbar-toggle{
+
+position:fixed;
+
+top:20px;
+
+right:20px;
+
+z-index:9999;
+
+padding:
+16px 22px;
+
+border:none;
+
+border-radius:22px;
+
+background:
+rgba(0,0,0,0.82);
+
+backdrop-filter:blur(14px);
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+color:#00ff99;
+
+font-size:1rem;
+
+font-weight:700;
+
+cursor:pointer;
+
+box-shadow:
+0 0 25px rgba(0,255,153,0.15);
+
+transition:0.25s;
+}
+
+.mobile-navbar-toggle:hover{
+
+transform:
+translateY(-2px);
+
+box-shadow:
+0 0 28px rgba(0,255,153,0.3);
+}
+
+/* MOBILE NAV */
+
+@media (max-width:900px){
+
+.dashboard-navbar{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+z-index:999;
+
+transition:0.3s;
+}
+
+.dashboard-navbar.hidden{
+
+transform:
+translateY(-120%);
+}
+
+.ticket-main{
+
+padding-top:140px;
+}
+
+}
+
+/* DESKTOP */
+
+@media (min-width:901px){
+
+.mobile-navbar-toggle{
+
+display:none;
+}
+
+.dashboard-navbar{
+
+position:sticky;
+
+top:0;
+
+z-index:999;
+}
+
+}
