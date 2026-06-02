@@ -160,8 +160,35 @@ normalizedBadges.includes(
 
 if(!isStaff){
 
-window.location.href =
-"/errors/403";
+document.body.innerHTML =
+
+`
+<div style="
+padding:40px;
+font-family:sans-serif;
+color:white;
+background:black;
+min-height:100vh;
+">
+
+<h1>ZOS-E403</h1>
+
+<p>
+You do not have permission to access the staff dashboard.
+</p>
+
+<hr>
+
+<h2>DEBUG</h2>
+
+<pre>
+
+${JSON.stringify(userData,null,2)}
+
+</pre>
+
+</div>
+`;
 
 return;
 
