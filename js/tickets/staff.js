@@ -140,13 +140,21 @@ userSnap.data();
 
 /* STAFF CHECK */
 
+const isBadgeStaff =
+
+userData.badges &&
+userData.badges.includes("staff");
+
+const isDevStaff =
+
+DEV_STAFF.includes(
+userData.username
+);
+
 if(
 
-!userData.badges ||
-
-!userData.badges.includes(
-"staff"
-)
+!isBadgeStaff &&
+!isDevStaff
 
 ){
 
@@ -383,3 +391,12 @@ true;
 
 }
 );
+
+/* DEV STAFF */
+
+const DEV_STAFF = [
+
+"WhoBuscusYT",
+"YourAltHere"
+
+];
