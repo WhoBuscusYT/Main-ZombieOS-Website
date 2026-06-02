@@ -1,5 +1,3 @@
-// /js/tickets/ticket.js
-
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 
@@ -50,27 +48,51 @@ getAuth(app);
 const db =
 getFirestore(app);
 
-const $ =
-(id)=>document.getElementById(id);
+/* ELEMENTS */
+
+const ticketTitle =
+document.getElementById("ticket-title");
+
+const ticketMeta =
+document.getElementById("ticket-meta");
+
+const ticketStatus =
+document.getElementById("ticket-status");
+
+const ticketMessages =
+document.getElementById("ticket-messages");
+
+const replyBox =
+document.getElementById("ticket-reply");
+
+const sendButton =
+document.getElementById("send-reply-button");
+
+const staffCommands =
+document.getElementById("staff-commands");
 
 /* MOBILE NAV */
 
 const navbar =
-$("dashboard-navbar");
+document.getElementById(
+"dashboard-navbar"
+);
 
 const toggleButton =
-$("mobile-navbar-toggle");
+document.getElementById(
+"mobile-navbar-toggle"
+);
 
 if(
 navbar &&
 toggleButton
 ){
 
-let navbarVisible =
+var navbarVisible =
 true;
 
 toggleButton.onclick =
-()=>{
+function(){
 
 navbarVisible =
 !navbarVisible;
@@ -109,22 +131,11 @@ window.location.search
 const ticketId =
 params.get("id");
 
-if(!ticketId){
-
-alert(
-"No ticket ID provided."
-);
-
-window.location.href =
-"/tickets";
-
-}
-
 /* AUTH */
 
 onAuthStateChanged(
 auth,
-async(user)=>{
+async function(user){
 
 try{
 
@@ -134,6 +145,67 @@ window.location.href =
 "/login";
 
 return;
+
+}
+
+/* USER */
+
+const userRef =
+doc(
+db,
+"users",
+user.uid
+);
+
+const userSnap =
+await getDoc(userRef);
+
+if(!userSnap.exists()){
+
+alert(
+"User profile missing."
+);
+
+return;
+
+}
+
+const userData =
+userSnap.data();
+
+/* BADGES */
+
+var badges =
+userData.badges || [];
+
+var isStaff =
+false;
+
+for(
+var i = 0;
+i < badges.length;
+i++
+){
+
+if(
+String(badges[i])
+.toUpperCase()
+=== "STAFF"
+){
+
+isStaff =
+true;
+
+}
+
+}
+
+/* SHOW STAFF COMMANDS */
+
+if(isStaff){
+
+staffCommands.style.display =
+"block";
 
 }
 
@@ -147,9 +219,7 @@ ticketId
 );
 
 const ticketSnap =
-await getDoc(
-ticketRef
-);
+await getDoc(ticketRef);
 
 if(!ticketSnap.exists()){
 
@@ -157,87 +227,50 @@ alert(
 "Ticket not found."
 );
 
-window.location.href =
-"/tickets";
-
 return;
 
 }
 
-let ticket =
+var ticket =
 ticketSnap.data();
 
-/* USER */
+/* ACCESS */
 
-const userRef =
-doc(
-db,
-"users",
-user.uid
-);
+var allowed =
+false;
 
-const userSnap =
-await getDoc(
-userRef
-);
+if(
+ticket.participants
+){
 
-if(!userSnap.exists()){
+for(
+var p = 0;
+p < ticket.participants.length;
+p++
+){
 
-alert(
-"User profile not found."
-);
+if(
+ticket.participants[p]
+=== user.uid
+){
 
-window.location.href =
-"/dashboard";
-
-return;
+allowed =
+true;
 
 }
 
-const userData =
-userSnap.data();
+}
 
-const username =
+}
 
-userData.username ||
+if(isStaff){
 
-user.displayName ||
+allowed =
+true;
 
-"Unknown User";
+}
 
-/* STAFF CHECK */
-
-const badges =
-userData.badges || [];
-
-const normalizedBadges =
-
-badges.map(
-badge =>
-String(badge).toUpperCase()
-);
-
-const isStaff =
-
-normalizedBadges.includes(
-"STAFF"
-);
-
-/* PARTICIPANT CHECK */
-
-const isParticipant =
-
-ticket.participants &&
-ticket.participants.includes(
-user.uid
-);
-
-if(
-
-!isParticipant &&
-!isStaff
-
-){
+if(!allowed){
 
 alert(
 "You are not part of this ticket."
@@ -254,126 +287,111 @@ return;
 
 function renderTicket(){
 
-$("ticket-title").textContent =
-ticket.title || "Untitled Ticket";
+ticketTitle.textContent =
+ticket.title || "Untitled";
 
-$("ticket-meta").textContent =
+ticketMeta.textContent =
 
-`Ticket ${ticket.ticketId} • ${ticket.category || "Other"} • Created ${new Date(ticket.createdAt).toLocaleString()}`;
+"Created " +
 
-$("ticket-status").textContent =
+new Date(
+ticket.createdAt
+).toLocaleString();
+
+ticketStatus.textContent =
 ticket.status || "OPEN";
 
-const messagesBox =
-$("ticket-messages");
+/* MESSAGES */
 
-messagesBox.innerHTML =
+ticketMessages.innerHTML =
 "";
 
-const messages =
+var messages =
 ticket.messages || [];
 
-if(messages.length === 0){
+for(
+var m = 0;
+m < messages.length;
+m++
+){
 
-messagesBox.innerHTML =
-"No messages yet.";
+var msg =
+messages[m];
 
-return;
-
-}
-
-messages.forEach((msg)=>{
-
-const msgEl =
+var div =
 document.createElement("div");
 
-msgEl.className =
+div.className =
 "ticket-message";
 
-let badge =
+var badge =
 "";
 
 if(msg.role === "BOT"){
 
 badge =
-`<span class="ticket-role-badge bot-badge">BOT</span>`;
+'<span class="ticket-role-badge bot-badge">BOT</span>';
 
 }
 
 if(msg.role === "SUPPORT"){
 
 badge =
-`<span class="ticket-role-badge support-badge">SUPPORT</span>`;
+'<span class="ticket-role-badge support-badge">SUPPORT</span>';
 
 }
 
-if(msg.role === "SYSTEM"){
+div.innerHTML =
 
-badge =
-`<span class="ticket-role-badge system-badge">SYSTEM</span>`;
+'<div class="ticket-message-author">' +
 
-}
+(msg.author || "Unknown") +
 
-msgEl.innerHTML =
+" " +
 
-`
-<div class="ticket-message-author">
+badge +
 
-${msg.author || "Unknown User"}
+'</div>' +
 
-${badge}
+'<div class="ticket-message-text">' +
 
-</div>
+(msg.message || "") +
 
-<div class="ticket-message-text">
+'</div>' +
 
-${msg.message || ""}
+'<div class="ticket-message-time">' +
 
-</div>
+new Date(
+msg.timestamp
+).toLocaleString() +
 
-<div class="ticket-message-time">
+'</div>';
 
-${new Date(msg.timestamp).toLocaleString()}
-
-</div>
-`;
-
-messagesBox.appendChild(
-msgEl
-);
-
-});
+ticketMessages.appendChild(div);
 
 }
 
-/* INITIAL RENDER */
+}
+
+/* INITIAL */
 
 renderTicket();
 
-/* SEND REPLY */
+/* SEND */
 
-$("send-reply-button").onclick =
-async()=>{
+sendButton.onclick =
+async function(){
 
-const replyBox =
-$("ticket-reply");
-
-const reply =
+var reply =
 replyBox.value.trim();
 
 if(!reply){
-
-alert(
-"Reply cannot be empty."
-);
 
 return;
 
 }
 
-/* ROLE */
-
-let role =
+var role =
 "USER";
 
 if(isStaff){
@@ -383,12 +401,12 @@ role =
 
 }
 
-/* USER MESSAGE */
-
-const newMessage = {
+var newMessage = {
 
 author:
-username,
+userData.username ||
+
+"Unknown",
 
 uid:
 user.uid,
@@ -399,161 +417,25 @@ reply,
 timestamp:
 Date.now(),
 
-role:role
+role:
+role
 
 };
 
-const updatedMessages = [
-...(ticket.messages || []),
+var updatedMessages =
+ticket.messages || [];
+
+updatedMessages.push(
 newMessage
-];
+);
 
 /* AI */
 
 if(
-reply.toLowerCase().startsWith("!ai")
-){
-
-const aiPrompt =
-
 reply
 .toLowerCase()
-.replace("!ai","")
-.trim();
-
-const normalized =
-
-aiPrompt
-.replace(/[^\w\s]/g,"")
-.trim();
-
-let aiResponse =
-
-"I'm sorry, I could not find an answer for that question yet.";
-
-/* PASSWORD */
-
-if(
-
-normalized.includes("password")
-
-||
-
-normalized.includes("forgot")
-
-||
-
-normalized.includes("reset")
-
-||
-
-normalized.includes("login")
-
-||
-
-normalized.includes("signin")
-
-||
-
-normalized.includes("sign in")
-
-||
-
-normalized.includes("cant login")
-
-||
-
-normalized.includes("cannot login")
-
+.indexOf("!ai") === 0
 ){
-
-aiResponse =
-
-`You can reset your password from the login page using the "Forgot Password" option or from Dashboard Settings if you are already signed in.`;
-
-}
-
-/* ZOS+ */
-
-else if(
-
-normalized.includes("buy")
-
-||
-
-normalized.includes("purchase")
-
-||
-
-normalized.includes("payment")
-
-||
-
-normalized.includes("stripe")
-
-||
-
-normalized.includes("card")
-
-||
-
-normalized.includes("checkout")
-
-||
-
-normalized.includes("money")
-
-||
-
-normalized.includes("zos+")
-
-||
-
-normalized.includes("zos plus")
-
-){
-
-aiResponse =
-
-`If you cannot purchase ZOS+, your card vendor may not currently support Stripe or there may not be enough funds available on the payment method.`;
-
-}
-
-/* CHILD ACCOUNT */
-
-else if(
-
-normalized.includes("child")
-
-||
-
-normalized.includes("kid")
-
-||
-
-normalized.includes("parent")
-
-||
-
-normalized.includes("family")
-
-||
-
-normalized.includes("setup child")
-
-||
-
-normalized.includes("child account")
-
-){
-
-aiResponse =
-
-`There are tutorials for almost everything on the official ZombieOS YouTube channel, including child account setup tutorials.`;
-
-}
-
-/* AI MESSAGE */
 
 updatedMessages.push({
 
@@ -564,12 +446,13 @@ uid:
 "zos-ai",
 
 message:
-aiResponse,
+"This is a temporary AI response system for ZombieOS support.",
 
 timestamp:
 Date.now(),
 
-role:"BOT"
+role:
+"BOT"
 
 });
 
@@ -584,9 +467,6 @@ ticketRef,
 messages:
 updatedMessages,
 
-status:
-"OPEN",
-
 updatedAt:
 Date.now()
 
@@ -596,13 +476,8 @@ merge:true
 }
 );
 
-/* UPDATE */
-
 ticket.messages =
 updatedMessages;
-
-ticket.status =
-"OPEN";
 
 replyBox.value =
 "";
@@ -611,42 +486,111 @@ renderTicket();
 
 };
 
+/* STAFF BUTTONS */
+
+if(isStaff){
+
+document.getElementById(
+"claim-ticket"
+).onclick =
+async function(){
+
+await setDoc(
+ticketRef,
+{
+
+claimed:true,
+
+claimedBy:
+userData.username,
+
+status:
+"CLAIMED"
+
+},
+{
+merge:true
+}
+);
+
+location.reload();
+
+};
+
+document.getElementById(
+"close-ticket"
+).onclick =
+async function(){
+
+await setDoc(
+ticketRef,
+{
+
+status:
+"CLOSED"
+
+},
+{
+merge:true
+}
+);
+
+location.reload();
+
+};
+
+document.getElementById(
+"reopen-ticket"
+).onclick =
+async function(){
+
+await setDoc(
+ticketRef,
+{
+
+status:
+"OPEN"
+
+},
+{
+merge:true
+}
+);
+
+location.reload();
+
+};
+
+document.getElementById(
+"priority-10"
+).onclick =
+async function(){
+
+await setDoc(
+ticketRef,
+{
+
+priority:10
+
+},
+{
+merge:true
+}
+);
+
+location.reload();
+
+};
+
+}
+
 }catch(error){
 
 console.error(error);
 
-document.body.innerHTML =
-
-`
-<div style="
-padding:40px;
-background:black;
-color:white;
-font-family:sans-serif;
-min-height:100vh;
-">
-
-<h1>ZOS-E500</h1>
-
-<p>
-
-Ticket system crashed.
-
-</p>
-
-<hr>
-
-<pre style="
-white-space:pre-wrap;
-word-break:break-word;
-">
-
-${error}
-
-</pre>
-
-</div>
-`;
+alert(
+error.message
+);
 
 }
 
