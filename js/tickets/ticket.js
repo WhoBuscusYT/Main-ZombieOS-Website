@@ -163,13 +163,37 @@ return;
 let ticket =
 ticketSnap.data();
 
+/* STAFF BYPASS */
+
+const badges =
+userData.badges || [];
+
+const normalizedBadges =
+
+badges.map(
+badge =>
+String(badge).toUpperCase()
+);
+
+const isStaff =
+
+normalizedBadges.includes(
+"STAFF"
+);
+
+/* ACCESS */
+
+const isParticipant =
+
+ticket.participants &&
+ticket.participants.includes(
+user.uid
+);
+
 if(
 
-!ticket.participants ||
-
-!ticket.participants.includes(
-user.uid
-)
+!isParticipant &&
+!isStaff
 
 ){
 
