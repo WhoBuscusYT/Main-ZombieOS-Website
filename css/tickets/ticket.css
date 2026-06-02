@@ -311,52 +311,131 @@ box-shadow:
 
 /* MOBILE NAV */
 
+.mobile-menu-toggle{
+    display:none;
+}
+
 @media (max-width:900px){
 
-.dashboard-navbar{
+    .mobile-menu-toggle{
+        display:flex;
+        position:fixed;
+        top:90px;
+        right:20px;
+        z-index:1001;
 
-position:fixed;
+        background:
+        rgba(0,0,0,0.92);
 
-top:0;
+        border:
+        1px solid rgba(0,255,140,0.2);
 
-left:0;
+        color:#00ff9c;
 
-width:100%;
+        padding:
+        16px 22px;
 
-z-index:999;
+        border-radius:22px;
 
-transition:0.3s;
-}
+        font-size:1rem;
+        font-weight:700;
 
-.dashboard-navbar.hidden{
+        cursor:pointer;
 
-transform:
-translateY(-120%);
-}
+        backdrop-filter:blur(12px);
 
-.ticket-main{
+        box-shadow:
+        0 0 30px rgba(0,255,140,0.15);
 
-padding-top:140px;
-}
+        transition:0.25s;
+    }
 
-}
+    .mobile-menu-toggle:hover{
+        transform:translateY(-2px);
 
-/* DESKTOP */
+        box-shadow:
+        0 0 40px rgba(0,255,140,0.25);
+    }
 
-@media (min-width:901px){
+    .dashboard-navbar{
+        position:fixed;
 
-.mobile-navbar-toggle{
+        top:0;
+        left:0;
 
-display:none;
-}
+        width:320px;
+        height:100vh;
 
-.dashboard-navbar{
+        z-index:1000;
 
-position:sticky;
+        background:
+        rgba(0,0,0,0.96);
 
-top:0;
+        border-right:
+        1px solid rgba(0,255,140,0.15);
 
-z-index:999;
-}
+        padding:40px 25px;
 
+        display:flex;
+        flex-direction:column;
+        gap:25px;
+
+        transition:0.35s ease;
+
+        overflow-y:auto;
+
+        backdrop-filter:blur(18px);
+
+        box-shadow:
+        0 0 60px rgba(0,255,140,0.15);
+    }
+
+    .dashboard-navbar.hidden{
+        transform:translateX(-110%);
+    }
+
+    .dashboard-navbar .logo{
+        font-size:3rem;
+        margin-bottom:10px;
+    }
+
+    .dashboard-navbar nav{
+        display:flex;
+        flex-direction:column;
+        gap:18px;
+    }
+
+    .dashboard-navbar nav a{
+        width:100%;
+
+        padding:16px 18px;
+
+        border-radius:16px;
+
+        background:
+        rgba(255,255,255,0.02);
+
+        border:
+        1px solid rgba(255,255,255,0.03);
+
+        color:#d9d9d9;
+
+        text-decoration:none;
+
+        transition:0.25s;
+    }
+
+    .dashboard-navbar nav a:hover{
+        background:
+        rgba(0,255,140,0.08);
+
+        color:#00ff9c;
+
+        border:
+        1px solid rgba(0,255,140,0.15);
+    }
+
+    body{
+        overflow-x:hidden;
+    }
 }

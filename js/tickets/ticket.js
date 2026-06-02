@@ -611,7 +611,7 @@ mobileToggle.textContent =
 /* Tab name */
 const tabName =
 document.getElementById(
-"title"
+"tab-title"
 );
 
 tabName.textContent = "Ticket - " + ticketId + " - ZombieOS";
