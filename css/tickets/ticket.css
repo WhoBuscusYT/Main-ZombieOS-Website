@@ -1,139 +1,104 @@
+/* /css/tickets/ticket.css */
+
 .ticket-main{
+
 max-width:1100px;
+
 margin:auto;
-padding:180px 20px 80px;
+
+padding:
+180px 20px 80px;
+
 display:flex;
+
 flex-direction:column;
+
 gap:24px;
 }
 
 .ticket-header-card{
+
 display:flex;
+
 flex-direction:column;
+
 gap:16px;
 }
 
 .ticket-header-card h1{
+
 font-size:3rem;
+
 color:#00ff99;
-text-shadow:0 0 24px rgba(0,255,153,0.2);
+
+text-shadow:
+0 0 24px rgba(0,255,153,0.2);
 }
 
 #ticket-meta{
+
 color:#b8b8b8;
+
 line-height:1.6;
 }
 
 .ticket-status-pill{
+
 width:max-content;
-padding:10px 16px;
+
+padding:
+10px 16px;
+
 border-radius:999px;
-background:rgba(0,255,153,0.14);
+
+background:
+rgba(0,255,153,0.14);
+
 color:#00ff99;
+
 font-weight:700;
 }
 
 .ticket-messages{
+
 display:flex;
+
 flex-direction:column;
+
 gap:18px;
+
 margin-top:20px;
 }
 
 .ticket-message{
-padding:18px;
+
+padding:
+18px;
+
 border-radius:20px;
-background:rgba(255,255,255,0.035);
-border:1px solid rgba(255,255,255,0.07);
+
+background:
+rgba(255,255,255,0.035);
+
+border:
+1px solid rgba(255,255,255,0.07);
 }
 
 .ticket-message-author{
+
 font-weight:700;
+
 color:#00ff99;
+
 margin-bottom:8px;
-}
 
-.ticket-message-text{
-color:#d0d0d0;
-line-height:1.6;
-white-space:pre-wrap;
-}
-
-.ticket-message-time{
-margin-top:10px;
-font-size:0.85rem;
-color:#888;
-}
-
-.ticket-reply-box{
-margin-top:24px;
 display:flex;
-flex-direction:column;
-gap:16px;
-}
 
-.ticket-reply-box textarea{
-width:100%;
-min-height:160px;
-resize:vertical;
-padding:16px;
-border-radius:18px;
-background:rgba(255,255,255,0.04);
-border:1px solid rgba(255,255,255,0.08);
-color:white;
-outline:none;
-}
-
-.ticket-reply-box textarea:focus{
-border-color:#00ff99;
-box-shadow:0 0 18px rgba(0,255,153,0.12);
-}
-
-#send-reply-button{
-padding:16px;
-border:none;
-border-radius:18px;
-background:linear-gradient(135deg,#00ff99,#00d47f);
-color:black;
-font-weight:700;
-cursor:pointer;
-}
-
-.mobile-navbar-toggle{
-display:none;
-}
-
-@media(max-width:768px){
-
-.mobile-navbar-toggle{
-position:fixed;
-top:16px;
-right:16px;
-display:flex;
 align-items:center;
-justify-content:center;
-padding:14px 18px;
-border-radius:18px;
-background:rgba(0,0,0,0.82);
-border:1px solid rgba(255,255,255,0.08);
-color:#00ff99;
-font-weight:700;
-z-index:100000;
-}
 
-.dashboard-navbar.hidden-navbar{
-opacity:0;
-pointer-events:none;
-}
+flex-wrap:wrap;
 
-.ticket-main{
-padding:120px 18px 70px;
-}
-
-.ticket-header-card h1{
-font-size:2.2rem;
-}
-
+gap:10px;
 }
 
 .ticket-role-badge{
@@ -142,8 +107,6 @@ display:inline-flex;
 
 align-items:center;
 justify-content:center;
-
-margin-left:10px;
 
 padding:
 4px 10px;
@@ -186,4 +149,145 @@ border:
 1px solid rgba(168,85,247,0.3);
 
 color:#c084fc;
+}
+
+.ticket-message-text{
+
+color:#d0d0d0;
+
+line-height:1.6;
+
+white-space:pre-wrap;
+}
+
+.ticket-message-time{
+
+margin-top:10px;
+
+font-size:0.85rem;
+
+color:#888;
+}
+
+.ticket-reply-box{
+
+margin-top:24px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:16px;
+}
+
+.ticket-reply-box textarea{
+
+width:100%;
+
+min-height:160px;
+
+resize:vertical;
+
+padding:
+16px;
+
+border-radius:18px;
+
+background:
+rgba(255,255,255,0.04);
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+color:white;
+
+outline:none;
+}
+
+.ticket-reply-box textarea:focus{
+
+border-color:#00ff99;
+
+box-shadow:
+0 0 18px rgba(0,255,153,0.12);
+}
+
+#send-reply-button{
+
+padding:
+16px;
+
+border:none;
+
+border-radius:18px;
+
+background:
+linear-gradient(
+135deg,
+#00ff99,
+#00d47f
+);
+
+color:black;
+
+font-weight:700;
+
+cursor:pointer;
+}
+
+.mobile-navbar-toggle{
+
+display:none;
+}
+
+@media(max-width:768px){
+
+.mobile-navbar-toggle{
+
+position:fixed;
+
+top:16px;
+right:16px;
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+padding:
+14px 18px;
+
+border-radius:18px;
+
+background:
+rgba(0,0,0,0.82);
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+color:#00ff99;
+
+font-weight:700;
+
+z-index:100000;
+}
+
+.dashboard-navbar.hidden-navbar{
+
+opacity:0;
+
+pointer-events:none;
+}
+
+.ticket-main{
+
+padding:
+120px 18px 70px;
+}
+
+.ticket-header-card h1{
+
+font-size:2.2rem;
+}
+
 }
