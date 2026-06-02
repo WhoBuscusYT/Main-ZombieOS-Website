@@ -143,21 +143,43 @@ renderTicket();
 
 /* SEND REPLY */
 
-$("send-reply-button").onclick = async() => {
+$("send-reply-button").onclick =
+async()=>{
 
-const replyBox = $("ticket-reply");
-const reply = replyBox.value.trim();
+const replyBox =
+$("ticket-reply");
+
+const reply =
+replyBox.value.trim();
 
 if(!reply){
-alert("Reply cannot be empty.");
+
+alert(
+"Reply cannot be empty."
+);
+
 return;
+
 }
 
+/* USER MESSAGE */
+
 const newMessage = {
-author: username,
-uid: user.uid,
-message: reply,
-timestamp: Date.now()
+
+author:
+username,
+
+uid:
+user.uid,
+
+message:
+reply,
+
+timestamp:
+Date.now(),
+
+role:"USER"
+
 };
 
 const updatedMessages = [
@@ -165,25 +187,202 @@ const updatedMessages = [
 newMessage
 ];
 
+/* AI */
+
+if(
+reply.toLowerCase().startsWith("!ai")
+){
+
+const aiPrompt =
+reply
+.toLowerCase()
+.replace("!ai","")
+.trim();
+
+/* NORMALIZE */
+
+const normalized =
+aiPrompt
+.replace(/[^\w\s]/g,"")
+.trim();
+
+/* RESPONSE */
+
+let aiResponse =
+"I'm sorry, I could not find an answer for that question yet.";
+
+/* PASSWORD */
+
+if(
+
+normalized.includes("password")
+
+||
+normalized.includes("forgot password")
+
+||
+normalized.includes("reset password")
+
+||
+normalized.includes("cant login")
+
+||
+normalized.includes("cannot login")
+
+||
+normalized.includes("login issue")
+
+||
+normalized.includes("signin")
+
+||
+normalized.includes("sign in")
+
+){
+
+aiResponse =
+
+`You can reset your password from the login page using the "Forgot Password" option or from Dashboard Settings if you are already signed in.`;
+
+}
+
+/* ZOS+ */
+
+else if(
+
+normalized.includes("buy zos+")
+
+||
+normalized.includes("buy zos plus")
+
+||
+normalized.includes("payment")
+
+||
+normalized.includes("purchase")
+
+||
+normalized.includes("checkout")
+
+||
+normalized.includes("card declined")
+
+||
+normalized.includes("stripe")
+
+||
+normalized.includes("not enough money")
+
+||
+
+(
+normalized.includes("cant")
+&&
+normalized.includes("buy")
+)
+
+||
+
+(
+normalized.includes("cannot")
+&&
+normalized.includes("buy")
+)
+
+){
+
+aiResponse =
+
+`If you cannot purchase ZOS+, your card vendor may not currently support Stripe or there may not be enough funds available on the payment method.`;
+
+}
+
+/* CHILD ACCOUNT */
+
+else if(
+
+normalized.includes("child account")
+
+||
+normalized.includes("kid account")
+
+||
+normalized.includes("parent dashboard")
+
+||
+normalized.includes("setup child")
+
+||
+normalized.includes("create child")
+
+||
+normalized.includes("family account")
+
+||
+normalized.includes("parent account")
+
+){
+
+aiResponse =
+
+`There are tutorials for almost everything on the official ZombieOS YouTube channel, including child account setup tutorials.`;
+
+}
+
+/* AI MESSAGE */
+
+updatedMessages.push({
+
+author:
+"ZOS AI",
+
+uid:
+"zos-ai",
+
+message:
+aiResponse,
+
+timestamp:
+Date.now(),
+
+role:"BOT"
+
+});
+
+}
+
+/* SAVE */
+
 await setDoc(
 ticketRef,
 {
-messages: updatedMessages,
-status: "OPEN",
-updatedAt: Date.now()
+
+messages:
+updatedMessages,
+
+status:
+"OPEN",
+
+updatedAt:
+Date.now()
+
 },
 {
-merge: true
+merge:true
 }
 );
 
-ticket.messages = updatedMessages;
-ticket.status = "OPEN";
+/* UPDATE LOCAL */
 
-replyBox.value = "";
+ticket.messages =
+updatedMessages;
+
+ticket.status =
+"OPEN";
+
+replyBox.value =
+"";
 
 renderTicket();
 
 };
-
-});
