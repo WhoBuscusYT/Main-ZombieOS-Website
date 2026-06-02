@@ -1,3 +1,5 @@
+// /js/tickets/staff.js
+
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 
@@ -140,26 +142,26 @@ userSnap.data();
 
 /* STAFF CHECK */
 
-const isBadgeStaff =
+const badges =
+userData.badges || [];
 
-userData.badges &&
-userData.badges.includes("staff");
+const normalizedBadges =
 
-const isDevStaff =
-
-DEV_STAFF.includes(
-userData.username
+badges.map(
+badge =>
+badge.toUpperCase()
 );
 
-if(
+const isStaff =
 
-!isBadgeStaff &&
-!isDevStaff
+normalizedBadges.includes(
+"STAFF"
+);
 
-){
+if(!isStaff){
 
 window.location.href =
-"/403";
+"/errors/403";
 
 return;
 
@@ -168,6 +170,8 @@ return;
 const username =
 
 userData.username ||
+
+user.displayName ||
 
 "Staff";
 
@@ -358,9 +362,6 @@ return;
 
 }
 
-const ticketData =
-ticketSnap.data();
-
 await setDoc(
 ticketRef,
 {
@@ -391,12 +392,3 @@ true;
 
 }
 );
-
-/* DEV STAFF */
-
-const DEV_STAFF = [
-
-"whobuscusyt",
-"WhoBuscusYT"
-
-];
