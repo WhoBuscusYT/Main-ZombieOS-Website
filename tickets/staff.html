@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+
+ZombieOS - Staff Dashboard
+
+</title>
+
+<link
+rel="icon"
+type="image/png"
+href="/favicon.png"
+>
+
+<link
+rel="stylesheet"
+href="/css/global.css?v=1"
+>
+
+<link
+rel="stylesheet"
+href="/css/dashboard.css?v=1"
+>
+
+<link
+rel="stylesheet"
+href="/css/tickets/staff.css?v=1"
+>
+
+</head>
+
+<body>
+
+<div class="background-grid"></div>
+
+<div class="background-glow glow1"></div>
+<div class="background-glow glow2"></div>
+
+<button
+id="mobile-navbar-toggle"
+class="mobile-navbar-toggle"
+>
+
+Hide Menu
+
+</button>
+
+<header
+id="dashboard-navbar"
+class="dashboard-navbar"
+>
+
+<div class="dashboard-navbar-top">
+
+<a
+href="/dashboard"
+class="dashboard-logo"
+>
+
+ZOS STAFF
+
+</a>
+
+<nav class="dashboard-links">
+
+<a href="/dashboard">
+
+Dashboard
+
+</a>
+
+<a href="/tickets">
+
+Tickets
+
+</a>
+
+<a href="/tickets/staff">
+
+Staff
+
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+<main class="staff-main">
+
+<section class="dashboard-card staff-header">
+
+<h1>
+
+Staff Dashboard
+
+</h1>
+
+<p>
+
+Manage support tickets and assist users across the ZombieOS ecosystem.
+
+</p>
+
+</section>
+
+<section class="dashboard-card">
+
+<h2>
+
+Support Queue
+
+</h2>
+
+<div
+id="staff-ticket-list"
+class="staff-ticket-list"
+>
+
+Loading tickets...
+
+</div>
+
+</section>
+
+</main>
+
+<script
+type="module"
+src="/js/tickets/staff.js?v=1"
+></script>
+
+</body>
+</html>
