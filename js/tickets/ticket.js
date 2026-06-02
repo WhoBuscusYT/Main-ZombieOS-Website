@@ -614,4 +614,4 @@ document.getElementById(
 "title"
 );
 
-tabName.textContent = "Ticket - " + ticketId + " - ZombieOS"
+tabName.textContent = "Ticket - " + ticketId + " - ZombieOS";
