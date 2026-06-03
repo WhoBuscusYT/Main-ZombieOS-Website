@@ -1,174 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
->
+<title id="tab-title">Ticket - ZombieOS</title>
 
-<title id="tab-title">
-
-Ticket - ZombieOS
-
-</title>
-
-<link rel="stylesheet" href="/css/global.css?v=202">
-
-<link rel="stylesheet" href="/css/dashboard.css?v=202">
-
-<link rel="stylesheet" href="/css/tickets/ticket.css?v=203">
-
-<link rel="icon" type="image/png" href="/images/favicon.png">
-
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="stylesheet" href="/css/global.css?v=300">
+<link rel="stylesheet" href="/css/dashboard.css?v=300">
+<link rel="stylesheet" href="/css/tickets/ticket.css?v=300">
 </head>
 
 <body>
 
 <div class="background-grid"></div>
-
 <div class="background-glow glow1"></div>
 <div class="background-glow glow2"></div>
 
-<button id="mobile-navbar-toggle" class="mobile-navbar-toggle">Hide Menu</button>
+<button id="mobile-navbar-toggle" class="mobile-navbar-toggle">
+Hide Menu
+</button>
 
 <header id="dashboard-navbar" class="dashboard-navbar">
-
 <div class="dashboard-navbar-top">
 
 <a href="/dashboard" class="dashboard-logo">ZOS SUPPORT</a>
 
 <nav class="dashboard-links">
-
-<a href="/dashboard">
-
-Dashboard
-
-</a>
-
-<a href="/tickets">
-
-Tickets
-
-</a>
-
-<a href="/dashboard/settings">
-
-Settings
-
-</a>
-
+<a href="/dashboard">Dashboard</a>
+<a href="/tickets">Tickets</a>
+<a href="/dashboard/settings">Settings</a>
 </nav>
 
 </div>
-
 </header>
 
 <main class="ticket-main">
 
-<section class="dashboard-card">
-
-<h1 id="ticket-title">
-
-Loading...
-
-</h1>
-
-<p id="ticket-meta">
-
-Loading ticket data...
-
-</p>
-
-<div
-id="ticket-status"
-class="ticket-status"
->
-
-OPEN
-
-</div>
-
+<section class="dashboard-card ticket-header-card">
+<h1 id="ticket-title">Loading...</h1>
+<p id="ticket-meta">Loading ticket data...</p>
+<div id="ticket-status" class="ticket-status-pill">OPEN</div>
 </section>
 
-<section
-id="staff-commands"
-class="dashboard-card"
-style="display:none;"
->
-
-<h2>
-
-Staff Commands
-
-</h2>
+<section id="staff-commands" class="dashboard-card staff-commands-card">
+<h2>Staff Commands</h2>
 
 <div class="staff-command-grid">
-
-<button id="claim-ticket">
-
-Claim Ticket
-
-</button>
-
-<button id="close-ticket">
-
-Close Ticket
-
-</button>
-
-<button id="reopen-ticket">
-
-Reopen Ticket
-
-</button>
-
-<button id="priority-10">
-
-Priority 10
-
-</button>
-
+<button id="claim-ticket">Claim Ticket</button>
+<button id="close-ticket">Close Ticket</button>
+<button id="reopen-ticket">Reopen Ticket</button>
+<button id="priority-10">Priority 10</button>
 </div>
-
 </section>
 
-<section class="dashboard-card">
+<section class="dashboard-card ticket-chat-card">
 
-<h2>
+<h2>Messages</h2>
 
-Messages
-
-</h2>
-
-<div id="ticket-messages">
-
+<div id="ticket-messages" class="ticket-messages">
 Loading messages...
-
 </div>
+
+<div id="typing-indicator" class="typing-indicator"></div>
+
+<div class="ticket-composer">
+
+<label for="ticket-image-upload" class="upload-image-button">
+＋
+</label>
+
+<input
+type="file"
+id="ticket-image-upload"
+accept="image/*"
+hidden
+>
 
 <textarea
 id="ticket-reply"
-placeholder="Write a reply..."
+placeholder="Message this ticket..."
 ></textarea>
 
 <button id="send-reply-button">
-
-Send Reply
-
+Send
 </button>
+
+</div>
+
+<p class="composer-note">
+Enter sends • Shift + Enter makes a new line • Images max 5MB
+</p>
 
 </section>
 
 </main>
 
-<script
-type="module"
-src="/js/tickets/ticket.js?v=9002"
-></script>
+<script type="module" src="/js/tickets/ticket.js?v=300"></script>
 
 </body>
 </html>
