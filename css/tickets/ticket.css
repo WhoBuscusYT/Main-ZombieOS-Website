@@ -363,7 +363,7 @@ box-shadow:
         top:0;
         left:0;
 
-        width:320px;
+        width:220px;
         height:100vh;
 
         z-index:1000;
@@ -389,6 +389,15 @@ box-shadow:
         box-shadow:
         0 0 60px rgba(0,255,140,0.15);
     }
+
+@media (max-width: 900px){
+
+    .dashboard-navbar{
+        width: 240px;
+        max-width: 72vw;
+    }
+
+}
 
     .dashboard-navbar.hidden{
         transform:translateX(-110%);
