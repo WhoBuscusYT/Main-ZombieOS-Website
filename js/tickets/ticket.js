@@ -152,8 +152,23 @@ return "";
 }
 
 function getAvatarForMessage(msg, currentUserData){
-if(msg.avatarBase64){
-return msg.avatarBase64;
+
+    if(
+        msg.role === "BOT" ||
+        msg.role === "SYSTEM"
+    ){
+        return "/images/favicon.png";
+    }
+
+    if(msg.avatarBase64){
+        return msg.avatarBase64;
+    }
+
+    return (
+        currentUserData.avatarBase64 ||
+        "/images/default-avatar.png"
+    );
+
 }
 
 if(msg.role === "BOT"){
