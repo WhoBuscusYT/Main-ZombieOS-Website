@@ -1,11 +1,9 @@
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 
 import {
 getAuth,
 onAuthStateChanged
-}
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
 import {
 getFirestore,
@@ -13,605 +11,635 @@ doc,
 getDoc,
 setDoc,
 onSnapshot
-}
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
-
-/* FIREBASE */
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
-
 apiKey:"AIzaSyDG0hSabeqYdGgSISOgvSnkOwATXDLiV9g",
 authDomain:"zombieos.firebaseapp.com",
 projectId:"zombieos",
 storageBucket:"zombieos.firebasestorage.app",
 messagingSenderId:"577624378484",
 appId:"1:577624378484:web:3e88e693724bde8e89d521"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+function $(id){
+return document.getElementById(id);
+}
+
+const params = new URLSearchParams(window.location.search);
+const ticketId = params.get("id");
+
+const ticketTitle = $("ticket-title");
+const ticketMeta = $("ticket-meta");
+const ticketStatus = $("ticket-status");
+const ticketMessages = $("ticket-messages");
+const replyBox = $("ticket-reply");
+const sendButton = $("send-reply-button");
+const staffCommands = $("staff-commands");
+const claimButton = $("claim-ticket");
+const typingIndicator = $("typing-indicator");
+const imageUpload = $("ticket-image-upload");
+const tabName = $("tab-title");
+
+if(tabName && ticketId){
+tabName.textContent = "Ticket - " + ticketId + " - ZombieOS";
+}
+
+/* MOBILE NAV */
+
+const mobileToggle = $("mobile-navbar-toggle");
+const navbar = $("dashboard-navbar");
+
+let navbarVisible = true;
+
+if(mobileToggle && navbar){
+
+mobileToggle.onclick = function(){
+
+navbarVisible = !navbarVisible;
+
+if(navbarVisible){
+navbar.classList.remove("hidden");
+mobileToggle.textContent = "Hide Menu";
+}else{
+navbar.classList.add("hidden");
+mobileToggle.textContent = "Show Menu";
+}
 
 };
 
-const app =
-initializeApp(firebaseConfig);
+}
 
-const auth =
-getAuth(app);
+/* HELPERS */
 
-const db =
-getFirestore(app);
+function hasStaffBadge(userData){
+const badges = userData.badges || [];
 
-/* ELEMENTS */
+for(let i = 0; i < badges.length; i++){
+if(String(badges[i]).toUpperCase() === "STAFF"){
+return true;
+}
+}
 
-const ticketTitle =
-document.getElementById("ticket-title");
+return false;
+}
 
-const ticketMeta =
-document.getElementById("ticket-meta");
+function userUses24HourTime(){
+const test = new Intl.DateTimeFormat(undefined,{hour:"numeric"}).format(new Date(2026,0,1,13,0));
+return test.indexOf("13") !== -1;
+}
 
-const ticketStatus =
-document.getElementById("ticket-status");
+function formatTime(timestamp){
+const date = new Date(timestamp);
+const uses24 = userUses24HourTime();
 
-const ticketMessages =
-document.getElementById("ticket-messages");
+return date.toLocaleTimeString([],{
+hour:"numeric",
+minute:"2-digit",
+hour12:!uses24
+});
+}
 
-const replyBox =
-document.getElementById("ticket-reply");
+function formatDiscordDate(timestamp){
+const date = new Date(timestamp);
+const now = new Date();
 
-const sendButton =
-document.getElementById("send-reply-button");
+const today = new Date(now.getFullYear(),now.getMonth(),now.getDate());
+const yesterday = new Date(today);
+yesterday.setDate(today.getDate() - 1);
 
-const staffCommands =
-document.getElementById("staff-commands");
+const messageDay = new Date(date.getFullYear(),date.getMonth(),date.getDate());
+const time = formatTime(timestamp);
 
-const claimButton =
-document.getElementById("claim-ticket");
+if(messageDay.getTime() === today.getTime()){
+return "Today at " + time;
+}
 
-const tabTitle =
-document.getElementById("tab-title");
+if(messageDay.getTime() === yesterday.getTime()){
+return "Yesterday at " + time;
+}
 
-/* PARAMS */
+return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear() + ", at " + time;
+}
 
-const params =
-new URLSearchParams(
-window.location.search
-);
+function escapeHTML(text){
+return String(text || "")
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+}
 
-const ticketId =
-params.get("id");
+function getBadgeHTML(role){
+if(role === "BOT"){
+return '<span class="ticket-badge bot-badge">BOT</span>';
+}
+
+if(role === "SUPPORT"){
+return '<span class="ticket-badge support-badge">SUPPORT</span>';
+}
+
+if(role === "SYSTEM"){
+return '<span class="ticket-badge system-badge">SYSTEM</span>';
+}
+
+return "";
+}
+
+function getAvatarForMessage(msg, currentUserData){
+if(msg.avatarBase64){
+return msg.avatarBase64;
+}
+
+if(msg.role === "BOT"){
+return "/images/default-avatar.png";
+}
+
+if(msg.role === "SYSTEM"){
+return "/favicon.png";
+}
+
+return currentUserData.avatarBase64 || "/images/default-avatar.png";
+}
+
+function getAIResponse(prompt){
+const normalized = prompt.toLowerCase().replace(/[^\w\s+]/g,"");
+
+if(
+normalized.indexOf("password") !== -1 ||
+normalized.indexOf("forgot") !== -1 ||
+normalized.indexOf("reset") !== -1 ||
+normalized.indexOf("login") !== -1 ||
+normalized.indexOf("sign in") !== -1 ||
+normalized.indexOf("signin") !== -1
+){
+return 'You can reset your password from the login page using the "Forgot Password" option or from Dashboard Settings if you are already signed in.';
+}
+
+if(
+normalized.indexOf("zos+") !== -1 ||
+normalized.indexOf("zos plus") !== -1 ||
+normalized.indexOf("buy") !== -1 ||
+normalized.indexOf("purchase") !== -1 ||
+normalized.indexOf("payment") !== -1 ||
+normalized.indexOf("checkout") !== -1 ||
+normalized.indexOf("stripe") !== -1 ||
+normalized.indexOf("card") !== -1 ||
+normalized.indexOf("money") !== -1
+){
+return "If you cannot purchase ZOS+, your card vendor may not currently support Stripe or there may not be enough funds available on the payment method.";
+}
+
+if(
+normalized.indexOf("child") !== -1 ||
+normalized.indexOf("kid") !== -1 ||
+normalized.indexOf("parent") !== -1 ||
+normalized.indexOf("family") !== -1
+){
+return "There are tutorials for almost everything on the official ZombieOS YouTube channel, including child account setup tutorials.";
+}
+
+return "I'm sorry, I could not find an answer for that question yet.";
+}
+
+function fileToBase64(file){
+return new Promise(function(resolve,reject){
+
+const reader = new FileReader();
+
+reader.onload = function(event){
+resolve(event.target.result);
+};
+
+reader.onerror = function(){
+reject("Image upload failed.");
+};
+
+reader.readAsDataURL(file);
+
+});
+}
 
 /* AUTH */
 
-onAuthStateChanged(
-auth,
-async function(user){
+onAuthStateChanged(auth,async function(user){
 
 if(!user){
-
-window.location.href =
-"/login";
-
+window.location.href = "/login";
 return;
+}
+
+if(!ticketId){
+alert("No ticket ID provided.");
+window.location.href = "/tickets";
+return;
+}
+
+const userRef = doc(db,"users",user.uid);
+const userSnap = await getDoc(userRef);
+
+if(!userSnap.exists()){
+alert("User profile missing.");
+return;
+}
+
+const userData = userSnap.data();
+const username = userData.username || user.displayName || "Unknown User";
+const isStaff = hasStaffBadge(userData);
+
+const ticketRef = doc(db,"tickets",ticketId);
+
+let currentTicket = null;
+let selectedImageBase64 = "";
+let typingTimeout = null;
+
+/* IMAGE UPLOAD */
+
+if(imageUpload){
+
+imageUpload.onchange = async function(){
+
+const file = imageUpload.files[0];
+
+if(!file){
+return;
+}
+
+if(file.size > 5 * 1024 * 1024){
+alert("Image must be 5MB or smaller.");
+imageUpload.value = "";
+return;
+}
+
+selectedImageBase64 = await fileToBase64(file);
+alert("Image added. Send your message to post it.");
+};
 
 }
 
-/* USER */
+/* TYPING */
 
-const userRef =
-doc(
-db,
-"users",
-user.uid
-);
+function updateTyping(isTyping){
 
-const userSnap =
-await getDoc(userRef);
+if(!currentTicket){
+return;
+}
 
-const userData =
-userSnap.data();
+const typing = currentTicket.typing || {};
 
-const username =
-userData.username || "Unknown";
+if(isTyping){
+typing[user.uid] = username;
+}else{
+delete typing[user.uid];
+}
 
-/* STAFF */
-
-let isStaff =
-false;
-
-const badges =
-userData.badges || [];
-
-for(
-let i = 0;
-i < badges.length;
-i++
-){
-
-if(
-String(badges[i]).toUpperCase()
-=== "STAFF"
-){
-
-isStaff = true;
+setDoc(ticketRef,{typing:typing},{merge:true});
 
 }
 
+if(replyBox){
+
+replyBox.addEventListener("input",function(){
+
+updateTyping(true);
+
+if(typingTimeout){
+clearTimeout(typingTimeout);
 }
 
-/* TICKET */
+typingTimeout = setTimeout(function(){
+updateTyping(false);
+},1500);
 
-const ticketRef =
-doc(
-db,
-"tickets",
-ticketId
-);
+});
+
+replyBox.addEventListener("keydown",function(event){
+
+if(event.key === "Enter" && !event.shiftKey){
+event.preventDefault();
+sendMessage();
+}
+
+});
+
+}
 
 /* REALTIME */
 
-onSnapshot(
-ticketRef,
-(snapshot)=>{
+onSnapshot(ticketRef,function(snapshot){
 
 if(!snapshot.exists()){
-
+ticketTitle.textContent = "Ticket not found";
 return;
-
 }
 
-const ticket =
-snapshot.data();
+const ticket = snapshot.data();
+currentTicket = ticket;
 
 /* ACCESS */
 
-let allowed =
-false;
+let allowed = false;
+const participants = ticket.participants || [];
 
-if(
-ticket.participants
-){
-
-for(
-let i = 0;
-i < ticket.participants.length;
-i++
-){
-
-if(
-ticket.participants[i]
-=== user.uid
-){
-
+for(let i = 0; i < participants.length; i++){
+if(participants[i] === user.uid){
 allowed = true;
-
 }
-
-}
-
 }
 
 if(isStaff){
-
 allowed = true;
-
 }
 
 if(!allowed){
-
-alert(
-"You are not part of this ticket."
-);
-
-window.location.href =
-"/tickets";
-
+alert("You are not part of this ticket.");
+window.location.href = "/tickets";
 return;
-
 }
 
 /* STAFF UI */
 
-if(isStaff){
-
-staffCommands.style.display =
-"block";
+if(isStaff && staffCommands){
+staffCommands.style.display = "block";
 
 if(ticket.claimed){
-
-claimButton.textContent =
-"Unclaim Ticket";
-
+claimButton.textContent = "Unclaim Ticket";
 }else{
-
-claimButton.textContent =
-"Claim Ticket";
-
+claimButton.textContent = "Claim Ticket";
+}
 }
 
-}
+/* HEADER */
 
-/* META */
-
-ticketTitle.textContent =
-ticket.title || "Untitled";
+ticketTitle.textContent = ticket.title || "Untitled Ticket";
 
 ticketMeta.textContent =
+"Ticket " + (ticket.ticketId || ticketId) +
+" • " + (ticket.category || "Other") +
+" • Created " + formatDiscordDate(ticket.createdAt || Date.now());
 
-"Created " +
+ticketStatus.textContent = ticket.status || "OPEN";
 
-new Date(
-ticket.createdAt
-).toLocaleString();
+/* TYPING INDICATOR */
 
-ticketStatus.textContent =
-ticket.status || "OPEN";
+const typing = ticket.typing || {};
+let typingNames = [];
+
+for(const uid in typing){
+if(uid !== user.uid){
+typingNames.push(typing[uid]);
+}
+}
+
+if(typingNames.length > 0){
+typingIndicator.innerHTML = "<span>" + escapeHTML(typingNames.join(", ")) + " is typing</span>";
+}else{
+typingIndicator.innerHTML = "";
+}
 
 /* MESSAGES */
 
 ticketMessages.innerHTML = "";
 
-const messages =
-ticket.messages || [];
+const messages = ticket.messages || [];
+let lastRenderableSender = "";
 
-messages.forEach((msg)=>{
+for(let i = 0; i < messages.length; i++){
 
-const card =
-document.createElement("div");
+const msg = messages[i];
+const senderKey = (msg.uid || msg.author || "") + "|" + (msg.role || "USER");
 
-card.className =
-"ticket-message-card";
+const compact =
+senderKey === lastRenderableSender &&
+msg.role !== "SYSTEM" &&
+msg.role !== "BOT";
 
-let badgeHTML = "";
+const row = document.createElement("div");
+row.className = compact ? "ticket-message-row compact" : "ticket-message-row";
 
-if(msg.role === "BOT"){
+const badgeHTML = getBadgeHTML(msg.role);
+const time = formatDiscordDate(msg.timestamp || Date.now());
 
-badgeHTML =
-`<span class="ticket-badge bot-badge">BOT</span>`;
+if(compact){
+
+row.innerHTML =
+'<div class="ticket-avatar-spacer"></div>' +
+'<div class="ticket-message-body">' +
+'<div class="ticket-message-content">' + escapeHTML(msg.message || "") + '</div>' +
+(msg.imageBase64 ? '<img class="ticket-message-image" src="' + msg.imageBase64 + '">' : '') +
+'</div>';
+
+}else{
+
+row.innerHTML =
+'<img class="ticket-avatar" src="' + getAvatarForMessage(msg,userData) + '">' +
+'<div class="ticket-message-body">' +
+'<div class="ticket-message-header">' +
+'<span class="ticket-author">' + escapeHTML(msg.author || "Unknown") + '</span>' +
+badgeHTML +
+'<span class="ticket-message-time">' + time + '</span>' +
+'</div>' +
+'<div class="ticket-message-content">' + escapeHTML(msg.message || "") + '</div>' +
+(msg.imageBase64 ? '<img class="ticket-message-image" src="' + msg.imageBase64 + '">' : '') +
+'</div>';
 
 }
 
-if(msg.role === "SUPPORT"){
+ticketMessages.appendChild(row);
 
-badgeHTML =
-`<span class="ticket-badge support-badge">SUPPORT</span>`;
+if(msg.role === "SYSTEM" || msg.role === "BOT"){
+lastRenderableSender = "";
+}else{
+lastRenderableSender = senderKey;
+}
 
 }
 
-if(msg.role === "SYSTEM"){
-
-badgeHTML =
-`<span class="ticket-badge system-badge">SYSTEM</span>`;
-
-}
-
-card.innerHTML =
-
-`
-<div class="ticket-message-header">
-
-<span class="ticket-author">
-
-${msg.author || "Unknown"}
-
-</span>
-
-${badgeHTML}
-
-</div>
-
-<div class="ticket-message-content">
-
-${msg.message || ""}
-
-</div>
-
-<div class="ticket-message-time">
-
-${new Date(
-msg.timestamp
-).toLocaleString()}
-
-</div>
-`;
-
-ticketMessages.appendChild(card);
+ticketMessages.scrollTop = ticketMessages.scrollHeight;
 
 });
 
-ticketMessages.scrollTop =
-ticketMessages.scrollHeight;
+/* SEND MESSAGE */
 
-});
+async function sendMessage(){
 
-/* SEND */
+const text = replyBox.value.trim();
 
-sendButton.onclick =
-async function(){
-
-const reply =
-replyBox.value.trim();
-
-if(!reply){
-
+if(!text && !selectedImageBase64){
 return;
-
 }
 
-const ticketSnap =
-await getDoc(ticketRef);
+const ticketSnap = await getDoc(ticketRef);
+const ticket = ticketSnap.data();
 
-const ticket =
-ticketSnap.data();
+const messages = ticket.messages || [];
 
-const messages =
-ticket.messages || [];
+const role = isStaff ? "SUPPORT" : "USER";
 
 messages.push({
-
 author:username,
 uid:user.uid,
-message:reply,
+avatarBase64:userData.avatarBase64 || "",
+message:text,
+imageBase64:selectedImageBase64,
 timestamp:Date.now(),
-role:isStaff ? "SUPPORT" : "USER"
-
+role:role
 });
 
-/* AI */
+if(text.toLowerCase().indexOf("!ai") === 0){
 
-if(
-reply.toLowerCase()
-.indexOf("!ai") === 0
-){
+const prompt = text.replace("!ai","").trim();
 
 messages.push({
-
 author:"ZOS AI",
 uid:"zos-ai",
-message:"This is a temporary AI response system for ZombieOS support.",
+message:getAIResponse(prompt),
 timestamp:Date.now(),
 role:"BOT"
-
 });
 
 }
 
-await setDoc(
-ticketRef,
-{
+const typing = ticket.typing || {};
+delete typing[user.uid];
 
+await setDoc(ticketRef,{
 messages:messages,
+typing:typing,
 updatedAt:Date.now()
+},{merge:true});
 
-},
-{
-merge:true
+replyBox.value = "";
+selectedImageBase64 = "";
+
+if(imageUpload){
+imageUpload.value = "";
 }
-);
 
-replyBox.value =
-"";
+}
 
-};
+sendButton.onclick = sendMessage;
 
-/* CLAIM */
+/* STAFF COMMANDS */
 
-claimButton.onclick =
-async function(){
+if(isStaff){
 
-const ticketSnap =
-await getDoc(ticketRef);
+claimButton.onclick = async function(){
 
-const ticket =
-ticketSnap.data();
-
-const messages =
-ticket.messages || [];
+const ticketSnap = await getDoc(ticketRef);
+const ticket = ticketSnap.data();
+const messages = ticket.messages || [];
 
 if(ticket.claimed){
 
 messages.push({
-
 author:"ZOS SYSTEM",
-message:
-username +
-" has unclaimed this ticket.",
-
+uid:"zos-system",
+message:username + " has unclaimed this ticket.",
 timestamp:Date.now(),
 role:"SYSTEM"
-
 });
 
-await setDoc(
-ticketRef,
-{
-
+await setDoc(ticketRef,{
 claimed:false,
 claimedBy:"",
 messages:messages
-
-},
-{
-merge:true
-}
-);
+},{merge:true});
 
 }else{
 
 messages.push({
-
 author:"ZOS SYSTEM",
-message:
-username +
-" has claimed this ticket.",
-
+uid:"zos-system",
+message:username + " has claimed this ticket.",
 timestamp:Date.now(),
 role:"SYSTEM"
-
 });
 
-await setDoc(
-ticketRef,
-{
-
+await setDoc(ticketRef,{
 claimed:true,
 claimedBy:username,
 messages:messages
-
-},
-{
-merge:true
-}
-);
+},{merge:true});
 
 }
 
 };
 
-/* CLOSE */
+$("close-ticket").onclick = async function(){
 
-document.getElementById(
-"close-ticket"
-).onclick =
-async function(){
-
-const reason =
-prompt(
-"Reason for closing?"
-);
+const reason = prompt("Reason for closing?");
 
 if(!reason){
-
 return;
-
 }
 
-const ticketSnap =
-await getDoc(ticketRef);
-
-const ticket =
-ticketSnap.data();
-
-const messages =
-ticket.messages || [];
+const ticketSnap = await getDoc(ticketRef);
+const ticket = ticketSnap.data();
+const messages = ticket.messages || [];
 
 messages.push({
-
 author:"ZOS SYSTEM",
-message:
-username +
-" has closed this ticket for: " +
-reason,
-
+uid:"zos-system",
+message:username + " has closed this ticket for: " + reason,
 timestamp:Date.now(),
 role:"SYSTEM"
-
 });
 
-await setDoc(
-ticketRef,
-{
-
+await setDoc(ticketRef,{
 status:"CLOSED",
 messages:messages
-
-},
-{
-merge:true
-}
-);
+},{merge:true});
 
 };
 
-/* REOPEN */
+$("reopen-ticket").onclick = async function(){
 
-document.getElementById(
-"reopen-ticket"
-).onclick =
-async function(){
-
-const ticketSnap =
-await getDoc(ticketRef);
-
-const ticket =
-ticketSnap.data();
-
-const messages =
-ticket.messages || [];
+const ticketSnap = await getDoc(ticketRef);
+const ticket = ticketSnap.data();
+const messages = ticket.messages || [];
 
 messages.push({
-
 author:"ZOS SYSTEM",
-message:
-username +
-" has reopened this ticket.",
-
+uid:"zos-system",
+message:username + " has reopened this ticket.",
 timestamp:Date.now(),
 role:"SYSTEM"
-
 });
 
-await setDoc(
-ticketRef,
-{
-
+await setDoc(ticketRef,{
 status:"OPEN",
 messages:messages
+},{merge:true});
 
-},
-{
-merge:true
-}
-);
+};
+
+$("priority-10").onclick = async function(){
+
+const ticketSnap = await getDoc(ticketRef);
+const ticket = ticketSnap.data();
+const messages = ticket.messages || [];
+
+messages.push({
+author:"ZOS SYSTEM",
+uid:"zos-system",
+message:username + " has changed this ticket priority to 10.",
+timestamp:Date.now(),
+role:"SYSTEM"
+});
+
+await setDoc(ticketRef,{
+priority:10,
+messages:messages
+},{merge:true});
 
 };
 
 }
-);
 
-/* MOBILE NAVBAR */
-
-const mobileToggle =
-document.getElementById(
-"mobile-navbar-toggle"
-);
-
-const navbar =
-document.getElementById(
-"dashboard-navbar"
-);
-
-let navbarVisible =
-true;
-
-mobileToggle.onclick =
-function(){
-
-navbarVisible =
-!navbarVisible;
-
-if(navbarVisible){
-
-navbar.classList.remove(
-"hidden"
-);
-
-mobileToggle.textContent =
-"Hide Menu";
-
-}else{
-
-navbar.classList.add(
-"hidden"
-);
-
-mobileToggle.textContent =
-"Show Menu";
-
-}
-
-};
-
-/* Tab name */
-const tabName =
-document.getElementById(
-"tab-title"
-);
-
-tabName.textContent = "Ticket - " + ticketId + " - ZombieOS";
+});
