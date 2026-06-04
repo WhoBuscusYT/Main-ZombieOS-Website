@@ -383,29 +383,36 @@ box-shadow:0 0 30px rgba(0,255,153,0.15);
 }
 
 .dashboard-navbar{
-position:fixed;
-top:85px;
-left:10px;
-width:200px;
-max-width:60vw;
-height:auto;
-max-height:70vh;
-overflow-y:auto;
-z-index:1000;
-background:rgba(0,0,0,0.96);
-border:1px solid rgba(0,255,140,0.15);
-border-radius:24px;
-padding:18px;
-display:flex;
-flex-direction:column;
-gap:14px;
-backdrop-filter:blur(18px);
-box-shadow:0 0 40px rgba(0,255,140,0.15);
-transition:0.3s ease;
+    position:fixed;
+
+    top:85px;
+    left:15px;
+
+    width:220px;
+    max-width:60vw;
+
+    height:auto;
+    max-height:70vh;
+
+    overflow-y:auto;
+
+    z-index:1000;
+
+    padding:18px;
+
+    border-radius:24px;
+
+    background:rgba(0,0,0,0.96);
+
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+
+    transform:none;
 }
 
 .dashboard-navbar.hidden{
-transform:translateX(-120%);
+    transform:translateX(-250px);
 }
 
 .dashboard-navbar-top{
