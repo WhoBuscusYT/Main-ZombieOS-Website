@@ -709,25 +709,46 @@ messages:messages
 
 $("priority-10").onclick = async function(){
 
-const ticketSnap = await getDoc(ticketRef);
-const ticket = ticketSnap.data();
-const messages = ticket.messages || [];
+    const priority = prompt(
+        "Enter priority (1-10):"
+    );
 
-messages.push({
-author:"ZOS SYSTEM",
-uid:"zos-system",
-message:username + " has changed this ticket priority to 10.",
-timestamp:Date.now(),
-role:"SYSTEM"
-});
+    if(!priority){
+        return;
+    }
 
-await setDoc(ticketRef,{
-priority:10,
-messages:messages
-},{merge:true});
+    const priorityNumber = Number(priority);
+
+    if(
+        isNaN(priorityNumber) ||
+        priorityNumber < 1 ||
+        priorityNumber > 10
+    ){
+        alert("Priority must be between 1 and 10.");
+        return;
+    }
+
+    const ticketSnap = await getDoc(ticketRef);
+    const ticket = ticketSnap.data();
+
+    const messages =
+        ticket.messages || [];
+
+    messages.push({
+        author:"ZOS SYSTEM",
+        uid:"zos-system",
+        message:
+            username +
+            " has changed this ticket priority to " +
+            priorityNumber +
+            ".",
+        timestamp:Date.now(),
+        role:"SYSTEM"
+    });
+
+    await setDoc(ticketRef,{
+        priority:priorityNumber,
+        messages:messages
+    },{merge:true});
 
 };
-
-}
-
-});
