@@ -7,9 +7,9 @@
 <title id="tab-title">Ticket - ZombieOS</title>
 
 <link rel="icon" type="image/png" href="/favicon.png">
-<link rel="stylesheet" href="/css/global.css?v=300">
-<link rel="stylesheet" href="/css/dashboard.css?v=300">
-<link rel="stylesheet" href="/css/tickets/ticket.css?v=300">
+<link rel="stylesheet" href="/css/global.css?v=400">
+<link rel="stylesheet" href="/css/dashboard.css?v=400">
+<link rel="stylesheet" href="/css/tickets/ticket.css?v=400">
 </head>
 
 <body>
@@ -18,13 +18,10 @@
 <div class="background-glow glow1"></div>
 <div class="background-glow glow2"></div>
 
-<button id="mobile-navbar-toggle" class="mobile-navbar-toggle">
-Hide Menu
-</button>
+<button id="mobile-navbar-toggle" class="mobile-navbar-toggle">Hide Menu</button>
 
 <header id="dashboard-navbar" class="dashboard-navbar">
 <div class="dashboard-navbar-top">
-
 <a href="/dashboard" class="dashboard-logo">ZOS SUPPORT</a>
 
 <nav class="dashboard-links">
@@ -32,7 +29,6 @@ Hide Menu
 <a href="/tickets">Tickets</a>
 <a href="/dashboard/settings">Settings</a>
 </nav>
-
 </div>
 </header>
 
@@ -56,20 +52,14 @@ Hide Menu
 </section>
 
 <section class="dashboard-card ticket-chat-card">
-
 <h2>Messages</h2>
 
-<div id="ticket-messages" class="ticket-messages">
-Loading messages...
-</div>
+<div id="ticket-messages" class="ticket-messages">Loading messages...</div>
 
 <div id="typing-indicator" class="typing-indicator"></div>
 
 <div class="ticket-composer">
-
-<label for="ticket-image-upload" class="upload-image-button">
-＋
-</label>
+<label for="ticket-image-upload" class="upload-image-button">＋</label>
 
 <input
 type="file"
@@ -78,26 +68,27 @@ accept="image/*"
 hidden
 >
 
-<textarea
-id="ticket-reply"
-placeholder="Message this ticket..."
-></textarea>
+<textarea id="ticket-reply" placeholder="Message this ticket..."></textarea>
 
-<button id="send-reply-button">
-Send
-</button>
+<button id="send-reply-button">Send</button>
+</div>
 
+<div id="upload-limit-display" class="upload-limit-display">
+Upload Limit:
+<span id="upload-limit-text">Loading...</span>
+<span id="upload-tier-badge" class="subscription-badge"></span>
 </div>
 
 <p class="composer-note">
-Enter sends • Shift + Enter makes a new line • Images max 5MB
+Enter sends • Shift + Enter makes a new line
 </p>
-
 </section>
 
 </main>
 
-<script type="module" src="/js/tickets/ticket.js?v=300"></script>
+<div id="zos-popup-layer" class="zos-popup-layer"></div>
+
+<script type="module" src="/js/tickets/ticket.js?v=400"></script>
 
 </body>
 </html>
