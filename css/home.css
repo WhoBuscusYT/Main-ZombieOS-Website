@@ -5,6 +5,7 @@
 padding:
 120px 7vw
 80px;
+
 }
 
 .section-eyebrow{
@@ -16,15 +17,21 @@ letter-spacing:10px;
 font-size:0.85rem;
 
 margin-bottom:22px;
+
 }
 
 .hero-title{
 
-font-size:clamp(4rem,14vw,8rem);
+font-size:clamp(
+4rem,
+14vw,
+8rem
+);
 
 line-height:1.05;
 
 margin-bottom:28px;
+
 }
 
 .hero-description{
@@ -38,6 +45,7 @@ max-width:850px;
 color:#d0d0d0;
 
 margin-bottom:50px;
+
 }
 
 /* BUTTONS */
@@ -45,9 +53,11 @@ margin-bottom:50px;
 .hero-buttons{
 
 display:flex;
+
 flex-wrap:wrap;
 
 gap:20px;
+
 }
 
 .primary-button,
@@ -64,13 +74,14 @@ font-weight:700;
 
 text-decoration:none;
 
-transition:
-0.25s;
+transition:0.25s;
 
 display:flex;
 
 align-items:center;
+
 justify-content:center;
+
 }
 
 .primary-button{
@@ -80,7 +91,13 @@ background:#00ff99;
 color:black;
 
 box-shadow:
-0 0 20px rgba(0,255,153,0.25);
+0 0 20px rgba(
+0,
+255,
+153,
+0.25
+);
+
 }
 
 .primary-button:hover{
@@ -90,18 +107,35 @@ translateY(-8px)
 scale(1.03);
 
 box-shadow:
-0 0 35px rgba(0,255,153,0.45);
+0 0 35px rgba(
+0,
+255,
+153,
+0.45
+);
+
 }
 
 .secondary-button{
 
 background:
-rgba(0,0,0,0.72);
+rgba(
+0,
+0,
+0,
+0.72
+);
 
 border:
-1px solid rgba(0,255,153,0.12);
+1px solid rgba(
+0,
+255,
+153,
+0.12
+);
 
 color:#00ff99;
+
 }
 
 .secondary-button:hover{
@@ -111,7 +145,47 @@ translateY(-8px)
 scale(1.03);
 
 box-shadow:
-0 0 35px rgba(0,255,153,0.2);
+0 0 35px rgba(
+0,
+255,
+153,
+0.2
+);
+
+}
+
+/* WHAT IS ZOS */
+
+.what-is-zos{
+
+margin:
+0 7vw
+100px;
+
+padding:40px;
+
+}
+
+.what-is-zos h2{
+
+font-size:2.5rem;
+
+margin-bottom:20px;
+
+color:#00ff99;
+
+}
+
+.what-is-zos p{
+
+line-height:1.9;
+
+font-size:1.1rem;
+
+color:#d0d0d0;
+
+margin-bottom:20px;
+
 }
 
 /* RUNTIME SHELL */
@@ -124,15 +198,6 @@ margin:
 
 padding:40px;
 
-background:
-rgba(0,0,0,0.72);
-
-border:
-1px solid rgba(0,255,153,0.12);
-
-border-radius:30px;
-
-backdrop-filter:blur(14px);
 }
 
 .shell-dots{
@@ -142,11 +207,13 @@ display:flex;
 gap:12px;
 
 margin-bottom:24px;
+
 }
 
 .shell-dots span{
 
 width:18px;
+
 height:18px;
 
 border-radius:50%;
@@ -154,7 +221,13 @@ border-radius:50%;
 background:#00ff99;
 
 box-shadow:
-0 0 15px rgba(0,255,153,0.7);
+0 0 15px rgba(
+0,
+255,
+153,
+0.7
+);
+
 }
 
 .runtime-shell h2{
@@ -164,6 +237,7 @@ font-size:2rem;
 color:#00ff99;
 
 margin-bottom:24px;
+
 }
 
 #shell-text{
@@ -175,6 +249,9 @@ font-size:1rem;
 white-space:pre-wrap;
 
 color:#d0d0d0;
+
+min-height:220px;
+
 }
 
 /* MOBILE */
@@ -182,20 +259,28 @@ color:#d0d0d0;
 @media(max-width:768px){
 
 .hero{
+
 padding-top:90px;
+
 }
 
 .hero-buttons{
+
 flex-direction:column;
+
 }
 
 .primary-button,
 .secondary-button{
+
 width:100%;
+
 }
 
 .hero-title{
+
 font-size:4rem;
+
 }
 
 }
