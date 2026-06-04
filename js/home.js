@@ -1,43 +1,104 @@
 const shellText =
-document.getElementById("shell-text");
+document.getElementById(
+"shell-text"
+);
 
 if(shellText){
 
-const shellLines = [
+const shellMessages = [
 
+[
 "> boot ZombieOS",
 "> load ZSharp",
 "> initialize runtime",
-"> connect ecosystem",
-"> prepare future_ui",
-"> establish runtime_core"
+"> connect ecosystem"
+],
+
+[
+"> loading user interface",
+"> preparing dashboard",
+"> syncing services",
+"> startup complete"
+],
+
+[
+"> checking integrity",
+"> loading modules",
+"> establishing runtime_core",
+"> ready"
+],
+
+[
+"> welcome to ZombieOS",
+"> prototype online",
+"> ecosystem connected",
+"> awaiting commands"
+]
 
 ];
 
-let currentLine = 0;
+let currentMessage = 0;
 
-function rotateShell(){
+async function typeText(text){
 
-shellText.textContent =
-shellLines
-.slice(currentLine)
-.concat(shellLines.slice(0,currentLine))
-.join("\n\n");
+shellText.textContent = "";
 
-currentLine++;
+for(
+let i = 0;
+i < text.length;
+i++
+){
 
-if(currentLine >= shellLines.length){
-currentLine = 0;
-}
+shellText.textContent +=
+text[i];
 
-}
-
-rotateShell();
-
-setInterval(
-rotateShell,
-3000
+await new Promise(
+resolve =>
+setTimeout(
+resolve,
+35
+)
 );
+
+}
+
+}
+
+async function shellLoop(){
+
+while(true){
+
+const message =
+shellMessages[
+currentMessage
+].join("\n\n");
+
+await typeText(
+message
+);
+
+await new Promise(
+resolve =>
+setTimeout(
+resolve,
+10000
+)
+);
+
+currentMessage++;
+
+if(
+currentMessage >=
+shellMessages.length
+){
+currentMessage = 0;
+}
+
+}
+
+}
+
+shellLoop();
 
 }
 
@@ -45,9 +106,12 @@ rotateShell,
 
 document.addEventListener(
 "keydown",
-(event)=>{
+event => {
 
-if(event.key.toLowerCase() === "z"){
+if(
+event.key.toLowerCase() ===
+"z"
+){
 
 console.log(
 "ZombieOS Runtime Initialized"
