@@ -10,8 +10,8 @@
 
 <link rel="icon" type="image/png" href="/images/favicon.png">
 
-<link rel="stylesheet" href="css/global.css">
-<link rel="stylesheet" href="css/home.css">
+<link rel="stylesheet" href="/css/global.css">
+<link rel="stylesheet" href="/css/home.css">
 
 <link
 rel="stylesheet"
@@ -27,28 +27,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 <div class="background-glow glow1"></div>
 <div class="background-glow glow2"></div>
 
-<header class="navbar">
-
-<a href="/" class="logo">
-ZombieOS
-</a>
-
-<nav class="nav-links">
-
-<a href="/">Home</a>
-<a href="/zsharp">Z#</a>
-<a href="/downloads">Downloads</a>
-<a href="/versions">Versions</a>
-<a href="/status">Status</a>
-<a href="/devlog">Devlog</a>
-<a href="/docs">Docs</a>
-<a href="/community">Community</a>
-<a
-id="navbar-login-button" href="/login" class="nav-button">Login</a>
-<a href="/tickets">Support</a>
-</nav>
-
-</header>
+<nav id="navbar"></nav>
 
 <main>
 
@@ -80,7 +59,27 @@ Explore Z#
 
 </section>
 
-<section class="runtime-shell floating-card">
+<section class="what-is-zos hero-card">
+
+<h2>
+What is ZombieOS?
+</h2>
+
+<p>
+ZombieOS (ZOS) is a futuristic operating system and runtime platform built around customization, performance, and the Z# programming language.
+</p>
+
+<p>
+The current prototype runs on existing operating systems while development continues toward a standalone kernel version capable of powering the full ZombieOS experience.
+</p>
+
+<p>
+ZombieOS includes the Z# language, developer tools, account system, support platform, community features, and future ecosystem services.
+</p>
+
+</section>
+
+<section class="runtime-shell hero-card">
 
 <div class="shell-dots">
 <span></span>
@@ -92,43 +91,17 @@ Explore Z#
 ZOS Runtime Shell
 </h2>
 
-<pre id="shell-text">
-> boot ZombieOS
-
-> load ZSharp
-
-> initialize runtime
-
-> connect ecosystem
-</pre>
+<pre id="shell-text"></pre>
 
 </section>
 
 </main>
 
-<footer>
+<footer id="footer"></footer>
 
-<h2>
-ZombieOS
-</h2>
-
-<div class="footer-links">
-
-<a href="/">Home</a>
-<a href="/downloads">Downloads</a>
-<a href="/versions">Versions</a>
-<a href="/status">Status</a>
-
-</div>
-
-<p>
-ZombieOS / ZOS © <span id="year"></span>
-</p>
-
-</footer>
-
-<script src="js/global.js"></script>
-<script src="js/home.js"></script>
+<script type="module" src="/js/global.js"></script>
+<script src="/js/home.js"></script>
 
 </body>
+
 </html>
