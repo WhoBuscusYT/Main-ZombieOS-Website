@@ -44,9 +44,29 @@ const claimButton = $("claim-ticket");
 const typingIndicator = $("typing-indicator");
 const imageUpload = $("ticket-image-upload");
 const tabName = $("tab-title");
+const uploadLimitText = $("upload-limit-text");
+const uploadTierBadge = $("upload-tier-badge");
+const popupLayer = $("zos-popup-layer");
 
 if(tabName && ticketId){
 tabName.textContent = "Ticket - " + ticketId + " - ZombieOS";
+}
+
+/* POPUPS */
+
+function showPopup(title,message,type){
+const popup = document.createElement("div");
+popup.className = "zos-popup " + (type || "info");
+
+popup.innerHTML =
+"<h3>" + escapeHTML(title) + "</h3>" +
+"<p>" + escapeHTML(message) + "</p>";
+
+popupLayer.appendChild(popup);
+
+setTimeout(function(){
+popup.remove();
+},4000);
 }
 
 /* MOBILE NAV */
@@ -86,6 +106,62 @@ return true;
 }
 
 return false;
+}
+
+function getSubscriptionTier(userData){
+const rawTier =
+userData.subscriptionTier ||
+userData.subscription ||
+"FREE";
+
+const tier = String(rawTier).toUpperCase();
+
+if(tier === "BASIC" || tier === "ZOS+ BASIC"){
+return "BASIC";
+}
+
+if(tier === "ZOS+" || tier === "ZOSPLUS" || tier === "PLUS"){
+return "ZOSPLUS";
+}
+
+return "FREE";
+}
+
+function getUploadLimit(userData){
+const tier = getSubscriptionTier(userData);
+
+if(tier === "BASIC"){
+return 4 * 1024 * 1024;
+}
+
+if(tier === "ZOSPLUS"){
+return 8 * 1024 * 1024;
+}
+
+return 2 * 1024 * 1024;
+}
+
+function formatBytes(bytes){
+const mb = bytes / 1024 / 1024;
+return mb + " MB";
+}
+
+function setupUploadLimitUI(userData){
+const tier = getSubscriptionTier(userData);
+const limit = getUploadLimit(userData);
+
+uploadLimitText.textContent = formatBytes(limit);
+
+if(tier === "BASIC"){
+uploadTierBadge.style.display = "inline-flex";
+uploadTierBadge.textContent = "BASIC";
+}else if(tier === "ZOSPLUS"){
+uploadTierBadge.style.display = "inline-flex";
+uploadTierBadge.textContent = "ZOS+";
+}else{
+uploadTierBadge.style.display = "none";
+uploadTierBadge.textContent = "";
+}
 }
 
 function userUses24HourTime(){
@@ -151,32 +227,13 @@ return '<span class="ticket-badge system-badge">SYSTEM</span>';
 return "";
 }
 
-function getAvatarForMessage(msg, currentUserData){
-
-    if(
-        msg.role === "BOT" ||
-        msg.role === "SYSTEM"
-    ){
-        return "/images/favicon.png";
-    }
-
-    if(msg.avatarBase64){
-        return msg.avatarBase64;
-    }
-
-    return (
-        currentUserData.avatarBase64 ||
-        "/images/default-avatar.png"
-    );
-
+function getAvatarForMessage(msg,currentUserData){
+if(msg.role === "BOT" || msg.role === "SYSTEM"){
+return "/images/favicon.png";
 }
 
-if(msg.role === "BOT"){
-return "/images/default-avatar.png";
-}
-
-if(msg.role === "SYSTEM"){
-return "/favicon.png";
+if(msg.avatarBase64){
+return msg.avatarBase64;
 }
 
 return currentUserData.avatarBase64 || "/images/default-avatar.png";
@@ -224,7 +281,6 @@ return "I'm sorry, I could not find an answer for that question yet.";
 
 function fileToBase64(file){
 return new Promise(function(resolve,reject){
-
 const reader = new FileReader();
 
 reader.onload = function(event){
@@ -236,7 +292,6 @@ reject("Image upload failed.");
 };
 
 reader.readAsDataURL(file);
-
 });
 }
 
@@ -250,7 +305,7 @@ return;
 }
 
 if(!ticketId){
-alert("No ticket ID provided.");
+showPopup("Missing Ticket","No ticket ID was provided.","error");
 window.location.href = "/tickets";
 return;
 }
@@ -259,13 +314,15 @@ const userRef = doc(db,"users",user.uid);
 const userSnap = await getDoc(userRef);
 
 if(!userSnap.exists()){
-alert("User profile missing.");
+showPopup("Profile Missing","Your user profile could not be loaded.","error");
 return;
 }
 
 const userData = userSnap.data();
 const username = userData.username || user.displayName || "Unknown User";
 const isStaff = hasStaffBadge(userData);
+
+setupUploadLimitUI(userData);
 
 const ticketRef = doc(db,"tickets",ticketId);
 
@@ -285,14 +342,26 @@ if(!file){
 return;
 }
 
-if(file.size > 5 * 1024 * 1024){
-alert("Image must be 5MB or smaller.");
+const uploadLimit = getUploadLimit(userData);
+
+if(file.size > uploadLimit){
+showPopup(
+"Upload Failed",
+"This image exceeds your " + formatBytes(uploadLimit) + " upload limit.",
+"error"
+);
+
 imageUpload.value = "";
 return;
 }
 
+try{
 selectedImageBase64 = await fileToBase64(file);
-alert("Image added. Send your message to post it.");
+showPopup("Image Added","Send your message to post the image.","success");
+}catch(error){
+showPopup("Upload Failed","Image could not be processed.","error");
+}
+
 };
 
 }
@@ -305,7 +374,7 @@ if(!currentTicket){
 return;
 }
 
-const typing = currentTicket.typing || {};
+const typing = JSON.parse(JSON.stringify(currentTicket.typing || {}));
 
 if(isTyping){
 typing[user.uid] = username;
@@ -329,7 +398,7 @@ clearTimeout(typingTimeout);
 
 typingTimeout = setTimeout(function(){
 updateTyping(false);
-},1500);
+},3000);
 
 });
 
@@ -372,7 +441,7 @@ allowed = true;
 }
 
 if(!allowed){
-alert("You are not part of this ticket.");
+showPopup("No Access","You are not part of this ticket.","error");
 window.location.href = "/tickets";
 return;
 }
@@ -446,7 +515,7 @@ row.innerHTML =
 '<div class="ticket-avatar-spacer"></div>' +
 '<div class="ticket-message-body">' +
 '<div class="ticket-message-content">' + escapeHTML(msg.message || "") + '</div>' +
-(msg.imageBase64 ? '<img class="ticket-message-image" src="' + msg.imageBase64 + '">' : '') +
+(msg.imageBase64 ? '<img class="ticket-message-image" src="' + msg.imageBase64 + '">' : "") +
 '</div>';
 
 }else{
@@ -460,7 +529,7 @@ badgeHTML +
 '<span class="ticket-message-time">' + time + '</span>' +
 '</div>' +
 '<div class="ticket-message-content">' + escapeHTML(msg.message || "") + '</div>' +
-(msg.imageBase64 ? '<img class="ticket-message-image" src="' + msg.imageBase64 + '">' : '') +
+(msg.imageBase64 ? '<img class="ticket-message-image" src="' + msg.imageBase64 + '">' : "") +
 '</div>';
 
 }
@@ -491,9 +560,7 @@ return;
 
 const ticketSnap = await getDoc(ticketRef);
 const ticket = ticketSnap.data();
-
 const messages = ticket.messages || [];
-
 const role = isStaff ? "SUPPORT" : "USER";
 
 messages.push({
@@ -606,8 +673,12 @@ timestamp:Date.now(),
 role:"SYSTEM"
 });
 
+const deleteAfter = Date.now() + 30 * 24 * 60 * 60 * 1000;
+
 await setDoc(ticketRef,{
 status:"CLOSED",
+closedAt:Date.now(),
+deleteAfter:deleteAfter,
 messages:messages
 },{merge:true});
 
@@ -629,6 +700,8 @@ role:"SYSTEM"
 
 await setDoc(ticketRef,{
 status:"OPEN",
+closedAt:null,
+deleteAfter:null,
 messages:messages
 },{merge:true});
 
