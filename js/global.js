@@ -346,32 +346,24 @@ buildFooter();
 }
 );
 
-const toggle =
-document.getElementById(
-"navbar-toggle"
-);
+buildNavbar();
 
-const links =
-document.getElementById(
-"navbar-links"
-);
+const toggle = document.getElementById("navbar-toggle");
+const links = document.querySelector(".nav-links");
 
-toggle.onclick = function(){
+if(toggle && links){
 
-links.classList.toggle(
-"open"
-);
+    toggle.addEventListener("click", function(){
 
-if(
-links.classList.contains(
-"open"
-)
-){
-toggle.textContent =
-"✕ Close";
-}else{
-toggle.textContent =
-"☰ Menu";
+        links.classList.toggle("open");
+
+        toggle.textContent =
+            links.classList.contains("open")
+            ? "✕ Close"
+            : "☰ Menu";
+
+    });
+
 }
 
 };
