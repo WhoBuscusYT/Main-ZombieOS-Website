@@ -522,3 +522,15 @@ margin-top:0;
 }
 
 }
+
+.navbar-top{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+width:100%;
+
+}
