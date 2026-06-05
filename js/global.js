@@ -113,6 +113,8 @@ navbar.innerHTML = `
 
 <header class="navbar">
 
+<div class="navbar-top">
+
 <a
 href="/"
 class="logo"
@@ -128,9 +130,11 @@ ${accountHTML}
 
 </div>
 
-<button id="navbar-toggle" class="primary-button">
+<button id="navbar-toggle">
 ☰ Menu
 </button>
+
+</div>
 
 <nav class="nav-links">
 
