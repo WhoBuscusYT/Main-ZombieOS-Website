@@ -122,6 +122,16 @@ ZombieOS
 
 </a>
 
+<div class="navbar-account">
+
+${accountHTML}
+
+</div>
+
+<button is="navbar-toggle">
+☰ Menu
+</button>
+
 <nav class="nav-links">
 
 <a href="/">
@@ -161,13 +171,6 @@ Support
 </a>
 
 </nav>
-
-<div class="navbar-account">
-
-${accountHTML}
-
-</div>
-
 </header>
 
 `;
@@ -338,3 +341,33 @@ buildFooter();
 
 }
 );
+
+const toggle =
+document.getElementById(
+"navbar-toggle"
+);
+
+const links =
+document.getElementById(
+"navbar-links"
+);
+
+toggle.onclick = function(){
+
+links.classList.toggle(
+"open"
+);
+
+if(
+links.classList.contains(
+"open"
+)
+){
+toggle.textContent =
+"✕ Close";
+}else{
+toggle.textContent =
+"☰ Menu";
+}
+
+};
