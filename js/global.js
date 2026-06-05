@@ -128,7 +128,7 @@ ${accountHTML}
 
 </div>
 
-<button is="navbar-toggle">
+<button id="navbar-toggle">
 ☰ Menu
 </button>
 
