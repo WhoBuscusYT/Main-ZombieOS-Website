@@ -109,76 +109,6 @@ Logout
 
 }
 
-navbar.innerHTML = `
-
-<header class="navbar">
-
-<div class="navbar-top">
-
-<a
-href="/"
-class="logo"
->
-
-ZombieOS
-
-</a>
-
-<div class="navbar-account">
-
-${accountHTML}
-
-</div>
-
-<button id="navbar-toggle">
-☰ Menu
-</button>
-
-</div>
-
-<nav class="nav-links">
-
-<a href="/">
-Home
-</a>
-
-<a href="/zsharp">
-Z#
-</a>
-
-<a href="/downloads">
-Downloads
-</a>
-
-<a href="/versions">
-Versions
-</a>
-
-<a href="/status">
-Status
-</a>
-
-<a href="/devlog">
-Devlog
-</a>
-
-<a href="/docs">
-Docs
-</a>
-
-<a href="/community">
-Community
-</a>
-
-<a href="/tickets">
-Support
-</a>
-
-</nav>
-</header>
-
-`;
-
 if(user){
 
 const pfp =
@@ -231,51 +161,6 @@ document.getElementById(
 
 if(!footer){
 return;
-}
-
-footer.innerHTML = `
-
-<footer>
-
-<h2>
-
-ZombieOS
-
-</h2>
-
-<div class="footer-links">
-
-<a href="/">
-Home
-</a>
-
-<a href="/downloads">
-Downloads
-</a>
-
-<a href="/versions">
-Versions
-</a>
-
-<a href="/status">
-Status
-</a>
-
-</div>
-
-<p>
-
-ZombieOS / ZOS ©
-<span id="year">
-${new Date().getFullYear()}
-</span>
-
-</p>
-
-</footer>
-
-`;
-
 }
 
 /* =========================

@@ -27,7 +27,71 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 <div class="background-glow glow1"></div>
 <div class="background-glow glow2"></div>
 
-<nav id="navbar">Loading...</nav>
+<header class="navbar">
+
+<div class="navbar-top">
+
+<a
+href="/"
+class="logo"
+>
+
+ZombieOS
+
+</a>
+
+<div class="navbar-account">
+
+${accountHTML}
+
+</div>
+
+<button id="navbar-toggle">
+☰ Menu
+</button>
+
+</div>
+
+<nav class="nav-links">
+
+<a href="/">
+Home
+</a>
+
+<a href="/zsharp">
+Z#
+</a>
+
+<a href="/downloads">
+Downloads
+</a>
+
+<a href="/versions">
+Versions
+</a>
+
+<a href="/status">
+Status
+</a>
+
+<a href="/devlog">
+Devlog
+</a>
+
+<a href="/docs">
+Docs
+</a>
+
+<a href="/community">
+Community
+</a>
+
+<a href="/tickets">
+Support
+</a>
+
+</nav>
+</header>
 
 <main>
 
@@ -97,7 +161,44 @@ ZOS Runtime Shell
 
 </main>
 
-<footer id="footer"></footer>
+<footer>
+
+<h2>
+
+ZombieOS
+
+</h2>
+
+<div class="footer-links">
+
+<a href="/">
+Home
+</a>
+
+<a href="/downloads">
+Downloads
+</a>
+
+<a href="/versions">
+Versions
+</a>
+
+<a href="/status">
+Status
+</a>
+
+</div>
+
+<p>
+
+ZombieOS / ZOS ©
+<span id="year">
+${new Date().getFullYear()}
+</span>
+
+</p>
+
+</footer>
 
 <script type="module" src="/js/global.js?v=3"></script>
 <script src="/js/home.js"></script>
