@@ -13,27 +13,29 @@
 <link rel="stylesheet" href="css/global.css">
 <link rel="stylesheet" href="css/downloads.css">
 
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 
 </head>
 
 <body>
 
 <div class="background-grid"></div>
-
 <div class="background-glow glow1"></div>
 <div class="background-glow glow2"></div>
 
 <header class="navbar">
 
-<a href="/" class="logo">
-ZombieOS
-</a>
+<div class="navbar-top">
 
-<nav class="nav-links">
+<a href="/" class="logo">ZombieOS</a>
+
+<div class="navbar-account"></div>
+
+<button id="navbar-toggle">☰ Menu</button>
+
+</div>
+
+<nav class="nav-links" id="nav-links">
 
 <a href="/">Home</a>
 <a href="/zsharp">Z#</a>
@@ -43,15 +45,7 @@ ZombieOS
 <a href="/devlog">Devlog</a>
 <a href="/docs">Docs</a>
 <a href="/community">Community</a>
-<a
-id="navbar-login-button"
-href="/login"
-class="nav-button"
->
-
-Login
-
-</a>
+<a href="/tickets">Support</a>
 
 </nav>
 
@@ -61,40 +55,25 @@ Login
 
 <section class="hero">
 
-<p class="section-eyebrow">
-INITIALIZING DOWNLOAD SYSTEM
-</p>
+<p class="section-eyebrow">INITIALIZING DOWNLOAD SYSTEM</p>
 
-<h1 class="hero-title">
-ZombieOS Downloads
-</h1>
+<h1 class="hero-title">ZombieOS Downloads</h1>
 
-<p class="hero-description">
-Download the latest ZombieOS runtime prototype and future operating ecosystem.
-</p>
+<p class="hero-description">Download the latest ZombieOS runtime prototype and future operating ecosystem.</p>
 
 <div class="detected-card floating-card">
 
-<h2>
-Detected Platform
-</h2>
+<h2>Detected Platform</h2>
 
-<p id="platform-text">
-Detecting your operating system...
-</p>
+<p id="platform-text">Detecting your operating system...</p>
 
 <div id="download-container">
 
-<a
-id="auto-download-button"
-class="download-button"
-href="downloads/zombieos-installer.exe">
+<a id="auto-download-button" class="download-button" href="downloads/zombieos-installer.exe">
 
 <i class="fa-solid fa-download"></i>
 
-<span>
-Download Latest Prototype
-</span>
+<span>Download Latest Prototype</span>
 
 </a>
 
@@ -113,19 +92,13 @@ Download Latest Prototype
 Windows
 </h2>
 
-<p>
-Supported Platform
-</p>
+<p>Supported Platform</p>
 
-<a
-href="downloads/zombieos-installer.exe"
-class="download-button">
+<a href="downloads/zombieos-installer.exe" class="download-button">
 
 <i class="fa-solid fa-download"></i>
 
-<span>
-Download
-</span>
+<span>Download</span>
 
 </a>
 
@@ -134,34 +107,23 @@ Download
 <div class="download-card floating-card">
 
 <h2>
-<i class="fa-brands fa-apple"></i>
-macOS
+<i class="fa-brands fa-apple"></i>macOS
 </h2>
 
-<p>
-Support coming soon.
-</p>
+<p>Support coming soon.</p>
 
-<button class="comingsoon-button">
-Coming Soon
-</button>
+<button class="comingsoon-button">Coming Soon</button>
 
 </div>
 
 <div class="download-card floating-card">
 
 <h2>
-<i class="fa-brands fa-linux"></i>
-Linux
-</h2>
+<i class="fa-brands fa-linux"></i>Linux</h2>
 
-<p>
-Support coming soon.
-</p>
+<p>Support coming soon.</p>
 
-<button class="comingsoon-button">
-Coming Soon
-</button>
+<button class="comingsoon-button">Coming Soon</button>
 
 </div>
 
@@ -169,24 +131,18 @@ Coming Soon
 
 </main>
 
-<footer>
+<footer class="footer">
 
-<h2>
-ZombieOS
-</h2>
+<h2>ZombieOS</h2>
 
 <div class="footer-links">
-
 <a href="/">Home</a>
 <a href="/downloads">Downloads</a>
 <a href="/versions">Versions</a>
 <a href="/status">Status</a>
-
 </div>
 
-<p>
-ZombieOS / ZOS © <span id="year"></span>
-</p>
+<p>ZombieOS / ZOS © <span id="year"></span></p>
 
 </footer>
 

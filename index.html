@@ -13,10 +13,7 @@
 <link rel="stylesheet" href="/css/global.css?v=2">
 <link rel="stylesheet" href="/css/home.css">
 
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 
 </head>
 
@@ -31,93 +28,45 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
 <div class="navbar-top">
 
-<a
-href="/"
-class="logo"
->
+<a href="/" class="logo">ZombieOS</a>
 
-ZombieOS
+<div class="navbar-account"></div>
 
-</a>
-
-<div class="navbar-account">
-
-${accountHTML}
+<button id="navbar-toggle">☰ Menu</button>
 
 </div>
 
-<button id="navbar-toggle">
-☰ Menu
-</button>
+<nav class="nav-links" id="nav-links">
 
-</div>
-
-<nav class="nav-links">
-
-<a href="/">
-Home
-</a>
-
-<a href="/zsharp">
-Z#
-</a>
-
-<a href="/downloads">
-Downloads
-</a>
-
-<a href="/versions">
-Versions
-</a>
-
-<a href="/status">
-Status
-</a>
-
-<a href="/devlog">
-Devlog
-</a>
-
-<a href="/docs">
-Docs
-</a>
-
-<a href="/community">
-Community
-</a>
-
-<a href="/tickets">
-Support
-</a>
+<a href="/">Home</a>
+<a href="/zsharp">Z#</a>
+<a href="/downloads">Downloads</a>
+<a href="/versions">Versions</a>
+<a href="/status">Status</a>
+<a href="/devlog">Devlog</a>
+<a href="/docs">Docs</a>
+<a href="/community">Community</a>
+<a href="/tickets">Support</a>
 
 </nav>
+
 </header>
 
 <main>
 
 <section class="hero">
 
-<p class="section-eyebrow">
-INITIALIZING FUTURE RUNTIME
-</p>
+<p class="section-eyebrow">INITIALIZING FUTURE RUNTIME</p>
 
-<h1 class="hero-title">
-ZombieOS
-</h1>
+<h1 class="hero-title">ZombieOS</h1>
 
-<p class="hero-description">
-ZOS is a futuristic operating system, runtime platform, and development ecosystem powered by Z#.
-</p>
+<p class="hero-description">ZOS is a futuristic operating system, runtime platform, and development ecosystem powered by Z#.</p>
 
 <div class="hero-buttons">
 
-<a href="/downloads" class="primary-button">
-Launch Prototype
-</a>
+<a href="/downloads" class="primary-button">Launch Prototype</a>
 
-<a href="/zsharp" class="secondary-button">
-Explore Z#
-</a>
+<a href="/zsharp" class="secondary-button">Explore Z#</a>
 
 </div>
 
@@ -125,21 +74,13 @@ Explore Z#
 
 <section class="what-is-zos hero-card">
 
-<h2>
-What is ZombieOS?
-</h2>
+<h2>What is ZombieOS?</h2>
 
-<p>
-ZombieOS (ZOS) is a futuristic operating system and runtime platform built around customization, performance, and the Z# programming language.
-</p>
+<p>ZombieOS (ZOS) is a futuristic operating system and runtime platform built around customization, performance, and the Z# programming language.</p>
 
-<p>
-The current prototype runs on existing operating systems while development continues toward a standalone kernel version capable of powering the full ZombieOS experience.
-</p>
+<p>The current prototype runs on existing operating systems while development continues toward a standalone kernel version capable of powering the full ZombieOS experience.</p>
 
-<p>
-ZombieOS includes the Z# language, developer tools, account system, support platform, community features, and future ecosystem services.
-</p>
+<p>ZombieOS includes the Z# language, developer tools, account system, support platform, community features, and future ecosystem services.</p>
 
 </section>
 
@@ -151,9 +92,7 @@ ZombieOS includes the Z# language, developer tools, account system, support plat
 <span></span>
 </div>
 
-<h2>
-ZOS Runtime Shell
-</h2>
+<h2>ZOS Runtime Shell</h2>
 
 <pre id="shell-text"></pre>
 
@@ -161,46 +100,22 @@ ZOS Runtime Shell
 
 </main>
 
-<footer>
+<footer class="footer">
 
-<h2>
-
-ZombieOS
-
-</h2>
+<h2>ZombieOS</h2>
 
 <div class="footer-links">
-
-<a href="/">
-Home
-</a>
-
-<a href="/downloads">
-Downloads
-</a>
-
-<a href="/versions">
-Versions
-</a>
-
-<a href="/status">
-Status
-</a>
-
+<a href="/">Home</a>
+<a href="/downloads">Downloads</a>
+<a href="/versions">Versions</a>
+<a href="/status">Status</a>
 </div>
 
-<p>
-
-ZombieOS / ZOS ©
-<span id="year">
-${new Date().getFullYear()}
-</span>
-
-</p>
+<p>ZombieOS / ZOS © <span id="year"></span></p>
 
 </footer>
 
-<script type="module" src="/js/global.js?v=3"></script>
+<script type="module" src="/js/global.js"></script>
 <script src="/js/home.js"></script>
 
 </body>
