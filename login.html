@@ -5,73 +5,43 @@
 
 <meta charset="UTF-8">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport"content="width=device-width, initial-scale=1.0" >
 
 <title>ZombieOS - Login</title>
 
-<link
-rel="icon"
-type="image/png"
-href="/images/favicon.png"
->
+<link rel="icon" type="image/png" href="/images/favicon.png">
 
-<link
-rel="stylesheet"
-href="/css/global.css?v=3"
->
+<link rel="stylesheet" href="/css/global.css?v=3">
 
-<link
-rel="stylesheet"
-href="/css/auth.css?v=3"
->
+<link rel="stylesheet" href="/css/auth.css?v=3">
 
 </head>
 
-<!-- NAVBAR -->
-
 <header class="navbar">
 
-<div class="nav-left">
+<div class="navbar-top">
 
-<a
-href="/"
-class="logo"
->
+<a href="/" class="logo">ZombieOS</a>
 
-ZombieOS
+<div class="navbar-account">
+    <a id="navbar-login-button" href="/login" class="nav-button">Login</a>
+</div>
 
-</a>
+<button id="navbar-toggle">☰ Menu</button>
 
 </div>
 
-<nav class="nav-links">
+<nav class="nav-links" id="nav-links">
 
-<a href="/">
-
-Home
-
-</a>
-
-<a href="/downloads">
-
-Downloads
-
-</a>
-
-<a href="/docs">
-
-Docs
-
-</a>
-
-<a href="/community">
-
-Community
-
-</a>
+<a href="/">Home</a>
+<a href="/zsharp">Z#</a>
+<a href="/downloads">Downloads</a>
+<a href="/versions">Versions</a>
+<a href="/status">Status</a>
+<a href="/devlog">Devlog</a>
+<a href="/docs">Docs</a>
+<a href="/community">Community</a>
+<a href="/tickets">Support</a>
 
 </nav>
 
@@ -88,78 +58,30 @@ Community
 
 <div class="auth-card">
 
-<h1>
+<h1>Login</h1>
 
-Login
+<p class="auth-subtitle">Access the ZombieOS ecosystem.</p>
 
-</h1>
+<form id="login-form" class="auth-form">
 
-<p class="auth-subtitle">
+<input type="email" id="email" placeholder="Email" required>
 
-Access the ZombieOS ecosystem.
+<input type="password" id="password" placeholder="Password" required>
 
-</p>
+<a href="/forgot-password" class="auth-link">Forgot Password?</a>
 
-<form
-id="login-form"
-class="auth-form"
->
-
-<input
-type="email"
-id="email"
-placeholder="Email"
-required
->
-
-<input
-type="password"
-id="password"
-placeholder="Password"
-required
->
-
-<a
-href="/forgot-password"
-class="auth-link"
->
-
-Forgot Password?
-
-</a>
-
-<button
-type="submit"
-class="auth-button"
->
-
-Login
-
-</button>
+<button type="submit" class="auth-button">Login</button>
 
 </form>
 
 <div class="auth-divider">
-
-<span>
-
-OR
-
-</span>
-
+<span>OR</span>
 </div>
 
 <div class="social-auths">
 
-<button
-id="google-login"
-class="social-button"
->
-
-<img
-src="/images/icons/google.png"
-alt="Google"
->
+<buttonid="google-login"class="social-button">
+<img src="/images/icons/google.png" alt="Google">
 
 <span>
 
