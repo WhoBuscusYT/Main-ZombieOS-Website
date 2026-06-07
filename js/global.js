@@ -27,16 +27,16 @@ const links = document.getElementById("nav-links");
 
 if(toggle && links){
 
-  toggle.addEventListener("click",function(){
+toggle.onclick = function(){
 
-    links.classList.toggle("open");
+links.classList.toggle("open");
 
-    toggle.textContent =
-      links.classList.contains("open")
-      ? "✕ Close"
-      : "☰ Menu";
+toggle.textContent =
+links.classList.contains("open")
+? "✕ Close"
+: "☰ Menu";
 
-  });
+};
 
 }
 
@@ -135,29 +135,21 @@ function setNavbarAccount(user,userData){
 
 /* Auth */
 
-onAuthStateChanged(auth,async function(user){
+onAuthStateChanged(auth, async function(user){
 
-  let userData = null;
+let userData = null;
 
-  if(user){
+if(user){
 
-    try{
+const userSnap = await getDoc(doc(db,"users",user.uid));
 
-      const userSnap = await getDoc(
-        doc(db,"users",user.uid)
-      );
+if(userSnap.exists()){
+userData = userSnap.data();
+}
 
-      if(userSnap.exists()){
-        userData = userSnap.data();
-      }
+}
 
-    }catch(error){
-      console.error(error);
-    }
-
-  }
-
-  setNavbarAccount(user,userData);
+setNavbarAccount(user,userData);
 
 });
 
