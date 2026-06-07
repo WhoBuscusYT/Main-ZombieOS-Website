@@ -20,34 +20,32 @@ from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
    NAVBAR
 ========================= */
 
-function buildNavbar(user,userData){
+function updateNavbarAccount(user,userData){
 
-const navbar =
-document.getElementById(
-"navbar"
-);
+const account =
+document.querySelector(".navbar-account");
 
-if(!navbar){
+if(!account){
 return;
 }
 
-let accountHTML = `
-<a
-href="/login"
-class="nav-button"
->
+if(!user){
+
+account.innerHTML = `
+<a id="navbar-login-button" href="/login" class="nav-button">
 Login
 </a>
 `;
 
-if(user){
+return;
+}
 
 const avatar =
 userData?.avatarBase64 ||
 userData?.avatar ||
 userData?.profilePicture ||
 user.photoURL ||
-"/images/default-avatar.png";
+"/images/favicon.png";
 
 const badges =
 userData?.badges || [];
@@ -58,7 +56,7 @@ badges.includes("DEV");
 const isStaff =
 badges.includes("STAFF");
 
-accountHTML = `
+account.innerHTML = `
 
 <div class="profile-menu">
 
@@ -68,38 +66,16 @@ class="navbar-pfp"
 src="${avatar}"
 >
 
-<div
-id="profile-dropdown"
-class="profile-dropdown"
->
+<div id="profile-dropdown" class="profile-dropdown">
 
-<a href="/dashboard">
-Dashboard
-</a>
+<a href="/dashboard">Dashboard</a>
+<a href="/social">Social</a>
+<a href="/dashboard/settings">Settings</a>
 
-<a href="/social">
-Social
-</a>
+${isDev ? `<a href="/analytics">Analytics</a>` : ""}
+${isStaff ? `<a href="/tickets/staff">Staff</a>` : ""}
 
-<a href="/dashboard/settings">
-Settings
-</a>
-
-${isDev ? `
-<a href="/analytics">
-Analytics
-</a>
-` : ""}
-
-${isStaff ? `
-<a href="/staff">
-Staff
-</a>
-` : ""}
-
-<button id="logout-button">
-Logout
-</button>
+<button id="logout-button">Logout</button>
 
 </div>
 
@@ -107,43 +83,21 @@ Logout
 
 `;
 
+const pfp = document.getElementById("navbar-pfp");
+const dropdown = document.getElementById("profile-dropdown");
+const logout = document.getElementById("logout-button");
+
+if(pfp && dropdown){
+pfp.onclick = function(){
+dropdown.classList.toggle("show");
+};
 }
 
-if(user){
-
-const pfp =
-document.getElementById(
-"navbar-pfp"
-);
-
-const dropdown =
-document.getElementById(
-"profile-dropdown"
-);
-
-pfp.onclick = function(){
-
-dropdown.classList.toggle(
-"show"
-);
-
-};
-
-const logout =
-document.getElementById(
-"logout-button"
-);
-
-logout.onclick =
-async function(){
-
+if(logout){
+logout.onclick = async function(){
 await signOut(auth);
-
-window.location.href =
-"/";
-
+window.location.href = "/";
 };
-
 }
 
 }
@@ -231,7 +185,7 @@ buildFooter();
 }
 );
 
-buildNavbar();
+updateNavbarAccount(user,userData);
 
 const toggle = document.getElementById("navbar-toggle");
 const links = document.querySelector(".nav-links");
