@@ -23,7 +23,7 @@ if(year){
 /* Mobile navbar */
 
 const toggle = document.getElementById("navbar-toggle");
-const links = document.getElementById("navbar-links");
+const links = document.getElementById("nav-links");
 
 if(toggle && links){
 
