@@ -1,3 +1,5 @@
+console.log("GLOBAL JS LOADED");
+
 import { auth, db } from "/js/firebase.js";
 
 import {
