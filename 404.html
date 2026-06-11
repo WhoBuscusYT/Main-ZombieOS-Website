@@ -5,14 +5,9 @@
 
 <meta charset="UTF-8">
 
-<meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>
-404 - ZombieOS
-</title>
+<title> 404 - ZombieOS</title>
 
 <link rel="icon" type="image/png" href="/images/favicon.png">
 
@@ -30,14 +25,34 @@ content="width=device-width, initial-scale=1.0"
 <div class="background-glow glow1"></div>
 <div class="background-glow glow2"></div>
 
+<div class="background-glow glow2"></div>
+
 <header class="navbar">
+
+<div class="navbar-top">
 
 <a href="/" class="logo">ZombieOS</a>
 
-<nav class="nav-links">
+<div class="navbar-account">
+    <a id="navbar-login-button" href="/login" class="nav-button">Login</a>
+</div>
+
+<button id="navbar-toggle">☰ Menu</button>
+
+</div>
+
+<nav class="nav-links" id="nav-links">
+
 <a href="/">Home</a>
+<a href="/zsharp">Z#</a>
 <a href="/downloads">Downloads</a>
-<a href="/login">Login</a>
+<a href="/versions">Versions</a>
+<a href="/status">Status</a>
+<a href="/devlog">Devlog</a>
+<a href="/docs">Docs</a>
+<a href="/community">Community</a>
+<a href="/tickets">Support</a>
+
 </nav>
 
 </header>
@@ -97,7 +112,7 @@ The requested page could not be found inside the ZombieOS ecosystem.
 
 </footer>
 
-<script src="/js/global.js"></script>
+<script type="module" src="/js/global.js"></script>
 
 </body>
 </html>

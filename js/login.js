@@ -36,8 +36,22 @@ appId:
 const app =
 initializeApp(firebaseConfig);
 
+const user =
+cresedentials.username;
+
 const auth =
 getAuth(app);
+
+if(user)
+{
+    showPopUp(
+        "Error Z-02",
+        "You're already logged into an account. You need to sign out first.",
+        function(){
+            window.location.href = "/dashboard";
+        }
+    );
+}
 
 /* LOGIN */
 

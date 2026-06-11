@@ -356,3 +356,143 @@ footer p{
   }
 
 }
+
+/* =========================
+   POPUP
+========================= */
+
+.popup-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+    rgba(
+        0,
+        0,
+        0,
+        0.75
+    );
+
+    backdrop-filter:
+    blur(8px);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:99999;
+
+}
+
+.popup-overlay.show{
+
+    display:flex;
+
+}
+
+.popup-box{
+
+    width:min(
+        450px,
+        90vw
+    );
+
+    background:
+    rgba(
+        0,
+        0,
+        0,
+        0.92
+    );
+
+    border:
+    1px solid rgba(
+        0,
+        255,
+        153,
+        0.15
+    );
+
+    border-radius:28px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:
+    0 0 40px rgba(
+        0,
+        255,
+        153,
+        0.18
+    );
+
+}
+
+.popup-box h2{
+
+    color:#00ff99;
+
+    margin-bottom:16px;
+
+}
+
+.popup-box p{
+
+    color:#d0d0d0;
+
+    line-height:1.7;
+
+}
+
+.popup-buttons{
+
+    display:flex;
+
+    gap:12px;
+
+    margin-top:24px;
+
+}
+
+.popup-buttons button{
+
+    flex:1;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+}
+
+.popup-confirm{
+
+    background:#00ff99;
+
+    color:black;
+
+}
+
+.popup-cancel{
+
+    background:
+    rgba(
+        255,
+        255,
+        255,
+        0.08
+    );
+
+    color:white;
+
+}

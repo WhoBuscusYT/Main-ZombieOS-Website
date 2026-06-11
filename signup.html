@@ -66,7 +66,9 @@
 
 <input type="text" id="username" placeholder="Username" required>
 
-<input type="email" id="email" placeholder="Email" required>
+<input type="text" id="handle" placeholder="@handle (without the @)" required>
+
+<input type="email" id="email" placeholder="you@example.coom" required>
 
 <input type="password" id="password" placeholder="Password" required>
 
@@ -87,6 +89,16 @@
 <span>Google</span>
 </button>
 
+<button id="git-login" class="social-button">
+<img src="/images/icons/github.png" alt="GitHub">
+<span>GitHub</span>
+</button>
+
+<button id="microsoft-login" class="social-button">
+<img src="/images/icons/microsoft.png" alt="Microsoft">
+<span>Microsoft</span>
+</button>
+
 <button class="social-button disabled-button" disabled>
 <img src="/images/icons/discord.png" alt="Discord">
 <span>Discord</span>
@@ -95,11 +107,6 @@
 <button class="social-button disabled-button" disabled>
 <img src="/images/icons/apple.png" alt="Apple">
 <span>Apple</span>
-</button>
-
-<button class="social-button disabled-button" disabled>
-<img src="/images/icons/microsoft.png" alt="Microsoft">
-<span>Microsoft</span>
 </button>
 
 </div>
@@ -125,7 +132,43 @@
 
 </footer>
 
+<div id="popup-overlay" class="popup-overlay">
+
+    <div class="popup-box">
+
+        <h2 id="popup-title">
+            Popup Title
+        </h2>
+
+        <p id="popup-message">
+            Popup Message
+        </p>
+
+        <div class="popup-buttons">
+
+            <button
+                id="popup-confirm"
+                class="popup-confirm"
+            >
+                OK
+            </button>
+
+            <button
+                id="popup-cancel"
+                class="popup-cancel"
+            >
+                Cancel
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
 <script type="module" src="/js/auth.js"></script>
+
+<script type="module" src="/js/global.js"></script>
 
 </body>
 </html>

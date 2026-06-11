@@ -5,6 +5,7 @@ import {
 getAuth,
 createUserWithEmailAndPassword,
 updateProfile,
+GithubAuthProvider,
 GoogleAuthProvider,
 signInWithPopup
 }
@@ -73,6 +74,11 @@ document.getElementById(
 "username"
 ).value.trim();
 
+const handle =
+document.getElementById(
+    "handle"
+).value();
+
 const email =
 document.getElementById(
 "email"
@@ -87,6 +93,7 @@ document.getElementById(
 
 if(
 !username ||
+!handle ||
 !email ||
 !password
 ){
@@ -112,6 +119,17 @@ password
 
 const user =
 credential.user;
+
+if(user)
+{
+    showPopUp(
+        "Error Z-02",
+        "You're already logged into an account. You need to sign out first.",
+        function(){
+            window.location.href = "/dashboard";
+        }
+    );
+}
 
 /* DISPLAY NAME */
 
@@ -189,7 +207,7 @@ subscription:
 "FREE",
 
 badges:[
-"prototype"
+"PROTOTYPE"
 ],
 
 createdAt:
@@ -199,10 +217,7 @@ bio:"",
 pronouns:"",
 
 handle:
-defaultHandle,
-
-customHandle:
-false,
+handle,
 
 profileColor:
 "default",
@@ -228,7 +243,7 @@ displayBadges:true,
 zosPlusProfile:false,
 
 visibleBadges:{
-prototype:true
+PROTOTYPE:true
 }
 
 }
@@ -272,17 +287,41 @@ async()=>{
 
 try{
 
-const provider =
+const GoogleProvider =
 new GoogleAuthProvider();
 
 const result =
 await signInWithPopup(
 auth,
-provider
+GoogleProvider
 );
 
 const user =
 result.user;
+
+/* GITHUB SIGNUP */
+
+const gitButton =
+document.getElementById(
+"github-login"
+);
+
+if(googleButton){
+
+googleButton.addEventListener(
+"click",
+async()=>{
+
+try{
+
+const GitHubProvider =
+new GitHubAuthProvider();
+
+const result =
+await signInWithPopup(
+auth,
+GitHubProvider
+);
 
 /* USER COUNTER */
 

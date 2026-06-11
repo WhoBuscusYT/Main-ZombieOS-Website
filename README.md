@@ -49,86 +49,82 @@ Current systems include:
 
 # Development Status
 
-ZombieOS is currently in:
-```text
-Prototype Development
+**ZombieOS is currently in prototype development**
 
 Most systems are actively being rewritten, expanded, or redesigned during development.
 
-Features may:
+## Features may:
 
-change frequently
+- change frequently
 
-be incomplete
+- be incomplete
 
-contain placeholder functionality
+- contain placeholder functionality
 
-undergo major restructuring
+- undergo major restructuring
 
-Contributions
+## Contributions
 
 Currently, public code contributions are not enabled.
 
 Please do not:
 
-modify repository code and redistribute it as official
+- modify repository code and redistribute it as official
 
-impersonate official ZombieOS services
+- impersonate official ZombieOS services
 
-claim unofficial builds as official releases
+- claim unofficial builds as official releases
 
 Future community contribution systems may be added later.
 
-Creator & Developer Programs
+## Creator & Developer Programs
 
 ZombieOS plans to support:
 
-creators
+ - contnet creators
 
-developers
+- software developers
 
-community contributors
+- community contributors
 
-experimental testers
+- experimental testers
 
 through dedicated ecosystem programs.
 
 These systems are currently under active development.
 
-Planned Features
+## Planned Features
 
 Planned ZombieOS ecosystem features include:
 
-socials platform
+- socials platform
 
-messaging systems
+- messaging systems
 
-voice/video communication
+- voice/video communication
 
-screen sharing
+- screen sharing
 
-creator systems
+- creator systems
 
-developer APIs
+- developer APIs
 
-AI assistant integration
+- AI assistant integration
 
-parental dashboards
+- parental dashboards
 
-mobile applications
+- mobile applications
 
-launcher/runtime environments
+- native operating system development
 
-native operating system development
+## Branding
 
-Branding
+ZombieOS, ZOS, and Z# are all part of the ZombieOS trademark.
 
-ZombieOS and ZOS branding are part of the official ZombieOS ecosystem project.
-
-Status
+## Status
 
 Current Status:
 
 ACTIVE DEVELOPMENT
 
-ZombieOS / ZOS © 2026
+ZombieOS / ZOS / Z# © 2026

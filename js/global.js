@@ -158,3 +158,65 @@ setNavbarAccount(user,userData);
 window.showPopup = function(title,message){
   alert(title + "\n\n" + message);
 };
+
+window.showPopup = function(
+    title,
+    message,
+    onConfirm = null,
+    onCancel = null
+){
+
+    const overlay =
+    document.getElementById(
+        "popup-overlay"
+    );
+
+    document.getElementById(
+        "popup-title"
+    ).textContent =
+    title;
+
+    document.getElementById(
+        "popup-message"
+    ).textContent =
+    message;
+
+    const confirm =
+    document.getElementById(
+        "popup-confirm"
+    );
+
+    const cancel =
+    document.getElementById(
+        "popup-cancel"
+    );
+
+    confirm.onclick = function(){
+
+        overlay.classList.remove(
+            "show"
+        );
+
+        if(onConfirm){
+            onConfirm();
+        }
+
+    };
+
+    cancel.onclick = function(){
+
+        overlay.classList.remove(
+            "show"
+        );
+
+        if(onCancel){
+            onCancel();
+        }
+
+    };
+
+    overlay.classList.add(
+        "show"
+    );
+
+};
